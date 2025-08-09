@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.UIBorderCard
 import com.example.kmpcomposescreen.UIRowSpaceBetween
+import com.example.kmpcomposescreen.screen.SecondScreen
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
@@ -32,6 +33,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -63,7 +65,13 @@ class MainScreen :
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Compose View", color = colorTheme.onBackground)
+            Text(
+                "Compose View",
+                modifier = Modifier.clickableTheme {
+                    SecondScreen().show()
+                },
+                color = colorTheme.onBackground
+            )
         }
 
     }

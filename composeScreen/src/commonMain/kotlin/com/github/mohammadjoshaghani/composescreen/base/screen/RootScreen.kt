@@ -36,6 +36,7 @@ import com.github.mohammadjoshaghani.composescreen.commonCompose.toast.ToastCrea
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import com.github.mohammadjoshaghani.composescreen.utils.WindowSizeBus
+import kotlinx.coroutines.flow.MutableStateFlow
 
 abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> {
 
@@ -43,8 +44,8 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
     abstract val handler: BaseHandler<VM, Effect, Event>
 
-    internal var isVisibleAnimation = mutableStateOf(false)
-
+    internal var isVisibleAnimation = MutableStateFlow(false)
+    val animationTime = 150L
 
     val screenSize = mutableStateOf(ScreenSize(0.dp, 0.dp))
 
@@ -61,13 +62,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     fun show(replace: Boolean = false, animation: Boolean = true) {
         this.showAnimation = animation
 
-        if (this is IClearStackScreen) {
-            Navigator.clear()
-        }
+        if (this is IClearStackScreen) Navigator.clear()
 
-        if (replace) {
-            Navigator.back()
-        }
+        if (replace) Navigator.back()
 
         Navigator.add(this)
         viewModel.initViewModel()
@@ -201,7 +198,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
                 StartedExpandedUI()
             }
-            Column(Modifier.fillMaxHeight().weight(1f)) {
+            Column(Modifier
+                .fillMaxHeight()
+                .weight(1f)) {
                 compactUI()
             }
             Column {
@@ -231,7 +230,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
                 StartedExpandedUI()
             }
-            Column(Modifier.fillMaxHeight().weight(1f)) {
+            Column(Modifier
+                .fillMaxHeight()
+                .weight(1f)) {
                 compactUI()
             }
         }

@@ -58,7 +58,9 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
 
     @Composable
     fun UIContentSideBar() {
-        val screen = Navigator.currentScreen.value as IShowNavigationSideBar
+        val screen = Navigator.currentScreen.value
+        if (screen !is IShowNavigationSideBar) return
+
         NavigationRail(
             contentColor = ApplicationConfig.config.color.onBackground,
             containerColor = ApplicationConfig.config.color.background,

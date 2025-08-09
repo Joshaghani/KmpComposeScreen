@@ -19,6 +19,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowStickyBoolean
+import com.github.mohammadjoshaghani.composescreen.commonCompose.UIAnimatedVisibility
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class TopBar {
@@ -65,19 +66,21 @@ class TopBar {
             }
         }
 
-        Surface(
-            shadowElevation = elevation,
-        ) {
-            Column(
-                Modifier
-                    .background(ApplicationConfig.config.color.background)
+        UIAnimatedVisibility {
+            Surface(
+                shadowElevation = elevation,
             ) {
-                when (screen) {
-                    is IShowTopbarMain -> ShowTitleMain(scrollBehavior, isScrolled.value)
-                    is IShowTopbar -> ShowTitle(scrollBehavior, isScrolled.value)
+                Column(
+                    Modifier
+                        .background(ApplicationConfig.config.color.background)
+                ) {
+                    when (screen) {
+                        is IShowTopbarMain -> ShowTitleMain(scrollBehavior, isScrolled.value)
+                        is IShowTopbar -> ShowTitle(scrollBehavior, isScrolled.value)
+                    }
                 }
-            }
 
+            }
         }
     }
 
