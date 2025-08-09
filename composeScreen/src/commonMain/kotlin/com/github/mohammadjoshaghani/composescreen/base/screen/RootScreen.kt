@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -113,7 +115,8 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
         RenderDialogs()
         if (this is IShowStickyHeader) {
-            SetStickyForSelectedSizeClass(this, WindowSizeBus.windowSizeClass.value)
+            val stateSize by WindowSizeBus.windowSizeClass.collectAsState()
+            SetStickyForSelectedSizeClass(this, stateSize)
         }
     }
 
