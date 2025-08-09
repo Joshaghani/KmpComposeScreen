@@ -91,3 +91,18 @@ android {
         compose = true
     }
 }
+
+group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
+version = (project.findProperty("version") as String?) ?: "0.0.1"
+
+// بقیهٔ targets و sourceSets...
+
+publishing {
+    // معمولاً KMP خودش publications می‌سازه؛ همین کافیه.
+    // اگر artifactId خاص می‌خوای، می‌تونی اینو اضافه کنی:
+    publications.withType<MavenPublication>().configureEach {
+        if (name.contains("kotlinMultiplatform", ignoreCase = true)) {
+            artifactId = "composeScreen"
+        }
+    }
+}
