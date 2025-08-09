@@ -2,12 +2,8 @@ package com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.compsoe
 
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList

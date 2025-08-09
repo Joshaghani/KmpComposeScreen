@@ -22,9 +22,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.UIBorderCard
 import com.example.kmpcomposescreen.UIRowSpaceBetween
-import com.example.kmpcomposescreen.screen.main.MainScreenContract
-import com.example.kmpcomposescreen.screen.main.MainScreenHandler
-import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
@@ -132,46 +129,29 @@ class MainScreen :
     override fun headerIconsSideBar(): List<NavigationItem> {
         return listOf(
             NavigationItem(
-                "مدیریت فروشگاه",
+                "Items Icon",
                 Res.drawable.compose_multiplatform,
                 Res.drawable.compose_multiplatform,
                 false, 0, {}),
 
             NavigationItem(
-                "انبار داری",
+                "Items Icon",
                 Res.drawable.compose_multiplatform,
                 Res.drawable.compose_multiplatform,
                 false, 0, {}),
 
             NavigationItem(
-                "نظرات",
+                "Items Icon",
                 Res.drawable.compose_multiplatform,
                 Res.drawable.compose_multiplatform,
                 false, 0, {}),
 
             NavigationItem(
-                "تیکت ها",
+                "Items Icon",
                 Res.drawable.compose_multiplatform,
                 Res.drawable.compose_multiplatform,
-                false, 0, {}),
-
-            NavigationItem(
-                "مشتریان",
-                Res.drawable.compose_multiplatform,
-                Res.drawable.compose_multiplatform,
-                false, 0, {}),
-            NavigationItem(
-                "سفارشات",
-                Res.drawable.compose_multiplatform,
-                Res.drawable.compose_multiplatform,
-                false, 0, {}),
-            NavigationItem(
-                "انواع ارسال",
-                Res.drawable.compose_multiplatform,
-                Res.drawable.compose_multiplatform,
-                false, 0, {}),
-
-            )
+                false, 0, {})
+        )
     }
 
     @Composable
