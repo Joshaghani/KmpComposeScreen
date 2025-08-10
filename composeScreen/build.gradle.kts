@@ -52,7 +52,8 @@ kotlin {
                 }
             }
         }
-        binaries.executable()
+        binaries.library() // برای انتشار لایبرری به‌جای executable
+
     }
 
     sourceSets {
