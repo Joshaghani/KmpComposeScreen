@@ -83,7 +83,7 @@ android {
 }
 
 group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.16"
+version = (project.findProperty("version") as String?) ?: "0.0.17"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
