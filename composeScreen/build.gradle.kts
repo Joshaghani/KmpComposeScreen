@@ -48,7 +48,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.stdlib)
+//            implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
             implementation(compose.runtime)
             implementation(compose.foundation)
