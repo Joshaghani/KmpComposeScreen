@@ -9,66 +9,65 @@ plugins {
 }
 
 kotlin {
-
+    // همه‌ی تارگت‌ها منتشر می‌شن؛ مصرف‌کننده هر کدوم خواست انتخاب می‌کنه
     androidTarget()
-
-    val xcfName = "composeScreenKit"
-
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
     jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        outputModuleName.set("composeScreen")
-        browser {
-            commonWebpackConfig {
-                outputFileName = "composeScreen.js"
-            }
-        }
+        browser() // config اختیاری
         binaries.library()
-
+        outputModuleName.set("composeScreen")
     }
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
 
     sourceSets {
-        commonMain.dependencies {
-//            implementation(libs.kotlin.stdlib)
-            // Add KMP dependencies here
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+        val commonMain by getting {
+            dependencies {
+                //            implementation(libs.kotlin.stdlib)
+                // Add KMP dependencies here
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
 
-            implementation(compose.materialIconsExtended)
+                implementation(compose.materialIconsExtended)
 
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
 
-            // https://mvnrepository.com/artifact/androidx.compose.material3/material3-window-size-class
-            api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
+                // https://mvnrepository.com/artifact/androidx.compose.material3/material3-window-size-class
+                api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
+
+            }
         }
 
+        val androidMain by getting {
+            dependencies {
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+            }
+        }
+
+        // iOS اشتراک‌گذاری
+        val iosMain by creating { dependsOn(commonMain) }
+        val iosX64Main by getting  { dependsOn(iosMain) }
+        val iosArm64Main by getting { dependsOn(iosMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(iosMain) }
+
+        val wasmJsMain by getting {
+            dependencies {
+            }
+        }
     }
-
-
 }
 
 android {
@@ -83,7 +82,7 @@ android {
 }
 
 group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.17"
+version = (project.findProperty("version") as String?) ?: "0.0.18"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
