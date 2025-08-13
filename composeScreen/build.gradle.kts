@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("maven-publish")
@@ -9,8 +11,14 @@ plugins {
 }
 
 kotlin {
-    // همه‌ی تارگت‌ها منتشر می‌شن؛ مصرف‌کننده هر کدوم خواست انتخاب می‌کنه
-    androidTarget()
+    androidTarget {
+        publishLibraryVariants("release")
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
     jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
@@ -23,6 +31,7 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+    linuxX64()
 
     sourceSets {
         val commonMain by getting {
@@ -81,11 +90,13 @@ android {
     }
 }
 
-group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.18"
+group = (project.findProperty("group") as String?) ?: "com.github.joshaghani"
+version = (project.findProperty("version") as String?) ?: "0.0.19"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
         artifactId = "KmpComposeScreen"
     }
 }
+
+
