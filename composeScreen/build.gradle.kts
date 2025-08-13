@@ -71,7 +71,7 @@ android {
 
 
 group = "com.github.Joshaghani"
-version = "0.0.31"
+version = "0.0.33"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
