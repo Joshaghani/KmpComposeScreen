@@ -59,7 +59,7 @@ kotlin {
         }
         commonMain.dependencies {
 
-            implementation(project(":composeScreen"))
+            implementation(project(":kmp-compose-screen"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
