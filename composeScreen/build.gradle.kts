@@ -71,12 +71,12 @@ android {
 
 
 group = "com.github.Joshaghani"
-version = "0.0.23"
+version = "0.0.24"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
-        groupId = "com.github.Joshaghani"
-        artifactId = "KmpComposeScreen"
+//        groupId = "com.github.Joshaghani"
+//        artifactId = "KmpComposeScreen"
     }
 }
 
