@@ -33,7 +33,7 @@ plugins {
 }
 
 include(":composeApp")
-rootProject.name = "composeScreen"
+rootProject.name = "library-root"
 
 include(":kmp-compose-screen")
 project(":kmp-compose-screen").projectDir = file("composeScreen")

@@ -10,7 +10,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.github.Joshaghani"
+group = "com.github.joshaghani"
 version = "0.0.26"
 
 kotlin {
