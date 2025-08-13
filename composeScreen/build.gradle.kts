@@ -55,6 +55,27 @@ kotlin {
             }
         }
 
+        val androidMain by getting {
+            dependencies {
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+            }
+        }
+
+        // iOS اشتراک‌گذاری
+        val iosMain by creating { dependsOn(commonMain) }
+        val iosX64Main by getting  { dependsOn(iosMain) }
+        val iosArm64Main by getting { dependsOn(iosMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(iosMain) }
+
+        val wasmJsMain by getting {
+            dependencies {
+            }
+        }
+
     }
 }
 
@@ -69,14 +90,11 @@ android {
     }
 }
 
-
 group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.40"
+version = (project.findProperty("version") as String?) ?: "0.0.41"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
         artifactId = "KmpComposeScreen"
     }
 }
-
-
