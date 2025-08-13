@@ -10,6 +10,9 @@ plugins {
     id("com.android.library")
 }
 
+group = "com.github.Joshaghani"
+version = "0.0.25"
+
 kotlin {
     androidTarget {
         publishLibraryVariants("release")
@@ -68,16 +71,4 @@ android {
         compose = true
     }
 }
-
-
-group = "com.github.Joshaghani"
-version = "0.0.24"
-
-publishing {
-    publications.withType<MavenPublication>().configureEach {
-//        groupId = "com.github.Joshaghani"
-//        artifactId = "KmpComposeScreen"
-    }
-}
-
 
