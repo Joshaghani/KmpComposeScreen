@@ -70,12 +70,12 @@ android {
 }
 
 
-group = (project.findProperty("group") as String?) ?: "com.github.joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.39"
+group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
+version = (project.findProperty("version") as String?) ?: "0.0.40"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
-        artifactId = "kmp-compose-screen"
+        artifactId = "KmpComposeScreen"
     }
 }
 
