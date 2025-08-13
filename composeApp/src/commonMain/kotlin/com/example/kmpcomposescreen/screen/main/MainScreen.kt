@@ -31,8 +31,8 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScre
 import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
-import kmpcomposescreen.composeapp.generated.resources.Res
-import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
+import library_root.composeapp.generated.resources.Res
+import library_root.composeapp.generated.resources.compose_multiplatform
 
 class MainScreen :
     BaseScreenLazyList<
