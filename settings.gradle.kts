@@ -5,20 +5,16 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
 dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven(url = "https://jitpack.io")
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-}
-
-include(":composeApp")
 rootProject.name = "library-root"
 
 include(":kmp-compose-screen")
-project(path = ":kmp-compose-screen").projectDir = file("composeScreen")
+project(":kmp-compose-screen").projectDir = file("composeScreen")

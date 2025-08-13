@@ -10,8 +10,8 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.github.joshaghani" 
-version = "0.0.29"
+group = "com.github.joshaghani"
+version = "0.0.30"
 
 kotlin {
     androidTarget {
