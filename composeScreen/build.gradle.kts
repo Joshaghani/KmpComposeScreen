@@ -25,7 +25,7 @@ kotlin {
     wasmJs {
         browser() // config اختیاری
         binaries.library()
-        outputModuleName.set("composeScreen")
+        outputModuleName.set("KmpComposeScreen")
     }
 
     iosX64()
@@ -71,7 +71,7 @@ android {
 
 
 group = "com.github.Joshaghani"
-version = "0.0.22"
+version = "0.0.23"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
@@ -79,6 +79,5 @@ publishing {
         artifactId = "KmpComposeScreen"
     }
 }
-
 
 
