@@ -2,4 +2,4 @@ jdk:
   - openjdk17
 
 install:
-  - ./gradlew publishToMavenLocal -x test -x lint
+  - ./gradlew :composeScreen:publishToMavenLocal -Pgroup=com.github.Joshaghani -Pversion=${VERSION} -x test -x lint
