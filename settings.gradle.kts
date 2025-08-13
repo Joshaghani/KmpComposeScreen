@@ -1,4 +1,3 @@
-rootProject.name = "KmpComposeScreen"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
