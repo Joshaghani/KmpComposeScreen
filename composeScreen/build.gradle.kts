@@ -71,12 +71,5 @@ android {
 
 
 group = "com.github.Joshaghani"
-version = "0.0.35"
-
-publishing {
-    publications.withType<MavenPublication>().configureEach {
-        artifactId = "KmpComposeScreen"
-    }
-}
-
+version = "0.0.36"
 
