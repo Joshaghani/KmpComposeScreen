@@ -14,7 +14,7 @@ import com.github.mohammadjoshaghani.composescreen.utils.WindowSizeBus
 @Composable
 fun BaseScreenUnScrollable<*,*,*,*>.ContentScreen() {
     BoxWithConstraints {
-        LaunchedEffect(maxWidth, maxHeight) {
+        LaunchedEffect(this.maxWidth, maxHeight) {
             val width = maxWidth
             val height = maxHeight
             screenSize.value = ScreenSize(width, height)

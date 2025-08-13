@@ -17,8 +17,6 @@ import androidx.compose.material.icons.automirrored.rounded.Message
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.Event
-import androidx.compose.material.icons.rounded.Loop
-import androidx.compose.material.icons.rounded.Message
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -34,13 +32,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UISpacer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun UIToastNotification() {

@@ -18,6 +18,7 @@ import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -25,9 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.base.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.base.screen.RootScreen
+import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
+import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.WindowSizeBus
@@ -40,6 +41,7 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
     fun Show() {
 
         val windowClass = calculateWindowSizeClass()
+
         LaunchedEffect(windowClass) {
             WindowSizeBus.windowSizeClass.value = windowClass.widthSizeClass
         }
@@ -49,8 +51,8 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
 
         if (showNavigationRail) {
             var show by rememberSaveable { mutableStateOf(false) }
-            LaunchedEffect(Navigator.currentScreen.value) {
-                show = Navigator.currentScreen.value is IShowNavigationSideBar
+            LaunchedEffect(Navigator.state.current.value) {
+                show = Navigator.state.current.value is IShowNavigationSideBar
             }
             if (show) UIContentSideBar()
         }
@@ -58,14 +60,14 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
 
     @Composable
     fun UIContentSideBar() {
-        val screen = Navigator.currentScreen.value
+        val screen = Navigator.state.current.value
         if (screen !is IShowNavigationSideBar) return
 
         NavigationRail(
             contentColor = ApplicationConfig.config.color.onBackground,
             containerColor = ApplicationConfig.config.color.background,
             header = {
-                var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
+                var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
                 screen.headerIconsSideBar()
                     .forEachIndexed { index, item ->
@@ -89,7 +91,7 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
                 .clip(CircleShape)
                 .padding(16.dp)
         ) {
-            var selectedItemIndex by rememberSaveable { mutableStateOf(0) }
+            var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
             Column(
                 modifier = Modifier.fillMaxHeight(),

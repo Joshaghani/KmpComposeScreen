@@ -1,5 +1,3 @@
-package com.github.mohammadjoshaghani.composescreen.commonCompose
-
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -21,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.base.Navigator
+import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 
 @Composable
 fun SwipeToGoBackWrapper(
@@ -64,7 +62,7 @@ fun SwipeToGoBackWrapper(
                             LayoutDirection.Ltr -> totalDrag > threshold
                         }
                         if (shouldNavigateBack) {
-                            Navigator.getCurrentScreen()?.onBackPressed()
+                            Navigator.state.current.value?.onBackPressed()
                         }
                         totalDrag = 0f
                         showIcon = false

@@ -14,11 +14,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.UIBorderCard
 import com.example.kmpcomposescreen.UIRowSpaceBetween
@@ -36,10 +33,14 @@ import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainScreen :
-    BaseScreenLazyList<MainScreenContract.State, MainScreenContract.Event, MainScreenContract.Effect, MainScreenViewModel>(),
+    BaseScreenLazyList<
+            MainScreenContract.State,
+            MainScreenContract.Event,
+            MainScreenContract.Effect,
+            MainScreenViewModel
+            >(),
     IShowNavigationSideBar,
     IShowTopbarMain,
     IShowScrollAwareFadingHeader,
@@ -49,13 +50,6 @@ class MainScreen :
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
 
     override val handler: MainScreenHandler = MainScreenHandler()
-
-    override val isPermissionShowSticky: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    override val heightStickyHeader: MutableState<Dp> = mutableStateOf(56.dp)
-
-    override var showAwareHeader = mutableStateOf(true)
-    override val heightAwareFaideHeader: MutableState<Dp> = mutableStateOf(0.dp)
-
 
     @Composable
     override fun ComposeView(state: MainScreenContract.State) {
@@ -259,7 +253,7 @@ class MainScreen :
 
 
     @Composable
-    override fun ComposeStickyView() {
+    override fun ComposeStickyView(modifier: Modifier) {
         Column(
             modifier = Modifier
                 .height(56.dp)
