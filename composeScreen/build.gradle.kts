@@ -75,8 +75,6 @@ version = "0.0.31"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
-        groupId = "com.github.Joshaghani"
-        artifactId = "KmpComposeScreen"
     }
 }
 
