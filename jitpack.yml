@@ -1,8 +1,5 @@
 jdk:
   - openjdk17
 
-before_install:
-  - echo "VERSION=$VERSION"
-
 install:
-  - ./gradlew :kmp-compose-screen:publishToMavenLocal -x test -x lint
+  - ./gradlew :composeScreen:publishToMavenLocal -Pgroup=com.github.Joshaghani -Pversion=${VERSION} -x test -x lint
