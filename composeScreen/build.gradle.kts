@@ -89,13 +89,13 @@ android {
     }
 }
 
-group = "com.github.joshaghani"
-version = "0.0.20"
+group = "com.github.Joshaghani"
+version = "0.0.21"
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
-        groupId = "com.github.joshaghani"
-        artifactId = "kmpcomposescreen"
+        groupId = "com.github.Joshaghani"
+        artifactId = "KmpComposeScreen"
     }
 }
 
