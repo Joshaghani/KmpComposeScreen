@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -19,7 +19,7 @@ fun MeasureHeight(
     content: @Composable (Modifier) -> Unit
 ) {
     val density = LocalDensity.current
-    var measuredHeight by rememberSaveable { mutableStateOf(0.dp) }
+    var measuredHeight by remember { mutableStateOf(0.dp) }
 
     // وقتی مقدار measuredHeight تغییر کرد، یک فریم بعد اطلاع بده
     LaunchedEffect(measuredHeight) {
