@@ -14,7 +14,6 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializer
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.compose.ContentScreen
-import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.rememberStickyHeaderState
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UIAnimatedVisibility
 
 abstract class BaseScreen<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> :
