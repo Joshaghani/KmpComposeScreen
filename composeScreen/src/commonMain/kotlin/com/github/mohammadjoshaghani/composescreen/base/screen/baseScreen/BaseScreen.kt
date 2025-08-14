@@ -27,7 +27,6 @@ abstract class BaseScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
     @Composable
     override fun ShowScreenFromApp() {
-        stickyState = rememberStickyHeaderState()
         UIAnimatedVisibility {
             super.SetStateComposeScreen(this)
         }

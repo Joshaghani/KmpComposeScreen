@@ -41,7 +41,7 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     val screenSize = mutableStateOf(ScreenSize(0.dp, 0.dp))
     private var updatedDataModel: List<Any>? = null
 
-    lateinit var stickyState: StickyHeaderState
+    var stickyState = StickyHeaderState()
 
     var showAwareHeader: MutableState<Boolean> = mutableStateOf(this is IShowScrollAwareFadingHeader)
     val heightAwareFaideHeader: MutableState<Dp> = mutableStateOf(0.dp)

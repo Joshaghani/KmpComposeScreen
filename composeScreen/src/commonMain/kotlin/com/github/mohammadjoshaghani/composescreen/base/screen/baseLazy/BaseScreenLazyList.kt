@@ -40,7 +40,6 @@ abstract class BaseScreenLazyList<
 
     @Composable
     override fun ShowScreenFromApp() {
-        stickyState = rememberStickyHeaderState()
         UIAnimatedVisibility {
             super.SetStateComposeScreen(this@BaseScreenLazyList)
         }
