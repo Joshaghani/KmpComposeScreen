@@ -24,7 +24,7 @@ fun MeasureHeight(
     // وقتی مقدار measuredHeight تغییر کرد، یک فریم بعد اطلاع بده
     LaunchedEffect(measuredHeight) {
         if (measuredHeight > 0.dp) {
-            kotlinx.coroutines.delay(16) // حدود یک فریم
+            kotlinx.coroutines.delay(60) // حدود یک فریم
             onHeightChanged(measuredHeight)
         }
     }

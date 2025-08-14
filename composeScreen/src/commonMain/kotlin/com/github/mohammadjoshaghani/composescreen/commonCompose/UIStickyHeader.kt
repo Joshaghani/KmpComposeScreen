@@ -6,15 +6,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator.state
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.MeasureHeight
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
 import com.github.mohammadjoshaghani.composescreen.commonCompose.topbar.TopBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
-
 
 @Composable
 fun UIStickyHeader(
