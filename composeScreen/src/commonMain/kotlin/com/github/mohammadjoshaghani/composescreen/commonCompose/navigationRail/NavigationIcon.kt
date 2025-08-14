@@ -5,7 +5,6 @@ import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -27,7 +26,7 @@ fun NavigationIcon(
         Icon(
             painter = painterResource(if (selected) item.selectedIcon else item.unselectedIcon),
             contentDescription = item.title,
-            tint = ApplicationConfig.config.color.surfaceVariant
+            tint = if (selected) item.selectedColor else item.unselectedColor
         )
     }
 }
