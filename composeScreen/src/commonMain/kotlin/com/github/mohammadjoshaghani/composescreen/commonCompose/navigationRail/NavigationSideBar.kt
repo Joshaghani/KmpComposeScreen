@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -94,7 +96,9 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
             var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
             Column(
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxHeight(),
                 verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom)
             ) {
                 screen.actionIconsSideBar()
@@ -102,6 +106,7 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
                         NavigationRailItem(
                             selected = selectedItemIndex == index,
                             onClick = {
+                                selectedItemIndex = index
                                 item.onIconClicked()
                             },
                             icon = {
