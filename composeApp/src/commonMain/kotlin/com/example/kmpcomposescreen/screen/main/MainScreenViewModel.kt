@@ -13,7 +13,7 @@ class MainScreenViewModel(
         >() {
 
     override fun initViewModel() {
-        setEvent(MainScreenContract.Event.GetData)
+//        setEvent(MainScreenContract.Event.GetData)
     }
 
     override fun setInitialState() = MainScreenContract.State()
