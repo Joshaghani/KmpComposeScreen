@@ -4,11 +4,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
@@ -17,10 +12,7 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScre
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderEmptyState
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderItemsIndexed
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderLoadMore
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowAwareHeader
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowSticky
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UISpacer
-import kotlinx.coroutines.delay
 
 @Composable
 fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *, *>.UILazyColumn(
@@ -28,27 +20,17 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
     modifier: Modifier = Modifier,
 ) {
 
-    var showItem by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        delay(16) // یک فریم تاخیر
-        showItem = true
-    }
-
     LazyColumn(
         state = lazyListState!!,
         modifier = modifier
     ) {
-        if (showItem) {
-            item {
-                RunIfShowSticky {
-                    Spacer(modifier = Modifier.height(stickyState.stickyHeaderHeight))
-                }
-                RunIfShowAwareHeader {
-                    Spacer(Modifier.height(heightAwareFaideHeader.value))
-                }
-                ComposeView(state)
-            }
+        item {
+            Spacer(modifier = Modifier.height(stickyState.stickyHeaderHeight))
+            Spacer(Modifier.height(heightAwareFaideHeader.value))
+        }
+
+        item {
+            ComposeView(state)
         }
         renderItemsIndexed(getItemsList(state)) { index, item ->
             ItemUI(index, item)
