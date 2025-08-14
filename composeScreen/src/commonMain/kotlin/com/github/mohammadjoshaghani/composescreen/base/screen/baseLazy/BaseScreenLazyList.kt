@@ -13,6 +13,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.ILazyListScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializer
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.compsoe.ContentScreen
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
+import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.rememberStickyHeaderState
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UIAnimatedVisibility
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -39,6 +40,7 @@ abstract class BaseScreenLazyList<
 
     @Composable
     override fun ShowScreenFromApp() {
+        stickyState = rememberStickyHeaderState()
         UIAnimatedVisibility {
             super.SetStateComposeScreen(this@BaseScreenLazyList)
         }

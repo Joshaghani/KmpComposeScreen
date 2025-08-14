@@ -93,8 +93,6 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     @Composable
     private fun ShowContent(screen: IScreenInitializer<State, Event>) {
 
-        stickyState = rememberStickyHeaderState()
-
         WithSwipeBackIfNeeded(this) {
             StickyHeaderHost(
                 screen = this,

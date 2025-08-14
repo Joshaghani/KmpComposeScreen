@@ -9,6 +9,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IRefreshableScre
 import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializer
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseUnScrollable.compose.ContentScreen
+import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.rememberStickyHeaderState
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UIAnimatedVisibility
 
 abstract class BaseScreenUnScrollable<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> :
@@ -16,6 +17,7 @@ abstract class BaseScreenUnScrollable<State : ViewState<Event>, Event : ViewEven
 
     @Composable
     override fun ShowScreenFromApp() {
+        stickyState = rememberStickyHeaderState()
         UIAnimatedVisibility {
             super.SetStateComposeScreen(this)
         }
