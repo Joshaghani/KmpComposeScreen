@@ -87,5 +87,5 @@ android {
 }
 
 
-group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.57"
+group = "com.github.Joshaghani.KmpComposeScreen"
+version = "0.0.61"
