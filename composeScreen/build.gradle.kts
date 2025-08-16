@@ -55,6 +55,13 @@ kotlin {
             }
         }
 
+        val iosMain by creating {
+            dependsOn(commonMain)
+        }
+        val iosArm64Main by getting { dependsOn(iosMain) }
+        val iosX64Main by getting { dependsOn(iosMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(iosMain) }
+
     }
 }
 
@@ -71,4 +78,4 @@ android {
 
 
 group = (project.findProperty("group") as String?) ?: "com.github.Joshaghani"
-version = (project.findProperty("version") as String?) ?: "0.0.42"
+version = (project.findProperty("version") as String?) ?: "0.0.55"

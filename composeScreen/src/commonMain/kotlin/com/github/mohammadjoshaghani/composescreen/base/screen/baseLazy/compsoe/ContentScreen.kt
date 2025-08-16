@@ -25,6 +25,7 @@ fun <State : ViewState<Event>, Event : ViewEvent>
 
             var showItem by remember { mutableStateOf(false) }
 
+            // یک فریم صبر کن تا استیکی یا فید هدر ساخته بشن
             LaunchedEffect(Unit) {
                 delay(16) // یک فریم تاخیر
                 showItem = true
