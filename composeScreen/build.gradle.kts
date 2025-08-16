@@ -28,9 +28,16 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "KmpComposeScreen"
+            isStatic = true
+        }
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -54,6 +61,13 @@ kotlin {
 
             }
         }
+
+        val iosMain by creating {
+            dependsOn(commonMain)
+        }
+        val iosArm64Main by getting { dependsOn(iosMain) }
+        val iosX64Main by getting { dependsOn(iosMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(iosMain) }
 
     }
 }
