@@ -68,7 +68,7 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
             contentColor = ApplicationConfig.config.color.onBackground,
             containerColor = ApplicationConfig.config.color.background,
             header = {
-                var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
+                var selectedItemIndex by rememberSaveable { mutableIntStateOf(index) }
 
                 screen.headerIconsSideBar()
                     .forEachIndexed { index, item ->
@@ -125,5 +125,10 @@ class NavigationSideBar(val startScreen: RootScreen<*, *, *, *>) {
             }
 
         }
+    }
+
+
+    companion object {
+        var index = 0
     }
 }
