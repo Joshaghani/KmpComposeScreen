@@ -7,26 +7,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.kmpcomposescreen.screen.main.MainScreen
 import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
-import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 
-class SecondScreen :
+class ThirdScreen :
     BaseScreen<
             MainScreenContract.State,
             MainScreenContract.Event,
             MainScreenContract.Effect,
             MainScreenViewModel>(),
-    IShowTopbarMain,
+    IShowTopbar,
     IShowNavigationSideBar {
 
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
@@ -47,6 +47,9 @@ class SecondScreen :
 
     }
 
+    override fun titleTopBar(): String {
+        return "Second"
+    }
 
     override fun actionIconsSideBar(): List<NavigationItem> {
         NavigationSideBar.selectedItemIndex = 5
@@ -61,15 +64,11 @@ class SecondScreen :
                 hasNews = false,
                 badgeCount = null,
                 onIconClicked = {
-                    ThirdScreen().show()
+                    MainScreen().show()
                 }
             )
 
         )
-    }
-
-    override fun menuIconTopBar(): IClickableIconModel? {
-        return null
     }
 
 }

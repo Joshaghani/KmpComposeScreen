@@ -13,7 +13,15 @@ class MainScreenViewModel(
         >() {
 
     override fun initViewModel() {
-//        setEvent(MainScreenContract.Event.GetData)
+        launchOnScope {
+            setState {
+                copy(isLoading = true)
+            }
+            delay(100)
+            setState {
+                copy(isLoading = false)
+            }
+        }
     }
 
     override fun setInitialState() = MainScreenContract.State()

@@ -19,7 +19,8 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar.ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
+fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
+    val screen = Navigator.state.current.value
 
     TopAppBar(
         title = {

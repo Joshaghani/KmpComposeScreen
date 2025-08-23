@@ -1,4 +1,4 @@
-package com.example.kmpcomposescreen.screen.main
+package com.example.kmpcomposescreen.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -18,23 +18,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.kmpcomposescreen.screen.MainScreen2
+import com.example.kmpcomposescreen.screen.main.MainScreen
+import com.example.kmpcomposescreen.screen.main.MainScreenContract
+import com.example.kmpcomposescreen.screen.main.MainScreenHandler
+import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
-import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 
-class MainScreen :
+class MainScreen2 :
     BaseScreenLazyList<
             MainScreenContract.State,
             MainScreenContract.Event,
@@ -42,22 +43,13 @@ class MainScreen :
             MainScreenViewModel
             >(),
     IShowNavigationSideBar,
-    IShowTopbarMain,
+    IShowTopbar,
     IShowStickyHeader,
-    IShowScrollAwareFadingHeader,
-    IClearStackScreen {
+    IShowScrollAwareFadingHeader {
 
     override val viewModel = MainScreenViewModel()
 
     override val handler = MainScreenHandler()
-
-
-    override fun menuIconTopBar(): IClickableIconModel? {
-        return IClickableIconModel.ClickableIconModel(
-            iconId = Res.drawable.compose_multiplatform,
-            onIconPressed = {}
-        )
-    }
 
 
     override fun actionIconsSideBar(): List<NavigationItem> {
@@ -73,7 +65,7 @@ class MainScreen :
                 hasNews = false,
                 badgeCount = null,
                 onIconClicked = {
-                    MainScreen2().show()
+                    MainScreen().show()
                 }
             )
 
@@ -173,6 +165,8 @@ class MainScreen :
         }
 
     }
+
+    override fun titleTopBar() = "asdf"
 
 
     data class CategoryModel(
