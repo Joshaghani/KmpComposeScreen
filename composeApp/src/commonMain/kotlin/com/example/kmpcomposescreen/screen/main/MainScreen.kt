@@ -60,7 +60,7 @@ class MainScreen :
 
 
     override fun actionIconsSideBar(): List<NavigationItem> {
-        NavigationSideBar.index = 5
+        NavigationSideBar.selectedItemIndex = 5
 
         return listOf(
             NavigationItem(

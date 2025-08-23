@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
-import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
@@ -24,11 +23,11 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScree
 import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializer
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
+import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.commonCompose.bottomSheet.UIBottomSheet
 import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 
 abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> {
@@ -65,15 +64,7 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
             Navigator.push(this)
         }
 
-        // یک فریم صبر کن تا صفحه کامل سایز بندی شود
-        viewModel.launchOnScope {
-            viewModel.viewState.value.isLoading = true
-            delay(10)
-            viewModel.viewState.value.isLoading = false
-        }
-
         viewModel.initViewModel()
-
     }
 
     @Composable
