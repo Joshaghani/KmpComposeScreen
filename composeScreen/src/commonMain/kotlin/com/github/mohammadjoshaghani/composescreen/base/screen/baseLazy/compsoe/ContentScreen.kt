@@ -27,7 +27,7 @@ fun <State : ViewState<Event>, Event : ViewEvent>
 
             // یک فریم صبر کن تا استیکی یا فید هدر ساخته بشن
             LaunchedEffect(Unit) {
-                delay(60) // چند فریم تاخیر
+                delay(120) // چند فریم تاخیر
                 showItem = true
             }
 
