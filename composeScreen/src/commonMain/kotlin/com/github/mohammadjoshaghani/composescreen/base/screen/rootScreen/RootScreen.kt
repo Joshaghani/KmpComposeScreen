@@ -28,6 +28,7 @@ import com.github.mohammadjoshaghani.composescreen.commonCompose.bottomSheet.UIB
 import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 
 abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> {
@@ -43,7 +44,8 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
     var stickyState = StickyHeaderState()
 
-    var showAwareHeader: MutableState<Boolean> = mutableStateOf(this is IShowScrollAwareFadingHeader)
+    var showAwareHeader: MutableState<Boolean> =
+        mutableStateOf(this is IShowScrollAwareFadingHeader)
     val heightAwareFaideHeader: MutableState<Dp> = mutableStateOf(0.dp)
 
     var onEventSent: (Event) -> Unit = { viewModel.setEvent(it) }
@@ -63,7 +65,15 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
             Navigator.push(this)
         }
 
+        // یک فریم صبر کن تا صفحه کامل سایز بندی شود
+        viewModel.launchOnScope {
+            viewModel.viewState.value.isLoading = true
+            delay(10)
+            viewModel.viewState.value.isLoading = false
+        }
+
         viewModel.initViewModel()
+
     }
 
     @Composable
