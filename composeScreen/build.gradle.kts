@@ -98,5 +98,6 @@ publishing {
 }
 
 
+
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.7۲"
+version = "0.0.73"
