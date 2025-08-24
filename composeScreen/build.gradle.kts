@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
     id("maven-publish")
@@ -28,17 +29,15 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "composeScreen"
-            isStatic = true
+    val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
+    if (HostManager.hostIsMac) {
+        iosTargets.forEach { t ->
+            t.binaries.framework {
+                baseName = "composeScreen"
+                isStatic = true
+            }
         }
     }
-
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -77,9 +76,9 @@ android {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenMultiplatform") {
-            from(components["kotlin"])
-        }
+//        create<MavenPublication>("mavenMultiplatform") {
+//            from(components["kotlin"])
+//        }
     }
 }
 
