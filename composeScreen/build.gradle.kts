@@ -72,6 +72,31 @@ android {
     }
 }
 
+publishing {
+    publications.withType<MavenPublication>().configureEach {
+        pom {
+            name.set("KmpComposeScreen")
+            description.set("Compose Multiplatform UI components")
+            url.set("https://github.com/Joshaghani/KmpComposeScreen")
+            licenses { license {
+                name.set("Apache-2.0")
+                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+            } }
+            scm { url.set("https://github.com/Joshaghani/KmpComposeScreen") }
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Joshaghani/KmpComposeScreen")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.71"
+version = "0.0.7۲"
