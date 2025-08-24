@@ -2,17 +2,12 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-val enableIos: Boolean = providers.gradleProperty("ENABLE_IOS")
-    .map { it.equals("true", ignoreCase = true) }
-    .orElse(false)
-    .get()
-
 plugins {
     id("maven-publish")
     id("org.jetbrains.kotlin.multiplatform") version "2.2.10"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
     id("org.jetbrains.compose") version "1.8.2"
-    alias(libs.plugins.androidLibrary)
+    id("com.android.library") version "8.12.1"
 }
 
 kotlin {
@@ -33,16 +28,14 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    if (enableIos) {
-        listOf(
-            iosX64(),
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
-            iosTarget.binaries.framework {
-                baseName = "composeScreen"
-                isStatic = true
-            }
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "composeScreen"
+            isStatic = true
         }
     }
 
@@ -84,12 +77,11 @@ android {
 
 publishing {
     publications {
-        // مهم: کامپوننت مولتی‌پلتفرم
         create<MavenPublication>("mavenMultiplatform") {
             from(components["kotlin"])
         }
     }
 }
 
-group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.80"
+//group = "com.github.Joshaghani.KmpComposeScreen"
+//version = "0.0.80"
