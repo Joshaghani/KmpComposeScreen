@@ -64,6 +64,9 @@ kotlin {
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
 
         }
+
+        iosMain { dependencies { } }
+
     }
 }
 
@@ -79,6 +82,14 @@ android {
     }
 }
 
+publishing {
+    publications {
+        // مهم: کامپوننت مولتی‌پلتفرم
+        create<MavenPublication>("mavenMultiplatform") {
+            from(components["kotlin"])
+        }
+    }
+}
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.78"
+version = "0.0.80"
