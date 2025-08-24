@@ -1,4 +1,3 @@
-rootProject.name = "KmpComposeScreen"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -20,5 +19,6 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
+rootProject.name = "KmpComposeScreen"
 include(":composeApp")
-include(":composeScreen")
+include(":kmpComposeScreen")

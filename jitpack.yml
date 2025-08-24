@@ -2,4 +2,6 @@ jdk:
   - openjdk17
 
 install:
-  - ./gradlew :composeScreen:publishToMavenLocal -x test -x lint
+  # روی JitPack آی‌اواس غیرفعال می‌کنیم (ENABLE_IOS=false)
+  # تا فقط android/jvm/wasm + metadata منتشر شوند
+  - ./gradlew :composeScreen:publishToMavenLocal -PENABLE_IOS=false -x test -x lint

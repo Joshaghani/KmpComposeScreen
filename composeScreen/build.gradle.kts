@@ -1,6 +1,8 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.gradle.internal.os.OperatingSystem
+
 
 plugins {
     id("maven-publish")
@@ -10,6 +12,10 @@ plugins {
     alias(libs.plugins.androidLibrary)
 
 }
+
+
+val enableIos = (System.getenv("ENABLE_IOS") ?: "false").toBoolean() ||
+        OperatingSystem.current().isMacOsX  // لوکال روی مک فعال می‌ماند
 
 kotlin {
     androidTarget {
@@ -29,14 +35,16 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "composeScreen"
-            isStatic = true
+    if (enableIos) {
+        listOf(
+            iosX64(),
+            iosArm64(),
+            iosSimulatorArm64()
+        ).forEach { iosTarget ->
+            iosTarget.binaries.framework {
+                baseName = "composeScreen"
+                isStatic = true
+            }
         }
     }
 
@@ -79,10 +87,12 @@ publishing {
             name.set("KmpComposeScreen")
             description.set("Compose Multiplatform UI components")
             url.set("https://github.com/Joshaghani/KmpComposeScreen")
-            licenses { license {
-                name.set("Apache-2.0")
-                url.set("https://www.apache.org/licenses/LICENSE-2.0")
-            } }
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                }
+            }
             scm { url.set("https://github.com/Joshaghani/KmpComposeScreen") }
         }
     }
@@ -99,6 +109,5 @@ publishing {
 }
 
 
-
-group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.73"
+group = "com.github.Joshaghani"
+version = "0.0.74"
