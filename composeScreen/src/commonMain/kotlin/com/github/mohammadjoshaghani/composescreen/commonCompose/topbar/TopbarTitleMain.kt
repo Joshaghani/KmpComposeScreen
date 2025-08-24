@@ -39,6 +39,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                     when (icon) {
                         is IClickableIconModel.ClickableIconModel -> ClickableIcon(
                             icon.iconId,
+                            title = icon.title,
                             badgeCount = icon.badgeCount,
                             onClick = icon.onIconPressed
                         )
@@ -46,6 +47,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                         is IClickableIconModel.ClickableIconVectorModel -> {
                             ClickableIcon(
                                 icon.iconId,
+                                title = icon.title,
                                 badgeCount = icon.badgeCount,
                                 onClick = icon.onIconPressed
                             )
@@ -60,6 +62,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                     when (icon) {
                         is IClickableIconModel.ClickableIconModel -> ClickableIcon(
                             icon.iconId,
+                            title = icon.title,
                             badgeCount = icon.badgeCount,
                             onClick = icon.onIconPressed
                         )
@@ -67,6 +70,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                         is IClickableIconModel.ClickableIconVectorModel -> {
                             ClickableIcon(
                                 icon.iconId,
+                                title = icon.title,
                                 badgeCount = icon.badgeCount,
                                 onClick = icon.onIconPressed
                             )

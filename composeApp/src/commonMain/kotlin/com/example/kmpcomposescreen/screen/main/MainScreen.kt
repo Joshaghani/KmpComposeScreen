@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Login
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -77,6 +79,16 @@ class MainScreen :
                 }
             )
 
+        )
+    }
+
+    override fun actionIconsTopBar(): List<IClickableIconModel> {
+        return listOf(
+            IClickableIconModel.ClickableIconVectorModel(
+                iconId = Icons.AutoMirrored.Rounded.Login,
+                title = "ورود | ثبت نام",
+                onIconPressed = {}
+            )
         )
     }
 
