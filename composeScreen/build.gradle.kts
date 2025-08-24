@@ -95,18 +95,9 @@ publishing {
             scm { url.set("https://github.com/Joshaghani/KmpComposeScreen") }
         }
     }
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Joshaghani/KmpComposeScreen")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
 }
 
 
-group = "com.github.Joshaghani"
-version = "0.0.75"
+
+group = "com.github.Joshaghani.KmpComposeScreen"
+version = "0.0.76"
