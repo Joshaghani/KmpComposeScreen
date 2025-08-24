@@ -1,8 +1,6 @@
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.gradle.internal.os.OperatingSystem
-
 
 plugins {
     id("maven-publish")
@@ -11,10 +9,6 @@ plugins {
     id("org.jetbrains.compose") version "1.8.2"
     alias(libs.plugins.androidLibrary)
 }
-
-
-val enableIos = (System.getenv("ENABLE_IOS") ?: "false").toBoolean() ||
-        OperatingSystem.current().isMacOsX  // لوکال روی مک فعال می‌ماند
 
 kotlin {
     androidTarget {
@@ -34,16 +28,14 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    if (enableIos) {
-        listOf(
-            iosX64(),
-            iosArm64(),
-            iosSimulatorArm64()
-        ).forEach { iosTarget ->
-            iosTarget.binaries.framework {
-                baseName = "composeScreen"
-                isStatic = true
-            }
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "composeScreen"
+            isStatic = true
         }
     }
 
@@ -65,6 +57,13 @@ kotlin {
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
 
         }
+
+        val iosArm64Main by getting
+        val iosArm64Test by getting
+        val iosSimulatorArm64Main by getting
+        val iosSimulatorArm64Test by getting
+        val iosX64Main by getting
+        val iosX64Test by getting
     }
 }
 
@@ -80,24 +79,6 @@ android {
     }
 }
 
-publishing {
-    publications.withType<MavenPublication>().configureEach {
-        pom {
-            name.set("KmpComposeScreen")
-            description.set("Compose Multiplatform UI components")
-            url.set("https://github.com/Joshaghani/KmpComposeScreen")
-            licenses {
-                license {
-                    name.set("Apache-2.0")
-                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
-                }
-            }
-            scm { url.set("https://github.com/Joshaghani/KmpComposeScreen") }
-        }
-    }
-}
-
-
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.76"
+version = "0.0.78"
