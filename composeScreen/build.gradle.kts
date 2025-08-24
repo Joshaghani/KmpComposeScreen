@@ -2,6 +2,11 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+val enableIos: Boolean = providers.gradleProperty("ENABLE_IOS")
+    .map { it.equals("true", ignoreCase = true) }
+    .orElse(false)
+    .get()
+
 plugins {
     id("maven-publish")
     id("org.jetbrains.kotlin.multiplatform") version "2.2.10"
@@ -28,14 +33,16 @@ kotlin {
         outputModuleName.set("KmpComposeScreen")
     }
 
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "composeScreen"
-            isStatic = true
+    if (enableIos) {
+        listOf(
+            iosX64(),
+            iosArm64(),
+            iosSimulatorArm64()
+        ).forEach { iosTarget ->
+            iosTarget.binaries.framework {
+                baseName = "composeScreen"
+                isStatic = true
+            }
         }
     }
 
@@ -57,13 +64,6 @@ kotlin {
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
 
         }
-
-        val iosArm64Main by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Main by getting
-        val iosSimulatorArm64Test by getting
-        val iosX64Main by getting
-        val iosX64Test by getting
     }
 }
 
