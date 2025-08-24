@@ -88,4 +88,4 @@ android {
 
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.69"
+version = "0.0.70"
