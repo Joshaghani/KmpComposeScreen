@@ -1,11 +1,8 @@
-name: Publish KMP Library (0.0.72)
+name: Publish KMP Library (0.0.74)
 
 on:
-  # وقتی تگ می‌زنی، اتومات منتشر می‌کند؛ مثال: v0.0.73
   push:
-    tags: ["v0.0.73"]
-
-  # امکان اجرای دستی از تب Actions
+    tags: ["v0.0.74"]   # همین تگ را که پوش کنی اجرا می‌شود
   workflow_dispatch:
 
 jobs:
@@ -29,4 +26,4 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew publish -Pversion=0.0.73
+        run: ./gradlew publishAllPublicationsToGithubPackagesRepository -Pversion=0.0.74 --stacktrace
