@@ -109,4 +109,4 @@ publishing {
 
 
 group = "com.github.Joshaghani"
-version = "0.0.74"
+version = "0.0.75"
