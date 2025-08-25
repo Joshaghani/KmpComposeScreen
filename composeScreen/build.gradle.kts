@@ -58,3 +58,6 @@ android {
     defaultConfig { minSdk = 24 }
     buildFeatures { compose = true }
 }
+
+group = "com.github.Joshaghani.KmpComposeScreen"
+version = "0.0.84"
