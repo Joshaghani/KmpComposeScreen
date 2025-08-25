@@ -15,16 +15,13 @@ kotlin {
     androidTarget {
         publishLibraryVariants("release")
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
+        compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
     }
-
     jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        browser() // config اختیاری
+        browser()
         binaries.library()
         outputModuleName.set("KmpComposeScreen")
     }
@@ -38,6 +35,7 @@ kotlin {
             }
         }
     }
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -46,41 +44,17 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-
             implementation(compose.materialIconsExtended)
-
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-
-            // https://mvnrepository.com/artifact/androidx.compose.material3/material3-window-size-class
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
-
         }
-
-        iosMain { dependencies { } }
-
     }
 }
-
 
 android {
     namespace = "com.github.mohammadjoshaghani.composescreen"
     compileSdk = 36
-    defaultConfig {
-        minSdk = 24
-    }
-    buildFeatures {
-        compose = true
-    }
+    defaultConfig { minSdk = 24 }
+    buildFeatures { compose = true }
 }
-
-publishing {
-    publications {
-//        create<MavenPublication>("mavenMultiplatform") {
-//            from(components["kotlin"])
-//        }
-    }
-}
-
-//group = "com.github.Joshaghani.KmpComposeScreen"
-//version = "0.0.80"

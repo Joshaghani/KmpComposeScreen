@@ -2,5 +2,4 @@ jdk:
   - openjdk17
 
 install:
-  # به‌طور صریح iOS را خاموش می‌کنیم؛ فقط root/metadata + android/jvm/wasm منتشر می‌شوند
-  ./gradlew :composeScreen:publishToMavenLocal -PENABLE_IOS=true -x test -x lint
+  ./gradlew :composeScreen:publishToMavenLocal -x test -x lint
