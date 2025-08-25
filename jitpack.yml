@@ -2,4 +2,6 @@ jdk:
   - openjdk17
 
 install:
-  ./gradlew :composeScreen:publishToMavenLocal -x test -x lint
+  - ./gradlew -v
+  - ./gradlew :composeScreen:publishToMavenLocal -x test -x lint --no-daemon --stacktrace
+  - ./gradlew :composeScreen:publishIosArm64PublicationToMavenLocal :composeScreen:publishIosX64PublicationToMavenLocal :composeScreen:publishIosSimulatorArm64PublicationToMavenLocal -x test -x lint --no-daemon --stacktrace
