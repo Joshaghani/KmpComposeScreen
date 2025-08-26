@@ -60,4 +60,13 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.85"
+version = "0.0.86"
+
+publishing {
+    repositories {
+        maven {
+            name = "GhPages"
+            url = uri(layout.projectDirectory.dir("gh-pages-maven")) // خروجی اینجاست
+        }
+    }
+}
