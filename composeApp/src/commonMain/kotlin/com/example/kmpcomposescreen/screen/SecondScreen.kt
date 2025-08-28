@@ -12,6 +12,7 @@ import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
@@ -27,7 +28,7 @@ class SecondScreen :
             MainScreenContract.Effect,
             MainScreenViewModel>(),
     IShowTopbarMain,
-    IShowNavigationSideBar {
+    IShowScrollAwareFadingHeader {
 
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
 
@@ -41,35 +42,42 @@ class SecondScreen :
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             repeat(50) {
-                Text("Compose View Second", color = colorTheme.onBackground)
+                Text("Compose View Second $it", color = colorTheme.onBackground)
             }
         }
 
     }
 
 
-    override fun actionIconsSideBar(): List<NavigationItem> {
-        NavigationSideBar.selectedItemIndex = 5
-
-        return listOf(
-            NavigationItem(
-                title = "icon",
-                unselectedIcon = Res.drawable.compose_multiplatform,
-                selectedColor = Color.Red,
-                selectedIcon = Res.drawable.compose_multiplatform,
-                unselectedColor = Color.Blue,
-                hasNews = false,
-                badgeCount = null,
-                onIconClicked = {
-                    ThirdScreen().show()
-                }
-            )
-
-        )
-    }
+//    override fun actionIconsSideBar(): List<NavigationItem> {
+//        NavigationSideBar.selectedItemIndex = 5
+//
+//        return listOf(
+//            NavigationItem(
+//                title = "icon",
+//                unselectedIcon = Res.drawable.compose_multiplatform,
+//                selectedColor = Color.Red,
+//                selectedIcon = Res.drawable.compose_multiplatform,
+//                unselectedColor = Color.Blue,
+//                hasNews = false,
+//                badgeCount = null,
+//                onIconClicked = {
+//                    ThirdScreen().show()
+//                }
+//            )
+//
+//        )
+//    }
 
     override fun menuIconTopBar(): IClickableIconModel? {
         return null
+    }
+
+    @Composable
+    override fun UIScrollAwareFadingHeader(modifier: Modifier) {
+        Column(modifier = modifier) {
+            Text("asdflkajsd ;lksjl;ksajd f;lksadjf ;lsakdj ;slkd")
+        }
     }
 
 }

@@ -64,9 +64,7 @@ fun BaseScreen<*, *, *, *>.ScrollAwareFadingHeaderPreservingSpace() {
             )
         }
 
-        if (!showAwareHeader.value && heightAwareFaideHeader.value > 0.dp) {
-            Spacer(Modifier.height(heightAwareFaideHeader.value))
-        }
+
     }
 
 }
