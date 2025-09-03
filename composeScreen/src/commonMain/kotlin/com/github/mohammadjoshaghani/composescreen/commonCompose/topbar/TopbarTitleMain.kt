@@ -25,67 +25,64 @@ import org.jetbrains.compose.resources.painterResource
 fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
     val screen = Navigator.state.current.value
 
-    CenterAlignedTopAppBar(
-        title = {
-            Image(
-                modifier = Modifier.size(56.dp),
-                painter = painterResource(ApplicationConfig.config.appIconId),
-                contentDescription = null
+    if (screen is IShowTopbarMain) {
+        if (screen.customTopbarUI(scrollBehavior) != null) {
+            screen.customTopbarUI(scrollBehavior)!!.invoke()
+        } else {
+            CenterAlignedTopAppBar(
+                title = {
+                    screen.titleTopBar().invoke()
+                },
+                navigationIcon = {
+                    screen.menuIconTopBar()?.let { icon ->
+                        when (icon) {
+                            is IClickableIconModel.ClickableIconModel -> ClickableIcon(
+                                icon.iconId,
+                                title = icon.title,
+                                badgeCount = icon.badgeCount,
+                                onClick = icon.onIconPressed
+                            )
+
+                            is IClickableIconModel.ClickableIconVectorModel -> {
+                                ClickableIcon(
+                                    icon.iconId,
+                                    title = icon.title,
+                                    badgeCount = icon.badgeCount,
+                                    onClick = icon.onIconPressed
+                                )
+                            }
+                        }
+                    }
+                },
+                actions = {
+                    screen.actionIconsTopBar().forEach { icon ->
+                        when (icon) {
+                            is IClickableIconModel.ClickableIconModel -> ClickableIcon(
+                                icon.iconId,
+                                title = icon.title,
+                                badgeCount = icon.badgeCount,
+                                onClick = icon.onIconPressed
+                            )
+
+                            is IClickableIconModel.ClickableIconVectorModel -> {
+                                ClickableIcon(
+                                    icon.iconId,
+                                    title = icon.title,
+                                    badgeCount = icon.badgeCount,
+                                    onClick = icon.onIconPressed
+                                )
+                            }
+                        }
+                    }
+                },
+                scrollBehavior = scrollBehavior,
+                colors = TopAppBarDefaults.topAppBarColors(
+                    scrolledContainerColor = ApplicationConfig.config.color.background,
+                    containerColor = ApplicationConfig.config.color.background,
+                )
             )
-        },
-        navigationIcon = {
-            if (screen is IShowTopbarMain) {
-                screen.menuIconTopBar()?.let { icon ->
-                    when (icon) {
-                        is IClickableIconModel.ClickableIconModel -> ClickableIcon(
-                            icon.iconId,
-                            title = icon.title,
-                            badgeCount = icon.badgeCount,
-                            onClick = icon.onIconPressed
-                        )
-
-                        is IClickableIconModel.ClickableIconVectorModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        actions = {
-            if (screen is IShowTopbarMain) {
-                screen.actionIconsTopBar().forEach { icon ->
-                    when (icon) {
-                        is IClickableIconModel.ClickableIconModel -> ClickableIcon(
-                            icon.iconId,
-                            title = icon.title,
-                            badgeCount = icon.badgeCount,
-                            onClick = icon.onIconPressed
-                        )
-
-                        is IClickableIconModel.ClickableIconVectorModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed
-                            )
-                        }
-                    }
-                }
-            }
-        },
-        scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(
-            scrolledContainerColor = ApplicationConfig.config.color.background,
-            containerColor = ApplicationConfig.config.color.background,
-        )
-
-    )
+        }
+    }
 
     if (isScrolled && ApplicationConfig.config.isDarkTheme) {
         if (screen is IShowStickyHeader) {
