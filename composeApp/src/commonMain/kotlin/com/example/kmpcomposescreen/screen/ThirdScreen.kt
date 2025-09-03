@@ -47,9 +47,7 @@ class ThirdScreen :
 
     }
 
-    override fun titleTopBar(): String {
-        return "Second"
-    }
+    override fun titleTopBar() = IShowTopbar.UiTitle.TextResult("Second")
 
     override fun actionIconsSideBar(): List<NavigationItem> {
         NavigationSideBar.selectedItemIndex = 5

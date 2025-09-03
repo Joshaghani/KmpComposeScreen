@@ -166,7 +166,7 @@ class MainScreen2 :
 
     }
 
-    override fun titleTopBar() = "asdf"
+    override fun titleTopBar() = IShowTopbar.UiTitle.TextResult("asdf")
 
 
     data class CategoryModel(

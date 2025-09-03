@@ -47,7 +47,7 @@ class MainScreen :
     IShowTopbarMain,
     IShowStickyHeader,
     IShowScrollAwareFadingHeader,
-    IClearStackScreen {
+    IClearStackScreen{
 
     override val viewModel = MainScreenViewModel()
 
