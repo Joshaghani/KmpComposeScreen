@@ -8,7 +8,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform") version "2.2.10"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
     id("org.jetbrains.compose") version "1.9.0-rc01"
-    id("com.android.library") version "8.12.1"
+    id("com.android.library") version "8.13.0"
 }
 
 kotlin {
@@ -63,7 +63,7 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.92"
+version = "0.0.93"
 
 publishing {
     repositories {
@@ -75,3 +75,8 @@ publishing {
 }
 
 //      ./gradlew :composeScreen:publishAllPublicationsToGhPagesRepository --stacktrace
+
+
+// ./gradlew :composeScreen:publishAllPublicationsToGhPagesRepository \
+//  --no-configuration-cache \
+//  --refresh-dependencies
