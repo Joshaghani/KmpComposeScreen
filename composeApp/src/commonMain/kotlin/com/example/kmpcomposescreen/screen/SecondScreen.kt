@@ -2,24 +2,28 @@ package com.example.kmpcomposescreen.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
+import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowBottombar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
+import com.github.mohammadjoshaghani.composescreen.commonCompose.UISpacer
 import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
-import kmpcomposescreen.composeapp.generated.resources.Res
-import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
+import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
 
 class SecondScreen :
     BaseScreen<
@@ -28,6 +32,7 @@ class SecondScreen :
             MainScreenContract.Effect,
             MainScreenViewModel>(),
     IShowTopbarMain,
+    IShowBottombar,
     IShowScrollAwareFadingHeader {
 
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
@@ -79,6 +84,37 @@ class SecondScreen :
             Text("asdflkajsd ;lksjl;ksajd f;lksadjf ;lsakdj ;slkd")
         }
     }
+
+    @Composable
+    override fun BottomBarView() {
+
+
+        val dialog = UIAlertDialog().setCustomContent(modifier = Modifier.fillMaxWidth(0.5f) , shape = RoundedCornerShape(16.dp)) {
+            Column(Modifier.fillMaxWidth()) {
+                UISpacer()
+                Text("Test Header")
+                UISpacer()
+                Text("Test Mesage")
+
+                UISpacer()
+
+                Button({
+                    UIAlertDialog.getDialog()?.dismiss()
+                }) {
+                    Text("Click Me!")
+                }
+
+            }
+        }
+
+        Button({
+            dialog.show()
+        }) {
+            Text("Click Me!")
+        }
+
+    }
+
 
 }
 

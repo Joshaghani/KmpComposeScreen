@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -15,6 +16,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -22,7 +24,11 @@ import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertD
 
 
 @Composable
-internal fun UIAlertDialog.CustomUIAlertDialog(content: @Composable ColumnScope.(UIAlertDialog) -> Unit) {
+internal fun UIAlertDialog.CustomUIAlertDialog(
+    modifier: Modifier,
+    shape: Shape? = null,
+    content: @Composable ColumnScope.(UIAlertDialog) -> Unit,
+) {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         Column(
             modifier = Modifier
@@ -42,11 +48,8 @@ internal fun UIAlertDialog.CustomUIAlertDialog(content: @Composable ColumnScope.
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Card(
-                    shape = if (paddingCustomUi == 0) {
-                        RoundedCornerShape(0.dp)
-                    } else {
-                        RoundedCornerShape(4.dp)
-                    },
+                    modifier = modifier,
+                    shape = shape ?: RoundedCornerShape(0.dp),
                     colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
                 ) {
                     Column { content(this@CustomUIAlertDialog) }

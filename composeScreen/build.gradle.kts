@@ -7,7 +7,7 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.kotlin.multiplatform") version "2.2.10"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
-    id("org.jetbrains.compose") version "1.8.2"
+    id("org.jetbrains.compose") version "1.9.0-rc01"
     id("com.android.library") version "8.12.1"
 }
 
@@ -48,6 +48,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
+            // back handler
+            implementation(libs.ui.backhandler)
+
         }
     }
 }
@@ -60,7 +63,7 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.91"
+version = "0.0.92"
 
 publishing {
     repositories {

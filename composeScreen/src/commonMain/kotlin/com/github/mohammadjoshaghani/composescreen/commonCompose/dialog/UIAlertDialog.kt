@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
@@ -29,7 +31,8 @@ class UIAlertDialog(
     private val isShowDialogFlow = MutableStateFlow(false)
     private var sampleDialogContent: (@Composable ColumnScope.(UIAlertDialog) -> Unit)? = null
 
-    internal var paddingCustomUi = 0
+    internal lateinit var modifierCustomUi: Modifier
+    internal var shapeCustomUi: Shape? = null
 
     fun show() {
         showSampleDialogState.value = this
@@ -47,11 +50,13 @@ class UIAlertDialog(
 
     @Composable
     fun setCustomContent(
-        padding: Int = 0,
+        modifier: Modifier = Modifier,
+        shape: Shape? = null,
         content: @Composable ColumnScope.(UIAlertDialog) -> Unit,
     ) = apply {
         this.sampleDialogContent = content
-        this.paddingCustomUi = padding
+        this.modifierCustomUi = modifier
+        this.shapeCustomUi = shape
     }
 
     fun setTitle(title: String) = apply { this.title = title }
@@ -92,7 +97,7 @@ class UIAlertDialog(
             onDismissRequest = { dismiss() }
         ) {
             sampleDialogContent?.let {
-                CustomUIAlertDialog(it)
+                CustomUIAlertDialog(modifierCustomUi, shapeCustomUi, it)
             } ?: SampleUiAlertDialog()
         }
     }
