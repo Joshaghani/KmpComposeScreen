@@ -13,9 +13,14 @@ import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,6 +38,7 @@ import org.jetbrains.compose.resources.painterResource
 fun ClickableIcon(
     icon: ImageVector,
     title: String? = null,
+    tooltip: String? = null,
     badgeCount: Int? = null,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
@@ -45,6 +51,7 @@ fun ClickableIcon(
             IconBox(
                 icon,
                 title,
+                tooltip,
                 modifier,
                 tint,
                 contentDescription,
@@ -59,6 +66,7 @@ fun ClickableIcon(
                 IconBox(
                     icon,
                     title,
+                    tooltip,
                     modifier,
                     tint,
                     contentDescription,
@@ -78,6 +86,7 @@ fun ClickableIcon(
                 IconBox(
                     icon,
                     title,
+                    tooltip,
                     modifier,
                     tint,
                     contentDescription,
@@ -93,6 +102,7 @@ fun ClickableIcon(
 fun ClickableIcon(
     icon: DrawableResource,
     title: String? = null,
+    tooltip: String? = null,
     badgeCount: Int? = null,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
@@ -105,6 +115,7 @@ fun ClickableIcon(
             IconBox(
                 icon,
                 title,
+                tooltip,
                 modifier,
                 tint,
                 contentDescription,
@@ -119,6 +130,7 @@ fun ClickableIcon(
                 IconBox(
                     icon,
                     title,
+                    tooltip,
                     modifier,
                     tint,
                     contentDescription,
@@ -138,6 +150,7 @@ fun ClickableIcon(
                 IconBox(
                     icon,
                     title,
+                    tooltip,
                     modifier,
                     tint,
                     contentDescription,
@@ -148,29 +161,44 @@ fun ClickableIcon(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IconBox(
     icon: DrawableResource,
     title: String? = null,
+    tooltip: String? = null,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
     onClick: () -> Unit,
 ) {
     if (title == null) {
-        Box(
-            modifier = modifier
-                .size(56.dp)
-                .clip(CircleShape)
-                .clickableTheme(onClick = onClick),
-            contentAlignment = Alignment.Center
+
+        TooltipBox(
+            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            tooltip = {
+                tooltip?.let {
+                    PlainTooltip {
+                        Text(tooltip)
+                    }
+                }
+            },
+            state = rememberTooltipState(),
         ) {
-            Icon(
-                painter = painterResource(icon),
-                contentDescription = contentDescription,
-                modifier = Modifier.size(24.dp),
-                tint = tint
-            )
+            Box(
+                modifier = modifier
+                    .size(56.dp)
+                    .clip(CircleShape)
+                    .clickableTheme(onClick = onClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(icon),
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(24.dp),
+                    tint = tint
+                )
+            }
         }
     } else {
         IconButtonMenu(
@@ -184,31 +212,44 @@ fun IconBox(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IconBox(
     icon: ImageVector,
     title: String? = null,
+    tooltip: String? = null,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
     onClick: () -> Unit,
 ) {
-
-
     if (title == null) {
-        Box(
-            modifier = modifier
-                .size(56.dp)
-                .clip(CircleShape)
-                .clickableTheme(onClick = onClick),
-            contentAlignment = Alignment.Center
+
+        TooltipBox(
+            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            tooltip = {
+                tooltip?.let {
+                    PlainTooltip {
+                        Text(tooltip)
+                    }
+                }
+            },
+            state = rememberTooltipState(),
         ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = contentDescription,
-                modifier = Modifier.size(24.dp),
-                tint = tint
-            )
+            Box(
+                modifier = modifier
+                    .size(56.dp)
+                    .clip(CircleShape)
+                    .clickableTheme(onClick = onClick),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = contentDescription,
+                    modifier = Modifier.size(24.dp),
+                    tint = tint
+                )
+            }
         }
     } else {
         IconButtonMenu(
