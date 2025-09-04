@@ -1,0 +1,295 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../composeScreen/0.0.94/composeScreen-0.0.94.module",
+    "group": "com.github.Joshaghani.KmpComposeScreen",
+    "module": "composeScreen",
+    "version": "0.0.94",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.13"
+    }
+  },
+  "variants": [
+    {
+      "name": "wasmJsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "dependencies": [
+        {
+          "group": "dev.chrisbanes.material3",
+          "module": "material3-window-size-class-multiplatform",
+          "version": {
+            "requires": "0.5.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "composeScreen-wasm-js-0.0.94.klib",
+          "url": "composeScreen-wasm-js-0.0.94.klib",
+          "size": 417464,
+          "sha512": "698834f46b43e76e8787028e3d8532ddf28f77b034a4a816aa27b2c286c7468e839ccef219681ee062febb4699069a10c2a567e1466b8f171e50154d6e2bd376",
+          "sha256": "b5f7d3ae4aa6ed855644e5ba6d34bb76fa89d8e017d4fd75ebec260ba8d8f6df",
+          "sha1": "6b4bb58a12991218dc968fe5ae3fcd6c1d252eb8",
+          "md5": "d30a4435510066b687f1d6f12a3b00cb"
+        }
+      ]
+    },
+    {
+      "name": "wasmJsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "dependencies": [
+        {
+          "group": "dev.chrisbanes.material3",
+          "module": "material3-window-size-class-multiplatform",
+          "version": {
+            "requires": "0.5.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.8.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-resources",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-ui-tooling-preview",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material",
+          "module": "material-icons-extended",
+          "version": {
+            "requires": "1.7.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.9.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.androidx.lifecycle",
+          "module": "lifecycle-runtime-compose",
+          "version": {
+            "requires": "2.9.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui-backhandler",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "composeScreen-wasm-js-0.0.94.klib",
+          "url": "composeScreen-wasm-js-0.0.94.klib",
+          "size": 417464,
+          "sha512": "698834f46b43e76e8787028e3d8532ddf28f77b034a4a816aa27b2c286c7468e839ccef219681ee062febb4699069a10c2a567e1466b8f171e50154d6e2bd376",
+          "sha256": "b5f7d3ae4aa6ed855644e5ba6d34bb76fa89d8e017d4fd75ebec260ba8d8f6df",
+          "sha1": "6b4bb58a12991218dc968fe5ae3fcd6c1d252eb8",
+          "md5": "d30a4435510066b687f1d6f12a3b00cb"
+        }
+      ]
+    },
+    {
+      "name": "wasmJsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "files": [
+        {
+          "name": "composeScreen-wasm-js-0.0.94-sources.jar",
+          "url": "composeScreen-wasm-js-0.0.94-sources.jar",
+          "size": 78213,
+          "sha512": "06337da9cb2388b5bfd6232163346100d1c5a27b5ee13ea9797ede30d128a9fdb153e1f92d54fa2c22e2c2440ff6af74824c5de1a35d2a2a0dc3277ee076c833",
+          "sha256": "b4e451e9fadb09574d0396698cadaffdd08b28c4e078ea02a337e36e61865544",
+          "sha1": "5c73c4a995ced21afae776af11761bd24ef5a3b2",
+          "md5": "be2a58e818b477196c20d63b05e2c2b3"
+        }
+      ]
+    },
+    {
+      "name": "wasmJsResourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.libraryelements": "kotlin-multiplatformresourcesjs",
+        "org.gradle.usage": "kotlin-multiplatformresourcesjs",
+        "org.jetbrains.kotlin.platform.type": "wasm",
+        "org.jetbrains.kotlin.wasm.target": "js"
+      },
+      "dependencies": [
+        {
+          "group": "dev.chrisbanes.material3",
+          "module": "material3-window-size-class-multiplatform",
+          "version": {
+            "requires": "0.5.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.10"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.runtime",
+          "module": "runtime",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.foundation",
+          "module": "foundation",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material3",
+          "module": "material3",
+          "version": {
+            "requires": "1.8.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-resources",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.components",
+          "module": "components-ui-tooling-preview",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.material",
+          "module": "material-icons-extended",
+          "version": {
+            "requires": "1.7.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.androidx.lifecycle",
+          "module": "lifecycle-viewmodel-compose",
+          "version": {
+            "requires": "2.9.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.androidx.lifecycle",
+          "module": "lifecycle-runtime-compose",
+          "version": {
+            "requires": "2.9.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.compose.ui",
+          "module": "ui-backhandler",
+          "version": {
+            "requires": "1.9.0-rc01"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "composeScreen-0.0.94.kotlin_resources.zip",
+          "url": "composeScreen-wasm-js-0.0.94-kotlin_resources.kotlin_resources.zip",
+          "size": 392,
+          "sha512": "d46c03a93b65c38b80f8d72c5eec604e835342643c6d012785252ad1e1f5bbc83d7cb9d6a35de7cf3319de14927f962c89f9d04b5c66356536eb5bbbd75f163b",
+          "sha256": "5fad460016dda44c18ba723de08b9cbd04862a7fd12a6d59cd3005b88454c492",
+          "sha1": "c37bf1da8cd9f4e31412a8096468fecc1ef8cab5",
+          "md5": "8fbf1dcd82042e53cb359994dd02e16c"
+        }
+      ]
+    }
+  ]
+}
