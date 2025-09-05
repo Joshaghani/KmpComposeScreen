@@ -144,21 +144,6 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
         }
     }
 
-    @Composable
-    fun MediumUI(compactUI: @Composable () -> Unit) {
-        Row(Modifier.fillMaxSize()) {
-            Column {
-                StickySpacer()
-                AwareHeaderSpacer(showAwareHeader.value, heightAwareFaideHeader.value)
-                StartedExpandedUI()
-            }
-            Column(
-                Modifier
-                    .fillMaxHeight()
-                    .weight(1f)
-            ) { compactUI() }
-        }
-    }
 
     @Composable
     open fun StartedExpandedUI() {

@@ -25,7 +25,7 @@ class UIAlertDialog(
     internal var setCanceledOnTouchOutside: Boolean = true,
     internal var primaryButtonContainerColor: Color = ApplicationConfig.config.color.primary,
     internal var primaryButtonContentColor: Color = ApplicationConfig.config.color.onPrimary,
-    internal var cancelButtonContentColor: Color = ApplicationConfig.config.color.onPrimary,
+    internal var cancelButtonContentColor: Color = ApplicationConfig.config.color.onBackground,
 ) : IAlertDialog {
 
     private val isShowDialogFlow = MutableStateFlow(false)

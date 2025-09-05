@@ -2,14 +2,10 @@ package com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.compo
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowSticky
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UIRefreshableContent
@@ -31,9 +27,7 @@ fun BaseScreen<*, *, *, *>.ContentScreen() {
                 }
 
                 WindowWidthSizeClass.Medium -> {
-                    MediumUI {
-                        CompactUI()
-                    }
+                    CompactUI()
                 }
 
                 WindowWidthSizeClass.Expanded -> {
