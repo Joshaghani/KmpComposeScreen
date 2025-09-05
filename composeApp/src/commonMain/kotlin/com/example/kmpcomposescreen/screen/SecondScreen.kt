@@ -13,15 +13,16 @@ import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
+import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowBottombar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
+import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
 
 class SecondScreen :
-    BaseScreen<
+    BaseScreenLazyList<
             MainScreenContract.State,
             MainScreenContract.Event,
             MainScreenContract.Effect,
@@ -102,6 +103,15 @@ class SecondScreen :
         }) {
             Text("Click Me!")
         }
+
+    }
+
+    override fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
+        return mutableListOf()
+    }
+
+    @Composable
+    override fun ItemUI(index: Int, item: Any) {
 
     }
 
