@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.github.mohammadjoshaghani.composescreen.base.handler.ILazyLoadingList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.compsoe.EmptyListContent
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.compsoe.LoadMoreProgressbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.isLoadMoreList
 
@@ -44,16 +43,6 @@ fun <T> LazyGridScope.renderLoadMore(
     }
 }
 
-fun <T> LazyGridScope.renderEmptyState(
-    list: MutableList<T>,
-    screen: BaseScreenLazyList<*, *, *, *>,
-) {
-    if (list.isEmpty()) {
-        item {
-            screen.EmptyListContent()
-        }
-    }
-}
 
 
 

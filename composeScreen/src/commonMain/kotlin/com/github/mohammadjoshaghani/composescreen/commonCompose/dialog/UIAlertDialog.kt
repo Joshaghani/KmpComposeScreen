@@ -28,7 +28,7 @@ class UIAlertDialog(
     internal var cancelButtonContentColor: Color = ApplicationConfig.config.color.onBackground,
 ) : IAlertDialog {
 
-    private val isShowDialogFlow = MutableStateFlow(false)
+    private val isShowDialogFlow = MutableStateFlow(true)
     private var sampleDialogContent: (@Composable ColumnScope.(UIAlertDialog) -> Unit)? = null
 
     internal lateinit var modifierCustomUi: Modifier
@@ -36,7 +36,6 @@ class UIAlertDialog(
 
     fun show() {
         showSampleDialogState.value = this
-        isShowDialogFlow.value = true
     }
 
 

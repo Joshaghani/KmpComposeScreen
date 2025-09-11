@@ -14,7 +14,6 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowFab
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderEmptyState
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderItemsIndexed
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderLoadMore
 import com.github.mohammadjoshaghani.composescreen.commonCompose.UISpacer
@@ -50,11 +49,16 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
         item(span = { GridItemSpan(maxLineSpan) }) {
             ComposeView(state)
         }
-        renderItemsIndexed(getItemsList(state)) { index, item ->
-            ItemUI(index, item)
+
+        val list = getItemsList(state)
+        if (list.isEmpty()) {
+            item { EmptyListUI(state) }
+        } else {
+            renderItemsIndexed(list) { index, item ->
+                ItemUI(index, item)
+            }
         }
-        renderLoadMore(getItemsList(state), this@UILazyVerticalGrid)
-        renderEmptyState(getItemsList(state), this@UILazyVerticalGrid)
+        renderLoadMore(list, this@UILazyVerticalGrid)
 
         item(span = { GridItemSpan(maxLineSpan) }) {
             FooterUI(state)
