@@ -7,6 +7,7 @@ import androidx.compose.material.icons.twotone.Laptop
 import androidx.compose.material.icons.twotone.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +44,9 @@ class SecondScreen :
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            TextField("" , {})
+
             repeat(50) {
                 Text("Compose View Second $it", color = colorTheme.onBackground)
             }

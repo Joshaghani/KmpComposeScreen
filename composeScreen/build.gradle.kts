@@ -63,7 +63,7 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.104"
+version = "0.0.107"
 
 publishing {
     repositories {
