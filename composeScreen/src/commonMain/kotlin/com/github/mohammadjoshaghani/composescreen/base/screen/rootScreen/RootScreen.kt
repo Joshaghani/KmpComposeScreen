@@ -24,8 +24,8 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializ
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.commonCompose.bottomSheet.UIBottomSheet
-import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.UIBottomSheet
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.flow.MutableStateFlow

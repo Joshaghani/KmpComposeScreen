@@ -3,7 +3,7 @@ package com.github.mohammadjoshaghani.composescreen.base.handler
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
 
 interface IShowTopbarMain {
 

@@ -15,8 +15,8 @@ import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 

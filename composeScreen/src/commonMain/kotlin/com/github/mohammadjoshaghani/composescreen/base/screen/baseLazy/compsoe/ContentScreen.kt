@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.commonCompose.UIRefreshableContent
+import com.github.mohammadjoshaghani.composescreen.compose.UIRefreshableContent
 import com.github.mohammadjoshaghani.composescreen.utils.WindowSizeBus
 import kotlinx.coroutines.delay
 

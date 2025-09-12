@@ -3,9 +3,7 @@ package com.example.kmpcomposescreen.screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +14,9 @@ import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowBottombar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.commonCompose.clickableIcon.IClickableIconModel
-import com.github.mohammadjoshaghani.composescreen.commonCompose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 
 class SecondScreen :
     BaseScreenLazyList<
@@ -27,7 +24,7 @@ class SecondScreen :
             MainScreenContract.Event,
             MainScreenContract.Effect,
             MainScreenViewModel>(),
-    IShowTopbarMain,
+    IShowTopbar,
     IShowBottombar,
     IShowScrollAwareFadingHeader {
 
@@ -49,13 +46,17 @@ class SecondScreen :
 
     }
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    override fun customTopbarUI(scrollBehavior: TopAppBarScrollBehavior): @Composable (() -> Unit)? {
-        return {
-            Text("Welocme To Custom UI :)")
-        }
+    override fun titleTopBar(): IShowTopbar.UiTitle {
+       return IShowTopbar.UiTitle.TextResult("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
     }
+
+//    @OptIn(ExperimentalMaterial3Api::class)
+//    @Composable
+//    override fun customTopbarUI(scrollBehavior: TopAppBarScrollBehavior): @Composable (() -> Unit)? {
+//        return {
+//            Text("Welocme To Custom UI :)")
+//        }
+//    }
 
 
 //    override fun actionIconsSideBar(): List<NavigationItem> {
@@ -78,9 +79,9 @@ class SecondScreen :
 //        )
 //    }
 
-    override fun menuIconTopBar(): IClickableIconModel? {
-        return null
-    }
+//    override fun menuIconTopBar(): IClickableIconModel? {
+//        return null
+//    }
 
     @Composable
     override fun UIScrollAwareFadingHeader(modifier: Modifier) {

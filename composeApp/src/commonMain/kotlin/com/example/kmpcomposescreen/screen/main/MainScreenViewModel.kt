@@ -1,7 +1,7 @@
 package com.example.kmpcomposescreen.screen.main
 
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
-import com.github.mohammadjoshaghani.composescreen.commonCompose.toast.ToastState
+import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastState
 import com.github.mohammadjoshaghani.composescreen.extension.toast
 import kotlinx.coroutines.delay
 

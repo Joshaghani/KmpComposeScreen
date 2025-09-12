@@ -29,8 +29,8 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationItem
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform

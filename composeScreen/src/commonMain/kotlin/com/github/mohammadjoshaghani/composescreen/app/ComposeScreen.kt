@@ -14,7 +14,7 @@ fun ComposeScreen(
     config: Config,
 ) {
     ApplicationConfig.config = config
-    AppContent(startScreen)
+    AppLayout { AppContent(startScreen) }
     BackHandler(onBack = config.onBack)
 }
 

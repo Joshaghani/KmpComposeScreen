@@ -18,9 +18,9 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
-import com.github.mohammadjoshaghani.composescreen.commonCompose.fab.UIFab
-import com.github.mohammadjoshaghani.composescreen.commonCompose.navigationRail.NavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.commonCompose.topbar.TopBar
+import com.github.mohammadjoshaghani.composescreen.compose.fab.UIFab
+import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.TopBar
 import com.github.mohammadjoshaghani.composescreen.extension.clickableWitoutHighlight
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 

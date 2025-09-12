@@ -3,8 +3,8 @@ package com.example.kmpcomposescreen.screen.main
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
-import com.github.mohammadjoshaghani.composescreen.commonCompose.errorScreen.ErrorScreenMessageModel
-import com.github.mohammadjoshaghani.composescreen.commonCompose.toast.ToastMessageModel
+import com.github.mohammadjoshaghani.composescreen.compose.errorScreen.ErrorScreenMessageModel
+import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageModel
 
 
 class MainScreenContract {
