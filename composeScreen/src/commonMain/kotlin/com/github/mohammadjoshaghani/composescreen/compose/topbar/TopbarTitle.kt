@@ -54,12 +54,14 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
                 actions = {
                     screen.actionIconsTopBar().forEach { icon ->
                         when (icon) {
-                            is IClickableIconModel.ClickableIconModel -> ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed
-                            )
+                            is IClickableIconModel.ClickableIconModel -> {
+                                ClickableIcon(
+                                    icon.iconId,
+                                    title = icon.title,
+                                    badgeCount = icon.badgeCount,
+                                    onClick = icon.onIconPressed
+                                )
+                            }
 
                             is IClickableIconModel.ClickableIconVectorModel -> {
                                 ClickableIcon(

@@ -78,7 +78,7 @@ fun ClickableIcon(
         else -> {
             BadgedBox(
                 badge = {
-                    Badge(Modifier.padding(12.dp)) {
+                    Badge(Modifier.offset(y = 10.dp, x = (-10).dp)) {
                         Text("$badgeCount")
                     }
                 }

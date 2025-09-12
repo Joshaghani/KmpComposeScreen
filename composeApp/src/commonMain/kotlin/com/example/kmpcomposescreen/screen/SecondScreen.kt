@@ -2,6 +2,9 @@ package com.example.kmpcomposescreen.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.twotone.Laptop
+import androidx.compose.material.icons.twotone.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +19,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowBottombar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 
 class SecondScreen :
@@ -47,7 +51,7 @@ class SecondScreen :
     }
 
     override fun titleTopBar(): IShowTopbar.UiTitle {
-       return IShowTopbar.UiTitle.TextResult("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
+        return IShowTopbar.UiTitle.TextResult("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
     }
 
 //    @OptIn(ExperimentalMaterial3Api::class)
@@ -114,6 +118,22 @@ class SecondScreen :
     @Composable
     override fun ItemUI(index: Int, item: Any) {
 
+    }
+
+    override fun actionIconsTopBar(): List<IClickableIconModel> {
+        return listOfNotNull(
+            IClickableIconModel.ClickableIconVectorModel(
+                badgeCount = 3,
+                iconId = Icons.TwoTone.ShoppingCart,
+                onIconPressed = {
+                }),
+            IClickableIconModel.ClickableIconVectorModel(
+                badgeCount = 2,
+                iconId = Icons.TwoTone.Laptop,
+                onIconPressed = {
+                })
+
+        )
     }
 
 
