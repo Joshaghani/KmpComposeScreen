@@ -9,6 +9,8 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
     id("org.jetbrains.compose") version "1.9.0-rc01"
     id("com.android.library") version "8.13.0"
+//    id("signing")
+
 }
 
 kotlin {
@@ -63,7 +65,10 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.107"
+version = "0.0.109"
+
+//group = "io.github.mohammadjoshaghani" // همونی که Sonatype تایید کرد
+//version = "0.0.1"
 
 publishing {
     repositories {
@@ -72,6 +77,32 @@ publishing {
             url = uri(layout.projectDirectory.dir("gh-pages-maven")) // خروجی اینجاست
         }
     }
+
+//    publications.withType<MavenPublication> {
+//        pom {
+//            name.set("composeScreen")
+//            description.set("KMP ComposeScreen Library with iOS")
+//            url.set("https://github.com/joshaghani/kmpcomposeScreen")
+//
+//            licenses {
+//                license {
+//                    name.set("Apache-2.0")
+//                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+//                }
+//            }
+//            scm {
+//                connection.set("scm:git:git://github.com/joshaghani/kmpcomposeScreen.git")
+//                developerConnection.set("scm:git:ssh://github.com/joshaghani/kmpcomposeScreen.git")
+//                url.set("https://github.com/joshaghani/kmpcomposeScreen")
+//            }
+//            developers {
+//                developer {
+//                    id.set("mohammadjoshaghani")
+//                    name.set("Mohammad Joshaghani")
+//                }
+//            }
+//        }
+//    }
 }
 
 //      ./gradlew :composeScreen:publishAllPublicationsToGhPagesRepository --stacktrace

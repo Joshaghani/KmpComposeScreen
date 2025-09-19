@@ -47,15 +47,17 @@ fun RenderScreenContent(startScreen: RootScreen<*, *, *, *>) {
             NavigationSideBar(startScreen).Show()
         }
 
-        AppLayout {
+        AppLayout(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+        ) {
             Scaffold(
                 floatingActionButton = { UIFab() },
                 topBar = { ProvideLayoutDirection { TopBar().Show(scrollBehavior) } },
                 bottomBar = { ProvideLayoutDirection { BottomBarRender() } },
                 contentWindowInsets = WindowInsets.safeDrawing,
                 modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
                     .nestedScroll(scrollBehavior.nestedScrollConnection),
             ) { padding ->
                 ProvideLayoutDirection {

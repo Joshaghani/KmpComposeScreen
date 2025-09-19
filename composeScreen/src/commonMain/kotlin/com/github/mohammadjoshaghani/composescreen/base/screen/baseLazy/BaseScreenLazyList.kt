@@ -26,7 +26,7 @@ abstract class BaseScreenLazyList<
 
     var warningMessageEmptyList = "لیست خالی می‌باشد!"
 
-    open val verticalGridMinSize = 0.dp
+    open var verticalGridMinSize = 0.dp
 
     var lazyListState: LazyListState? = null
     var lazyGridState: LazyGridState? = null
@@ -46,7 +46,6 @@ abstract class BaseScreenLazyList<
 
     @Composable
     override fun InitBaseComposeScreen(state: State) {
-
         ContentScreen(state)
     }
 
