@@ -5,9 +5,9 @@ import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
     id("maven-publish")
-    id("org.jetbrains.kotlin.multiplatform") version "2.2.10"
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.10"
-    id("org.jetbrains.compose") version "1.9.0-rc01"
+    id("org.jetbrains.kotlin.multiplatform") version "2.2.20"
+    id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
+    id("org.jetbrains.compose") version "1.9.0"
     id("com.android.library") version "8.13.0"
 //    id("signing")
 
@@ -65,7 +65,7 @@ android {
 }
 
 group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.109"
+version = "0.0.110"
 
 //group = "io.github.mohammadjoshaghani" // همونی که Sonatype تایید کرد
 //version = "0.0.1"

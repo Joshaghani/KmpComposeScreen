@@ -1,5 +1,6 @@
 package com.example.kmpcomposescreen.screen.main
 
+import com.example.kmpcomposescreen.screen.main.MainScreenContract.Effect.ShowToast
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
 import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastState
 import com.github.mohammadjoshaghani.composescreen.extension.toast
@@ -13,15 +14,7 @@ class MainScreenViewModel(
         >() {
 
     override fun initViewModel() {
-        launchOnScope {
-            setState {
-                copy(isLoading = true)
-            }
-            delay(100)
-            setState {
-                copy(isLoading = false)
-            }
-        }
+        setEvent(MainScreenContract.Event.GetData)
     }
 
     override fun setInitialState() = MainScreenContract.State()
@@ -36,10 +29,16 @@ class MainScreenViewModel(
                     delay(2000)
 
                     setEffect {
-                        MainScreenContract.Effect.ShowToast("Loading Started".toast(ToastState.SUCCESS))
+                        ShowToast("Loading Started".toast(ToastState.SUCCESS))
                     }
 
 
+                }
+            }
+
+            MainScreenContract.Event.Login -> {
+                setEffect {
+                    ShowToast("You'r not login".toast())
                 }
             }
         }

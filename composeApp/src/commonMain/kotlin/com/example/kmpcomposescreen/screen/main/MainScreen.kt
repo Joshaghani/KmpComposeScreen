@@ -24,12 +24,14 @@ import com.example.kmpcomposescreen.screen.MainScreen2
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
+import com.github.mohammadjoshaghani.composescreen.base.handler.ILazyLoadingList
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
@@ -47,6 +49,7 @@ class MainScreen :
     IShowTopbarMain,
     IShowStickyHeader,
     IShowScrollAwareFadingHeader,
+    ILazyLoadingList,
     IClearStackScreen {
 
     override val viewModel = MainScreenViewModel()
@@ -54,7 +57,7 @@ class MainScreen :
     override val handler = MainScreenHandler()
 
 
-    override fun menuIconTopBar(): IClickableIconModel? {
+    override fun menuIconTopBar(): IClickableIconModel {
         return IClickableIconModel.ClickableIconModel(
             iconId = Res.drawable.compose_multiplatform,
             onIconPressed = {}
@@ -87,7 +90,14 @@ class MainScreen :
             IClickableIconModel.ClickableIconVectorModel(
                 iconId = Icons.AutoMirrored.Rounded.Login,
                 title = "ورود | ثبت نام",
-                onIconPressed = {}
+                onIconPressed = {
+                    UIAlertDialog()
+                        .setMessage("You ar login")
+                        .setButtonAction("login") {
+                            onEventSent(MainScreenContract.Event.Login)
+                        }
+                        .show()
+                }
             )
         )
     }
@@ -127,6 +137,7 @@ class MainScreen :
     override fun UIScrollAwareFadingHeader(modifier: Modifier) {
         Row(
             modifier = modifier
+                .height(56.dp)
                 .fillMaxWidth()
                 .background(ApplicationConfig.config.color.surfaceVariant)
                 .padding(8.dp)
@@ -148,6 +159,8 @@ class MainScreen :
         CategoryModel("کالای دیجیتال"),
         CategoryModel("لوازم برقی خانگی"),
         CategoryModel("دوربین"),
+        CategoryModel("تلسکوپ"),
+        CategoryModel("تلسکوپ"),
         CategoryModel("تلسکوپ"),
         CategoryModel("تلسکوپ"),
         CategoryModel("تلسکوپ"),
@@ -184,6 +197,10 @@ class MainScreen :
             }
         }
 
+    }
+
+    override fun lazyColumnScrolledEnd() {
+        println("*&&*&*lazyColumnScrolledEnd")
     }
 
 

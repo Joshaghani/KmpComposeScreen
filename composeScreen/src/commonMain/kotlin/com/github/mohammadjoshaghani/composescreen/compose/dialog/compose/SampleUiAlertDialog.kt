@@ -96,14 +96,14 @@ internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
                             }
                         }
 
-                        if (buttonCancelTitle != null && buttonActionText != null){
+                        if (buttonCancelTitle != null && buttonActionText != null) {
                             UISpacer(8)
                         }
 
                         buttonActionText?.let { textTitle ->
                             Button(
                                 onClick = {
-                                    dismiss()
+                                    if (buttonActionDismissAfterClick) dismiss()
                                     buttonActionBlock?.invoke()
                                 },
                                 colors = ButtonDefaults.buttonColors(

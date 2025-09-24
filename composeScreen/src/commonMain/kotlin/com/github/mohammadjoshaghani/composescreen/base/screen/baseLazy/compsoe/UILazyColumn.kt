@@ -34,6 +34,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
     }
 
 
+
     LazyColumn(
         state = lazyListState!!, modifier = modifier
     ) {
@@ -46,6 +47,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
             ComposeView(state)
         }
         val list = getItemsList(state)
+
         if (list.isEmpty()) {
             item { EmptyListUI(state) }
         } else {
@@ -53,7 +55,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
                 ItemUI(index, item)
             }
         }
-        renderLoadMore(list, this@UILazyColumn)
+        renderLoadMore(list, lazyListState!!, this@UILazyColumn)
         item { FooterUI(state) }
         item { UISpacer(if (this@UILazyColumn is IShowFab) 150 else 50) }
     }

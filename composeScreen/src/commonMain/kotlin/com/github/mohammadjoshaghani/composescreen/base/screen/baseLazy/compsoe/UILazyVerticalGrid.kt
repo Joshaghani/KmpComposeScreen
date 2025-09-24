@@ -58,7 +58,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
                 ItemUI(index, item)
             }
         }
-        renderLoadMore(list, this@UILazyVerticalGrid)
+        renderLoadMore(list, lazyGridState!!, this@UILazyVerticalGrid)
 
         item(span = { GridItemSpan(maxLineSpan) }) {
             FooterUI(state)

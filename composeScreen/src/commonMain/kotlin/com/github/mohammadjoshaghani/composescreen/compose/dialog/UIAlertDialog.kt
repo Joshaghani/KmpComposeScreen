@@ -19,6 +19,7 @@ class UIAlertDialog(
     internal var title: String? = null,
     internal var message: String? = null,
     internal var buttonActionText: String? = null,
+    internal var buttonActionDismissAfterClick: Boolean = true,
     internal var buttonActionBlock: (() -> Unit)? = null,
     internal var buttonCancelTitle: String? = null,
     internal var buttonCancelBlock: (() -> Unit)? = null,
@@ -74,9 +75,14 @@ class UIAlertDialog(
         this.setCanceledOnTouchOutside = value
     }
 
-    fun setButtonAction(text: String, block: (() -> Unit)? = null) = apply {
+    fun setButtonAction(
+        text: String,
+        dismissAfterClick: Boolean = true,
+        block: (() -> Unit)? = null,
+    ) = apply {
         this.buttonActionText = text
         this.buttonActionBlock = block
+        this.buttonActionDismissAfterClick = dismissAfterClick
     }
 
     fun setButtonCancelTitle(text: String, block: (() -> Unit)? = null) = apply {

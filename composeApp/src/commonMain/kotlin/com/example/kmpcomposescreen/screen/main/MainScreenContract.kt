@@ -11,6 +11,7 @@ class MainScreenContract {
 
     sealed class Event : ViewEvent {
         data object GetData: Event()
+        data object Login: Event()
     }
 
     data class State(
