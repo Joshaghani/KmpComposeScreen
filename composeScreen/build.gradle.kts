@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta7"
+version = "1.0.0-beta8"
 
 kotlin {
     androidTarget {
@@ -61,7 +61,7 @@ kotlin {
 
 android {
     namespace = "io.github.joshaghani.composescreen"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 24
