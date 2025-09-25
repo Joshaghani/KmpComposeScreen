@@ -62,7 +62,7 @@ android {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0"
+version = "1.0.0-beta4"
 
 publishing {
     publications.withType<MavenPublication> {

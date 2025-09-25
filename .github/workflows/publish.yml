@@ -2,8 +2,8 @@ name: Publish to Maven Central (KMP)
 
 on:
   push:
-    tags: ["*"]     # با هر تگ
-  workflow_dispatch: # اجرای دستی از تب Actions
+    tags: ["*"]
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -23,6 +23,16 @@ jobs:
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Sanity check OSSRH creds
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -u "$OSSRH_USERNAME:$OSSRH_PASSWORD" \
+            https://s01.oss.sonatype.org/service/local/staging/profiles)
+          echo "HTTP=$code"
+          test "$code" = "200"
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+
       - name: Publish (sign → Sonatype close+release)
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
@@ -33,4 +43,5 @@ jobs:
           ./gradlew clean \
             publishToSonatype \
             closeAndReleaseSonatypeStagingRepository \
+            --no-configuration-cache \
             --stacktrace --no-daemon
