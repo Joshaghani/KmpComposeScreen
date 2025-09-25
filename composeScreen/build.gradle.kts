@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -8,8 +9,9 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("org.jetbrains.compose") version "1.9.0"
     id("com.android.library") version "8.13.0"
-    id("maven-publish")
+
     id("signing")
+    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 kotlin {
@@ -62,7 +64,7 @@ android {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta4"
+version = "1.0.0-beta5"
 
 publishing {
     publications.withType<MavenPublication> {
@@ -93,9 +95,35 @@ publishing {
 }
 
 signing {
-    useInMemoryPgpKeys(
-        System.getenv("SIGNING_KEY"),
-        System.getenv("SIGNING_PASSWORD")
-    )
-    sign(publishing.publications)
+    val key = findProperty("signing.secretKey") as String?
+    val pass = findProperty("signing.password") as String?
+    if (!key.isNullOrBlank() && !pass.isNullOrBlank()) {
+        useInMemoryPgpKeys(key, pass)
+        sign(publishing.publications)
+    } else {
+        logger.lifecycle("Signing disabled: missing signing.secretKey or signing.password")
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+
+    pom {
+        name.set("KmpComposeScreen")
+        description.set("Kotlin Multiplatform Compose library (Android + iOS)")
+        url.set("https://github.com/Joshaghani/KmpComposeScreen")
+        licenses { license {
+            name.set("Apache-2.0")
+            url.set("https://www.apache.org/licenses/LICENSE-2.0")
+        }}
+        scm {
+            connection.set("scm:git:https://github.com/Joshaghani/KmpComposeScreen.git")
+            developerConnection.set("scm:git:ssh://github.com/Joshaghani/KmpComposeScreen.git")
+            url.set("https://github.com/Joshaghani/KmpComposeScreen")
+        }
+        developers { developer {
+            id.set("joshaghani"); name.set("Mohammad Joshaghani")
+        }}
+    }
 }
