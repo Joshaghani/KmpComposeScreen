@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta9"
+version = "1.0.0-beta10"
 
 kotlin {
     androidTarget {
@@ -87,13 +87,14 @@ android {
 }
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
     signAllPublications()
 
     pom {
         name.set("composeScreen")
         description.set("A lightweight Compose Multiplatform screens library.")
         inceptionYear.set("2024")
+        coordinates("io.github.joshaghani", "composeScreen", "1.0.0-beta10")
 
         url.set("https://github.com/joshaghani/KmpComposeScreen")
 

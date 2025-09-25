@@ -26,9 +26,9 @@ jobs:
           mkdir -p composeScreen
           touch composeScreen/consumer-rules.pro
 
-      - name: Publish to Sonatype (staging)
+      - name: Publish to Sonatype (staging via Central Portal)
         run: |
-          ./gradlew :composeScreen:publishAllPublicationsToMavenCentralRepository \
+          ./gradlew :composeScreen:publishAllPublicationsToMavenCentralRepository --stacktrace \
             -PmavenCentralUsername="${{ secrets.OSSRH_USERNAME }}" \
             -PmavenCentralPassword="${{ secrets.OSSRH_PASSWORD }}" \
             -PsigningInMemoryKey="${{ secrets.SIGNING_KEY }}" \
