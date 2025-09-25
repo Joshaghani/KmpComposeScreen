@@ -2,8 +2,8 @@ name: Publish to Maven Central (KMP)
 
 on:
   push:
-    tags: ["*"]
-
+    tags: ["*"]     # با هر تگ
+  workflow_dispatch: # اجرای دستی از تب Actions
 
 jobs:
   publish:
@@ -27,7 +27,7 @@ jobs:
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_KEY:     ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         run: |
           ./gradlew clean \
