@@ -14,9 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Message
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.Event
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -42,18 +42,20 @@ import kotlinx.coroutines.flow.collectLatest
 fun UIToastNotification() {
 
     var textToastMessage by remember { mutableStateOf<ToastMessageModel?>(null) }
+    var isshowToast by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         ToastCreator.toastChannel.collectLatest { toast ->
             textToastMessage = toast
+            isshowToast = true
             delay(3000)
-            textToastMessage = null
+            isshowToast = false
         }
     }
 
     AnimatedVisibility(
         modifier = Modifier.testTag("ToastAnimatedVisibility"),
-        visible = textToastMessage != null,
+        visible = isshowToast,
         enter = slideInVertically(
             initialOffsetY = { -it }
         ),
@@ -62,7 +64,7 @@ fun UIToastNotification() {
         )
     ) {
 
-        textToastMessage?.apply {
+        textToastMessage!!.apply {
             val textColor = when (state) {
                 ToastState.ERROR -> MaterialTheme.colorScheme.error
                 ToastState.WARNING -> MaterialTheme.colorScheme.errorContainer
@@ -72,9 +74,9 @@ fun UIToastNotification() {
 
             val drawable = when (state) {
                 ToastState.ERROR -> Icons.Rounded.Error
-                ToastState.WARNING -> Icons.Default.Warning // Res.drawable.ic_law
-                ToastState.SUCCESS -> Icons.Rounded.Event // Res.drawable.ic_shield_tick
-                ToastState.MESSAGE -> Icons.AutoMirrored.Rounded.Message // Res.drawable.ic_info_circle
+                ToastState.WARNING -> Icons.Rounded.Warning
+                ToastState.SUCCESS -> Icons.Rounded.Event
+                ToastState.MESSAGE -> Icons.AutoMirrored.Rounded.Message
             }
 
             val message = message

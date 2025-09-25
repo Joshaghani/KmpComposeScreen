@@ -39,9 +39,7 @@ internal fun RootScreen<*, *, *, *>.UIRefreshableContent(content: @Composable @U
                     screenSize.value = ScreenSize(width, height)
                 }
             }
-
             content()
-
         }
     }
 

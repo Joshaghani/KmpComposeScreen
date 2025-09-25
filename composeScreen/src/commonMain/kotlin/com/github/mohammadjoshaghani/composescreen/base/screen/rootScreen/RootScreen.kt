@@ -105,7 +105,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
         ScreenSideEffects(
             state = viewModel.viewState.value,
-            clearToast = { viewModel.viewState.value.toastMessage = null }
+            clearToast = {
+                viewModel.viewState.value.toastMessage = null
+            }
         )
 
         // اگر این صفحه Sticky دارد، گیت سایز را اعمال کن
@@ -157,8 +159,8 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     @Composable
     private fun ShowLoadingIndicator() {
         Box(
-            modifier = Modifier.Companion.fillMaxSize(),
-            contentAlignment = Alignment.Companion.Center
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
         }
@@ -186,8 +188,8 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     }
 
     private fun cleanupResources() {
-        UIBottomSheet.Companion.getBottomSheet()?.hide()
-        UIAlertDialog.Companion.getDialog()?.dismiss()
+        UIBottomSheet.getBottomSheet()?.hide()
+        UIAlertDialog.getDialog()?.dismiss()
     }
 
     open fun onPause() {
@@ -206,12 +208,12 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
         return when {
             backFromDialog -> {
-                UIAlertDialog.Companion.getDialog()?.dismiss()
+                UIAlertDialog.getDialog()?.dismiss()
                 Navigator.pop()
             }
 
-            UIAlertDialog.Companion.isShow() -> {
-                UIAlertDialog.Companion.getDialog()?.dismiss()
+            UIAlertDialog.isShow() -> {
+                UIAlertDialog.getDialog()?.dismiss()
                 true
             }
 
