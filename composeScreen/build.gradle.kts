@@ -4,13 +4,12 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
-    id("maven-publish")
     id("org.jetbrains.kotlin.multiplatform") version "2.2.20"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("org.jetbrains.compose") version "1.9.0"
     id("com.android.library") version "8.13.0"
-//    id("signing")
-
+    id("maven-publish")
+    id("signing")
 }
 
 kotlin {
@@ -50,9 +49,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
-            // back handler
             implementation(libs.ui.backhandler)
-
         }
     }
 }
@@ -64,50 +61,41 @@ android {
     buildFeatures { compose = true }
 }
 
-group = "com.github.Joshaghani.KmpComposeScreen"
-version = "0.0.110"
-
-//group = "io.github.mohammadjoshaghani" // همونی که Sonatype تایید کرد
-//version = "0.0.1"
+group = "io.github.joshaghani"
+version = "1.0.0"
 
 publishing {
-    repositories {
-        maven {
-            name = "GhPages"
-            url = uri(layout.projectDirectory.dir("gh-pages-maven")) // خروجی اینجاست
+    publications.withType<MavenPublication> {
+        pom {
+            name.set("KmpComposeScreen")
+            description.set("Kotlin Multiplatform Compose library (Android + iOS)")
+            url.set("https://github.com/Joshaghani/KmpComposeScreen")
+
+            licenses {
+                license {
+                    name.set("Apache-2.0")
+                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                }
+            }
+            scm {
+                connection.set("scm:git:https://github.com/Joshaghani/KmpComposeScreen.git")
+                developerConnection.set("scm:git:ssh://github.com/Joshaghani/KmpComposeScreen.git")
+                url.set("https://github.com/Joshaghani/KmpComposeScreen")
+            }
+            developers {
+                developer {
+                    id.set("joshaghani")
+                    name.set("Mohammad Joshaghani")
+                }
+            }
         }
     }
-
-//    publications.withType<MavenPublication> {
-//        pom {
-//            name.set("composeScreen")
-//            description.set("KMP ComposeScreen Library with iOS")
-//            url.set("https://github.com/joshaghani/kmpcomposeScreen")
-//
-//            licenses {
-//                license {
-//                    name.set("Apache-2.0")
-//                    url.set("https://www.apache.org/licenses/LICENSE-2.0")
-//                }
-//            }
-//            scm {
-//                connection.set("scm:git:git://github.com/joshaghani/kmpcomposeScreen.git")
-//                developerConnection.set("scm:git:ssh://github.com/joshaghani/kmpcomposeScreen.git")
-//                url.set("https://github.com/joshaghani/kmpcomposeScreen")
-//            }
-//            developers {
-//                developer {
-//                    id.set("mohammadjoshaghani")
-//                    name.set("Mohammad Joshaghani")
-//                }
-//            }
-//        }
-//    }
 }
 
-//      ./gradlew :composeScreen:publishAllPublicationsToGhPagesRepository --stacktrace
-
-
-// ./gradlew :composeScreen:publishAllPublicationsToGhPagesRepository \
-//  --no-configuration-cache \
-//  --refresh-dependencies
+signing {
+    useInMemoryPgpKeys(
+        System.getenv("SIGNING_KEY"),
+        System.getenv("SIGNING_PASSWORD")
+    )
+    sign(publishing.publications)
+}
