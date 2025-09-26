@@ -1,4 +1,3 @@
-
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -14,7 +13,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta15"
+version = "1.0.0-beta16"
 
 kotlin {
     androidTarget {
@@ -92,7 +91,7 @@ mavenPublishing {
     pom {
         name.set("composeScreen")
         description.set("A lightweight Compose Multiplatform screens library.")
-        inceptionYear.set("2024")
+        inceptionYear.set("2025")
 
         url.set("https://github.com/joshaghani/KmpComposeScreen")
 
