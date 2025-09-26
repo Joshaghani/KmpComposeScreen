@@ -21,7 +21,7 @@ import org.jetbrains.compose.resources.DrawableResource
 
 
 @Composable
-fun UITextButtonVector(
+fun UITextButton(
     title: String,
     enable: Boolean = true,
     modifier: Modifier = Modifier,

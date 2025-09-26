@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIBorderButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIBorderButtonVector
+import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButtonVector
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import org.jetbrains.compose.resources.DrawableResource
@@ -321,7 +322,7 @@ fun IconButtonMenu(
             textColor = tint,
         )
     } else {
-        UITextButtonVector(
+        UITextButton(
             title = title,
             modifier = modifier,
             leftIcon = icon,
