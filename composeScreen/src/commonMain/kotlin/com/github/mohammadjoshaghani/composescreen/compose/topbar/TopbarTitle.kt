@@ -16,7 +16,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeade
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.UISmartMarqueeText
-import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
@@ -32,8 +32,7 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
         } else {
             TopAppBar(
                 title = {
-                    val title = screen.titleTopBar()
-                    when (title) {
+                    when (val title = screen.titleTopBar()) {
                         is IShowTopbar.UiTitle.ComposableResult -> title.content.invoke()
                         is IShowTopbar.UiTitle.TextResult -> {
                             UISmartMarqueeText(

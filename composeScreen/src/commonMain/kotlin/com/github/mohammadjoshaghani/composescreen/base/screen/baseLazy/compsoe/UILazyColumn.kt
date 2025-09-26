@@ -14,7 +14,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowFab
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderItemsIndexed
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderLoadMore
-import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 
 @Composable
 fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *, *>.UILazyColumn(

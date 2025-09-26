@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import org.jetbrains.compose.resources.DrawableResource
 
