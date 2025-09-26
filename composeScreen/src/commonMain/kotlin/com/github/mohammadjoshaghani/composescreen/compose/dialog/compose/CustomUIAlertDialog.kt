@@ -3,6 +3,7 @@ package com.github.mohammadjoshaghani.composescreen.compose.dialog.compose
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.toast.UIToastNotification
 
 
 @Composable
@@ -29,7 +31,7 @@ internal fun UIAlertDialog.CustomUIAlertDialog(
     content: @Composable ColumnScope.(UIAlertDialog) -> Unit,
 ) {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .clickable(
@@ -54,6 +56,8 @@ internal fun UIAlertDialog.CustomUIAlertDialog(
                     Column { content(this@CustomUIAlertDialog) }
                 }
             }
+
+            UIToastNotification()
         }
     }
 }

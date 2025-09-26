@@ -93,7 +93,7 @@ class MainScreen :
                 onIconPressed = {
                     UIAlertDialog()
                         .setMessage("You ar login")
-                        .setButtonAction("login") {
+                        .setButtonAction("login", false) {
                             onEventSent(MainScreenContract.Event.Login)
                         }
                         .show()

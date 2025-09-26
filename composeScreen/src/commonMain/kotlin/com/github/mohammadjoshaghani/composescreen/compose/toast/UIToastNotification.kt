@@ -60,7 +60,7 @@ fun UIToastNotification() {
             initialOffsetY = { -it }
         ),
         exit = slideOutVertically(
-            targetOffsetY = { -it }
+            targetOffsetY = { -(it + 10) }
         )
     ) {
 

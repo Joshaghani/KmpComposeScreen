@@ -1,6 +1,7 @@
 package com.github.mohammadjoshaghani.composescreen.compose.dialog.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,12 +26,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.toast.UIToastNotification
 import com.github.mohammadjoshaghani.composescreen.extension.clickableWitoutHighlight
 
 
 @Composable
 internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
             .clickableWitoutHighlight {
@@ -130,5 +132,7 @@ internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
                 }
             }
         }
+
+        UIToastNotification()
     }
 }
