@@ -12,14 +12,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.toast.UIToastNotification
 
@@ -30,7 +28,7 @@ internal fun UIAlertDialog.CustomUIAlertDialog(
     shape: Shape? = null,
     content: @Composable ColumnScope.(UIAlertDialog) -> Unit,
 ) {
-    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+    ProvideLayoutDirection {
         Box(
             modifier = Modifier
                 .fillMaxSize()

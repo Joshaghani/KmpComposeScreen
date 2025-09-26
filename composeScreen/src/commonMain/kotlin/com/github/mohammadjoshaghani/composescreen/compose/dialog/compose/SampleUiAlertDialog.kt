@@ -19,13 +19,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
@@ -35,7 +32,6 @@ import com.github.mohammadjoshaghani.composescreen.extension.clickableWitoutHigh
 
 @Composable
 internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
-    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -138,5 +134,4 @@ internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
             UIToastNotification()
         }
 
-    }
 }

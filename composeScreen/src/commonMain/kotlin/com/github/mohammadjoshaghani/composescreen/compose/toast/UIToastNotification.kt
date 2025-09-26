@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -98,36 +99,38 @@ fun UIToastNotification() {
                     shape = MaterialTheme.shapes.medium
 
                 ) {
-                    Row(
-                        modifier = Modifier
-                            .heightIn(min = 60.dp)
-                            .clip(MaterialTheme.shapes.medium)
-                            .background(MaterialTheme.colorScheme.background)
-                            .border(
-                                1.dp,
-                                textColor,
-                                MaterialTheme.shapes.medium
-                            ),
+                    ProvideLayoutDirection {
+                        Row(
+                            modifier = Modifier
+                                .heightIn(min = 60.dp)
+                                .clip(MaterialTheme.shapes.medium)
+                                .background(MaterialTheme.colorScheme.background)
+                                .border(
+                                    1.dp,
+                                    textColor,
+                                    MaterialTheme.shapes.medium
+                                ),
 
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
 
-                        UISpacer(16)
+                            UISpacer(16)
 
-                        Text(message)
+                            Text(message)
 
-                        UISpacer(8)
+                            UISpacer(8)
 
-                        Icon(
-                            imageVector = drawable,
-                            contentDescription = null,
-                            modifier = Modifier.size(24.dp),
-                            tint = textColor
-                        )
+                            Icon(
+                                imageVector = drawable,
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp),
+                                tint = textColor
+                            )
 
-                        UISpacer(16)
+                            UISpacer(16)
 
+                        }
                     }
                 }
             }

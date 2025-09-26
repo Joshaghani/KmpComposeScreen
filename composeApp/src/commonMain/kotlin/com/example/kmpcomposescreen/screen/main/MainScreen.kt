@@ -30,6 +30,9 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
+import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
@@ -97,20 +100,42 @@ class MainScreen :
                 title = "ورود | ثبت نام",
                 doesButtonHaveBorder = false,
                 onIconPressed = {
-                    UIAlertDialog()
-                        .setMessage("You ar login")
-                        .setButtonAction("login", false) {
-                            onEventSent(MainScreenContract.Event.Login)
-                        }
-                        .show()
+                    a.show()
+
+//                    UIAlertDialog()
+//                        .setMessage("You ar login")
+//                        .setButtonAction("login", false) {
+//                            onEventSent(MainScreenContract.Event.Login)
+//                        }
+//                        .show()
                 }
             ),
 
-        )
+            )
     }
+
+    lateinit var a: UIAlertDialog
 
     @Composable
     override fun ComposeStickyView(modifier: Modifier) {
+
+
+        a = UIAlertDialog()
+            .setCustomContent {
+                Text("asdfklkjasf")
+
+                UISpacer()
+                Row {
+
+                    UITextButton("fd") {}
+
+                    UIPrimaryButton("asc") {
+                        onEventSent(MainScreenContract.Event.Login)
+                    }
+                }
+            }
+
+
 
         Row(
             modifier = modifier
