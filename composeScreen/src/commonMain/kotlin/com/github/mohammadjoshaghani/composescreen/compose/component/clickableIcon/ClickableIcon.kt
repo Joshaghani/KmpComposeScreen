@@ -170,7 +170,7 @@ fun IconBox(
     icon: DrawableResource,
     title: String? = null,
     tooltip: String? = null,
-    doTooltipHaveBorder: Boolean = true,
+    doesButtonHaveBorder: Boolean = true,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
@@ -207,7 +207,7 @@ fun IconBox(
     } else {
         IconButtonMenu(
             title,
-            doTooltipHaveBorder,
+            doesButtonHaveBorder,
             icon,
             modifier,
             tint,
@@ -223,7 +223,7 @@ fun IconBox(
     icon: ImageVector,
     title: String? = null,
     tooltip: String? = null,
-    doTooltipHaveBorder: Boolean = true,
+    doesButtonHaveBorder: Boolean = true,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
@@ -260,7 +260,7 @@ fun IconBox(
     } else {
         IconButtonMenu(
             title,
-            doTooltipHaveBorder,
+            doesButtonHaveBorder,
             icon,
             modifier,
             tint,
@@ -274,7 +274,7 @@ fun IconBox(
 @Composable
 fun IconButtonMenu(
     title: String,
-    doTooltipHaveBorder: Boolean = true,
+    doesButtonHaveBorder: Boolean = true,
     icon: ImageVector,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
@@ -282,7 +282,7 @@ fun IconButtonMenu(
     onClick: () -> Unit,
 ) {
 
-    if (doTooltipHaveBorder) {
+    if (doesButtonHaveBorder) {
         UIBorderButtonVector(
             title = title,
             modifier = modifier,
@@ -305,14 +305,14 @@ fun IconButtonMenu(
 @Composable
 fun IconButtonMenu(
     title: String,
-    doTooltipHaveBorder: Boolean = true,
+    doesButtonHaveBorder: Boolean = true,
     icon: DrawableResource,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
     onClick: () -> Unit,
 ) {
-    if (doTooltipHaveBorder) {
+    if (doesButtonHaveBorder) {
         UIBorderButton(
             title = title,
             modifier = modifier,
