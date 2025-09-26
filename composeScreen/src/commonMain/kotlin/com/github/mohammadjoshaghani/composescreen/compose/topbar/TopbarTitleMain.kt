@@ -3,6 +3,7 @@ package com.github.mohammadjoshaghani.composescreen.compose.topbar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -10,8 +11,9 @@ import androidx.compose.runtime.collectAsState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.ClickableIcon
-import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 
@@ -55,18 +57,33 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                             is IClickableIconModel.ClickableIconModel -> ClickableIcon(
                                 icon.iconId,
                                 title = icon.title,
+                                doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                 badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed
+                                onClick = icon.onIconPressed,
+                                tint = MaterialTheme.colorScheme.primary
                             )
 
                             is IClickableIconModel.ClickableIconVectorModel -> {
                                 ClickableIcon(
                                     icon.iconId,
                                     title = icon.title,
+                                    doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     badgeCount = icon.badgeCount,
-                                    onClick = icon.onIconPressed
+                                    onClick = icon.onIconPressed,
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
+                        }
+                    }
+                    val last = screen.actionIconsTopBar().last()
+
+                    if (last is IClickableIconModel.ClickableIconModel) {
+                        if (last.title != null && last.doesButtonHaveBorder) {
+                            UISpacer()
+                        }
+                    } else if (last is IClickableIconModel.ClickableIconVectorModel) {
+                        if (last.title != null && last.doesButtonHaveBorder) {
+                            UISpacer()
                         }
                     }
                 },

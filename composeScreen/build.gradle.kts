@@ -15,7 +15,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta12"
+version = "1.0.0-beta13"
 
 kotlin {
     androidTarget {

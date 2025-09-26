@@ -16,8 +16,9 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeade
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.UISmartMarqueeText
-import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.ClickableIcon
-import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,8 +59,10 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
                                 ClickableIcon(
                                     icon.iconId,
                                     title = icon.title,
+                                    doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     badgeCount = icon.badgeCount,
-                                    onClick = icon.onIconPressed
+                                    onClick = icon.onIconPressed,
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
 
@@ -67,12 +70,27 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
                                 ClickableIcon(
                                     icon.iconId,
                                     title = icon.title,
+                                    doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     onClick = icon.onIconPressed,
                                     badgeCount = icon.badgeCount,
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
                     }
+
+                    val last = screen.actionIconsTopBar().last()
+
+                    if (last is IClickableIconModel.ClickableIconModel) {
+                        if (last.title != null && last.doesButtonHaveBorder) {
+                            UISpacer()
+                        }
+                    } else if (last is IClickableIconModel.ClickableIconVectorModel) {
+                        if (last.title != null && last.doesButtonHaveBorder) {
+                            UISpacer()
+                        }
+                    }
+
 
                 },
                 scrollBehavior = scrollBehavior,

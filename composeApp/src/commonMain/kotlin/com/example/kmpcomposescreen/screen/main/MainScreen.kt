@@ -30,7 +30,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.compose.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
@@ -89,7 +89,13 @@ class MainScreen :
         return listOf(
             IClickableIconModel.ClickableIconVectorModel(
                 iconId = Icons.AutoMirrored.Rounded.Login,
+                onIconPressed = {
+                }
+            ),
+            IClickableIconModel.ClickableIconVectorModel(
+                iconId = Icons.AutoMirrored.Rounded.Login,
                 title = "ورود | ثبت نام",
+                doesButtonHaveBorder = false,
                 onIconPressed = {
                     UIAlertDialog()
                         .setMessage("You ar login")
@@ -98,7 +104,8 @@ class MainScreen :
                         }
                         .show()
                 }
-            )
+            ),
+
         )
     }
 
