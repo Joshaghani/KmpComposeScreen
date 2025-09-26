@@ -1,5 +1,4 @@
 
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -10,12 +9,12 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.compose") version "1.9.0"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
-    id("com.vanniktech.maven.publish") version "0.29.0"
+    id("com.vanniktech.maven.publish") version "0.34.0"
     id("signing")
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta13"
+version = "1.0.0-beta15"
 
 kotlin {
     androidTarget {
@@ -87,7 +86,7 @@ android {
 }
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
     signAllPublications()
 
     pom {
