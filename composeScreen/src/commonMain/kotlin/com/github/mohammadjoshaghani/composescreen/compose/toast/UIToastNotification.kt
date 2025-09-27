@@ -117,16 +117,16 @@ fun UIToastNotification() {
 
                             UISpacer(16)
 
-                            Text(message)
-
-                            UISpacer(8)
-
                             Icon(
                                 imageVector = drawable,
                                 contentDescription = null,
                                 modifier = Modifier.size(24.dp),
                                 tint = textColor
                             )
+
+                            UISpacer(8)
+
+                            Text(message)
 
                             UISpacer(16)
 
