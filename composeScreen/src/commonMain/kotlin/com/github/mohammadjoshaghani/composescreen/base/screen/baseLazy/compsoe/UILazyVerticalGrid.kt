@@ -55,7 +55,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
             item { EmptyListUI(state) }
         } else {
             renderItemsIndexed(list) { index, item ->
-                ItemUI(index, item)
+                ItemUI(state, index, item)
             }
         }
         renderLoadMore(list, lazyGridState!!, this@UILazyVerticalGrid)

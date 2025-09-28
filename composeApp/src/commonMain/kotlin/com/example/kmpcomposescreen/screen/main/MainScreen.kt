@@ -213,7 +213,7 @@ class MainScreen :
     }
 
     @Composable
-    override fun ItemUI(index: Int, item: Any) {
+    override fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
         (item as CategoryModel).apply {
             Row(
                 modifier = Modifier

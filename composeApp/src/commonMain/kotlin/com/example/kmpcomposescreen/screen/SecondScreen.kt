@@ -45,7 +45,7 @@ class SecondScreen :
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            TextField("" , {})
+            TextField("", {})
 
             repeat(50) {
                 Text("Compose View Second $it", color = colorTheme.onBackground)
@@ -120,7 +120,7 @@ class SecondScreen :
     }
 
     @Composable
-    override fun ItemUI(index: Int, item: Any) {
+    override fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
 
     }
 
