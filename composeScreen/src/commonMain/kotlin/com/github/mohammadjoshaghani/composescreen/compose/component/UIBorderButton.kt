@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ fun UIBorderButton(
     enabled: Boolean = true,
     textColor: Color = MaterialTheme.colorScheme.primary,
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
+    shape: Shape = ButtonDefaults.shape,
     border: BorderStroke = BorderStroke(
         1.dp, MaterialTheme.colorScheme.primary.copy(alpha = if (enabled) 1f else .5f)
     ),
@@ -45,7 +47,7 @@ fun UIBorderButton(
         contentPadding = PaddingValues(vertical = 8.dp),
         border = border,
         modifier = modifier,
-        shape = RoundedCornerShape(10.dp)
+        shape = shape,
     ) {
         leftIconPainter?.let {
             UIIcon(
