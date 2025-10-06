@@ -1,6 +1,5 @@
 package com.github.mohammadjoshaghani.composescreen.compose.component
 
-
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.offset
@@ -32,7 +31,8 @@ fun UIBorderButton(
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
     shape: Shape = ButtonDefaults.shape,
     border: BorderStroke = BorderStroke(
-        1.dp, MaterialTheme.colorScheme.primary.copy(alpha = if (enabled) 1f else .5f)
+        1.dp,
+        MaterialTheme.colorScheme.primary.copy(alpha = if (enabled) 1f else .5f)
     ),
     onClick: () -> Unit,
 ) {

@@ -61,7 +61,7 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
                                     doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     badgeCount = icon.badgeCount,
                                     onClick = icon.onIconPressed,
-                                    tint = MaterialTheme.colorScheme.primary
+                                    tint = icon.tint
                                 )
                             }
 
@@ -72,7 +72,7 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
                                     doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     onClick = icon.onIconPressed,
                                     badgeCount = icon.badgeCount,
-                                    tint = MaterialTheme.colorScheme.primary
+                                    tint = icon.tint
                                 )
                             }
                         }

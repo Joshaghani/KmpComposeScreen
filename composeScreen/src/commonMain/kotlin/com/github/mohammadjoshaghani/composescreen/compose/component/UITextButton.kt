@@ -19,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
 import org.jetbrains.compose.resources.DrawableResource
 
-
 @Composable
 fun UITextButton(
     title: String,

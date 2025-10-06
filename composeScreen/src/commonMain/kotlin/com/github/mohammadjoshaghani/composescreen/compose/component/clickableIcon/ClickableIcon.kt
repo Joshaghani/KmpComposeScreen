@@ -297,6 +297,7 @@ fun IconButtonMenu(
             modifier = modifier,
             leftIconVector = icon,
             clickable = onClick,
+            textColor = tint,
         )
     }
 
@@ -327,6 +328,7 @@ fun IconButtonMenu(
             modifier = modifier,
             leftIcon = icon,
             clickable = onClick,
+            textColor = tint,
         )
     }
 

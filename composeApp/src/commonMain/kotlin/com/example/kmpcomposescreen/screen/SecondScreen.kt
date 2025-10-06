@@ -22,6 +22,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class SecondScreen :
     BaseScreenLazyList<
@@ -129,11 +130,13 @@ class SecondScreen :
             IClickableIconModel.ClickableIconVectorModel(
                 badgeCount = 3,
                 iconId = Icons.TwoTone.ShoppingCart,
+                tint = ApplicationConfig.config.color.onPrimary,
                 onIconPressed = {
                 }),
             IClickableIconModel.ClickableIconVectorModel(
                 badgeCount = 2,
                 iconId = Icons.TwoTone.Laptop,
+                tint = ApplicationConfig.config.color.onPrimary,
                 onIconPressed = {
                 })
 

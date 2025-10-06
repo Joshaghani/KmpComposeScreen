@@ -63,6 +63,7 @@ class MainScreen :
     override fun menuIconTopBar(): IClickableIconModel {
         return IClickableIconModel.ClickableIconModel(
             iconId = Res.drawable.compose_multiplatform,
+            tint = ApplicationConfig.config.color.onPrimary,
             onIconPressed = {}
         )
     }
@@ -92,12 +93,14 @@ class MainScreen :
         return listOf(
             IClickableIconModel.ClickableIconVectorModel(
                 iconId = Icons.AutoMirrored.Rounded.Login,
+                tint = ApplicationConfig.config.color.onPrimary,
                 onIconPressed = {
                 }
             ),
             IClickableIconModel.ClickableIconVectorModel(
                 iconId = Icons.AutoMirrored.Rounded.Login,
                 title = "ورود | ثبت نام",
+                tint = ApplicationConfig.config.color.onPrimary,
                 doesButtonHaveBorder = false,
                 onIconPressed = {
                     a.show()

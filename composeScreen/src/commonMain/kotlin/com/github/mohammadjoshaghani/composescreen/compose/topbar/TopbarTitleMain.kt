@@ -3,7 +3,6 @@ package com.github.mohammadjoshaghani.composescreen.compose.topbar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
@@ -37,6 +36,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                                 icon.iconId,
                                 title = icon.title,
                                 badgeCount = icon.badgeCount,
+                                tint = icon.tint,
                                 onClick = icon.onIconPressed
                             )
 
@@ -45,7 +45,8 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                                     icon.iconId,
                                     title = icon.title,
                                     badgeCount = icon.badgeCount,
-                                    onClick = icon.onIconPressed
+                                    onClick = icon.onIconPressed,
+                                    tint = icon.tint
                                 )
                             }
                         }
@@ -60,7 +61,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                                 doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                 badgeCount = icon.badgeCount,
                                 onClick = icon.onIconPressed,
-                                tint = MaterialTheme.colorScheme.primary
+                                tint = icon.tint
                             )
 
                             is IClickableIconModel.ClickableIconVectorModel -> {
@@ -70,7 +71,7 @@ fun ShowTitleMain(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) 
                                     doesButtonHaveBorder = icon.doesButtonHaveBorder,
                                     badgeCount = icon.badgeCount,
                                     onClick = icon.onIconPressed,
-                                    tint = MaterialTheme.colorScheme.primary
+                                    tint = icon.tint
                                 )
                             }
                         }
