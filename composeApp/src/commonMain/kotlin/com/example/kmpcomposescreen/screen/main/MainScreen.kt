@@ -1,8 +1,10 @@
 package com.example.kmpcomposescreen.screen.main
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,6 +37,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.BaseSimpleBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
@@ -99,16 +102,16 @@ class TestDialgViewModel : BaseViewModel<
         when (event) {
             TestDialgContract.Event.Test -> {
 
-               launchOnScope {
-                   setState {
-                       copy(isLoading = true)
-                   }
-                   delay(1500)
+                launchOnScope {
+                    setState {
+                        copy(isLoading = true)
+                    }
+                    delay(1500)
 
-                   setState {
-                       copy(isLoading = false)
-                   }
-               }
+                    setState {
+                        copy(isLoading = false)
+                    }
+                }
 
             }
         }
@@ -190,12 +193,24 @@ class MainScreen :
         )
     }
 
+    class CustomBottom : BaseSimpleBottomSheet() {
+        @Composable
+        override fun ComposeView() {
+            Column(Modifier.fillMaxSize()) {
+                Text("asdfkl;jasdklfj")
+
+            }
+        }
+
+    }
+
     override fun actionIconsTopBar(): List<IClickableIconModel> {
         return listOf(
             IClickableIconModel.ClickableIconVectorModel(
                 iconId = Icons.AutoMirrored.Rounded.Login,
                 tint = ApplicationConfig.config.color.onPrimary,
                 onIconPressed = {
+                    CustomBottom().show()
                 }
             ),
             IClickableIconModel.ClickableIconVectorModel(

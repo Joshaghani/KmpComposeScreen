@@ -23,7 +23,7 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootSc
 import com.github.mohammadjoshaghani.composescreen.compose.fab.UIFab
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.TopBar
-import com.github.mohammadjoshaghani.composescreen.extension.clickableWitoutHighlight
+import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 internal var keyboardController: SoftwareKeyboardController? = null
@@ -69,7 +69,7 @@ fun RenderScreenContent(startScreen: RootScreen<*, *, *, *>) {
                             )
                             .fillMaxSize()
                             .background(ApplicationConfig.config.color.background)
-                            .clickableWitoutHighlight {
+                            .noRippleClickable {
                                 hideKeyboard()
                             }
                     ) {

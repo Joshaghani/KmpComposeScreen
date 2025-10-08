@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.base.screen.sample
+package com.github.mohammadjoshaghani.composescreen.base.screen.simple
 
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
@@ -6,7 +6,7 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.compose.errorScreen.ErrorScreenMessageModel
 import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageModel
 
-class BaseSampleScreenContract {
+class BaseSimpleScreenContract {
     sealed interface Event : ViewEvent
 
     data class State(

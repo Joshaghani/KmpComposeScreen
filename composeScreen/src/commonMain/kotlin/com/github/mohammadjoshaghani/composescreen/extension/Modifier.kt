@@ -28,7 +28,7 @@ fun Modifier.clickableTheme(
 }
 
 @Composable
-fun Modifier.clickableWitoutHighlight(
+fun Modifier.noRippleClickable(
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,

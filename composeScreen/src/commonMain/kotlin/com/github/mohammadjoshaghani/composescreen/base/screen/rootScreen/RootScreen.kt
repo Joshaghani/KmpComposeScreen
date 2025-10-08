@@ -24,8 +24,9 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializ
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.UIBottomSheet
+import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.IBaseDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -188,8 +189,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     }
 
     private fun cleanupResources() {
-        UIBottomSheet.getBottomSheet()?.hide()
         UIAlertDialog.getDialog()?.dismiss()
+        IBaseDialog.stack.clear()
+        IBottomSheet.stack.clear()
     }
 
     open fun onPause() {
