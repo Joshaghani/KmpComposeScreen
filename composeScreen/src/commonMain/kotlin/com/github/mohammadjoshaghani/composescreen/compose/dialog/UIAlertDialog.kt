@@ -1,16 +1,12 @@
 package com.github.mohammadjoshaghani.composescreen.compose.dialog
 
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.compose.CustomUIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.compose.SampleUiAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,15 +26,10 @@ class UIAlertDialog(
 ) : IAlertDialog {
 
     private val isShowDialogFlow = MutableStateFlow(true)
-    private var sampleDialogContent: (@Composable ColumnScope.(UIAlertDialog) -> Unit)? = null
-
-    internal lateinit var modifierCustomUi: Modifier
-    internal var shapeCustomUi: Shape? = null
 
     fun show() {
         showSampleDialogState.value = this
     }
-
 
     fun onDismissRequest(action: () -> Unit) = apply {
         Navigator.state.current.value?.viewModel?.launchOnScope {
@@ -46,17 +37,6 @@ class UIAlertDialog(
                 if (!it) action()
             }
         }
-    }
-
-    @Composable
-    fun setCustomContent(
-        modifier: Modifier = Modifier,
-        shape: Shape? = null,
-        content: @Composable ColumnScope.(UIAlertDialog) -> Unit,
-    ) = apply {
-        this.sampleDialogContent = content
-        this.modifierCustomUi = modifier
-        this.shapeCustomUi = shape
     }
 
     fun setTitle(title: String) = apply { this.title = title }
@@ -101,9 +81,7 @@ class UIAlertDialog(
             ),
             onDismissRequest = { dismiss() }
         ) {
-            sampleDialogContent?.let {
-                CustomUIAlertDialog(modifierCustomUi, shapeCustomUi, it)
-            } ?: SampleUiAlertDialog()
+            SampleUiAlertDialog()
         }
     }
 

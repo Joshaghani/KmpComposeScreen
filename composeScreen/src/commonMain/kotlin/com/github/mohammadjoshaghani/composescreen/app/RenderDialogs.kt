@@ -5,6 +5,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.UIBottomSheet
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.BaseDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -14,6 +15,10 @@ fun RenderDialogs() {
         UIAlertDialog.isShow() -> {
             UIAlertDialog.getDialog()
                 ?.ShowDialog()
+        }
+
+        BaseDialog.stack.isNotEmpty() -> {
+            BaseDialog.stack.last().ShowDialog()
         }
 
         UIBottomSheet.isShow() -> {

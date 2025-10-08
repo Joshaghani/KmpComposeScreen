@@ -31,15 +31,50 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeade
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
-import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.BaseDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastCreator
+import com.github.mohammadjoshaghani.composescreen.extension.toast
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+
+
+class TestDialg : BaseDialog() {
+    @Composable
+    override fun ComposeView() {
+
+        UIPrimaryButton("adsfsadf") {
+            TestDialg2().show()
+        }
+    }
+
+}
+
+class TestDialg2 : BaseDialog() {
+    @Composable
+    override fun ComposeView() {
+
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+
+        UIPrimaryButton("adsfsadf") {
+            MainScope().launch {
+                ToastCreator.showToast("hellop".toast())
+            }
+        }
+    }
+
+}
 
 class MainScreen :
     BaseScreenLazyList<
@@ -64,7 +99,13 @@ class MainScreen :
         return IClickableIconModel.ClickableIconModel(
             iconId = Res.drawable.compose_multiplatform,
             tint = ApplicationConfig.config.color.onPrimary,
-            onIconPressed = {}
+            onIconPressed = {
+                TestDialg()
+                    .onDismissRequest {
+
+                    }
+                    .show()
+            }
         )
     }
 
@@ -121,23 +162,6 @@ class MainScreen :
 
     @Composable
     override fun ComposeStickyView(modifier: Modifier) {
-
-
-        a = UIAlertDialog()
-            .setCustomContent {
-                Text("asdfklkjasf")
-
-                UISpacer()
-                Row {
-
-                    UITextButton("fd") {}
-
-                    UIPrimaryButton("asc") {
-                        onEventSent(MainScreenContract.Event.Login)
-                    }
-                }
-            }
-
 
 
         Row(
