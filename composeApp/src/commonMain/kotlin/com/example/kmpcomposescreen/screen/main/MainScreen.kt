@@ -22,6 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.MainScreen2
 import com.example.kmpcomposescreen.theme.color.colorTheme
+import com.github.mohammadjoshaghani.composescreen.base.BaseHandler
+import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
+import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
+import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
+import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.ILazyLoadingList
@@ -32,49 +37,104 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.BaseDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.BaseDialog
+import com.github.mohammadjoshaghani.composescreen.compose.errorScreen.ErrorScreenMessageModel
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastCreator
-import com.github.mohammadjoshaghani.composescreen.extension.toast
+import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.delay
 
 
-class TestDialg : BaseDialog() {
-    @Composable
-    override fun ComposeView() {
+class TestDialgHandler : BaseHandler<
+        TestDialgViewModel,
+        TestDialgContract.Effect,
+        TestDialgContract.Event
+        > {
+    override fun handleEffects(
+        effect: TestDialgContract.Effect,
+        viewModel: TestDialgViewModel,
+    ) {
+    }
 
-        UIPrimaryButton("adsfsadf") {
-            TestDialg2().show()
-        }
+    override fun TestDialgViewModel.updateState(
+        isLoading: Boolean,
+        toastMessage: ToastMessageModel?,
+        errorScreen: ErrorScreenMessageModel<TestDialgContract.Event>?,
+    ) {
     }
 
 }
 
-class TestDialg2 : BaseDialog() {
-    @Composable
-    override fun ComposeView() {
+class TestDialgContract {
+    sealed interface Event : ViewEvent {
+        data object Test : Event
+    }
 
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
-        Text("asdkfjhaskdjfh klsajd fhlkasdj")
+    data class State(
+        override var errorScreen: ErrorScreenMessageModel<Event>? = null,
+        override var isLoading: Boolean = false,
+        override var toastMessage: ToastMessageModel? = null,
+    ) : ViewState<Event>
 
-        UIPrimaryButton("adsfsadf") {
-            MainScope().launch {
-                ToastCreator.showToast("hellop".toast())
+    sealed interface Effect : ViewSideEffect {
+        data object Nothing : Effect
+        data object Loading : Effect
+        data class ShowToast(val message: ToastMessageModel) : Effect
+        data class ErrorPage(val message: String, val event: Event) : Effect
+    }
+}
+
+class TestDialgViewModel : BaseViewModel<
+        TestDialgContract.Event,
+        TestDialgContract.State,
+        TestDialgContract.Effect
+        >() {
+    override fun setInitialState() = TestDialgContract.State()
+
+    override fun handleEvents(event: TestDialgContract.Event) {
+        when (event) {
+            TestDialgContract.Event.Test -> {
+
+               launchOnScope {
+                   setState {
+                       copy(isLoading = true)
+                   }
+                   delay(1500)
+
+                   setState {
+                       copy(isLoading = false)
+                   }
+               }
+
             }
         }
     }
 
 }
+
+class TestDialg : BaseDialog<
+        TestDialgContract.State,
+        TestDialgContract.Event,
+        TestDialgContract.Effect,
+        TestDialgViewModel
+        >() {
+
+    override val viewModel: TestDialgViewModel = TestDialgViewModel()
+    override val handler: TestDialgHandler = TestDialgHandler()
+
+    @Composable
+    override fun ComposeView(state: TestDialgContract.State) {
+        UIPrimaryButton("adsfsadf") {
+            onEventSent(TestDialgContract.Event.Test)
+        }
+    }
+
+}
+
 
 class MainScreen :
     BaseScreenLazyList<
