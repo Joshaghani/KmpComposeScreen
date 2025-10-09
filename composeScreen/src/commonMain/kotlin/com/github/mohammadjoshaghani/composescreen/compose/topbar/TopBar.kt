@@ -14,8 +14,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowStickyBoolean
@@ -69,10 +67,7 @@ class TopBar {
                     Modifier
                         .background(ApplicationConfig.config.color.background)
                 ) {
-                    when (screen) {
-                        is IShowTopbarMain -> ShowTitleMain(scrollBehavior, isScrolled.value)
-                        is IShowTopbar -> ShowTitle(scrollBehavior, isScrolled.value)
-                    }
+                    ShowTitle(scrollBehavior, isScrolled.value)
                 }
 
             }

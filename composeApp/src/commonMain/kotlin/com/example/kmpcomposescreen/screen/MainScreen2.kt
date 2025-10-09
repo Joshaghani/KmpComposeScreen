@@ -27,10 +27,10 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
@@ -43,7 +43,6 @@ class MainScreen2 :
             MainScreenViewModel
             >(),
     IShowNavigationSideBar,
-    IShowTopbar,
     IShowStickyHeader,
     IShowScrollAwareFadingHeader {
 
@@ -166,7 +165,7 @@ class MainScreen2 :
 
     }
 
-    override fun titleTopBar() = IShowTopbar.UiTitle.TextResult("asdf")
+    override fun titleTopBar() = UiTopbar.Text("asdf")
 
     data class CategoryModel(
         val title: String,

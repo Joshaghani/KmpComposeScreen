@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -36,10 +37,10 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.ILazyLoadingList
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
 import com.github.mohammadjoshaghani.composescreen.base.screen.simple.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.BaseSimpleBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.BaseSimpleDialog
@@ -146,7 +147,6 @@ class TestDialg : BaseSimpleDialog(
 class MainScreen :
     BaseSimpleScreen(),
     IShowNavigationSideBar,
-    IShowTopbarMain,
     IShowStickyHeader,
     IShowScrollAwareFadingHeader,
     ILazyLoadingList,
@@ -156,16 +156,6 @@ class MainScreen :
     @Composable
     override fun StartedExpandedUI() {
         Text("StartedExpandedUI")
-    }
-
-    override fun menuIconTopBar(): IClickableIconModel {
-        return IClickableIconModel.ClickableIconModel(
-            iconId = Res.drawable.compose_multiplatform,
-            tint = ApplicationConfig.config.color.onPrimary,
-            onIconPressed = {
-                TestDialg().show()
-            }
-        )
     }
 
 
@@ -198,6 +188,13 @@ class MainScreen :
             }
         }
 
+    }
+
+    @Composable
+    override fun NavigationIcon() {
+        ClickableIcon(icon = Icons.Rounded.Menu) {
+            TestDialg().show()
+        }
     }
 
     override fun actionIconsTopBar(): List<IClickableIconModel> {
@@ -333,7 +330,7 @@ class MainScreen :
 
     @Composable
     override fun ComposeView() {
-
+        Text("adf")
     }
 
 

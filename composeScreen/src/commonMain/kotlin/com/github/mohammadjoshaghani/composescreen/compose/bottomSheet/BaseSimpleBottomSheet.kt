@@ -46,7 +46,9 @@ abstract class BaseSimpleBottomSheet : IBottomSheet, CoroutineScope {
                             dismiss()
                         }
                 ) {
-                    Column(content = { ComposeView() })
+                    Column(
+                        modifier = Modifier.noRippleClickable {},
+                        content = { ComposeView() })
                     UIToastNotification()
                 }
             }

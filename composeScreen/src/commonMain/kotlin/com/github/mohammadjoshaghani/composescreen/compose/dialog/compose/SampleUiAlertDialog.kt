@@ -49,7 +49,7 @@ internal fun UIAlertDialog.SampleUiAlertDialog(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Card(
-                modifier = Modifier.widthIn(max = 300.dp),
+                modifier = Modifier.noRippleClickable {}.widthIn(max = 300.dp),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surface),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {

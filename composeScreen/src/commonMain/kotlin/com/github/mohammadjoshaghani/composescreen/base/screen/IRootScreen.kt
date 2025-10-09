@@ -1,5 +1,7 @@
 package com.github.mohammadjoshaghani.composescreen.base.screen
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -9,8 +11,12 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.StickyHeaderState
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
+import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.IBaseDialog
+import com.github.mohammadjoshaghani.composescreen.compose.fab.FabIconModel
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -99,5 +105,26 @@ interface IRootScreen {
 
     @Composable
     fun ShowScreenFromApp()
+
+    @Composable
+    fun BottomBarView()
+
+
+    fun titleTopBar(): UiTopbar = UiTopbar.Compose {}
+
+    fun actionIconsTopBar(): List<IClickableIconModel> {
+        return listOf()
+    }
+
+    fun iconFab(): FabIconModel? = null
+
+    @Composable
+    fun NavigationIcon() {
+        Navigator.previous()?.let {
+            ClickableIcon(icon = Icons.AutoMirrored.Rounded.ArrowBack) {
+                Navigator.state.current.value?.onBackPressed()
+            }
+        }
+    }
 
 }

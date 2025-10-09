@@ -13,10 +13,10 @@ import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 
@@ -26,7 +26,6 @@ class ThirdScreen :
             MainScreenContract.Event,
             MainScreenContract.Effect,
             MainScreenViewModel>(),
-    IShowTopbar,
     IShowNavigationSideBar {
 
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
@@ -47,7 +46,7 @@ class ThirdScreen :
 
     }
 
-    override fun titleTopBar() = IShowTopbar.UiTitle.TextResult("Second")
+    override fun titleTopBar() = UiTopbar.Text("Second")
 
     override fun actionIconsSideBar(): List<NavigationItem> {
         NavigationSideBar.selectedItemIndex = 5

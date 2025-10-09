@@ -131,6 +131,10 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
     @Composable
     abstract fun ComposeView()
 
+    @Composable
+    override fun BottomBarView() {
+    }
+
     fun showToast(message: ToastMessageModel){
         launch {
             ToastCreator.showToast(message)

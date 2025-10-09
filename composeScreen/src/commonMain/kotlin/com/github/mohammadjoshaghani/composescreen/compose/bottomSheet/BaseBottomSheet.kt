@@ -68,7 +68,9 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
                             dismiss()
                         }
                 ) {
-                    Column(content = { ComposeView(state = viewModel.viewState.value) })
+                    Column(
+                        modifier = Modifier.noRippleClickable {},
+                        content = { ComposeView(state = viewModel.viewState.value) })
                     UIToastNotification()
                 }
             }

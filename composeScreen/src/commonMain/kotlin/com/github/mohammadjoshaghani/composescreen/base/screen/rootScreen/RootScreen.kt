@@ -170,4 +170,13 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
     }
 
+    @Composable
+    override fun BottomBarView() {
+        BottomBarView(viewModel.viewState.value)
+    }
+
+    @Composable
+    fun BottomBarView(state: State) {
+    }
+
 }

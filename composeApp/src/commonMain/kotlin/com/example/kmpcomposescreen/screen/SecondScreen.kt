@@ -16,12 +16,11 @@ import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowBottombar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbar
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class SecondScreen :
@@ -30,8 +29,6 @@ class SecondScreen :
             MainScreenContract.Event,
             MainScreenContract.Effect,
             MainScreenViewModel>(),
-    IShowTopbar,
-    IShowBottombar,
     IShowScrollAwareFadingHeader {
 
     override val viewModel: MainScreenViewModel = MainScreenViewModel()
@@ -55,8 +52,8 @@ class SecondScreen :
 
     }
 
-    override fun titleTopBar(): IShowTopbar.UiTitle {
-        return IShowTopbar.UiTitle.TextResult("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
+    override fun titleTopBar(): UiTopbar {
+        return UiTopbar.Text("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
     }
 
 //    @OptIn(ExperimentalMaterial3Api::class)

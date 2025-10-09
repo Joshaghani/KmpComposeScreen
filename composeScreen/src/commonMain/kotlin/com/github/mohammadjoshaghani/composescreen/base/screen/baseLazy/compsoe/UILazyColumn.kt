@@ -10,7 +10,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowFab
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderItemsIndexed
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderLoadMore
@@ -57,6 +56,6 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
         }
         renderLoadMore(list, lazyListState!!, this@UILazyColumn)
         item { FooterUI(state) }
-        item { UISpacer(if (this@UILazyColumn is IShowFab) 150 else 50) }
+        item { UISpacer(if (this@UILazyColumn.iconFab() != null) 150 else 50) }
     }
 }
