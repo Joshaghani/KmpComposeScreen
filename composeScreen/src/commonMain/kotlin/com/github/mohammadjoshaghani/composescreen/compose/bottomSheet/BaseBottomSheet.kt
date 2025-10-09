@@ -14,14 +14,18 @@ import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
-import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet.Companion.stack
 import com.github.mohammadjoshaghani.composescreen.compose.toast.UIToastNotification
 import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> :
-    IBottomSheet {
+    IBottomSheet, CoroutineScope {
 
     abstract val viewModel: VM
     abstract val handler: BaseHandler<VM, Effect, Event>
@@ -31,6 +35,12 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
     private val isShowDialogFlow = MutableStateFlow(true)
 
     private var setCanceledOnTouchOutside: Boolean = true
+
+    private var job: Job = Job()
+
+    // انتساب CoroutineScope به job برای کنترل طول عمر آن
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job  // Dispatcher و Job برای مدیریت Coroutine
 
     fun setCanceledOnTouchOutside(value: Boolean) = apply {
         setCanceledOnTouchOutside = value
@@ -74,10 +84,14 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
     }
 
     fun onDismissRequest(action: () -> Unit) = apply {
-        Navigator.state.current.value?.viewModel?.launchOnScope {
+        launch {
             isShowDialogFlow.collect {
                 if (!it) action()
             }
         }
+    }
+
+    fun cancelCoroutine() {
+        job.cancel()
     }
 }

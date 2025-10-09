@@ -8,15 +8,25 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
-import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet.Companion.stack
 import com.github.mohammadjoshaghani.composescreen.compose.toast.UIToastNotification
 import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-abstract class BaseSimpleBottomSheet : IBottomSheet {
+abstract class BaseSimpleBottomSheet : IBottomSheet, CoroutineScope {
 
     private val isShowDialogFlow = MutableStateFlow(true)
+
+    private var job: Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
 
     override fun show() {
         stack.add(this)
@@ -53,10 +63,14 @@ abstract class BaseSimpleBottomSheet : IBottomSheet {
 
 
     fun onDismissRequest(action: () -> Unit) = apply {
-        Navigator.state.current.value?.viewModel?.launchOnScope {
+        launch {
             isShowDialogFlow.collect {
                 if (!it) action()
             }
         }
+    }
+
+    fun cancelCoroutine() {
+        job.cancel()
     }
 }

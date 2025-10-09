@@ -20,6 +20,7 @@ import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowStickyBoolean
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
+import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
 import com.github.mohammadjoshaghani.composescreen.compose.UIAnimatedVisibility
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
@@ -29,13 +30,15 @@ class TopBar {
     @Composable
     fun Show(scrollBehavior: TopAppBarScrollBehavior) {
         val screen = Navigator.state.current.value ?: return
-        val viewState = screen.viewModel.viewState.value
 
-        if (viewState.errorScreen != null || viewState.isLoading) return
+        if (screen is RootScreen<*, *, *, *>) {
+            val viewState = screen.viewModel.viewState.value
+            if (viewState.errorScreen != null || viewState.isLoading) return
+        }
 
-        if (screen is BaseScreenLazyList) {
+        if (screen is BaseScreenLazyList<*, *, *, *>) {
             isScrolled.value = screen.isScrolledNow.collectAsState().value
-        } else if (screen is BaseScreen) {
+        } else if (screen is BaseScreen<*, *, *, *>) {
             isScrolled.value = screen.isScrolledNow.collectAsState().value
         }
 
@@ -49,7 +52,7 @@ class TopBar {
             }
 
         if (isScrolled.value) {
-            screen?.RunIfShowStickyBoolean { isShowStickyHeader ->
+            screen.RunIfShowStickyBoolean { isShowStickyHeader ->
                 elevation = if (isShowStickyHeader) {
                     0.dp
                 } else {

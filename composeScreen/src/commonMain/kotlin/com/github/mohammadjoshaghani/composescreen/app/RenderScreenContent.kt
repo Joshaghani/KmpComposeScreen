@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.RootScreen
+import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
 import com.github.mohammadjoshaghani.composescreen.compose.fab.UIFab
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.TopBar
@@ -32,7 +32,7 @@ internal var focusManager: FocusManager? = null
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RenderScreenContent(startScreen: RootScreen<*, *, *, *>) {
+fun RenderScreenContent(startScreen: IRootScreen) {
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 

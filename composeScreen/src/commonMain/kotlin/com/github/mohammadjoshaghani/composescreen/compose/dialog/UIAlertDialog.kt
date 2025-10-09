@@ -6,10 +6,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.compose.SampleUiAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class UIAlertDialog(
     internal var title: String? = null,
@@ -23,16 +27,21 @@ class UIAlertDialog(
     internal var primaryButtonContainerColor: Color = ApplicationConfig.config.color.primary,
     internal var primaryButtonContentColor: Color = ApplicationConfig.config.color.onPrimary,
     internal var cancelButtonContentColor: Color = ApplicationConfig.config.color.onBackground,
-) : IAlertDialog {
+) : IAlertDialog , CoroutineScope {
 
     private val isShowDialogFlow = MutableStateFlow(true)
+
+    private var job: Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     fun show() {
         showSampleDialogState.value = this
     }
 
     fun onDismissRequest(action: () -> Unit) = apply {
-        Navigator.state.current.value?.viewModel?.launchOnScope {
+        launch {
             isShowDialogFlow.collect {
                 if (!it) action()
             }
@@ -89,6 +98,10 @@ class UIAlertDialog(
     override fun dismiss() {
         showSampleDialogState.value = null
         isShowDialogFlow.value = false
+    }
+
+    fun cancelCoroutine() {
+        job.cancel()
     }
 
     companion object {

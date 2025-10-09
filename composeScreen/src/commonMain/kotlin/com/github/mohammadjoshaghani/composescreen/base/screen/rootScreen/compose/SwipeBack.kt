@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen
+package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose
 
 import SwipeToGoBackWrapper
 import androidx.compose.runtime.Composable

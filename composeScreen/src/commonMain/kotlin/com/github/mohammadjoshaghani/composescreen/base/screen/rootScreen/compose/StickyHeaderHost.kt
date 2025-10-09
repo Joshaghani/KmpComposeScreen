@@ -1,15 +1,16 @@
-package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen
+package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.unit.Dp
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Stable
 class StickyHeaderState(
     has: Boolean = false,
-    heightDp: androidx.compose.ui.unit.Dp = 0.dp
+    heightDp: Dp = 0.dp
 ) {
     var hasStickyHeader = MutableStateFlow(has)
         internal set

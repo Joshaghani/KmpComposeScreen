@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen
+package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
+import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
@@ -35,7 +35,7 @@ fun UITextButton(
         modifier = modifier
             .clipToBounds()
             .clip(MaterialTheme.shapes.medium)
-            .clickableTheme(enabled = enable) {
+            .themeClickable(enabled = enable) {
                 clickable()
             }
             .padding(horizontal = paddingHorizontal.dp),
@@ -83,7 +83,7 @@ fun UITextButtonVector(
         modifier = modifier
             .clipToBounds()
             .clip(MaterialTheme.shapes.medium)
-            .clickableTheme(enabled = enable) {
+            .themeClickable(enabled = enable) {
                 clickable()
             }
             .padding(horizontal = paddingHorizontal.dp),

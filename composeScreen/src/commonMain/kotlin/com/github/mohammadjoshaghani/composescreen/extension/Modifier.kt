@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
-fun Modifier.clickableTheme(
+fun Modifier.themeClickable(
     color: Color = ApplicationConfig.config.color.primary,
     enabled: Boolean = true,
     onClickLabel: String? = null,

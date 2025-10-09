@@ -26,7 +26,7 @@ import com.github.mohammadjoshaghani.composescreen.compose.component.UIBorderBut
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIBorderButtonVector
 import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.UITextButtonVector
-import com.github.mohammadjoshaghani.composescreen.extension.clickableTheme
+import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -194,7 +194,7 @@ fun IconBox(
                 modifier = modifier
                     .size(56.dp)
                     .clip(CircleShape)
-                    .clickableTheme(onClick = onClick),
+                    .themeClickable(onClick = onClick),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
@@ -247,7 +247,7 @@ fun IconBox(
                 modifier = modifier
                     .size(56.dp)
                     .clip(CircleShape)
-                    .clickableTheme(onClick = onClick),
+                    .themeClickable(onClick = onClick),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

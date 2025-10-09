@@ -55,7 +55,8 @@ fun UIToastNotification() {
     }
 
     AnimatedVisibility(
-        modifier = Modifier.testTag("ToastAnimatedVisibility"),
+        modifier = Modifier
+            .testTag("ToastAnimatedVisibility"),
         visible = isshowToast,
         enter = slideInVertically(
             initialOffsetY = { -it }

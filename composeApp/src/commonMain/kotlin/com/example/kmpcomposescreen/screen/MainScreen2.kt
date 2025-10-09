@@ -168,7 +168,6 @@ class MainScreen2 :
 
     override fun titleTopBar() = IShowTopbar.UiTitle.TextResult("asdf")
 
-
     data class CategoryModel(
         val title: String,
     ) : IIdentifiable

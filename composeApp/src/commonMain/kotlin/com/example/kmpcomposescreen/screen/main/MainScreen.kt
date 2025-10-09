@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.MainScreen2
+import com.example.kmpcomposescreen.screen.TableHeaderCell
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
@@ -36,16 +37,17 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationS
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowTopbarMain
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.base.screen.simple.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.BaseSimpleBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.BaseDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.BaseSimpleDialog
 import com.github.mohammadjoshaghani.composescreen.compose.errorScreen.ErrorScreenMessageModel
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageModel
+import com.github.mohammadjoshaghani.composescreen.extension.toast
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
@@ -104,12 +106,15 @@ class TestDialgViewModel : BaseViewModel<
 
                 launchOnScope {
                     setState {
-                        copy(isLoading = true)
+                        copy(isLoading = true, toastMessage = ToastMessageModel("asfd"))
                     }
                     delay(1500)
 
                     setState {
-                        copy(isLoading = false)
+                        copy(
+                            isLoading = false,
+                            errorScreen = ErrorScreenMessageModel("fas", event)
+                        )
                     }
                 }
 
@@ -119,33 +124,27 @@ class TestDialgViewModel : BaseViewModel<
 
 }
 
-class TestDialg : BaseDialog<
-        TestDialgContract.State,
-        TestDialgContract.Event,
-        TestDialgContract.Effect,
-        TestDialgViewModel
-        >() {
-
-    override val viewModel: TestDialgViewModel = TestDialgViewModel()
-    override val handler: TestDialgHandler = TestDialgHandler()
+class TestDialg : BaseSimpleDialog(
+) {
 
     @Composable
-    override fun ComposeView(state: TestDialgContract.State) {
+    override fun ComposeView() {
+
+        Text("asf s fasfsd  afs df")
+        Text("a asdf;lkj sd;lfkjasd;l")
+        Text("a sd j;lsdkjf asf")
+
         UIPrimaryButton("adsfsadf") {
-            onEventSent(TestDialgContract.Event.Test)
+            showToast("asfasdf".toast())
         }
+
     }
 
 }
 
 
 class MainScreen :
-    BaseScreenLazyList<
-            MainScreenContract.State,
-            MainScreenContract.Event,
-            MainScreenContract.Effect,
-            MainScreenViewModel
-            >(),
+    BaseSimpleScreen(),
     IShowNavigationSideBar,
     IShowTopbarMain,
     IShowStickyHeader,
@@ -153,21 +152,18 @@ class MainScreen :
     ILazyLoadingList,
     IClearStackScreen {
 
-    override val viewModel = MainScreenViewModel()
 
-    override val handler = MainScreenHandler()
-
+    @Composable
+    override fun StartedExpandedUI() {
+        Text("StartedExpandedUI")
+    }
 
     override fun menuIconTopBar(): IClickableIconModel {
         return IClickableIconModel.ClickableIconModel(
             iconId = Res.drawable.compose_multiplatform,
             tint = ApplicationConfig.config.color.onPrimary,
             onIconPressed = {
-                TestDialg()
-                    .onDismissRequest {
-
-                    }
-                    .show()
+                TestDialg().show()
             }
         )
     }
@@ -219,21 +215,19 @@ class MainScreen :
                 tint = ApplicationConfig.config.color.onPrimary,
                 doesButtonHaveBorder = false,
                 onIconPressed = {
-                    a.show()
+                    UIAlertDialog()
+                        .setMessage("You ar login")
+                        .setButtonAction("login", false) {
+                            showToast("adf".toast())
 
-//                    UIAlertDialog()
-//                        .setMessage("You ar login")
-//                        .setButtonAction("login", false) {
-//                            onEventSent(MainScreenContract.Event.Login)
-//                        }
-//                        .show()
+//                            nEventSent(MainScreenContract.Event.Login)
+                        }
+                        .show()
                 }
             ),
 
             )
     }
-
-    lateinit var a: UIAlertDialog
 
     @Composable
     override fun ComposeStickyView(modifier: Modifier) {
@@ -310,31 +304,36 @@ class MainScreen :
         CategoryModel("تلسکوپ"),
     )
 
-    override fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
-        return getItemsList()
-    }
-
-    @Composable
-    override fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
-        (item as CategoryModel).apply {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                TableCell("${title}\n${id}", 0.2f)
-                TableCell("email", 0.25f)
-                TableCell("phone", 0.15f)
-                TableCell("${"location"}\n${"country"}", 0.15f)
-                TableCell("orders", 0.1f)
-                TableCell("totalSpent", 0.15f)
-            }
-        }
-
-    }
+//    override fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
+//        return getItemsList()
+//    }
+//
+//    @Composable
+//    override fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
+//        (item as CategoryModel).apply {
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(8.dp)
+//            ) {
+//                TableCell("${title}\n${id}", 0.2f)
+//                TableCell("email", 0.25f)
+//                TableCell("phone", 0.15f)
+//                TableCell("${"location"}\n${"country"}", 0.15f)
+//                TableCell("orders", 0.1f)
+//                TableCell("totalSpent", 0.15f)
+//            }
+//        }
+//
+//    }
 
     override fun lazyColumnScrolledEnd() {
         println("*&&*&*lazyColumnScrolledEnd")
+    }
+
+    @Composable
+    override fun ComposeView() {
+
     }
 
 
