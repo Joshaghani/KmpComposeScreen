@@ -51,7 +51,7 @@ import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageMod
 import com.github.mohammadjoshaghani.composescreen.extension.toast
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
-import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
+import kmpcomposescreen.composeapp.generated.resources.ic_android_black_24dp
 import kotlinx.coroutines.delay
 
 
@@ -165,9 +165,9 @@ class MainScreen :
         return listOf(
             NavigationItem(
                 title = "icon",
-                unselectedIcon = Res.drawable.compose_multiplatform,
+                unselectedIcon = Res.drawable.ic_android_black_24dp,
                 selectedColor = Color.Red,
-                selectedIcon = Res.drawable.compose_multiplatform,
+                selectedIcon = Res.drawable.ic_android_black_24dp,
                 unselectedColor = Color.Blue,
                 hasNews = false,
                 badgeCount = null,

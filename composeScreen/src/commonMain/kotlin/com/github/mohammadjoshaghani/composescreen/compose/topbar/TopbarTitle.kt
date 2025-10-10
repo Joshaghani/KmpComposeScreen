@@ -26,8 +26,8 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
     TopAppBar(
         title = {
             when (val title = screen.titleTopBar()) {
-                is UiTopbar.Compose -> title.compose.invoke()
-                is UiTopbar.Text -> {
+                is UITopBar.Compose -> title.compose.invoke()
+                is UITopBar.Text -> {
                     UISmartMarqueeText(
                         title.text,
                         textStyle = MaterialTheme.typography.titleMedium,
@@ -92,7 +92,7 @@ fun ShowTitle(scrollBehavior: TopAppBarScrollBehavior, isScrolled: Boolean) {
 
     if (isScrolled && ApplicationConfig.config.isDarkTheme) {
         if (screen is IShowStickyHeader) {
-            if (!screen.stickyState.hasStickyHeader.collectAsState().value) {
+            if (!screen.hasStickyHeader.collectAsState().value) {
                 HorizontalDivider()
             }
         } else {

@@ -41,7 +41,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
     ) {
 
         item(span = { GridItemSpan(maxLineSpan) }) {
-            Spacer(modifier = Modifier.height(stickyState.stickyHeaderHeight))
+            Spacer(modifier = Modifier.height(stickyHeaderHeight.value))
             Spacer(Modifier.height(heightAwareFaideHeader.value))
         }
 

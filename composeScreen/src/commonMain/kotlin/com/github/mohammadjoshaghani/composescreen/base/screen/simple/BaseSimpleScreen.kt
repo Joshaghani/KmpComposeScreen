@@ -5,11 +5,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.app.RenderDialogs
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IRefreshableScreen
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
@@ -22,6 +26,7 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.simple.compose.Co
 import com.github.mohammadjoshaghani.composescreen.compose.UIAnimatedVisibility
 import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastCreator
 import com.github.mohammadjoshaghani.composescreen.compose.toast.ToastMessageModel
+import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,7 +34,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
+abstract class BaseSimpleScreen : IRootScreen, CoroutineScope {
 
     override var isVisibleAnimation = MutableStateFlow(false)
 
@@ -41,6 +46,18 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
         get() = Dispatchers.Main + job
 
     override var result: List<Any>? = null
+
+    override val screenSize: MutableState<ScreenSize> = mutableStateOf(ScreenSize(0.dp, 0.dp))
+    override val showAwareHeader: MutableState<Boolean> =
+        mutableStateOf(this is IShowScrollAwareFadingHeader)
+
+    override val heightAwareFaideHeader: MutableState<Dp> = mutableStateOf(0.dp)
+
+    override val hasStickyHeader: MutableStateFlow<Boolean> =
+        MutableStateFlow(this is IShowStickyHeader)
+
+    override val stickyHeaderHeight: MutableState<Dp> = mutableStateOf(0.dp)
+
 
     override fun show(replace: Boolean, animation: Boolean) {
         this.showAnimation = animation
@@ -60,10 +77,7 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
     override fun ShowScreenFromApp() {
         UIAnimatedVisibility {
             WithSwipeBackIfNeeded(this) {
-                StickyHeaderHost(
-                    screen = this,
-                    state = stickyState
-                ) {
+                StickyHeaderHost {
                     InitBaseComposeScreen()
                 }
             }
@@ -75,8 +89,8 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
                 ApplyStickyVisibilityBySize(
                     screen = sticky
                 ) { visible ->
-                    stickyState.hasStickyHeader.value = visible
-                    if (!visible) stickyState.stickyHeaderHeight = 0.dp
+                    hasStickyHeader.value = visible
+                    if (!visible) stickyHeaderHeight.value = 0.dp
                 }
             }
         }
@@ -101,7 +115,7 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
     fun ExpandedUI(compactUI: @Composable () -> Unit) {
         Row(Modifier.fillMaxSize()) {
             Column {
-                StickySpacer(stickyState)
+                StickySpacer()
                 AwareHeaderSpacer(showAwareHeader.value, heightAwareFaideHeader.value)
                 StartedExpandedUI()
             }
@@ -111,7 +125,7 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
                     .weight(1f)
             ) { compactUI() }
             Column {
-                StickySpacer(stickyState)
+                StickySpacer()
                 AwareHeaderSpacer(showAwareHeader.value, heightAwareFaideHeader.value)
                 EndedExpandedUI()
             }
@@ -135,7 +149,7 @@ abstract class BaseSimpleScreen : IRootScreen , CoroutineScope{
     override fun BottomBarView() {
     }
 
-    fun showToast(message: ToastMessageModel){
+    fun showToast(message: ToastMessageModel) {
         launch {
             ToastCreator.showToast(message)
         }

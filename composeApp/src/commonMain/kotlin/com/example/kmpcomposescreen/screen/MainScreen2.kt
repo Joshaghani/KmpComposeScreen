@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.kmpcomposescreen.screen.main.MainScreen
 import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
@@ -28,12 +27,11 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationS
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
-import kmpcomposescreen.composeapp.generated.resources.Res
-import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 
 class MainScreen2 :
     BaseScreenLazyList<
@@ -55,18 +53,6 @@ class MainScreen2 :
         NavigationSideBar.selectedItemIndex = 5
 
         return listOf(
-            NavigationItem(
-                title = "icon",
-                unselectedIcon = Res.drawable.compose_multiplatform,
-                selectedColor = Color.Red,
-                selectedIcon = Res.drawable.compose_multiplatform,
-                unselectedColor = Color.Blue,
-                hasNews = false,
-                badgeCount = null,
-                onIconClicked = {
-                    MainScreen().show()
-                }
-            )
 
         )
     }
@@ -89,15 +75,15 @@ class MainScreen2 :
                     .width(500.dp),
                 onValueChange = {})
 
-//
-//            UIPrimaryButton(
-//                modifier = modifier
-//                    .width(200.dp)
-//                    .padding(horizontal = 16.dp),
-//                title = strings.message.addCategory
-//            ) {
-//
-//            }
+
+            UIPrimaryButton(
+                modifier = modifier
+                    .width(200.dp)
+                    .padding(horizontal = 16.dp),
+                title =" strings.message.addCategory"
+            ) {
+
+            }
 
         }
     }
@@ -165,7 +151,7 @@ class MainScreen2 :
 
     }
 
-    override fun titleTopBar() = UiTopbar.Text("asdf")
+    override fun titleTopBar() = UITopBar.Text("asdf")
 
     data class CategoryModel(
         val title: String,

@@ -6,8 +6,8 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
-import com.github.mohammadjoshaghani.composescreen.compose.UIStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.awareFading.UIScrollAwareFading
+import com.github.mohammadjoshaghani.composescreen.compose.UIStickyHeader
 
 
 @Composable
@@ -20,7 +20,7 @@ internal fun <State : ViewState<Event>, Event : ViewEvent> ScrollAwareFadingHead
             screen = screen,
             contentItemRows = content,
             stickyheadContent = { sticky ->
-                UIStickyHeader(screen) {
+                screen.UIStickyHeader {
                     sticky.ComposeStickyView(it)
                 }
 

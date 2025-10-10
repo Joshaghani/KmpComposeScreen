@@ -1,43 +1,29 @@
 package com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose
 
-import androidx.compose.runtime.*
-import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.ui.unit.Dp
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import kotlinx.coroutines.flow.MutableStateFlow
-
-@Stable
-class StickyHeaderState(
-    has: Boolean = false,
-    heightDp: Dp = 0.dp
-) {
-    var hasStickyHeader = MutableStateFlow(has)
-        internal set
-    var stickyHeaderHeight by mutableStateOf(heightDp)
-        internal set
-}
+import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
 
 
 @Composable
-fun StickyHeaderHost(
-    screen: Any, // معمولاً this@RootScreen
-    state: StickyHeaderState,
+fun IRootScreen.StickyHeaderHost(
     content: @Composable () -> Unit
 ) {
     content() // محتوای اصلی
 
-    (screen as? IShowStickyHeader)?.let { sticky ->
-        state.hasStickyHeader.value = true
+    (this as? IShowStickyHeader)?.let { sticky ->
+        hasStickyHeader.value = true
         MeasureHeight(onHeightChanged = { h ->
-            if (state.stickyHeaderHeight != h) state.stickyHeaderHeight = h
+            if (stickyHeaderHeight.value != h) stickyHeaderHeight.value = h
         }) { measuredModifier ->
             sticky.ComposeStickyView(
                 modifier = measuredModifier.fillMaxWidth()
             )
         }
     } ?: run {
-        state.hasStickyHeader.value = false
-        state.stickyHeaderHeight = 0.dp
+        hasStickyHeader.value = false
+        stickyHeaderHeight.value = 0.dp
     }
 }

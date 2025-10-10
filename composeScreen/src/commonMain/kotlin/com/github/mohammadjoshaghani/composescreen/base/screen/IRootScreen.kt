@@ -4,19 +4,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
-import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.StickyHeaderState
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.IBaseDialog
 import com.github.mohammadjoshaghani.composescreen.compose.fab.FabIconModel
-import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -29,17 +25,15 @@ interface IRootScreen {
 
     var showAnimation: Boolean
 
-    val stickyState: StickyHeaderState
-        get() = StickyHeaderState()
+    val hasStickyHeader : MutableStateFlow<Boolean>
+
+    val stickyHeaderHeight : MutableState<Dp>
 
     val screenSize: MutableState<ScreenSize>
-        get() = mutableStateOf(ScreenSize(0.dp, 0.dp))
 
     val showAwareHeader: MutableState<Boolean>
-        get() = mutableStateOf(this is IShowScrollAwareFadingHeader)
 
     val heightAwareFaideHeader: MutableState<Dp>
-        get() = mutableStateOf(0.dp)
 
     var result: List<Any>?
 
@@ -110,7 +104,7 @@ interface IRootScreen {
     fun BottomBarView()
 
 
-    fun titleTopBar(): UiTopbar = UiTopbar.Compose {}
+    fun titleTopBar(): UITopBar = UITopBar.Compose {}
 
     fun actionIconsTopBar(): List<IClickableIconModel> {
         return listOf()

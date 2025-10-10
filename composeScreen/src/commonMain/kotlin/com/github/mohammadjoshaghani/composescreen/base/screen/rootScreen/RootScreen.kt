@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
@@ -18,6 +21,7 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IClearStackScreen
 import com.github.mohammadjoshaghani.composescreen.base.handler.IScreenInitializer
+import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
@@ -27,8 +31,10 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compos
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.LoadingShell
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.ScreenSideEffects
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.StickyHeaderHost
+import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.StickySpacer
 import com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.WithSwipeBackIfNeeded
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
+import com.github.mohammadjoshaghani.composescreen.utils.ScreenSize
 import kotlinx.coroutines.flow.MutableStateFlow
 
 abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : ViewSideEffect, VM : BaseViewModel<Event, State, Effect>> :
@@ -40,6 +46,17 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     override var isVisibleAnimation = MutableStateFlow(false)
 
     override var showAnimation: Boolean = true
+
+    override val screenSize: MutableState<ScreenSize> = mutableStateOf(ScreenSize(0.dp, 0.dp))
+    override val showAwareHeader: MutableState<Boolean> =
+        mutableStateOf(this is IShowScrollAwareFadingHeader)
+
+    override val heightAwareFaideHeader: MutableState<Dp> = mutableStateOf(0.dp)
+
+    override val hasStickyHeader: MutableStateFlow<Boolean> =
+        MutableStateFlow(this is IShowStickyHeader)
+
+    override val stickyHeaderHeight: MutableState<Dp> = mutableStateOf(0.dp)
 
     var onEventSent: (Event) -> Unit = { viewModel.setEvent(it) }
 
@@ -86,10 +103,7 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     private fun ShowContent(screen: IScreenInitializer<State, Event>) {
 
         WithSwipeBackIfNeeded(this) {
-            StickyHeaderHost(
-                screen = this,
-                state = stickyState
-            ) {
+            StickyHeaderHost {
                 screen.InitBaseComposeScreen(viewModel.viewState.value)
             }
         }
@@ -106,18 +120,12 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
             ApplyStickyVisibilityBySize(
                 screen = sticky
             ) { visible ->
-                stickyState.hasStickyHeader.value = visible
-                if (!visible) stickyState.stickyHeaderHeight = 0.dp
+                hasStickyHeader.value = visible
+                if (!visible) stickyHeaderHeight.value = 0.dp
             }
         }
     }
 
-    // API عمومی برای فاصله‌ها:
-    @Composable
-    fun StickySpacer() =
-        com.github.mohammadjoshaghani.composescreen.base.screen.rootScreen.compose.StickySpacer(
-            stickyState
-        )
 
     @Composable
     fun ExpandedUI(compactUI: @Composable () -> Unit) {
@@ -163,11 +171,9 @@ abstract class RootScreen<State : ViewState<Event>, Event : ViewEvent, Effect : 
     @Composable
     private fun ShowErrorScreen() {
         val errorScreen = viewModel.viewState.value.errorScreen!!
-
         ApplicationConfig.config.errorScreen(errorScreen.message) {
             viewModel.setEvent(errorScreen.event)
         }
-
     }
 
     @Composable

@@ -20,7 +20,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAware
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
-import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class SecondScreen :
@@ -52,8 +52,8 @@ class SecondScreen :
 
     }
 
-    override fun titleTopBar(): UiTopbar {
-        return UiTopbar.Text("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
+    override fun titleTopBar(): UITopBar {
+        return UITopBar.Text("گوشی اپل iPhone 16 CH رجیستر‌شده دو سیم‌کارت 128 گیگابایت با رم 8 گیگابایت")
     }
 
 //    @OptIn(ExperimentalMaterial3Api::class)

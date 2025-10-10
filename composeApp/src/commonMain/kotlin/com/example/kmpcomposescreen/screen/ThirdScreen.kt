@@ -16,7 +16,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationS
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.compose.topbar.UiTopbar
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.compose_multiplatform
 
@@ -46,7 +46,7 @@ class ThirdScreen :
 
     }
 
-    override fun titleTopBar() = UiTopbar.Text("Second")
+    override fun titleTopBar() = UITopBar.Text("Second")
 
     override fun actionIconsSideBar(): List<NavigationItem> {
         NavigationSideBar.selectedItemIndex = 5

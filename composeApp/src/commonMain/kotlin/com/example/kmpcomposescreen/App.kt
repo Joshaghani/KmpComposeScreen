@@ -3,7 +3,7 @@ package com.example.kmpcomposescreen
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.kmpcomposescreen.screen.main.MainScreen
+import com.example.kmpcomposescreen.screen.MainScreen2
 import com.example.kmpcomposescreen.theme.ExampleTheme
 import com.example.kmpcomposescreen.theme.color.getApplicationColorScheme
 import com.github.mohammadjoshaghani.composescreen.app.ComposeScreen
@@ -16,7 +16,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     ExampleTheme {
         ComposeScreen(
-            MainScreen(),
+            MainScreen2(),
             config = Config(
                 isDarkTheme = false,
                 color = getApplicationColorScheme(false),
