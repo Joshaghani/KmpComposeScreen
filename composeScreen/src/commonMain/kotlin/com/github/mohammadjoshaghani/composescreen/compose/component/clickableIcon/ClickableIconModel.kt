@@ -2,6 +2,7 @@ package com.github.mohammadjoshaghani.composescreen.compose.component.clickableI
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.jetbrains.compose.resources.DrawableResource
 
 sealed interface IClickableIconModel {
@@ -11,7 +12,7 @@ sealed interface IClickableIconModel {
         val doesButtonHaveBorder: Boolean = true,
         val badgeCount: Int? = null,
         val onIconPressed: () -> Unit,
-        val tint: Color,
+        val tint: Color = ApplicationConfig.config.color.onBackground,
     ) : IClickableIconModel
 
     data class ClickableIconVectorModel(
@@ -20,6 +21,6 @@ sealed interface IClickableIconModel {
         val doesButtonHaveBorder: Boolean = true,
         val badgeCount: Int? = null,
         val onIconPressed: () -> Unit,
-        val tint: Color,
+        val tint: Color = ApplicationConfig.config.color.onBackground,
     ) : IClickableIconModel
 }
