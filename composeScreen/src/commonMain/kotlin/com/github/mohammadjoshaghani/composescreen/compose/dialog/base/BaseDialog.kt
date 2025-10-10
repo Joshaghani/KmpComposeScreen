@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -51,7 +50,7 @@ abstract class BaseDialog<State : ViewState<Event>, Event : ViewEvent, Effect : 
 
     private var job: Job = Job()
 
-    open var modifier: Modifier = Modifier.fillMaxWidth()
+    open var modifier: Modifier = Modifier
     open var backgroundColor: Color = ApplicationConfig.config.color.surface
     open var borderColor: Color = ApplicationConfig.config.color.outlineVariant
     open var elevation: Dp = 0.dp
