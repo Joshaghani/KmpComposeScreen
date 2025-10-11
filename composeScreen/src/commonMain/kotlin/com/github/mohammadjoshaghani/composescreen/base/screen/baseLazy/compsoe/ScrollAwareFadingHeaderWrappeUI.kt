@@ -7,6 +7,7 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.awareFading.UIScrollAwareFading
+import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.utils.RunIfShowSticky
 import com.github.mohammadjoshaghani.composescreen.compose.UIStickyHeader
 
 
@@ -31,6 +32,11 @@ internal fun <State : ViewState<Event>, Event : ViewEvent> ScrollAwareFadingHead
         )
     } else {
         Column {
+            screen.RunIfShowSticky {
+                screen.UIStickyHeader {
+                    ComposeStickyView(it)
+                }
+            }
             content()
         }
     }

@@ -24,7 +24,6 @@ import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
@@ -41,8 +40,8 @@ class MainScreen2 :
             MainScreenViewModel
             >(),
     IShowNavigationSideBar,
-    IShowStickyHeader,
-    IShowScrollAwareFadingHeader {
+    IShowStickyHeader/*,
+    IShowScrollAwareFadingHeader*/ {
 
     override val viewModel = MainScreenViewModel()
 
@@ -89,7 +88,7 @@ class MainScreen2 :
     }
 
     @Composable
-    override fun UIScrollAwareFadingHeader(modifier: Modifier) {
+    /*override*/ fun UIScrollAwareFadingHeader(modifier: Modifier) {
         Row(
             modifier = modifier
                 .fillMaxWidth()

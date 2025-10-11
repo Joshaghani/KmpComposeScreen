@@ -19,7 +19,7 @@ fun IRootScreen.UIStickyHeader(content: @Composable (Modifier) -> Unit) {
             modifier = Modifier
                 .fillMaxWidth(),
             color = ApplicationConfig.config.color.background,
-            shadowElevation = if (TopBar.isScrolled.value) 5.dp else 0.dp
+            shadowElevation = if (TopBar.isLifted.value) 5.dp else 0.dp
         ) {
             MeasureHeight(onHeightChanged = { h ->
                 if (stickyHeaderHeight.value != h) stickyHeaderHeight.value = h
@@ -28,8 +28,10 @@ fun IRootScreen.UIStickyHeader(content: @Composable (Modifier) -> Unit) {
             }
 
         }
-        if (ApplicationConfig.config.isDarkTheme && TopBar.isScrolled.value) {
+
+        if (ApplicationConfig.config.isDarkTheme && TopBar.isLifted.value) {
             HorizontalDivider()
         }
+
     }
 }

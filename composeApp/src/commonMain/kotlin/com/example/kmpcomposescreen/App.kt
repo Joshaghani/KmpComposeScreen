@@ -18,8 +18,9 @@ fun App() {
         ComposeScreen(
             MainScreen2(),
             config = Config(
-                isDarkTheme = false,
-                color = getApplicationColorScheme(false),
+                isDarkTheme = true,
+                isRtl = true,
+                color = getApplicationColorScheme(true),
                 errorScreen = { message, retryClick ->
                     Text(
                         message,

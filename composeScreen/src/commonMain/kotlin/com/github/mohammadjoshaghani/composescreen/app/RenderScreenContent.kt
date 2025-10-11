@@ -10,11 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
@@ -34,33 +32,26 @@ internal var focusManager: FocusManager? = null
 @Composable
 fun RenderScreenContent(startScreen: IRootScreen) {
 
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
     keyboardController = LocalSoftwareKeyboardController.current
     focusManager = LocalFocusManager.current
 
-
-    Row(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        if (!ApplicationConfig.config.isRtl) {
-            NavigationSideBar(startScreen).Show()
-        }
-
-        AppLayout(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
+    ProvideLayoutDirection {
+        Row(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Scaffold(
-                floatingActionButton = { UIFab() },
-                topBar = { ProvideLayoutDirection { TopBar().Show(scrollBehavior) } },
-                bottomBar = { ProvideLayoutDirection { BottomBarRender() } },
-                contentWindowInsets = WindowInsets.safeDrawing,
+            NavigationSideBar(startScreen).Show()
+
+            AppLayout(
                 modifier = Modifier
-                    .nestedScroll(scrollBehavior.nestedScrollConnection),
-            ) { padding ->
-                ProvideLayoutDirection {
+                    .weight(1f)
+                    .fillMaxHeight()
+            ) {
+                Scaffold(
+                    floatingActionButton = { UIFab() },
+                    topBar = { TopBar().Show() },
+                    bottomBar = { BottomBarRender() },
+                    contentWindowInsets = WindowInsets.safeDrawing,
+                ) { padding ->
                     Column(
                         modifier = Modifier
                             .padding(
@@ -78,12 +69,10 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                             screen.isVisibleAnimation.value = true
                         }
                     }
+
                 }
             }
-        }
 
-        if (ApplicationConfig.config.isRtl) {
-            NavigationSideBar(startScreen).Show()
         }
     }
 

@@ -14,6 +14,8 @@ import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScre
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderItemsIndexed
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.extension.renderLoadMore
 import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.compose.topbar.TopBar
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *, *>.UILazyColumn(
@@ -26,13 +28,11 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
 
     LaunchedEffect(listState) {
         snapshotFlow {
-            listState.firstVisibleItemIndex > 0 || listState.firstVisibleItemScrollOffset > 0
-        }.collect { scrolled ->
-            isScrolledNow.value = scrolled
+            listState.firstVisibleItemScrollOffset > 1
+        }.distinctUntilChanged().collect { lifted ->
+            TopBar.isLifted.value = lifted
         }
     }
-
-
 
     LazyColumn(
         state = lazyListState!!, modifier = modifier
