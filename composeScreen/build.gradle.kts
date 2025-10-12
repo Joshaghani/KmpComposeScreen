@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta38"
+version = "1.0.0-beta39"
 
 kotlin {
     androidTarget {
@@ -38,6 +38,11 @@ kotlin {
                 isStatic = true
             }
         }
+    }
+
+    js {
+        browser()
+        binaries.executable()
     }
 
     sourceSets {
