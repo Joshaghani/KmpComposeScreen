@@ -6,14 +6,14 @@ import org.jetbrains.kotlin.konan.target.HostManager
 plugins {
     kotlin("multiplatform") version "2.2.20"
     id("com.android.library")
-    id("org.jetbrains.compose") version "1.9.0"
+    id("org.jetbrains.compose") version "1.10.0-alpha02"
     id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
     id("com.vanniktech.maven.publish") version "0.34.0"
     id("signing")
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta39"
+version = "1.0.0-beta40"
 
 kotlin {
     androidTarget {
