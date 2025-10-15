@@ -1,6 +1,8 @@
 package com.example.kmpcomposescreen.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,7 +28,7 @@ import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseLazy.BaseScreenLazyList
+import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
@@ -34,7 +36,7 @@ import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class MainScreen2 :
-    BaseScreenLazyList<
+    BaseScreen<
             MainScreenContract.State,
             MainScreenContract.Event,
             MainScreenContract.Effect,
@@ -47,6 +49,30 @@ class MainScreen2 :
     override val viewModel = MainScreenViewModel()
 
     override val handler = MainScreenHandler()
+
+    @Composable
+    override fun ComposeView(state: MainScreenContract.State) {
+
+        Column(
+            Modifier
+                .background(Color.Red)
+                .fillMaxWidth().height(400.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+
+            Text("asdlfkjas;ldkfj")
+        }
+
+    }
+
+    @Composable
+    override fun BottomBarView() {
+
+        Column(Modifier.height(56.dp)) {
+            TextField(value = "asdfsadfdf", onValueChange = {})
+
+        }
+    }
 
 
     override fun actionIconsSideBar(): List<NavigationItem> {
@@ -80,7 +106,7 @@ class MainScreen2 :
                 modifier = modifier
                     .width(200.dp)
                     .padding(horizontal = 16.dp),
-                title =" strings.message.addCategory"
+                title = " strings.message.addCategory"
             ) {
 
             }
@@ -128,12 +154,12 @@ class MainScreen2 :
         CategoryModel("تلسکوپ"),
     )
 
-    override fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
+    fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
         return getItemsList()
     }
 
     @Composable
-    override fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
+    fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
         (item as CategoryModel).apply {
             Row(
                 modifier = Modifier
