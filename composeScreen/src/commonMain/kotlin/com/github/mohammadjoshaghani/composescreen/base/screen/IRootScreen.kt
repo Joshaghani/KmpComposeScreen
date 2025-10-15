@@ -9,7 +9,7 @@ import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.IBottomSheet
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.alertDialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.IBaseDialog
 import com.github.mohammadjoshaghani.composescreen.compose.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar

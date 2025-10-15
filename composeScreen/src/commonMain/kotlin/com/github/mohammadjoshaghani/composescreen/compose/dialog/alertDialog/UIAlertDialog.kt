@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.compose.dialog
+package com.github.mohammadjoshaghani.composescreen.compose.dialog.alertDialog
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -6,7 +6,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.compose.SampleUiAlertDialog
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +26,7 @@ class UIAlertDialog(
     internal var primaryButtonContainerColor: Color = ApplicationConfig.config.color.primary,
     internal var primaryButtonContentColor: Color = ApplicationConfig.config.color.onPrimary,
     internal var cancelButtonContentColor: Color = ApplicationConfig.config.color.onBackground,
-) : IAlertDialog , CoroutineScope {
+) : IAlertDialog, CoroutineScope {
 
     private val isShowDialogFlow = MutableStateFlow(true)
 
@@ -114,4 +113,3 @@ class UIAlertDialog(
         fun getDialog(): IAlertDialog? = showSampleDialogState.value
     }
 }
-

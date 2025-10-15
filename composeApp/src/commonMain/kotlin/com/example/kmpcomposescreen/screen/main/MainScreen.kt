@@ -42,7 +42,7 @@ import com.github.mohammadjoshaghani.composescreen.compose.bottomSheet.BaseSimpl
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.ClickableIcon
 import com.github.mohammadjoshaghani.composescreen.compose.component.clickableIcon.IClickableIconModel
-import com.github.mohammadjoshaghani.composescreen.compose.dialog.UIAlertDialog
+import com.github.mohammadjoshaghani.composescreen.compose.dialog.alertDialog.UIAlertDialog
 import com.github.mohammadjoshaghani.composescreen.compose.dialog.base.BaseSimpleDialog
 import com.github.mohammadjoshaghani.composescreen.compose.errorScreen.ErrorScreenMessageModel
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
