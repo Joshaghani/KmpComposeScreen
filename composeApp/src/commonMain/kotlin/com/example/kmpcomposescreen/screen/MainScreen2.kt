@@ -8,14 +8,9 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -23,13 +18,11 @@ import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
-import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
 import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
-import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
@@ -86,32 +79,8 @@ class MainScreen2 :
     @Composable
     override fun ComposeStickyView(modifier: Modifier) {
 
-        Row(
-            modifier = modifier
-                .height(80.dp)
-                .background(colorTheme.background)
-                .fillMaxWidth()
-        ) {
-            var text by remember { mutableStateOf("") }
+        Text("asdlfkjasdlfkj")
 
-            TextField(
-                value = text,
-                modifier = Modifier
-                    .padding(16.dp)
-                    .width(500.dp),
-                onValueChange = {})
-
-
-            UIPrimaryButton(
-                modifier = modifier
-                    .width(200.dp)
-                    .padding(horizontal = 16.dp),
-                title = " strings.message.addCategory"
-            ) {
-
-            }
-
-        }
     }
 
     @Composable
