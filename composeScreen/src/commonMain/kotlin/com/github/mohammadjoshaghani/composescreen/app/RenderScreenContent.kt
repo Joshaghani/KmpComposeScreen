@@ -16,6 +16,8 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.base.handler.IDeactiveBottomBarPadding
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
 import com.github.mohammadjoshaghani.composescreen.compose.fab.UIFab
@@ -56,7 +58,12 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                         modifier = Modifier
                             .padding(
                                 top = padding.calculateTopPadding(),
-                                bottom = padding.calculateBottomPadding()
+                                bottom =
+                                    if (Navigator.state.current is IDeactiveBottomBarPadding) {
+                                        0.dp
+                                    } else {
+                                        padding.calculateBottomPadding()
+                                    }
                             )
                             .fillMaxSize()
                             .background(ApplicationConfig.config.color.background)
