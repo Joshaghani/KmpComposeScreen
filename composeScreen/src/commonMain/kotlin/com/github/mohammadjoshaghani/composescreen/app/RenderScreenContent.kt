@@ -16,8 +16,6 @@ import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
-import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.base.handler.IDeactiveBottomBarPadding
 import com.github.mohammadjoshaghani.composescreen.base.navigation.Navigator
 import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
 import com.github.mohammadjoshaghani.composescreen.compose.fab.UIFab
@@ -44,9 +42,7 @@ fun RenderScreenContent(startScreen: IRootScreen) {
             NavigationSideBar(startScreen).Show()
 
             AppLayout(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
+                modifier = Modifier.weight(1f).fillMaxHeight()
             ) {
                 Scaffold(
                     floatingActionButton = { UIFab() },
@@ -56,15 +52,7 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                 ) { padding ->
                     Column(
                         modifier = Modifier
-                            .padding(
-                                top = padding.calculateTopPadding(),
-                                bottom =
-                                    if (Navigator.state.current is IDeactiveBottomBarPadding) {
-                                        0.dp
-                                    } else {
-                                        padding.calculateBottomPadding()
-                                    }
-                            )
+                            .padding(top = padding.calculateTopPadding())
                             .fillMaxSize()
                             .background(ApplicationConfig.config.color.background)
                             .noRippleClickable {
@@ -72,14 +60,13 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                             }
                     ) {
                         Navigator.state.current.value?.let { screen ->
-                            screen.ShowScreenFromApp()
+                            screen.ShowScreenFromApp(padding)
                             screen.isVisibleAnimation.value = true
                         }
-                    }
 
+                    }
                 }
             }
-
         }
     }
 

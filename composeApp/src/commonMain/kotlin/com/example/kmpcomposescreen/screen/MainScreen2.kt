@@ -49,31 +49,27 @@ class MainScreen2 :
         Column(
             Modifier
                 .background(Color.Red)
-                .fillMaxWidth().height(400.dp),
+                .fillMaxWidth(),
             verticalArrangement = Arrangement.Center
         ) {
-
-            Text("asdlfkjas;ldkfj")
+            repeat(30) {
+                Text("${it} asdlfkjas;ldkfj")
+            }
         }
 
     }
 
     @Composable
     override fun BottomBarView() {
-
         Column(Modifier.height(56.dp)) {
             TextField(value = "asdfsadfdf", onValueChange = {})
-
         }
     }
 
 
     override fun actionIconsSideBar(): List<NavigationItem> {
         NavigationSideBar.selectedItemIndex = 5
-
-        return listOf(
-
-        )
+        return listOf()
     }
 
     @Composable
