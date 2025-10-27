@@ -9,6 +9,7 @@ import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewState
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -30,7 +31,7 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState<Event>, Effe
     private var _effect: Channel<Effect> = Channel()
 
     val viewState: State<UiState> = _viewState
-    
+
     var effect = _effect.receiveAsFlow()
 
     fun launchOnScope(block: suspend CoroutineScope.() -> Unit) {
@@ -62,6 +63,7 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState<Event>, Effe
     }
 
     fun clear() {
+        viewModelScope.cancel()
         onCleared()
     }
 
