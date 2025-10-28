@@ -64,7 +64,6 @@ abstract class BaseViewModel<Event : ViewEvent, UiState : ViewState<Event>, Effe
 
     fun clear() {
         viewModelScope.cancel()
-        onCleared()
     }
 
 }
