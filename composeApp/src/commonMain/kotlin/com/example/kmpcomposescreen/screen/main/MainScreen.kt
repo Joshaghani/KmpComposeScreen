@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.MainScreen2
-import com.example.kmpcomposescreen.screen.TableHeaderCell
 import com.example.kmpcomposescreen.theme.color.colorTheme
 import com.github.mohammadjoshaghani.composescreen.base.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
@@ -53,7 +52,6 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kmpcomposescreen.composeapp.generated.resources.Res
 import kmpcomposescreen.composeapp.generated.resources.ic_android_black_24dp
 import kotlinx.coroutines.delay
-
 
 class TestDialgHandler : BaseHandler<
         TestDialgViewModel,

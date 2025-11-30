@@ -4,40 +4,41 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.kmpcomposescreen.UIRoundedCard
 import com.example.kmpcomposescreen.screen.main.MainScreenContract
 import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
-import com.github.mohammadjoshaghani.composescreen.base.handler.IIdentifiable
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowNavigationSideBar
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowScrollAwareFadingHeader
-import com.github.mohammadjoshaghani.composescreen.base.handler.IShowStickyHeader
-import com.github.mohammadjoshaghani.composescreen.base.screen.baseScreen.BaseScreen
-import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationItem
-import com.github.mohammadjoshaghani.composescreen.compose.navigationRail.NavigationSideBar
+import com.example.kmpcomposescreen.textFieldTheme.UITextFieldTitle
+import com.github.mohammadjoshaghani.composescreen.base.screen.baseUnScrollable.BaseScreenUnScrollable
+import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
+import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 class MainScreen2 :
-    BaseScreen<
+    BaseScreenUnScrollable<
             MainScreenContract.State,
             MainScreenContract.Event,
             MainScreenContract.Effect,
             MainScreenViewModel
-            >(),
-    IShowNavigationSideBar,
-    IShowStickyHeader,
-    IShowScrollAwareFadingHeader {
+            >() {
 
     override val viewModel = MainScreenViewModel()
 
@@ -45,135 +46,88 @@ class MainScreen2 :
 
     @Composable
     override fun ComposeView(state: MainScreenContract.State) {
-
         Column(
             Modifier
                 .background(Color.Red)
-                .fillMaxWidth(),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            repeat(30) {
-                Text("${it} asdlfkjas;ldkfj")
+            PortRateScreen()
+        }
+    }
+
+    @Composable
+    fun PortRateScreen() {
+
+        var phoneNumber by remember { mutableStateOf("") }
+        val focusRequesterMobile = remember { FocusRequester() }
+
+        Column(
+            modifier = Modifier.fillMaxSize().padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            Text("UIHorizontalLogo()")
+
+            UIRoundedCard {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+
+                    Text(
+                        text = "Strings.Title.enter_mytipax",
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+
+                Text(
+                    text = "Strings.Messages.enter_phone_number",
+                    style = MaterialTheme.typography.labelMedium,
+                    textAlign = TextAlign.Right,
+                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                )
+
+                UITextFieldTitle(
+                    title = "phoneNumber",
+                    text = "asdf",
+                    onChangeValue = {}
+                )
+
+                UISpacer()
+
+                UIPrimaryButton(
+                    shape = MaterialTheme.shapes.medium,
+                    title = "Strings.Title.sent_confirmation_code",
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                }
             }
         }
-
+        LaunchedEffect(Unit) {
+            focusRequesterMobile.requestFocus()
+        }
     }
 
     @Composable
     override fun BottomBarView() {
-        Column(Modifier.height(56.dp)) {
-            TextField(value = "asdfsadfdf", onValueChange = {})
-        }
+//        Column(
+//            Modifier
+//                .padding(16.dp)
+//                .fillMaxWidth()
+//                .height(56.dp)
+//        ) {
+//            TextField(value = "asdfsadfdf", onValueChange = {})
+//        }
     }
 
-
-    override fun actionIconsSideBar(): List<NavigationItem> {
-        NavigationSideBar.selectedItemIndex = 5
-        return listOf()
-    }
-
-    @Composable
-    override fun ComposeStickyView(modifier: Modifier) {
-
-        Text("asdlfkjasdlfkj")
-
-    }
-
-    @Composable
-    override fun UIScrollAwareFadingHeader(modifier: Modifier) {
-        Row(
-            modifier = modifier
-                .fillMaxWidth()
-                .background(ApplicationConfig.config.color.surfaceVariant)
-                .padding(8.dp)
-        ) {
-            TableHeaderCell("Customer", 0.2f)
-            TableHeaderCell("Email", 0.25f)
-            TableHeaderCell("Phone", 0.15f)
-            TableHeaderCell("Location", 0.15f)
-            TableHeaderCell("Orders", 0.1f)
-            TableHeaderCell("Total Spent", 0.15f)
-        }
-
-
-    }
-
-    fun getItemsList(): MutableList<IIdentifiable> = mutableListOf(
-        CategoryModel("موبایل"),
-        CategoryModel("لپتاپ"),
-        CategoryModel("کالای دیجیتال"),
-        CategoryModel("لوازم برقی خانگی"),
-        CategoryModel("دوربین"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-        CategoryModel("تلسکوپ"),
-    )
-
-    fun getItemsList(state: MainScreenContract.State): MutableList<IIdentifiable> {
-        return getItemsList()
-    }
-
-    @Composable
-    fun ItemUI(state: MainScreenContract.State, index: Int, item: Any) {
-        (item as CategoryModel).apply {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                TableCell("${title}\n${id}", 0.2f)
-                TableCell("email", 0.25f)
-                TableCell("phone", 0.15f)
-                TableCell("${"location"}\n${"country"}", 0.15f)
-                TableCell("orders", 0.1f)
-                TableCell("totalSpent", 0.15f)
-            }
-        }
-
-    }
 
     override fun titleTopBar() = UITopBar.Text("asdf")
 
-    data class CategoryModel(
-        val title: String,
-    ) : IIdentifiable
 
-}
-
-@Composable
-fun RowScope.TableHeaderCell(text: String, weight: Float) {
-    Text(
-        text = text,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier
-            .weight(weight)
-            .padding(4.dp)
-    )
-}
-
-@Composable
-fun RowScope.TableCell(
-    text: String,
-    weight: Float,
-    color: Color = ApplicationConfig.config.color.onBackground,
-) {
-    Text(
-        text = text,
-        color = color,
-        modifier = Modifier
-            .weight(weight)
-            .padding(4.dp)
-    )
 }
 
 
