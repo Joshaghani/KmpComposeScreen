@@ -50,6 +50,7 @@ fun UIBorderButton(
         shape = shape,
     ) {
         leftIconPainter?.let {
+            UISpacer(8)
             UIIcon(
                 resource = it,
                 modifier = Modifier
@@ -83,6 +84,7 @@ fun UIBorderButton(
                     .size(20.dp),
                 tint = textColor
             )
+            UISpacer(8)
         }
     }
 }

@@ -28,6 +28,7 @@ import com.example.kmpcomposescreen.screen.main.MainScreenHandler
 import com.example.kmpcomposescreen.screen.main.MainScreenViewModel
 import com.example.kmpcomposescreen.textFieldTheme.UITextFieldTitle
 import com.github.mohammadjoshaghani.composescreen.base.screen.baseUnScrollable.BaseScreenUnScrollable
+import com.github.mohammadjoshaghani.composescreen.compose.component.UIBorderButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.UIPrimaryButton
 import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.compose.topbar.UITopBar
@@ -52,6 +53,10 @@ class MainScreen2 :
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
+
+            UIBorderButton("jsd"){}
+            UIPrimaryButton("jsd"){}
+
             PortRateScreen()
         }
     }
