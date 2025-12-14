@@ -48,6 +48,7 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                     floatingActionButton = { UIFab() },
                     topBar = { TopBar().Show() },
                     bottomBar = { BottomBarRender() },
+                    floatingActionButtonPosition = ApplicationConfig.config.fabPosition,
                     contentWindowInsets = WindowInsets.safeDrawing,
                 ) { padding ->
                     Column(
