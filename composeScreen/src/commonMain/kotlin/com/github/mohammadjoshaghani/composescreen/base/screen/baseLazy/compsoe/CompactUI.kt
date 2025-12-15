@@ -49,7 +49,7 @@ fun <State : ViewState<Event>, Event : ViewEvent> BaseScreenLazyList<State, *, *
         }
     }
 
-    if (verticalGridMinSize == 0.dp) {
+    if (!isGridItems()) {
         UILazyColumn(
             state,
             modifier = Modifier

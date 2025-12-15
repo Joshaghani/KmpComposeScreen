@@ -52,6 +52,8 @@ abstract class BaseScreenLazyList<
     }
 
 
+    open fun isGridItems(): Boolean = false
+
     @Composable
     override fun ComposeView(state: State) {
     }
