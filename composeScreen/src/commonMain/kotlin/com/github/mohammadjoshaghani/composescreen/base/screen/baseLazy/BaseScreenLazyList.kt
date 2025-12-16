@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.base.BaseViewModel
 import com.github.mohammadjoshaghani.composescreen.base.contract.ViewEvent
@@ -27,8 +28,6 @@ abstract class BaseScreenLazyList<
 
     var warningMessageEmptyList = "لیست خالی می‌باشد!"
 
-    open var verticalGridMinSize = 0.dp
-
     var lazyListState: LazyListState? = null
     var lazyGridState: LazyGridState? = null
 
@@ -51,8 +50,7 @@ abstract class BaseScreenLazyList<
         ContentScreen(state)
     }
 
-
-    open fun isGridItems(): Boolean = false
+    open fun withGridItems(): Dp? = null
 
     @Composable
     override fun ComposeView(state: State) {
