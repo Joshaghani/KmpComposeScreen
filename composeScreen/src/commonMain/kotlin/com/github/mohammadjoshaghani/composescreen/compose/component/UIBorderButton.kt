@@ -54,7 +54,6 @@ fun UIBorderButton(
             UIIcon(
                 resource = it,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
                     .offset(x = (-10).dp, y = 0.dp)
                     .size(20.dp),
                 tint = textColor
@@ -71,6 +70,7 @@ fun UIBorderButton(
             maxLines = 1,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
+                .padding(horizontal = 8.dp)
                 .wrapContentWidth()
                 .offset(x = if (leftIconPainter != null) (-10).dp else 0.dp)
         )
@@ -79,7 +79,6 @@ fun UIBorderButton(
             UIIcon(
                 resource = it,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
                     .offset(x = (-5).dp)
                     .size(20.dp),
                 tint = textColor
@@ -121,7 +120,6 @@ fun UIBorderButtonVector(
             UIIcon(
                 imageVector = it,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
                     .offset(x = (-10).dp, y = 0.dp)
                     .size(20.dp),
                 tint = textColor
@@ -138,6 +136,7 @@ fun UIBorderButtonVector(
             maxLines = 1,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
+                .padding(horizontal = 8.dp)
                 .wrapContentWidth()
                 .offset(x = if (leftIconVector != null) (-10).dp else 0.dp)
         )
@@ -146,7 +145,6 @@ fun UIBorderButtonVector(
             UIIcon(
                 imageVector = it,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
                     .offset(x = (-5).dp)
                     .size(20.dp),
                 tint = textColor
