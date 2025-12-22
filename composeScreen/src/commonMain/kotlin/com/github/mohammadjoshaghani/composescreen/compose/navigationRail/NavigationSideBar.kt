@@ -100,11 +100,13 @@ class NavigationSideBar(val startScreen: IRootScreen) {
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
                     .fillMaxHeight(),
-                verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom)
+                verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Bottom),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 screen.actionIconsSideBar()
                     .forEachIndexed { index, item ->
                         NavigationRailItem(
+                            modifier = Modifier.padding(horizontal = 8.dp),
                             selected = selectedItemIndex == index,
                             onClick = {
                                 selectedItemIndex = index
