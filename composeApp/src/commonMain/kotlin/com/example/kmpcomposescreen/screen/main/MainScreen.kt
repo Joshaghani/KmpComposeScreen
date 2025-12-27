@@ -188,11 +188,13 @@ class MainScreen :
 
     }
 
-    @Composable
-    override fun NavigationIcon() {
-        ClickableIcon(icon = Icons.Rounded.Menu) {
-            TestDialg().show()
-        }
+    override fun navigationIcon(): IClickableIconModel {
+        return IClickableIconModel.ClickableIconVectorModel(
+            iconId = Icons.Rounded.Menu,
+            onIconPressed = {
+                TestDialg().show()
+            }
+        )
     }
 
     override fun actionIconsTopBar(): List<IClickableIconModel> {

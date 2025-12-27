@@ -94,8 +94,6 @@ interface IRootScreen {
 
             else -> Navigator.pop()
         }
-
-
     }
 
     @Composable
@@ -104,7 +102,7 @@ interface IRootScreen {
     @Composable
     fun BottomBarView()
 
-    fun titleTopBar(): UITopBar = UITopBar.Noting
+    fun titleTopBar(): UITopBar = UITopBar.Nothing
 
     fun actionIconsTopBar(): List<IClickableIconModel> {
         return listOf()
@@ -112,13 +110,8 @@ interface IRootScreen {
 
     fun iconFab(): FabIconModel? = null
 
-    @Composable
-    fun NavigationIcon() {
-        Navigator.previous()?.let {
-            ClickableIcon(icon = Icons.AutoMirrored.Rounded.ArrowBack) {
-                Navigator.state.current.value?.onBackPressed()
-            }
-        }
+    fun navigationIcon(): IClickableIconModel? {
+        return null
     }
 
 }

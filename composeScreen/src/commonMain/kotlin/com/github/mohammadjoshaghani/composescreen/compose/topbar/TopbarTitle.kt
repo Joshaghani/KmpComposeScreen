@@ -2,6 +2,8 @@ package com.github.mohammadjoshaghani.composescreen.compose.topbar
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +33,14 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 fun ShowTitle() {
     val screen = Navigator.state.current.value ?: return
 
-    if (screen.titleTopBar() is UITopBar.Noting) return
+    if (screen.titleTopBar() is UITopBar.Nothing
+        ||
+        screen.navigationIcon() == null
+        ||
+        screen.actionIconsTopBar().isEmpty()
+    ) {
+        return
+    }
 
     var isShowStickyHeader by remember { mutableStateOf(false) }
     val elevation by animateDpAsState(
@@ -43,13 +52,11 @@ fun ShowTitle() {
         isShowStickyHeader = it
     }
 
-
     UIAnimatedVisibility {
         Surface(
             shadowElevation = if (isShowStickyHeader) 0.dp else elevation,
         ) {
             Column {
-
                 TopAppBar(
                     title = {
                         when (val title = screen.titleTopBar()) {
@@ -67,7 +74,37 @@ fun ShowTitle() {
                         }
                     },
                     navigationIcon = {
-                        screen.NavigationIcon()
+                        screen.navigationIcon()?.let { icon ->
+                            when (icon) {
+                                is IClickableIconModel.ClickableIconModel -> {
+                                    ClickableIcon(
+                                        icon.iconId,
+                                        title = icon.title,
+                                        doesButtonHaveBorder = icon.doesButtonHaveBorder,
+                                        badgeCount = icon.badgeCount,
+                                        onClick = icon.onIconPressed,
+                                        tint = icon.tint
+                                    )
+                                }
+
+                                is IClickableIconModel.ClickableIconVectorModel -> {
+                                    ClickableIcon(
+                                        icon.iconId,
+                                        title = icon.title,
+                                        doesButtonHaveBorder = icon.doesButtonHaveBorder,
+                                        onClick = icon.onIconPressed,
+                                        badgeCount = icon.badgeCount,
+                                        tint = icon.tint
+                                    )
+                                }
+                            }
+                        } ?: run {
+                            Navigator.previous()?.let {
+                                ClickableIcon(icon = Icons.AutoMirrored.Rounded.ArrowBack) {
+                                    Navigator.state.current.value?.onBackPressed()
+                                }
+                            }
+                        }
                     },
                     actions = {
                         screen.actionIconsTopBar().forEach { icon ->
@@ -125,3 +162,7 @@ fun ShowTitle() {
     }
 
 }
+
+
+
+

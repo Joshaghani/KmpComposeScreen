@@ -27,7 +27,6 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 internal var keyboardController: SoftwareKeyboardController? = null
 internal var focusManager: FocusManager? = null
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RenderScreenContent(startScreen: IRootScreen) {
@@ -64,11 +63,9 @@ fun RenderScreenContent(startScreen: IRootScreen) {
                             screen.ShowScreenFromApp(padding)
                             screen.isVisibleAnimation.value = true
                         }
-
                     }
                 }
             }
         }
     }
-
 }
