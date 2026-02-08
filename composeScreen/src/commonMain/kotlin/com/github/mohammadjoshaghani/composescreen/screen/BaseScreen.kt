@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import com.github.mohammadjoshaghani.composescreen.app.RenderDialogs
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreenImpl
+import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewState
@@ -40,6 +42,20 @@ abstract class BaseScreen<
         LaunchedEffect(viewModel) {
             viewModel.effect.collect { handler.handleEffects(it, viewModel) }
         }
+
+        LaunchedEffect(Unit) {
+            if (this is IClearStack) {
+                ApplicationConfig.navigator?.popAll()
+            }
+            onStart()
+        }
+
+        DisposableEffect(Unit) {
+            onDispose {
+                onStop()
+            }
+        }
+
         when {
             viewModel.state.value.isLoading -> ShowLoadingIndicator()
             viewModel.state.value.errorScreen != null -> {
