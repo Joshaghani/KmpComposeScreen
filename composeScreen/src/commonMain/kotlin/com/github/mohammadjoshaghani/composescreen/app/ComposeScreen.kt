@@ -1,26 +1,27 @@
 package com.github.mohammadjoshaghani.composescreen.app
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.backhandler.BackHandler
-import com.github.mohammadjoshaghani.composescreen.base.screen.IRootScreen
+import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.Config
 
-@OptIn(ExperimentalComposeUiApi::class)
+
 @Composable
 fun ComposeScreen(
-    startScreen: IRootScreen,
+    initScreen: List<IBaseScreen>,
     config: Config,
+    loadingScreen: (@Composable () -> Unit)? = null,
+    errorScreen: @Composable (message: String, retryClick: () -> Unit) -> Unit
 ) {
-    ApplicationConfig.config = config
-    AppContent(startScreen)
-    BackHandler(onBack = config.onBack)
 
+    ApplicationConfig.apply {
+        this.config = config
+        this.errorScreen = errorScreen
+        this.loadingScreen = loadingScreen
+    }
+
+    App(initScreen)
 }
-
-
-
 
 
 

@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.textFieldTheme.utilities.TypeInputTextField
-import com.github.mohammadjoshaghani.composescreen.compose.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 

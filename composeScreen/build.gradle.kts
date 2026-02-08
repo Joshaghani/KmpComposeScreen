@@ -1,26 +1,22 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
-    kotlin("multiplatform") version "2.2.20"
+    alias(libs.plugins.kotlinMultiplatform)
     id("com.android.library")
-    id("org.jetbrains.compose") version "1.10.0-alpha02"
-    id("org.jetbrains.kotlin.plugin.compose") version "2.2.20"
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
+    id("com.vanniktech.maven.publish") version "0.36.0"
     id("signing")
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta66"
+version = "1.0.0-beta67"
 
 kotlin {
-    androidTarget {
-        publishLibraryVariants("release")
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
-    }
+    androidTarget()
+
     jvm()
 
     @OptIn(ExperimentalWasmDsl::class)
@@ -47,17 +43,34 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(compose.materialIconsExtended)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.material)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.material.icons.extended)
+
+            // Navigator
+            api(libs.voyager.navigator)
+
+            // Screen Model
+            api(libs.voyager.screenmodel)
+
+            // BottomSheetNavigator
+            api(libs.voyager.bottom.sheet.navigator)
+
+            // TabNavigator
+            api(libs.voyager.tab.navigator)
+
+            // Transitions
+            api(libs.voyager.transitions)
+
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
-            implementation(libs.ui.backhandler)
+
         }
     }
 }

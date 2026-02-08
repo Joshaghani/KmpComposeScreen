@@ -2,15 +2,14 @@ package com.github.mohammadjoshaghani.composescreen.extension
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ripple
+import androidx.compose.material.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 fun Modifier.themeClickable(
-    color: Color = ApplicationConfig.config.color.primary,
+    color: Color? = null,
     enabled: Boolean = true,
     onClickLabel: String? = null,
     role: Role? = null,
@@ -18,7 +17,7 @@ fun Modifier.themeClickable(
 ): Modifier {
     return clickable(
         interactionSource = MutableInteractionSource(),
-        indication = ripple(color = color),
+        indication = ripple(color = color ?: Color.Gray.copy(0.7f)),
         enabled = enabled,
         onClickLabel = onClickLabel,
         role = role,
@@ -26,6 +25,7 @@ fun Modifier.themeClickable(
     )
 
 }
+
 
 @Composable
 fun Modifier.noRippleClickable(

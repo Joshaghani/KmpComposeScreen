@@ -1,9 +1,13 @@
 package com.example.kmpcomposescreen
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.kmpcomposescreen.screen.MainScreen2
+import androidx.compose.ui.unit.dp
+import com.example.kmpcomposescreen.screen.MainScreen
+import com.example.kmpcomposescreen.screen.SettingScreen
 import com.example.kmpcomposescreen.theme.ExampleTheme
 import com.example.kmpcomposescreen.theme.color.getApplicationColorScheme
 import com.github.mohammadjoshaghani.composescreen.app.ComposeScreen
@@ -16,17 +20,23 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     ExampleTheme {
         ComposeScreen(
-            MainScreen2(),
+            listOf(MainScreen() , SettingScreen()),
             config = Config(
                 isDarkTheme = true,
                 isRtl = true,
                 color = getApplicationColorScheme(true),
-                errorScreen = { message, retryClick ->
-                    Text(
-                        message,
-                        modifier = Modifier.themeClickable { retryClick() })
+            ),
+            loadingScreen = {
+                Column {
+                    Text("Loading...")
+                    CircularProgressIndicator(strokeWidth = 1.dp)
                 }
-            )
+            },
+            errorScreen = { message, retryClick ->
+                Text(
+                    message,
+                    modifier = Modifier.themeClickable { retryClick() })
+            }
         )
     }
 }
