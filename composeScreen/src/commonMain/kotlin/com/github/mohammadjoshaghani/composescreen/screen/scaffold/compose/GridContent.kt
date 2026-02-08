@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
@@ -36,7 +37,7 @@ fun GridContent(
     columns: GridCells,
     isLoading: Boolean = false, // اضافه شد
     onLoadMore: (() -> Unit)? = null, // اضافه شد
-    content: LazyGridScope.() -> Unit
+    content: LazyGridScope.(LazyGridState) -> Unit
 ) {
     val gridState = rememberLazyGridState()
 
@@ -75,7 +76,7 @@ fun GridContent(
                 columns = columns,
                 state = gridState
             ) {
-                content()
+                content(gridState)
 
                 // نمایش لودینگ به صورت تمام‌عرض (Full Span)
                 if (isLoading) {

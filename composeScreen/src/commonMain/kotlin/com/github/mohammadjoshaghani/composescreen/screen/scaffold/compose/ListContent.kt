@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -34,7 +36,7 @@ fun ListContent(
     bottomBar: (@Composable () -> Unit)? = null,
     isLoading: Boolean = false, // وضعیت لودینگ رو پاس بدید
     onLoadMore: (() -> Unit)? = null, // تابعی که دیتای جدید رو میاره
-    content: LazyListScope.() -> Unit
+    content: LazyListScope.(LazyListState) -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -75,7 +77,7 @@ fun ListContent(
         Box(modifier = Modifier.padding(padding)) {
             LazyColumn(state = listState) {
                 // محتوای اصلی لیست
-                content()
+                content(listState)
 
                 // نمایش یک Indicator در انتهای لیست هنگام لود شدن
                 if (isLoading) {
