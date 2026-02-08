@@ -21,4 +21,8 @@ abstract class BaseViewModel<
     fun setEffect(builder: () -> EFFECT) {
         _effect.tryEmit(builder())
     }
+
+    fun setState(reducer: STATE.() -> STATE) {
+        mutableState.value = state.value.reducer()
+    }
 }
