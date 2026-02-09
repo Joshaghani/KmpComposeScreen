@@ -1,5 +1,6 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar
 
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,6 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -41,7 +43,11 @@ fun BaseScreenTopBar(
                 when (topbarModel) {
                     is TopbarModel.Compose -> topbarModel.content()
                     TopbarModel.Nothing -> Unit
-                    is TopbarModel.Text -> Text(topbarModel.title)
+                    is TopbarModel.Text -> Text(
+                        topbarModel.title,
+                        maxLines = 1,
+                        modifier = Modifier.basicMarquee()
+                    )
                 }
             },
             actions = {
