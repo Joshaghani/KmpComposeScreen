@@ -22,9 +22,6 @@ abstract class BaseSimpleScreen : Screen, IBaseScreen by IBaseScreenImpl() {
     @Composable
     override fun Content() {
         LaunchedEffect(Unit) {
-            if (this is IClearStack) {
-                ApplicationConfig.navigator?.popAll()
-            }
             onStart()
         }
         DisposableEffect(Unit) {

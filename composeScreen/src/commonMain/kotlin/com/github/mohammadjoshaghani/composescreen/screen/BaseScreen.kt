@@ -44,9 +44,6 @@ abstract class BaseScreen<
         }
 
         LaunchedEffect(Unit) {
-            if (this is IClearStack) {
-                ApplicationConfig.navigator?.popAll()
-            }
             onStart()
         }
 

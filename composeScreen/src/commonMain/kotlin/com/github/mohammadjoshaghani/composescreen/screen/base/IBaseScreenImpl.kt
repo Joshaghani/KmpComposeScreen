@@ -15,7 +15,11 @@ class IBaseScreenImpl : IBaseScreen {
         animation: ScreenTransitionType
     ) {
         ApplicationConfig.animationType = animation
-        if (replace) navigator?.replace(getScreen()) else navigator?.push(getScreen())
+        val currentScreen = getScreen()
+        if (currentScreen is IClearStack) {
+            ApplicationConfig.navigator?.popAll()
+        }
+        if (replace) navigator?.replace(currentScreen) else navigator?.push(currentScreen)
     }
 
     override fun onBackPressed(
