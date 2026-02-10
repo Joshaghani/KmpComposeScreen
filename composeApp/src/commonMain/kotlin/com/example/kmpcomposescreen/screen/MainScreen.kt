@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import cafe.adriel.voyager.koin.koinScreenModel
 import com.example.kmpcomposescreen.screen.SettingScreenViewModel
 import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseHandler
@@ -154,6 +155,11 @@ class SettingScreen : BaseScreen<
         SettingScreenContract.Effect,
         SettingScreenViewModel,
         >() {
+
+    @Composable
+    override fun getViewModel(): SettingScreenViewModel {
+        return koinScreenModel<SettingScreenViewModel>()
+    }
 
     override val handler: SettingScreenHandler = SettingScreenHandler()
 

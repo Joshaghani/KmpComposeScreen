@@ -77,6 +77,8 @@ kotlin {
 
             // koin
             api(libs.koin.annotations)
+            api(libs.koin.core)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -124,11 +126,6 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-}
-
-
-dependencies {
-    debugImplementation(compose.uiTooling)
     kspCommonMainMetadata(libs.koin.ksp.compiler)
 
 // KSP Tasks
@@ -156,4 +153,5 @@ ksp {
     arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
     arg("KOIN_CONFIG_CHECK", "true")
 }
+
 

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
@@ -34,8 +35,9 @@ abstract class BaseScreen<
         VM : BaseViewModel<STATE, EVENT, EFFECT>> :
     Screen, IBaseScreen by IBaseScreenImpl() {
 
-    lateinit var viewModel: VM
 
+    @Composable
+    abstract fun getViewModel(): VM
     abstract val handler: BaseHandler<EVENT, EFFECT, VM>
 
     init {
@@ -45,9 +47,9 @@ abstract class BaseScreen<
     @Composable
     override fun Content() {
 
-        viewModel = koinScreenModel<BaseViewModel<STATE, EVENT, EFFECT>>() as VM
-
+        val viewModel = getViewModel()
         val viewState by viewModel.state.collectAsState()
+
         LaunchedEffect(viewModel) {
             viewModel.effect.collect { handler.handleEffects(it, viewModel) }
         }
@@ -102,5 +104,4 @@ abstract class BaseScreen<
     abstract fun ComposeView(state: STATE)
 
 }
-
 

@@ -19,8 +19,6 @@ import com.github.mohammadjoshaghani.composescreen.component.SlidScreenAnimation
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
-import org.koin.core.context.KoinContext
-import org.koin.core.context.startKoin
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalVoyagerApi::class)
 @Composable

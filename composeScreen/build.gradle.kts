@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
@@ -9,6 +10,7 @@ plugins {
     alias(libs.plugins.composeHotReload)
     id("com.vanniktech.maven.publish") version "0.36.0"
     id("signing")
+
 }
 
 group = "io.github.joshaghani"
@@ -23,7 +25,7 @@ kotlin {
     wasmJs {
         browser()
         binaries.library()
-        outputModuleName.set("KmpComposeScreen")
+        outputModuleName.set("composeScreen")
     }
 
     val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
@@ -74,12 +76,13 @@ kotlin {
 
             // voyager-koin
             api(libs.voyager.koin)
-            api(libs.koin.core)
 
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
 
         }
     }
+
+
 }
 
 android {
@@ -150,3 +153,10 @@ extensions.configure<SigningExtension>("signing") {
         sign(publishing.publications)
     }
 }
+
+
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+}
+
