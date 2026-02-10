@@ -35,6 +35,9 @@ abstract class BaseScreen<
         VM : BaseViewModel<STATE, EVENT, EFFECT>> :
     Screen, IBaseScreen by IBaseScreenImpl() {
 
+    private lateinit var viewModel: VM
+
+    var onEventSent: (EVENT) -> Unit = { viewModel.handleEvents(it) }
 
     @Composable
     abstract fun getViewModel(): VM
@@ -47,7 +50,7 @@ abstract class BaseScreen<
     @Composable
     override fun Content() {
 
-        val viewModel = getViewModel()
+        viewModel = getViewModel()
         val viewState by viewModel.state.collectAsState()
 
         LaunchedEffect(viewModel) {
