@@ -10,7 +10,9 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.kmpcomposescreen.screen.SettingScreenViewModel
 import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.screen.BaseScreen
@@ -28,6 +30,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 import com.github.mohammadjoshaghani.composescreen.screen.toast.ToastMessageModel
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Factory
 
 class MainScreen : BaseSimpleScreen() {
     @Composable
@@ -110,6 +113,7 @@ class SettingScreenContract {
 }
 
 
+@Factory
 class SettingScreenViewModel : BaseViewModel<
         SettingScreenContract.State,
         SettingScreenContract.Event,
@@ -117,9 +121,7 @@ class SettingScreenViewModel : BaseViewModel<
         >(SettingScreenContract.State()) {
     override fun handleEvents(event: SettingScreenContract.Event) {
         screenModelScope.launch {
-
         }
-
     }
 
 }
@@ -152,7 +154,7 @@ class SettingScreen : BaseScreen<
         SettingScreenContract.Effect,
         SettingScreenViewModel,
         >() {
-    override val viewModel: SettingScreenViewModel = SettingScreenViewModel()
+
     override val handler: SettingScreenHandler = SettingScreenHandler()
 
     @Composable

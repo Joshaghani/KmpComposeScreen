@@ -2,12 +2,16 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
+import kotlin.jvm.java
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.ksp)
+
 }
 
 kotlin {
@@ -59,6 +63,8 @@ kotlin {
         commonMain.dependencies {
 
             implementation(project(":composeScreen"))
+            api(libs.koin.core)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -68,6 +74,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(compose.materialIconsExtended)
+
+            // koin
+            api(libs.koin.annotations)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -78,6 +87,11 @@ kotlin {
             implementation(libs.kotlinx.coroutinesSwing)
         }
 
+    }
+
+    // KSP Common sourceSet
+    sourceSets.named("commonMain").configure {
+        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
     }
 }
 
@@ -112,4 +126,34 @@ dependencies {
     debugImplementation(compose.uiTooling)
 }
 
+
+dependencies {
+    debugImplementation(compose.uiTooling)
+    kspCommonMainMetadata(libs.koin.ksp.compiler)
+
+// KSP Tasks
+//    add("kspCommonMainMetadata", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+//    add("kspIosX64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+    add("kspIosArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+    add("kspIosSimulatorArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+
+}
+
+// Trigger Common Metadata Generation from Native tasks
+project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
+afterEvaluate {
+    tasks.matching { it.name.startsWith("kspKotlinIos") }.configureEach {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
+}
+
+ksp {
+    arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
+    arg("KOIN_CONFIG_CHECK", "true")
+}
 

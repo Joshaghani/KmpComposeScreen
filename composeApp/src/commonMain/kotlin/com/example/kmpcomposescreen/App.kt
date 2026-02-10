@@ -14,11 +14,16 @@ import com.github.mohammadjoshaghani.composescreen.app.ComposeScreen
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 import com.github.mohammadjoshaghani.composescreen.utils.Config
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.core.context.startKoin
 
 @Composable
 @Preview
 fun App() {
     ExampleTheme {
+
+        startKoin {
+
+        }
         ComposeScreen(
             listOf(MainScreen() , SettingScreen()),
             config = Config(

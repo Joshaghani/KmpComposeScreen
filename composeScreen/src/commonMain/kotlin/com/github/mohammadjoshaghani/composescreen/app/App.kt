@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
@@ -17,52 +19,57 @@ import com.github.mohammadjoshaghani.composescreen.component.SlidScreenAnimation
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
+import org.koin.core.context.KoinContext
+import org.koin.core.context.startKoin
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalVoyagerApi::class)
 @Composable
 @Preview
 fun App(startScreen: List<IBaseScreen>) {
-    BottomSheetNavigator(
-        sheetShape = RoundedCornerShape(
-            topStart = 16.dp,
-            topEnd = 16.dp
-        )
-    ) {
+    ProvideNavigatorLifecycleKMPSupport {
+        BottomSheetNavigator(
+            sheetShape = RoundedCornerShape(
+                topStart = 16.dp,
+                topEnd = 16.dp
+            )
+        ) {
 
-        ApplicationConfig.bottomSheetNavigator = LocalBottomSheetNavigator.current
+            ApplicationConfig.bottomSheetNavigator = LocalBottomSheetNavigator.current
 
-        Navigator(
-            screens = startScreen.map { it.getScreen() },
-            onBackPressed = {
-                (it as? IBaseScreen)?.onBackPressed() ?: true
-            }
-        ) { navigator ->
-            DisposableEffect(navigator) {
-                ApplicationConfig.navigator = navigator
-                onDispose {
-                    ApplicationConfig.navigator = null
-                    ApplicationConfig.bottomSheetNavigator = null
+            Navigator(
+                screens = startScreen.map { it.getScreen() },
+                onBackPressed = {
+                    (it as? IBaseScreen)?.onBackPressed() ?: true
                 }
-            }
-
-            when (ApplicationConfig.animationType) {
-                ScreenTransitionType.SLIDE -> {
-                    if (ApplicationConfig.config.isRtl) {
-                        SlidScreenAnimation(navigator)
-                    } else {
-                        SlideTransition(navigator = navigator)
+            ) { navigator ->
+                DisposableEffect(navigator) {
+                    ApplicationConfig.navigator = navigator
+                    onDispose {
+                        ApplicationConfig.navigator = null
+                        ApplicationConfig.bottomSheetNavigator = null
                     }
                 }
 
-                ScreenTransitionType.FADE -> FadeTransition(navigator)
-                ScreenTransitionType.SCALE -> ScaleTransition(navigator)
-                ScreenTransitionType.NONE -> CurrentScreen()
+                when (ApplicationConfig.animationType) {
+                    ScreenTransitionType.SLIDE -> {
+                        if (ApplicationConfig.config.isRtl) {
+                            SlidScreenAnimation(navigator)
+                        } else {
+                            SlideTransition(navigator = navigator)
+                        }
+                    }
+
+                    ScreenTransitionType.FADE -> FadeTransition(navigator)
+                    ScreenTransitionType.SCALE -> ScaleTransition(navigator)
+                    ScreenTransitionType.NONE -> CurrentScreen()
+                }
+
             }
 
         }
-
     }
 
     RenderNotifications()
+
 }
 

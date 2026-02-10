@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta73"
+version = "1.0.0-beta74"
 
 kotlin {
     androidTarget()
@@ -68,6 +68,13 @@ kotlin {
 
             // Transitions
             api(libs.voyager.transitions)
+
+            // lifecycle
+            implementation(libs.voyager.lifecycle.kmp)
+
+            // voyager-koin
+            api(libs.voyager.koin)
+            api(libs.koin.core)
 
             api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.5.0")
 

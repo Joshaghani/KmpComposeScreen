@@ -6,10 +6,16 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.getScreenModel
+import cafe.adriel.voyager.koin.koinScreenModel
 import com.github.mohammadjoshaghani.composescreen.app.RenderDialogs
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreenImpl
@@ -28,10 +34,9 @@ abstract class BaseScreen<
         VM : BaseViewModel<STATE, EVENT, EFFECT>> :
     Screen, IBaseScreen by IBaseScreenImpl() {
 
-    abstract val viewModel: VM
-    abstract val handler: BaseHandler<EVENT, EFFECT, VM>
+    lateinit var viewModel: VM
 
-    var onEventSent: (EVENT) -> Unit = { viewModel.handleEvents(it) }
+    abstract val handler: BaseHandler<EVENT, EFFECT, VM>
 
     init {
         setScreen(this)
@@ -39,10 +44,13 @@ abstract class BaseScreen<
 
     @Composable
     override fun Content() {
+
+        viewModel = koinScreenModel<BaseViewModel<STATE, EVENT, EFFECT>>() as VM
+
+        val viewState by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {
             viewModel.effect.collect { handler.handleEffects(it, viewModel) }
         }
-
         LaunchedEffect(Unit) {
             onStart()
         }
@@ -54,14 +62,14 @@ abstract class BaseScreen<
         }
 
         when {
-            viewModel.state.value.isLoading -> ShowLoadingIndicator()
-            viewModel.state.value.errorScreen != null -> {
-                ShowErrorScreen()
+            viewState.isLoading -> ShowLoadingIndicator()
+            viewState.errorScreen != null -> {
+                ShowErrorScreen(viewModel, viewState)
             }
 
             else -> {
                 SwipeBack(this) {
-                    ComposeView(viewModel.state.value)
+                    ComposeView(viewState)
                 }
                 RenderDialogs()
             }
@@ -83,8 +91,8 @@ abstract class BaseScreen<
     }
 
     @Composable
-    private fun ShowErrorScreen() {
-        val errorScreen = viewModel.state.value.errorScreen!!
+    private fun ShowErrorScreen(viewModel: VM, state: STATE) {
+        val errorScreen = state.errorScreen!!
         ApplicationConfig.errorScreen(errorScreen.message) {
             viewModel.handleEvents(errorScreen.event)
         }
