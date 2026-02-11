@@ -13,15 +13,15 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun UIIcon(
-    icon: ImageType,
+    icon: IconSourceType,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
 ) {
 
     when (icon) {
-        is ImageType.IconResource -> UIIconResource(icon.icon, modifier, tint)
-        is ImageType.IconVector -> UIIconVector(icon.icon, modifier, tint)
-        is ImageType.IconBitmap -> UIIconBitmap(icon.icon, modifier, tint)
+        is IconSourceType.IconResource -> UIIconResource(icon.icon, modifier, tint)
+        is IconSourceType.IconVector -> UIIconVector(icon.icon, modifier, tint)
+        is IconSourceType.IconBitmap -> UIIconBitmap(icon.icon, modifier, tint)
     }
 
 }

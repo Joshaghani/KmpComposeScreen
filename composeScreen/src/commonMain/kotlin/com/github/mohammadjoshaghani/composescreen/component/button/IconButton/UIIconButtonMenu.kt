@@ -6,13 +6,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.github.mohammadjoshaghani.composescreen.component.button.UIBorderButton
 import com.github.mohammadjoshaghani.composescreen.component.button.UITextButton
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 
 @Composable
 fun IconButtonMenu(
     title: String,
     doesButtonHaveBorder: Boolean = true,
-    icon: ImageType,
+    icon: IconSourceType,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,
     onClick: () -> Unit,

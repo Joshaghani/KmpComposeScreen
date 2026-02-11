@@ -15,7 +15,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun UIImage(
-    image: ImageType,
+    image: IconSourceType,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
@@ -23,9 +23,9 @@ fun UIImage(
     colorFilter: ColorFilter? = null,
 ) {
     when(image) {
-        is ImageType.IconBitmap -> UIImageBitmap(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
-        is ImageType.IconResource -> UIImageResource(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
-        is ImageType.IconVector -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.IconBitmap -> UIImageBitmap(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.IconResource -> UIImageResource(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.IconVector -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
     }
 }
 

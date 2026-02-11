@@ -16,14 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IconTooltipBox(
-    icon: ImageType,
+    icon: IconSourceType,
     tooltip: String? = null,
     modifier: Modifier = Modifier,
     tint: Color = MaterialTheme.colorScheme.onSurface,

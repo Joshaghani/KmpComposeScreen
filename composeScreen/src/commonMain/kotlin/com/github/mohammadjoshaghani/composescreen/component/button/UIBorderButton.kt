@@ -17,15 +17,15 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 
 @Composable
 fun UIBorderButton(
     title: String,
     modifier: Modifier = Modifier,
-    leftIcon: ImageType? = null,
-    rightIcon: ImageType? = null,
+    leftIcon: IconSourceType? = null,
+    rightIcon: IconSourceType? = null,
     enabled: Boolean = true,
     textColor: Color = MaterialTheme.colorScheme.primary,
     backgroundColor: Color = MaterialTheme.colorScheme.surface,

@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.screen.BaseScreen
@@ -39,14 +39,14 @@ class MainScreen : BaseSimpleScreen() {
 
             },
             navigationIcon = IconButtonModel(
-                icon = ImageType.IconVector(Icons.Default.Start),
+                icon = IconSourceType.IconVector(Icons.Default.Start),
                 onClick = {
                     SettingScreen().show()
                 },
             ),
             actions = listOf(
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     onClick = {
                         LoginScreen().show(animation = ScreenTransitionType.SCALE)
                     },
@@ -176,157 +176,157 @@ class SettingScreen : BaseScreen<
             },
             navItems = listOf(
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "testtesttesttesttesttesttesttest",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test2",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
                 IconButtonModel(
-                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    icon = IconSourceType.IconVector(Icons.Default.Memory),
                     title = "test3",
                     isSelected = false,
                     onClick = {}

@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
@@ -64,7 +64,7 @@ fun BaseScreenTopBar(
                     if (navigator.size > 1) {
                         UIIconButton(
                             IconButtonModel(
-                                icon = ImageType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
+                                icon = IconSourceType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
                             ) {
                                 (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
                             }

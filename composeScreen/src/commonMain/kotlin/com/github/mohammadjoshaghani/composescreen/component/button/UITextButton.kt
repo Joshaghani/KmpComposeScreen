@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 
 @Composable
@@ -27,8 +27,8 @@ fun UITextButton(
     modifier: Modifier = Modifier,
     paddingHorizontal: Int = 16,
     textColor: Color = MaterialTheme.colorScheme.primary,
-    leftIcon: ImageType? = null,
-    rightIcon: ImageType? = null,
+    leftIcon: IconSourceType? = null,
+    rightIcon: IconSourceType? = null,
     clickable: () -> Unit,
 ) {
 

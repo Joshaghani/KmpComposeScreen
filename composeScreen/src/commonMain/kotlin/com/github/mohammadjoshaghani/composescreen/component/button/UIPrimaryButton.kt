@@ -17,15 +17,15 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 
 @Composable
 fun UIPrimaryButton(
     title: String,
     modifier: Modifier = Modifier,
-    leftIconPainter: ImageType? = null,
-    rightIconPainter: ImageType? = null,
+    leftIconPainter: IconSourceType? = null,
+    rightIconPainter: IconSourceType? = null,
     enabled: Boolean = true,
     paddingTop: Dp = 0.dp,
     textColor: Color = White,

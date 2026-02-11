@@ -1,5 +1,6 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
@@ -18,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
+import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
+import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 
 @Composable
@@ -59,26 +62,29 @@ fun BaseScreenBottomBar(
                 NavigationBarItem(
                     selected = false,
                     onClick = { expanded = true },
-                    icon = { Icon(Icons.Default.MoreVert, contentDescription = "More") },
-                    label = { Text("More") }
-                )
+                    icon = {
+                        Box {
+                            Icon(Icons.Default.MoreVert, contentDescription = "More")
 
-                // منوی کشویی
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    offset = DpOffset(5000.dp, 0.dp)
-                ) {
-                    overflowItems.forEach { item ->
-                        DropdownMenuItem(
-                            text = { item.title?.let { Text(it) } },
-                            onClick = {
-                                expanded = false
-                                item.onClick()
+                            DropdownMenu(
+                                expanded = expanded,
+                                onDismissRequest = { expanded = false },
+                                offset = DpOffset((-16).dp, (-4).dp)
+                            ) {
+                                overflowItems.forEach { item ->
+                                    DropdownMenuItem(
+                                        text = { item.title?.let { Text(it) } },
+                                        leadingIcon = { UIIcon(item.icon) },
+                                        onClick = {
+                                            expanded = false
+                                            item.onClick()
+                                        }
+                                    )
+                                }
                             }
-                        )
-                    }
-                }
+                        }
+                    },
+                )
             }
         }
     }
