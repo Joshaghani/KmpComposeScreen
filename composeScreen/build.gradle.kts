@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-beta75"
+version = "1.0.0-beta76"
 
 kotlin {
     androidTarget()
@@ -71,7 +71,7 @@ kotlin {
             api(libs.voyager.transitions)
 
             // lifecycle
-            implementation(libs.voyager.lifecycle.kmp)
+//            implementation(libs.voyager.lifecycle.kmp)
 
             // voyager-koin
             api(libs.voyager.koin)

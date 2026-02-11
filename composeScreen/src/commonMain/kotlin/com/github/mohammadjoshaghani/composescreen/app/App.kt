@@ -7,7 +7,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
-import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
+//import cafe.adriel.voyager.jetpack.ProvideNavigatorLifecycleKMPSupport
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
@@ -24,7 +24,7 @@ import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
 @Composable
 @Preview
 fun App(startScreen: List<IBaseScreen>) {
-    ProvideNavigatorLifecycleKMPSupport {
+//    ProvideNavigatorLifecycleKMPSupport {
         BottomSheetNavigator(
             sheetShape = RoundedCornerShape(
                 topStart = 16.dp,
@@ -64,7 +64,7 @@ fun App(startScreen: List<IBaseScreen>) {
 
             }
 
-        }
+//        }
     }
 
     RenderNotifications()

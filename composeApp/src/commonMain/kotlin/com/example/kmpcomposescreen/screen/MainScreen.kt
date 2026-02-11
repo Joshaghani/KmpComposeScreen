@@ -10,6 +10,7 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import cafe.adriel.voyager.koin.koinScreenModel
@@ -106,7 +107,7 @@ class SettingScreenContract {
 
     data class State(
         override var errorScreen: ErrorScreenMessageModel<Event>? = null,
-        override var isLoading: Boolean = true,
+        override var isLoading: Boolean = false,
         override var toastMessage: ToastMessageModel? = null
     ) : ViewState<Event>
 
@@ -158,7 +159,7 @@ class SettingScreen : BaseScreen<
 
     @Composable
     override fun getViewModel(): SettingScreenViewModel {
-        return koinScreenModel<SettingScreenViewModel>()
+        return SettingScreenViewModel()
     }
 
     override val handler: SettingScreenHandler = SettingScreenHandler()
@@ -171,6 +172,7 @@ class SettingScreen : BaseScreen<
                 iconVector = Icons.Default.Add,
                 onFabPressed = {},
                 fabPosition = FabPosition.Start,
+//                paddingFromStart = 100.dp
             ),
             startPanel = {
                 Text("START PANEL")
@@ -178,13 +180,151 @@ class SettingScreen : BaseScreen<
             navItems = listOf(
                 NavigationItem(
                     icon = Icons.Default.Add,
-                    label = "test",
+                    label = "testtesttesttesttesttesttesttest",
                     isSelected = false,
                     onClick = {}
                 ),
                 NavigationItem(
                     icon = Icons.Default.Add,
                     label = "test2",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
+                    isSelected = false,
+                    onClick = {}
+                ),
+                NavigationItem(
+                    icon = Icons.Default.Add,
+                    label = "test3",
                     isSelected = false,
                     onClick = {}
                 ),

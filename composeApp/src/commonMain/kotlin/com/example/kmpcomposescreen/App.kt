@@ -28,7 +28,7 @@ fun App() {
             listOf(MainScreen() , SettingScreen()),
             config = Config(
                 isDarkTheme = true,
-                isRtl = true,
+                isRtl = false,
                 color = getApplicationColorScheme(true),
             ),
             loadingScreen = {

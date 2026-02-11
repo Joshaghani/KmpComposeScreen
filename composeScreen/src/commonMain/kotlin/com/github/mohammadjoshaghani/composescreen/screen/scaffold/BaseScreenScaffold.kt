@@ -59,7 +59,7 @@ fun BaseScreenScaffold(
             },
             floatingActionButton = {
                 floatingActionButton?.let {
-                    BaseScreenFab(it)
+                    BaseScreenFab(it, isWideScreen, navItems)
                 }
             },
             // اگر صفحه عریض نبود (موبایل بود)، باتوم بار را نشان بده

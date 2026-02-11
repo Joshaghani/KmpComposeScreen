@@ -59,7 +59,12 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            // KSP Common sourceSet
+            sourceSets.named("commonMain").configure {
+                kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+            }
         }
+
         commonMain.dependencies {
 
             implementation(project(":composeScreen"))
@@ -91,10 +96,7 @@ kotlin {
 
     }
 
-    // KSP Common sourceSet
-    sourceSets.named("commonMain").configure {
-        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-    }
+
 }
 
 android {
@@ -126,13 +128,13 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-    kspCommonMainMetadata(libs.koin.ksp.compiler)
+//    kspCommonMainMetadata(libs.koin.ksp.compiler)
 
 // KSP Tasks
 //    add("kspCommonMainMetadata", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
 //    add("kspIosX64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-    add("kspIosArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-    add("kspIosSimulatorArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+//    add("kspIosArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
+//    add("kspIosSimulatorArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
 
 }
 
