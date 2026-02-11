@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -18,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.BadgeItem
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
 
 @Composable
@@ -44,7 +48,9 @@ fun BaseScreenContent(
                         NavigationRailItem(
                             selected = item.isSelected,
                             onClick = item.onClick,
-                            icon = { Icon(item.icon, contentDescription = item.label) },
+                            icon = {
+                                IconNav(item)
+                            },
                             label = { Text(item.label) }
                         )
                     }
@@ -67,5 +73,39 @@ fun BaseScreenContent(
         if (isWideScreen && endPanel != null) {
             Box(modifier = Modifier.weight(1f)) { endPanel() }
         }
+    }
+}
+
+
+@Composable
+private fun IconNav(item: NavigationItem) {
+    when (item.badgeItem) {
+        BadgeItem.Badge -> BadgedBox(
+            badge = {
+                Badge(
+                    Modifier.offset(
+                        y = 16.dp,
+                        x = (-16).dp
+                    )
+                )
+            }
+        ) {
+            Icon(item.icon, contentDescription = item.label)
+        }
+
+        is BadgeItem.BadgeWithNumber -> BadgedBox(
+            badge = {
+                Badge(Modifier.padding(12.dp)) {
+                    Text("${item.badgeItem.number}")
+                }
+            }
+        ) {
+            Icon(item.icon, contentDescription = item.label)
+        }
+
+        BadgeItem.None -> Icon(
+            item.icon,
+            contentDescription = item.label
+        )
     }
 }
