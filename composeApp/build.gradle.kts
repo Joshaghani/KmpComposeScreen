@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -59,16 +60,12 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            // KSP Common sourceSet
-            sourceSets.named("commonMain").configure {
-                kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
-            }
+
         }
 
         commonMain.dependencies {
 
             implementation(project(":composeScreen"))
-            api(libs.koin.core)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -96,6 +93,9 @@ kotlin {
 
     }
 
+    sourceSets.named("commonMain").configure {
+        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+    }
 
 }
 
@@ -127,16 +127,10 @@ android {
 }
 
 dependencies {
-    debugImplementation(compose.uiTooling)
-//    kspCommonMainMetadata(libs.koin.ksp.compiler)
-
 // KSP Tasks
-//    add("kspCommonMainMetadata", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-//    add("kspIosX64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-//    add("kspIosArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-//    add("kspIosSimulatorArm64", "io.insert-koin:koin-ksp-compiler:${libs.versions.koin}")
-
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
 }
+
 
 // Trigger Common Metadata Generation from Native tasks
 project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
@@ -145,15 +139,9 @@ project.tasks.withType(KotlinCompilationTask::class.java).configureEach {
     }
 }
 
-afterEvaluate {
-    tasks.matching { it.name.startsWith("kspKotlinIos") }.configureEach {
-        dependsOn("kspCommonMainKotlinMetadata")
-    }
-}
-
 ksp {
     arg("KOIN_USE_COMPOSE_VIEWMODEL", "true")
     arg("KOIN_CONFIG_CHECK", "true")
+    arg("KOIN_DEFAULT_MODULE", "true")
 }
-
 

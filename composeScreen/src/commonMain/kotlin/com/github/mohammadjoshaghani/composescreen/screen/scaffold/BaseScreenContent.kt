@@ -1,10 +1,13 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -12,10 +15,16 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
@@ -38,23 +47,42 @@ fun BaseScreenContent(
         if (isWideScreen && navItems.isNotEmpty()) {
             Column(
                 modifier = Modifier
-                    .border(1.dp, color = MaterialTheme.colorScheme.onSecondary)
+                    .fillMaxHeight()
+                    .background(color = MaterialTheme.colorScheme.onSecondary)
+                    .clip(MaterialTheme.shapes.medium)
+//
                     .verticalScroll(rememberScrollState())
             ) {
-                NavigationRail {
-                    navItems.forEach { item ->
-                        NavigationRailItem(
-                            selected = item.isSelected,
-                            onClick = item.onClick,
-                            icon = {
-                                UIBadgeIcon(item.badgeItem) {
-                                    IconTooltipBox(
-                                        icon = item.icon,
-                                    )
-                                }
-                            },
-                            label = { item.title?.let { Text(it) } }
-                        )
+
+                Surface(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .fillMaxHeight(),
+                    shadowElevation = 4.dp,
+                    color = MaterialTheme.colorScheme.surface,
+                    shape = MaterialTheme.shapes.medium,
+                    tonalElevation = 0.dp
+
+                ) {
+                    NavigationRail {
+                        navItems.forEach { item ->
+                            NavigationRailItem(
+                                selected = item.isSelected,
+                                onClick = item.onClick,
+                                icon = {
+                                    UIBadgeIcon(item.badgeItem) {
+                                        IconTooltipBox(
+                                            icon = item.icon,
+                                            tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                        )
+                                    }
+                                },
+                                label = { item.title?.let { Text(it) } },
+                                colors = NavigationRailItemDefaults.colors(
+                                    indicatorColor = Color.Transparent // 👈 حذف دایره انتخاب
+                                )
+                            )
+                        }
                     }
                 }
             }

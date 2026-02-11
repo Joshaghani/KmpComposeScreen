@@ -6,26 +6,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.kmpcomposescreen.screen.MainScreen
-import com.example.kmpcomposescreen.screen.SettingScreen
+import com.example.kmpcomposescreen.screen.content.main.MainScreen
 import com.example.kmpcomposescreen.theme.ExampleTheme
 import com.example.kmpcomposescreen.theme.color.getApplicationColorScheme
 import com.github.mohammadjoshaghani.composescreen.app.ComposeScreen
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 import com.github.mohammadjoshaghani.composescreen.utils.Config
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.core.context.startKoin
 
 @Composable
-@Preview
 fun App() {
     ExampleTheme {
-
-        startKoin {
-
-        }
         ComposeScreen(
-            listOf(MainScreen() , SettingScreen()),
+            listOf(MainScreen()),
             config = Config(
                 isDarkTheme = true,
                 isRtl = false,

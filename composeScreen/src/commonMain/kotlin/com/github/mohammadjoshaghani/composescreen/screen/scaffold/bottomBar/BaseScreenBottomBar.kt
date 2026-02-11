@@ -6,21 +6,24 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 
 @Composable
@@ -43,17 +46,21 @@ fun BaseScreenBottomBar(
         NavigationBar {
             // آیتم‌های اصلی
             mainItems.forEach { item ->
-                NavigationBarItem(
+                NavigationRailItem(
                     selected = item.isSelected,
                     onClick = item.onClick,
                     icon = {
                         UIBadgeIcon(item.badgeItem) {
                             IconTooltipBox(
                                 icon = item.icon,
+                                tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                             )
                         }
                     },
-                    label = { item.title?.let { Text(it) } }
+                    label = { item.title?.let { Text(it) } },
+                    colors = NavigationRailItemDefaults.colors(
+                        indicatorColor = Color.Transparent // 👈 حذف دایره انتخاب
+                    )
                 )
             }
 
