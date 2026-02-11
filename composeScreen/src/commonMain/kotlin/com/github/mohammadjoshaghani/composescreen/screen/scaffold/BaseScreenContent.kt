@@ -1,8 +1,6 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,16 +16,14 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
+import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 
 @Composable
 fun BaseScreenContent(
@@ -50,7 +46,6 @@ fun BaseScreenContent(
                     .fillMaxHeight()
                     .background(color = MaterialTheme.colorScheme.onSecondary)
                     .clip(MaterialTheme.shapes.medium)
-//
                     .verticalScroll(rememberScrollState())
             ) {
 

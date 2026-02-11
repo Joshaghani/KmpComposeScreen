@@ -38,8 +38,8 @@ abstract class BaseSimpleDialog : IBaseDialog, CoroutineScope {
     private var job: Job = Job()
 
     open var modifier: Modifier = Modifier
-    open var backgroundColor: Color = ApplicationConfig.config.color.surface
-    open var borderColor: Color = ApplicationConfig.config.color.outlineVariant
+    open var backgroundColor: Color = ApplicationConfig.color.surface
+    open var borderColor: Color = ApplicationConfig.color.outlineVariant
     open var elevation: Dp = 0.dp
     open var paddingValue: Dp = 16.dp
     open var borderWidth: Dp = 1.dp

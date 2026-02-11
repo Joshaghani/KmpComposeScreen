@@ -11,8 +11,8 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.jetbrains.compose.resources.DrawableResource
 
 enum class ToastState(val icon: ImageVector?, val vector: DrawableResource?, val textColor: Color) {
-    ERROR(Icons.Rounded.Error, null, ApplicationConfig.config.color.error),
-    WARNING(Icons.Rounded.Warning, null, ApplicationConfig.config.color.errorContainer),
-    SUCCESS(Icons.Rounded.Event, null, ApplicationConfig.config.color.primary),
-    MESSAGE(Icons.AutoMirrored.Rounded.Message, null, ApplicationConfig.config.color.onSecondary)
+    ERROR(Icons.Rounded.Error, null, ApplicationConfig.color.error),
+    WARNING(Icons.Rounded.Warning, null, ApplicationConfig.color.errorContainer),
+    SUCCESS(Icons.Rounded.Event, null, ApplicationConfig.color.primary),
+    MESSAGE(Icons.AutoMirrored.Rounded.Message, null, ApplicationConfig.color.onSecondary)
 }

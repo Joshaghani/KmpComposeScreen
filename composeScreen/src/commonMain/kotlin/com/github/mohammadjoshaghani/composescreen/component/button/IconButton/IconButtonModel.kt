@@ -13,6 +13,6 @@ data class IconButtonModel(
     val isSelected: Boolean = false,
     val badgeItem: BadgeItem = BadgeItem.None,
     val modifier: Modifier = Modifier,
-    val tint: Color = ApplicationConfig.config.color.onBackground,
+    val tint: Color = ApplicationConfig.color.onBackground,
     val onClick: () -> Unit,
 )

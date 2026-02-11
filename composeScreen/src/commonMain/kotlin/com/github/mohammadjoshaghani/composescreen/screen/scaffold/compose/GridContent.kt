@@ -40,27 +40,8 @@ fun GridContent(
 ) {
     val gridState = rememberLazyGridState()
 
-    val isScrolled by remember {
-        derivedStateOf { gridState.firstVisibleItemIndex > 0 || gridState.firstVisibleItemScrollOffset > 0 }
-    }
-
-    // تشخیص رسیدن به انتهای گرید
-    val reachEnd by remember {
-        derivedStateOf {
-            val lastVisibleItem = gridState.layoutInfo.visibleItemsInfo.lastOrNull()
-            lastVisibleItem?.index != 0 && lastVisibleItem?.index == gridState.layoutInfo.totalItemsCount - 1
-        }
-    }
-
-    // اجرای درخواست لود بیشتر
-    LaunchedEffect(reachEnd) {
-        if (reachEnd && !isLoading && onLoadMore != null) {
-            onLoadMore()
-        }
-    }
 
     BaseScreenScaffold(
-        isScrolled = isScrolled,
         topbarModel = topbarModel,
         actions = actions,
         navigationIcon = navigationIcon,
@@ -77,9 +58,27 @@ fun GridContent(
             ) {
                 content(gridState)
 
-                // نمایش لودینگ به صورت تمام‌عرض (Full Span)
-                if (isLoading) {
-                    item(span = { GridItemSpan(maxLineSpan) }) {
+                // تشخیص رسیدن به انتهای گرید
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    if (onLoadMore != null) {
+
+                        val reachEnd by remember {
+                            derivedStateOf {
+                                val lastVisibleItem =
+                                    gridState.layoutInfo.visibleItemsInfo.lastOrNull()
+                                lastVisibleItem?.index != 0 && lastVisibleItem?.index == gridState.layoutInfo.totalItemsCount - 1
+                            }
+                        }
+
+                        // اجرای درخواست لود بیشتر
+                        LaunchedEffect(reachEnd) {
+                            if (reachEnd && !isLoading) {
+                                onLoadMore()
+                            }
+                        }
+                    }
+                    // نمایش لودینگ به صورت تمام‌عرض (Full Span)
+                    if (isLoading) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -90,7 +89,8 @@ fun GridContent(
                                 screen()
                             } ?: run {
                                 CircularProgressIndicator()
-                            }                        }
+                            }
+                        }
                     }
                 }
             }

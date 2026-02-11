@@ -117,7 +117,7 @@ class CategoriesScreen :
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .background(ApplicationConfig.config.color.surfaceVariant)
+                .background(ApplicationConfig.color.surfaceVariant)
                 .padding(8.dp)
         ) {
             Row(

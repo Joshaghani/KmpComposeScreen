@@ -164,7 +164,7 @@ class ProductsScreen : BaseSimpleScreen(),
     fun FadingHeader(modifier: Modifier) {
         Row(
             modifier = modifier.fillMaxWidth()
-                .background(ApplicationConfig.config.color.surfaceVariant).padding(8.dp)
+                .background(ApplicationConfig.color.surfaceVariant).padding(8.dp)
         ) {
             Box(
                 modifier = Modifier.weight(1f).padding(4.dp)

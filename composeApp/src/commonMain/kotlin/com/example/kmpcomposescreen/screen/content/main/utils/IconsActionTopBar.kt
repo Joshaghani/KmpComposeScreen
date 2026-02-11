@@ -16,7 +16,7 @@ fun iconsActionTopBar(
     icons,
     IconButtonModel(
         icon = IconSourceType.IconVector(Icons.Rounded.Settings),
-        tint = ApplicationConfig.config.color.onBackground,
+        tint = ApplicationConfig.color.onBackground,
         onClick = {
             UIAlertDialog()
                 .setTitle("خروج از حساب کاربری")
@@ -24,11 +24,11 @@ fun iconsActionTopBar(
                 .setButtonAction("خارج میشوم") {
                 }
                 .setButtonCancelTitle("انصراف")
-                .setCancelButtonContentColor(ApplicationConfig.config.color.onBackground)
+                .setCancelButtonContentColor(ApplicationConfig.color.onBackground)
                 .show()
         }),
     IconButtonModel(
-        tint = ApplicationConfig.config.color.onBackground,
+        tint = ApplicationConfig.color.onBackground,
         icon =
             IconSourceType.IconVector(
                 Icons.Rounded.LightMode

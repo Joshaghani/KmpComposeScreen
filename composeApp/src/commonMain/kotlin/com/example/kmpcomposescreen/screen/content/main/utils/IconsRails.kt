@@ -18,7 +18,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
 
         IconButtonModel(
             title = "سفارشات",
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             isSelected = tabNavigator.current == OrdersTab,
             onClick = {
@@ -26,7 +26,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
             }),
         IconButtonModel(
             title = "دسته بندی",
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             isSelected = tabNavigator.current == CategoriesTab,
             onClick = {
@@ -36,7 +36,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
 
         IconButtonModel(
             title = "محصولات",
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             isSelected = tabNavigator.current == ProductsTab,
             onClick = {
@@ -45,7 +45,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
 
         IconButtonModel(
             title = "تیکت",
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             onClick = {
             }),
@@ -54,7 +54,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
         IconButtonModel(
             title = "نظرات",
 
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             onClick = {
             }),
@@ -63,7 +63,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
         IconButtonModel(
             title = "مشتریان",
 
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             onClick = {
             }),
@@ -72,7 +72,7 @@ fun getIconsRails(tabNavigator: TabNavigator): List<IconButtonModel> {
         IconButtonModel(
             title = "انواع ارسال",
 
-            tint = ApplicationConfig.config.color.onSurfaceVariant,
+            tint = ApplicationConfig.color.onSurfaceVariant,
             icon = IconSourceType.IconVector(Icons.Default.Event),
             onClick = {
             }),

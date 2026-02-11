@@ -50,7 +50,7 @@ fun App(startScreen: List<IBaseScreen>) {
 
                 when (ApplicationConfig.animationType) {
                     ScreenTransitionType.SLIDE -> {
-                        if (ApplicationConfig.config.isRtl) {
+                        if (ApplicationConfig.isRtl) {
                             SlidScreenAnimation(navigator)
                         } else {
                             SlideTransition(navigator = navigator)

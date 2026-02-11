@@ -7,6 +7,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
@@ -23,7 +24,6 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 @Composable
 fun BaseScreenScaffold(
     topbarModel: TopbarModel,
-    isScrolled: Boolean,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
@@ -33,6 +33,9 @@ fun BaseScreenScaffold(
     bottomBar: (@Composable () -> Unit)? = null,
     content: @Composable (PaddingValues) -> Unit
 ) {
+
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+
 
     val windowSizeClass = calculateWindowSizeClass()
     val isWideScreen = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
@@ -47,11 +50,12 @@ fun BaseScreenScaffold(
                     keyboardController?.hide()
                     focusManager.clearFocus()
                 }
-                .imePadding(),
+                .imePadding()
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
                 BaseScreenTopBar(
+                    scrollBehavior,
                     topbarModel,
-                    isScrolled,
                     actions,
                     navigationIcon,
                 )

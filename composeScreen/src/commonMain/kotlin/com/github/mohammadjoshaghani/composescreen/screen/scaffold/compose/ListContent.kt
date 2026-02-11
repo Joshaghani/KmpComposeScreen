@@ -38,31 +38,7 @@ fun ListContent(
 ) {
     val listState = rememberLazyListState()
 
-    // تشخیص اسکرول برای تغییر ظاهر TopBar
-    val isScrolled by remember {
-        derivedStateOf {
-            listState.firstVisibleItemIndex > 0 || listState.firstVisibleItemScrollOffset > 0
-        }
-    }
-
-    // منطق تشخیص رسیدن به انتهای لیست
-    val reachEnd by remember {
-        derivedStateOf {
-            val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()
-            // اگر آیتم آخر دیده شد و کلاً لیستی وجود داشت
-            lastVisibleItem?.index != 0 && lastVisibleItem?.index == listState.layoutInfo.totalItemsCount - 1
-        }
-    }
-
-    // صدا زدن تابع لود بیشتر وقتی به آخر لیست رسیدیم
-    LaunchedEffect(reachEnd) {
-        if (reachEnd && !isLoading && onLoadMore != null) {
-            onLoadMore()
-        }
-    }
-
     BaseScreenScaffold(
-        isScrolled = isScrolled,
         topbarModel = topbarModel,
         actions = actions,
         navigationIcon = navigationIcon,
@@ -77,9 +53,28 @@ fun ListContent(
                 // محتوای اصلی لیست
                 content(listState)
 
-                // نمایش یک Indicator در انتهای لیست هنگام لود شدن
-                if (isLoading) {
-                    item {
+                item {
+                    if (onLoadMore != null) {
+                        // منطق تشخیص رسیدن به انتهای لیست
+                        val reachEnd by remember {
+                            derivedStateOf {
+                                val lastVisibleItem =
+                                    listState.layoutInfo.visibleItemsInfo.lastOrNull()
+                                // اگر آیتم آخر دیده شد و کلاً لیستی وجود داشت
+                                lastVisibleItem?.index != 0 && lastVisibleItem?.index == listState.layoutInfo.totalItemsCount - 1
+                            }
+                        }
+
+                        // صدا زدن تابع لود بیشتر وقتی به آخر لیست رسیدیم
+                        LaunchedEffect(reachEnd) {
+                            if (reachEnd && !isLoading) {
+                                onLoadMore()
+                            }
+                        }
+                    }
+                    // نمایش یک Indicator در انتهای لیست هنگام لود شدن
+                    if (isLoading) {
+
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
