@@ -15,13 +15,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
 
 
 @Composable
 fun BaseScreenBottomBar(
     bottomBar: (@Composable () -> Unit)? = null,
     isWideScreen: Boolean,
-    navItems: List<NavigationItem> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     maxVisibleItems: Int = 4 // حداکثر آیتمی که مستقیم نشون داده میشه
 
 ) {
@@ -40,8 +43,14 @@ fun BaseScreenBottomBar(
                 NavigationBarItem(
                     selected = item.isSelected,
                     onClick = item.onClick,
-                    icon = { Icon(item.icon, contentDescription = item.label) },
-                    label = { Text(item.label) }
+                    icon = {
+                        UIBadgeIcon(item.badgeItem) {
+                            IconTooltipBox(
+                                icon = item.icon,
+                            )
+                        }
+                    },
+                    label = { item.title?.let { Text(it) } }
                 )
             }
 
@@ -62,7 +71,7 @@ fun BaseScreenBottomBar(
                 ) {
                     overflowItems.forEach { item ->
                         DropdownMenuItem(
-                            text = { Text(item.label) },
+                            text = { item.title?.let { Text(it) } },
                             onClick = {
                                 expanded = false
                                 item.onClick()

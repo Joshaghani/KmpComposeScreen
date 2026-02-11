@@ -17,9 +17,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
@@ -27,10 +26,10 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 @Composable
 fun GridContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
-    actions: List<IClickableIconModel> = emptyList(),
-    navigationIcon: IClickableIconModel? = null,
+    actions: List<IconButtonModel> = emptyList(),
+    navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<NavigationItem> = emptyList(),
+    navItems: List<IconButtonModel> = emptyList(),
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,

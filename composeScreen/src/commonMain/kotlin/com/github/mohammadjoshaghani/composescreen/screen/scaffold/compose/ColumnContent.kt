@@ -11,9 +11,8 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
 
@@ -22,10 +21,10 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 @Composable
 fun ColumnContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
-    actions: List<IClickableIconModel> = emptyList(),
-    navigationIcon: IClickableIconModel? = null,
+    actions: List<IconButtonModel> = emptyList(),
+    navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<NavigationItem> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,

@@ -10,12 +10,9 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import cafe.adriel.voyager.koin.koinScreenModel
-import com.example.kmpcomposescreen.screen.SettingScreenViewModel
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseHandler
 import com.github.mohammadjoshaghani.composescreen.screen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
@@ -24,7 +21,6 @@ import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.screen.errorScreen.ErrorScreenMessageModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ColumnContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
@@ -42,19 +38,20 @@ class MainScreen : BaseSimpleScreen() {
             bottomBar = {
 
             },
-            navigationIcon = IClickableIconModel.ClickableIconVectorModel(
-                iconId = Icons.Default.Start,
-                onIconPressed = {
+            navigationIcon = IconButtonModel(
+                icon = ImageType.IconVector(Icons.Default.Start),
+                onClick = {
                     SettingScreen().show()
                 },
             ),
             actions = listOf(
-                IClickableIconModel.ClickableIconVectorModel(
-                    iconId = Icons.Default.Memory,
-                    onIconPressed = {
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    onClick = {
                         LoginScreen().show(animation = ScreenTransitionType.SCALE)
                     },
                 ),
+                
             ),
         ) { scrollState ->
 
@@ -178,159 +175,159 @@ class SettingScreen : BaseScreen<
                 Text("START PANEL")
             },
             navItems = listOf(
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "testtesttesttesttesttesttesttest",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "testtesttesttesttesttesttesttest",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test2",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test2",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 ),
-                NavigationItem(
-                    icon = Icons.Default.Add,
-                    label = "test3",
+                IconButtonModel(
+                    icon = ImageType.IconVector(Icons.Default.Memory),
+                    title = "test3",
                     isSelected = false,
                     onClick = {}
                 )

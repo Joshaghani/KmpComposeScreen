@@ -4,7 +4,6 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -13,8 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.ClickableIcon
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
+import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,8 +22,8 @@ import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 fun BaseScreenTopBar(
     topbarModel: TopbarModel,
     isScrolled: Boolean,
-    actions: List<IClickableIconModel> = emptyList(),
-    navigationIcon: IClickableIconModel? = null,
+    actions: List<IconButtonModel> = emptyList(),
+    navigationIcon: IconButtonModel? = null,
 ) {
 
     if (
@@ -52,66 +52,23 @@ fun BaseScreenTopBar(
             },
             actions = {
                 actions.forEach { icon ->
-                    when (icon) {
-                        is IClickableIconModel.ClickableIconModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                doesButtonHaveBorder = icon.doesButtonHaveBorder,
-                                badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed,
-                                tint = icon.tint ?: MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-
-                        is IClickableIconModel.ClickableIconVectorModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                doesButtonHaveBorder = icon.doesButtonHaveBorder,
-                                onClick = icon.onIconPressed,
-                                badgeCount = icon.badgeCount,
-                                tint = icon.tint ?: MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-
-                        else -> {}
-                    }
+                    UIIconButton(icon)
                 }
             },
             navigationIcon = {
                 navigationIcon?.let { icon ->
-                    when (icon) {
-                        is IClickableIconModel.ClickableIconModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                doesButtonHaveBorder = icon.doesButtonHaveBorder,
-                                badgeCount = icon.badgeCount,
-                                onClick = icon.onIconPressed,
-                                tint = icon.tint ?: MaterialTheme.colorScheme.onBackground
-                            )
-                        }
+                    UIIconButton(icon)
 
-                        is IClickableIconModel.ClickableIconVectorModel -> {
-                            ClickableIcon(
-                                icon.iconId,
-                                title = icon.title,
-                                doesButtonHaveBorder = icon.doesButtonHaveBorder,
-                                onClick = icon.onIconPressed,
-                                badgeCount = icon.badgeCount,
-                                tint = icon.tint ?: MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-
-                        else -> {}
-                    }
                 } ?: run {
                     val navigator = LocalNavigator.currentOrThrow
                     if (navigator.size > 1) {
-                        ClickableIcon(icon = Icons.AutoMirrored.Rounded.ArrowBack) {
-                            (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                        }
+                        UIIconButton(
+                            IconButtonModel(
+                                icon = ImageType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
+                            ) {
+                                (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
+                            }
+                        )
                     }
                 }
             }

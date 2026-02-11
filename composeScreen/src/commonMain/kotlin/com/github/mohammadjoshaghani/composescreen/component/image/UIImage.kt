@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.component
+package com.github.mohammadjoshaghani.composescreen.component.image
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
@@ -12,8 +12,26 @@ import androidx.compose.ui.layout.ContentScale
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
+
 @Composable
 fun UIImage(
+    image: ImageType,
+    modifier: Modifier = Modifier,
+    alignment: Alignment = Alignment.Center,
+    contentScale: ContentScale = ContentScale.Fit,
+    alpha: Float = DefaultAlpha,
+    colorFilter: ColorFilter? = null,
+) {
+    when(image) {
+        is ImageType.IconBitmap -> UIImageBitmap(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is ImageType.IconResource -> UIImageResource(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is ImageType.IconVector -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+    }
+}
+
+
+@Composable
+fun UIImageResource(
     resource: DrawableResource,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
@@ -33,7 +51,7 @@ fun UIImage(
 }
 
 @Composable
-fun UIImage(
+fun UIImageVector(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
@@ -53,7 +71,7 @@ fun UIImage(
 }
 
 @Composable
-fun UIImage(
+fun UIImageBitmap(
     bitmap: ImageBitmap,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,

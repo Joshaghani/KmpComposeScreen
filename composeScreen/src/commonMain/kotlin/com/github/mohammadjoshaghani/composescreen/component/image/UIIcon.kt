@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.component
+package com.github.mohammadjoshaghani.composescreen.component.image
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -10,8 +10,24 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
+
 @Composable
 fun UIIcon(
+    icon: ImageType,
+    modifier: Modifier = Modifier,
+    tint: Color = LocalContentColor.current,
+) {
+
+    when (icon) {
+        is ImageType.IconResource -> UIIconResource(icon.icon, modifier, tint)
+        is ImageType.IconVector -> UIIconVector(icon.icon, modifier, tint)
+        is ImageType.IconBitmap -> UIIconBitmap(icon.icon, modifier, tint)
+    }
+
+}
+
+@Composable
+fun UIIconResource(
     resource: DrawableResource,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
@@ -25,7 +41,7 @@ fun UIIcon(
 }
 
 @Composable
-fun UIIcon(
+fun UIIconVector(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
@@ -39,7 +55,7 @@ fun UIIcon(
 }
 
 @Composable
-fun UIIcon(
+fun UIIconBitmap(
     bitmap: ImageBitmap,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,

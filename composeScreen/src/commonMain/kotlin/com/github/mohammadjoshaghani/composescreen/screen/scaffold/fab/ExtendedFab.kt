@@ -9,16 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun ExtendedFab(
     fabIconModel: FabIconModel,
     isWideScreen: Boolean,
-    navItems: List<NavigationItem> = emptyList(),
+    navItems: List<IconButtonModel> = emptyList(),
 ) {
     ExtendedFloatingActionButton(
         modifier = Modifier.offset(

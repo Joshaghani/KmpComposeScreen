@@ -4,29 +4,23 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.BadgeItem
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
 
 @Composable
 fun BaseScreenContent(
-    navItems: List<NavigationItem> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     paddingValues: PaddingValues,
@@ -49,9 +43,13 @@ fun BaseScreenContent(
                             selected = item.isSelected,
                             onClick = item.onClick,
                             icon = {
-                                IconNav(item)
+                                UIBadgeIcon(item.badgeItem) {
+                                    IconTooltipBox(
+                                        icon = item.icon,
+                                    )
+                                }
                             },
-                            label = { Text(item.label) }
+                            label = { item.title?.let { Text(it) } }
                         )
                     }
                 }
@@ -76,36 +74,3 @@ fun BaseScreenContent(
     }
 }
 
-
-@Composable
-private fun IconNav(item: NavigationItem) {
-    when (item.badgeItem) {
-        BadgeItem.Badge -> BadgedBox(
-            badge = {
-                Badge(
-                    Modifier.offset(
-                        y = 16.dp,
-                        x = (-16).dp
-                    )
-                )
-            }
-        ) {
-            Icon(item.icon, contentDescription = item.label)
-        }
-
-        is BadgeItem.BadgeWithNumber -> BadgedBox(
-            badge = {
-                Badge(Modifier.padding(12.dp)) {
-                    Text("${item.badgeItem.number}")
-                }
-            }
-        ) {
-            Icon(item.icon, contentDescription = item.label)
-        }
-
-        BadgeItem.None -> Icon(
-            item.icon,
-            contentDescription = item.label
-        )
-    }
-}

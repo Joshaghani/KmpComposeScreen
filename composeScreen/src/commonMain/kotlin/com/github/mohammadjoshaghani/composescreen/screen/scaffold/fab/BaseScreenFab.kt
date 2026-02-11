@@ -1,13 +1,13 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab
 
 import androidx.compose.runtime.Composable
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 
 @Composable
 fun BaseScreenFab(
     fabIconModel: FabIconModel,
     isWideScreen: Boolean,
-    navItems: List<NavigationItem>,
+    navItems: List<IconButtonModel>,
 ) {
 
     if (fabIconModel.title.isNullOrEmpty()) {

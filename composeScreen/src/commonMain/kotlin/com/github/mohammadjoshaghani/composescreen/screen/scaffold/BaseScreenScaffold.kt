@@ -9,14 +9,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import com.github.mohammadjoshaghani.composescreen.component.clickableIcon.IClickableIconModel
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.BaseScreenBottomBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScreenFab
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.NavigationItem
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
 
 
@@ -25,10 +24,10 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 fun BaseScreenScaffold(
     topbarModel: TopbarModel,
     isScrolled: Boolean,
-    actions: List<IClickableIconModel> = emptyList(),
-    navigationIcon: IClickableIconModel? = null,
+    actions: List<IconButtonModel> = emptyList(),
+    navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<NavigationItem> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,

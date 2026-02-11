@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.component
+package com.github.mohammadjoshaghani.composescreen.component.button
 
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
@@ -13,11 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
-import org.jetbrains.compose.resources.DrawableResource
+import com.github.mohammadjoshaghani.composescreen.component.image.ImageType
+import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 
 @Composable
 fun UITextButton(
@@ -26,8 +27,8 @@ fun UITextButton(
     modifier: Modifier = Modifier,
     paddingHorizontal: Int = 16,
     textColor: Color = MaterialTheme.colorScheme.primary,
-    leftIcon: DrawableResource? = null,
-    rightIcon: DrawableResource? = null,
+    leftIcon: ImageType? = null,
+    rightIcon: ImageType? = null,
     clickable: () -> Unit,
 ) {
 
@@ -45,7 +46,7 @@ fun UITextButton(
     ) {
 
         leftIcon?.let {
-            UIIcon(resource = it, tint = textColor)
+            UIIcon(icon = it, tint = textColor)
             UISpacer(8)
         }
 
@@ -60,56 +61,9 @@ fun UITextButton(
         )
 
         rightIcon?.let {
-            UIIcon(resource = it, tint = textColor)
+            UIIcon(icon = it, tint = textColor)
             UISpacer(8)
         }
     }
 }
 
-
-@Composable
-fun UITextButtonVector(
-    title: String,
-    enable: Boolean = true,
-    modifier: Modifier = Modifier,
-    paddingHorizontal: Int = 16,
-    textColor: Color = MaterialTheme.colorScheme.primary,
-    leftIconVector: ImageVector? = null,
-    rightIconVector: ImageVector? = null,
-    clickable: () -> Unit,
-) {
-
-    Row(
-        modifier = modifier
-            .clipToBounds()
-            .clip(MaterialTheme.shapes.medium)
-            .themeClickable(enabled = enable) {
-                clickable()
-            }
-            .padding(horizontal = paddingHorizontal.dp),
-
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-
-        leftIconVector?.let {
-            UIIcon(imageVector = it, tint = textColor)
-            UISpacer(8)
-        }
-
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodyLarge,
-            color = textColor.copy(alpha = if (enable) 1.0f else 0.3f),
-            softWrap = false,
-            maxLines = 1,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.wrapContentWidth().basicMarquee()
-        )
-
-        rightIconVector?.let {
-            UIIcon(imageVector = it, tint = textColor)
-            UISpacer(8)
-        }
-    }
-}
