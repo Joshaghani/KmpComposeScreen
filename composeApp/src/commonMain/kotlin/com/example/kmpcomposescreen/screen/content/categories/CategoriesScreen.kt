@@ -12,8 +12,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -37,6 +40,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -47,7 +51,7 @@ class CategoriesScreen :
     IClearStack {
 
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
     @Composable
     override fun ComposeView() {
 
@@ -59,14 +63,17 @@ class CategoriesScreen :
 
         ListContent(
             topbarModel = titleTopBar(),
+            topbarType = TopbarType.MEDIUM,
+            scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState()),
             actions = iconsActionTopBar(
+
                 IconButtonModel(
-                icon = IconSourceType.IconVector(Icons.Rounded.Add),
-                title = "addCategory",
-                onClick = {
-                    DialogAddCategory {}.show()
-                }
-            )
+                    icon = IconSourceType.IconVector(Icons.Rounded.Add),
+                    title = "addCategory",
+                    onClick = {
+                        DialogAddCategory {}.show()
+                    }
+                )
             )
 
 
@@ -79,38 +86,16 @@ class CategoriesScreen :
             }
 
             itemsIndexed(getItemsList()) { index, item ->
-                ItemUI( index, item)
+                ItemUI(index, item)
             }
         }
     }
 
 
-    fun titleTopBar() = TopbarModel.Compose {
-        Column(
-            Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-
-            ComposeStickyView()
-
-        }
-    }
+    fun titleTopBar() = TopbarModel.Text( "Medium Top App Bar")
 
 
-    @Composable
-    fun ComposeStickyView(modifier: Modifier = Modifier) {
 
-        Row(
-            modifier = modifier
-                .height(80.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            var text by remember { mutableStateOf("") }
-
-
-        }
-    }
 
     @Composable
     fun FadingHeader(modifier: Modifier = Modifier) {

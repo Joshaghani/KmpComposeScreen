@@ -18,12 +18,15 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScree
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun BaseScreenScaffold(
     topbarModel: TopbarModel,
+    topbarType: TopbarType = TopbarType.NORMAL,
+    scrollBehavior: TopAppBarScrollBehavior,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
@@ -33,9 +36,6 @@ fun BaseScreenScaffold(
     bottomBar: (@Composable () -> Unit)? = null,
     content: @Composable (PaddingValues) -> Unit
 ) {
-
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
 
     val windowSizeClass = calculateWindowSizeClass()
     val isWideScreen = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
@@ -55,6 +55,7 @@ fun BaseScreenScaffold(
             topBar = {
                 BaseScreenTopBar(
                     scrollBehavior,
+                    topbarType,
                     topbarModel,
                     actions,
                     navigationIcon,

@@ -1,5 +1,6 @@
 package com.example.kmpcomposescreen.screen.content.main
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
@@ -9,6 +10,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ColumnContent
 
 class MainScreen : BaseSimpleScreen() {
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun ComposeView() {
         TabNavigator(OrdersTab) { tabNavigator ->

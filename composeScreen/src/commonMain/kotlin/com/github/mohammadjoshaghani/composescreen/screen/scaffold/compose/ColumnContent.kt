@@ -4,17 +4,24 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ColumnContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
+    topbarType: TopbarType = TopbarType.NORMAL,
+    scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
@@ -26,6 +33,8 @@ fun ColumnContent(
 ) {
     BaseScreenScaffold(
         topbarModel = topbarModel,
+        topbarType = topbarType,
+        scrollBehavior = scrollBehavior,
         actions = actions,
         navigationIcon = navigationIcon,
         floatingActionButton = floatingActionButton,
