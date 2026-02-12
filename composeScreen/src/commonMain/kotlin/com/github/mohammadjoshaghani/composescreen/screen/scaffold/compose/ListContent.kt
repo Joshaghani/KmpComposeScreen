@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
@@ -28,13 +28,14 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListContent(
-    topbarModel: TopbarModel = TopbarModel.Nothing,
+    topbarTypeCompose: TopbarTypeCompose = TopbarTypeCompose.Nothing,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
-    appBarSetting: AppBarSetting = AppBarSetting,
+    appBarSetting: AppBarSetting = AppBarSetting(),
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
     navItems: List<ButtonModel> = emptyList(),
+    stickyTopbar: (@Composable () -> Unit)? = null,
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
@@ -45,12 +46,13 @@ fun ListContent(
     val listState = rememberLazyListState()
 
     BaseScreenScaffold(
-        topbarModel = topbarModel,
+        topbarTypeCompose = topbarTypeCompose,
         scrollBehavior = scrollBehavior,
         appBarSetting = appBarSetting,
         actions = actions,
         navigationIcon = navigationIcon,
         floatingActionButton = floatingActionButton,
+        stickyTopbar = stickyTopbar,
         navItems = navItems,
         startPanel = startPanel,
         endPanel = endPanel,

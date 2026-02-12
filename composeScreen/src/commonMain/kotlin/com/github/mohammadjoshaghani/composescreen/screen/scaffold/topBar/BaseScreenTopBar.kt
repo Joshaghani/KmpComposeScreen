@@ -6,15 +6,12 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MediumTopAppBar
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
@@ -28,7 +25,7 @@ import com.github.mohammadjoshaghani.composescreen.utils.TopAppBar
 fun BaseScreenTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     topAppBar: TopAppBar,
-    topbarModel: TopbarModel,
+    topbarModel: TopbarTypeCompose,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
 ) {
@@ -36,46 +33,39 @@ fun BaseScreenTopBar(
     if (
         actions.isEmpty() &&
         navigationIcon == null &&
-        topbarModel == TopbarModel.Nothing
+        topbarModel == TopbarTypeCompose.Nothing
     ) {
         return
     }
 
-    val fraction = scrollBehavior.state.overlappedFraction
 
-    Surface(
-        Modifier.zIndex(5f),
-        shadowElevation = if (topAppBar.isStickyHeader) 0.dp else if (fraction > 0.01f) 8.dp else 0.dp,
-        tonalElevation = 0.dp
-    ) {
 
-        when (topAppBar.topbarType) {
-            TopbarType.NORMAL -> NormalAppbar(
-                scrollBehavior = scrollBehavior,
-                topbarModel = topbarModel,
-                topAppBar = topAppBar,
-                actions = actions,
-                navigationIcon = navigationIcon,
-            )
+    when (topAppBar.topbarType) {
+        TopbarType.NORMAL -> NormalAppbar(
+            scrollBehavior = scrollBehavior,
+            topbarTypeCompose = topbarModel,
+            topAppBar = topAppBar,
+            actions = actions,
+            navigationIcon = navigationIcon,
+        )
 
-            TopbarType.MEDIUM -> MediumAppbar(
-                scrollBehavior = scrollBehavior,
-                topbarModel = topbarModel,
-                topAppBar = topAppBar,
-                actions = actions,
-                navigationIcon = navigationIcon,
-            )
+        TopbarType.MEDIUM -> MediumAppbar(
+            scrollBehavior = scrollBehavior,
+            topbarTypeCompose = topbarModel,
+            topAppBar = topAppBar,
+            actions = actions,
+            navigationIcon = navigationIcon,
+        )
 
-            TopbarType.LARGE -> LargeAppbar(
-                scrollBehavior = scrollBehavior,
-                topbarModel = topbarModel,
-                topAppBar = topAppBar,
-                actions = actions,
-                navigationIcon = navigationIcon,
-            )
-        }
-
+        TopbarType.LARGE -> LargeAppbar(
+            scrollBehavior = scrollBehavior,
+            topbarTypeCompose = topbarModel,
+            topAppBar = topAppBar,
+            actions = actions,
+            navigationIcon = navigationIcon,
+        )
     }
+
 
 }
 
@@ -83,7 +73,7 @@ fun BaseScreenTopBar(
 @Composable
 fun NormalAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
-    topbarModel: TopbarModel,
+    topbarTypeCompose: TopbarTypeCompose,
     topAppBar: TopAppBar,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
@@ -91,11 +81,11 @@ fun NormalAppbar(
     TopAppBar(
         scrollBehavior = scrollBehavior,
         title = {
-            when (topbarModel) {
-                is TopbarModel.Compose -> topbarModel.content()
-                TopbarModel.Nothing -> Unit
-                is TopbarModel.Text -> Text(
-                    topbarModel.title,
+            when (topbarTypeCompose) {
+                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
+                TopbarTypeCompose.Nothing -> Unit
+                is TopbarTypeCompose.Text -> Text(
+                    topbarTypeCompose.title,
                     maxLines = 1,
                     modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )
@@ -133,7 +123,7 @@ fun NormalAppbar(
 @Composable
 fun MediumAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
-    topbarModel: TopbarModel,
+    topbarTypeCompose: TopbarTypeCompose,
     topAppBar: TopAppBar,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
@@ -141,11 +131,11 @@ fun MediumAppbar(
     MediumTopAppBar(
         scrollBehavior = scrollBehavior,
         title = {
-            when (topbarModel) {
-                is TopbarModel.Compose -> topbarModel.content()
-                TopbarModel.Nothing -> Unit
-                is TopbarModel.Text -> Text(
-                    topbarModel.title,
+            when (topbarTypeCompose) {
+                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
+                TopbarTypeCompose.Nothing -> Unit
+                is TopbarTypeCompose.Text -> Text(
+                    topbarTypeCompose.title,
                     maxLines = 1,
                     modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )
@@ -183,7 +173,7 @@ fun MediumAppbar(
 @Composable
 fun LargeAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
-    topbarModel: TopbarModel,
+    topbarTypeCompose: TopbarTypeCompose,
     topAppBar: TopAppBar,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
@@ -191,11 +181,11 @@ fun LargeAppbar(
     LargeTopAppBar(
         scrollBehavior = scrollBehavior,
         title = {
-            when (topbarModel) {
-                is TopbarModel.Compose -> topbarModel.content()
-                TopbarModel.Nothing -> Unit
-                is TopbarModel.Text -> Text(
-                    topbarModel.title,
+            when (topbarTypeCompose) {
+                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
+                TopbarTypeCompose.Nothing -> Unit
+                is TopbarTypeCompose.Text -> Text(
+                    topbarTypeCompose.title,
                     maxLines = 1,
                     modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -25,23 +24,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.koin.koinScreenModel
 import com.example.kmpcomposescreen.screen.content.main.utils.iconsActionTopBar
 import com.example.kmpcomposescreen.textFieldTheme.UITextField
 import com.github.mohammadjoshaghani.composescreen.component.UIBorderCard
-import com.github.mohammadjoshaghani.composescreen.component.UIFadingHeader
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.button.UITextButton
-import com.github.mohammadjoshaghani.composescreen.component.image.UIImage
-import com.github.mohammadjoshaghani.composescreen.screen.BaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
-import kmpcomposescreen.composeapp.generated.resources.Res
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class OrderScreen : BaseSimpleScreen(),
     KoinComponent,
@@ -53,7 +46,7 @@ class OrderScreen : BaseSimpleScreen(),
     override fun ComposeView() {
 
         ListContent(
-            topbarModel = titleTopBar(),
+            topbarTypeCompose = titleTopBar(),
             actions = iconsActionTopBar()
         ) {
             stickyHeader {
@@ -73,7 +66,7 @@ class OrderScreen : BaseSimpleScreen(),
     }
 
 
-    fun titleTopBar() = TopbarModel.Compose {
+    fun titleTopBar() = TopbarTypeCompose.Compose {
         Column(
             Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally

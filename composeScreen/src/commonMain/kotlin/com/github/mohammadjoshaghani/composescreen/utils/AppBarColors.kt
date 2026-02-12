@@ -8,7 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
 
-object AppBarSetting {
+class AppBarSetting {
 
     @OptIn(ExperimentalMaterial3Api::class)
     internal var topAppBar: TopAppBar = TopAppBar()
@@ -21,7 +21,6 @@ object AppBarSetting {
         containerColor: Color = Color.Unspecified,
         scrolledContainerColor: Color = Color.Unspecified,
         topbarType: TopbarType = TopbarType.NORMAL,
-        isStickyHeader: Boolean = false,
     ) = apply {
         this.topAppBar.apply {
             this.containerColor = containerColor

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -15,28 +14,25 @@ import androidx.compose.material.icons.automirrored.twotone.Login
 import androidx.compose.material.icons.twotone.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.UIFadingHeader
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.component.UIStickyHeader
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.BadgeItem
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonType
+import com.github.mohammadjoshaghani.composescreen.component.itemFadingHeader
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.koin.core.component.KoinComponent
@@ -59,9 +55,9 @@ class CategoriesScreen :
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
         ListContent(
-            topbarModel = titleTopBar(scrollBehavior),
+            topbarTypeCompose = titleTopBar(scrollBehavior),
             scrollBehavior = scrollBehavior,
-            appBarSetting = AppBarSetting
+            appBarSetting = AppBarSetting()
                 .setNavRailSetting(
                     color = MaterialTheme.colorScheme.surface,
                     backGroundColor = MaterialTheme.colorScheme.background
@@ -73,9 +69,15 @@ class CategoriesScreen :
                 .setTopBarSetting(
                     containerColor = MaterialTheme.colorScheme.background,
                     scrolledContainerColor = MaterialTheme.colorScheme.background,
-                    isStickyHeader = true
                 ),
             actions = actionIconsTopBar(),
+            stickyTopbar = {
+                Text(
+                    text = "هدر چسبان (ادامه‌ی تاپ‌بار)",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
 //            bottomBar = {
 //                Column(
 //                    Modifier.fillMaxWidth(),
@@ -88,22 +90,8 @@ class CategoriesScreen :
 
         ) {
 
-            stickyHeader {
-
-                UIStickyHeader(scrollBehavior.state) {
-                    Text(
-                        text = "هدر چسبان (ادامه‌ی تاپ‌بار)",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-
-                }
-
-//                UIFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
-//                    FadingHeader()
-//
-//                }
-
+            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
+                FadingHeader()
             }
 
             itemsIndexed(getItemsList()) { index, item ->
@@ -135,7 +123,7 @@ class CategoriesScreen :
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    fun titleTopBar(scrollBehavior: TopAppBarScrollBehavior) = TopbarModel.Compose {
+    fun titleTopBar(scrollBehavior: TopAppBarScrollBehavior) = TopbarTypeCompose.Compose {
         Column {
             Text("Medium Top App Bar")
         }

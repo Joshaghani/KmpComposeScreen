@@ -12,33 +12,35 @@ import androidx.compose.ui.Modifier
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ColumnContent(
-    topbarModel: TopbarModel = TopbarModel.Nothing,
+    topbarTypeCompose: TopbarTypeCompose = TopbarTypeCompose.Nothing,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
-    appBarSetting: AppBarSetting = AppBarSetting,
+    appBarSetting: AppBarSetting = AppBarSetting(),
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
     navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
+    stickyTopbar: (@Composable () -> Unit)? = null,
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit
 ) {
     BaseScreenScaffold(
-        topbarModel = topbarModel,
+        topbarTypeCompose = topbarTypeCompose,
         scrollBehavior = scrollBehavior,
         appBarSetting = appBarSetting,
         actions = actions,
         navigationIcon = navigationIcon,
         floatingActionButton = floatingActionButton,
         navItems = navItems,
+        stickyTopbar = stickyTopbar,
         startPanel = startPanel,
         endPanel = endPanel,
         bottomBar = bottomBar,

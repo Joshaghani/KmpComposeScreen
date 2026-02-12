@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
@@ -17,20 +19,21 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.Bas
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScreenFab
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun BaseScreenScaffold(
-    topbarModel: TopbarModel,
+    topbarTypeCompose: TopbarTypeCompose,
     appBarSetting: AppBarSetting,
     scrollBehavior: TopAppBarScrollBehavior,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
     navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
+    stickyTopbar: (@Composable () -> Unit)? = null,
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
@@ -54,13 +57,30 @@ fun BaseScreenScaffold(
                 .navigationBarsPadding()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                BaseScreenTopBar(
-                    scrollBehavior,
-                    appBarSetting.topAppBar,
-                    topbarModel,
-                    actions,
-                    navigationIcon,
-                )
+                val fraction = scrollBehavior.state.overlappedFraction
+
+                Surface(
+                    Modifier.zIndex(5f),
+                    shadowElevation = if (fraction > 0.01f) 8.dp else 0.dp,
+                    tonalElevation = 0.dp,
+                    color = if (fraction > 0.01f) appBarSetting.topAppBar.scrolledContainerColor else appBarSetting.topAppBar.containerColor
+
+                ) {
+                    Column {
+                        BaseScreenTopBar(
+                            scrollBehavior,
+                            appBarSetting.topAppBar,
+                            topbarTypeCompose,
+                            actions,
+                            navigationIcon,
+                        )
+                        stickyTopbar?.let {
+                            stickyTopbar()
+                        }
+
+                    }
+                }
+
             },
             floatingActionButton = {
                 floatingActionButton?.let {

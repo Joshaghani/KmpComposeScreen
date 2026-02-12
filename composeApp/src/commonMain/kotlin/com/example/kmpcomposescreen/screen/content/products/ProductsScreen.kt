@@ -29,7 +29,7 @@ import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.B
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.koin.core.component.KoinComponent
 
@@ -42,7 +42,7 @@ class ProductsScreen : BaseSimpleScreen(),
 
 
         ListContent(
-            topbarModel = titleTopBar(),
+            topbarTypeCompose = titleTopBar(),
             actions = iconsActionTopBar(
                 ButtonModel(
                     icon =Icons.Rounded.Add,
@@ -62,7 +62,7 @@ class ProductsScreen : BaseSimpleScreen(),
         }
     }
 
-    fun titleTopBar() = TopbarModel.Compose {
+    fun titleTopBar() = TopbarTypeCompose.Compose {
         Column(
             Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
