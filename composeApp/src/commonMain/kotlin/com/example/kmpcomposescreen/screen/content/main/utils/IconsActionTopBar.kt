@@ -15,7 +15,7 @@ fun iconsActionTopBar(
 ) = listOfNotNull(
     icons,
     IconButtonModel(
-        icon = IconSourceType.IconVector(Icons.Rounded.Settings),
+        iconVector = Icons.Rounded.Settings,
         tint = ApplicationConfig.color.onBackground,
         onClick = {
             UIAlertDialog()
@@ -29,10 +29,7 @@ fun iconsActionTopBar(
         }),
     IconButtonModel(
         tint = ApplicationConfig.color.onBackground,
-        icon =
-            IconSourceType.IconVector(
-                Icons.Rounded.LightMode
-            ),
+        iconVector = Icons.Rounded.LightMode,
         onClick = {
         }
     )

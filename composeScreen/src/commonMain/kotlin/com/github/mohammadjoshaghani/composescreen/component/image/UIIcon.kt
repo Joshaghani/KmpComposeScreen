@@ -13,21 +13,24 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun UIIcon(
-    icon: IconSourceType,
+    icon: IconSourceType?,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
 ) {
 
     when (icon) {
-        is IconSourceType.IconResource -> UIIconResource(icon.icon, modifier, tint)
-        is IconSourceType.IconVector -> UIIconVector(icon.icon, modifier, tint)
-        is IconSourceType.IconBitmap -> UIIconBitmap(icon.icon, modifier, tint)
+        is IconSourceType.IconResource -> UIIcon(icon.icon, modifier, tint)
+        is IconSourceType.IconVector -> UIIcon(icon.icon, modifier, tint)
+        is IconSourceType.IconBitmap -> UIIcon(icon.icon, modifier, tint)
+        else -> {
+            NullPointerException("icon of UIcon must not be null")
+        }
     }
 
 }
 
 @Composable
-fun UIIconResource(
+fun UIIcon(
     resource: DrawableResource,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
@@ -41,7 +44,7 @@ fun UIIconResource(
 }
 
 @Composable
-fun UIIconVector(
+fun UIIcon(
     imageVector: ImageVector,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
@@ -55,7 +58,7 @@ fun UIIconVector(
 }
 
 @Composable
-fun UIIconBitmap(
+fun UIIcon(
     bitmap: ImageBitmap,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,

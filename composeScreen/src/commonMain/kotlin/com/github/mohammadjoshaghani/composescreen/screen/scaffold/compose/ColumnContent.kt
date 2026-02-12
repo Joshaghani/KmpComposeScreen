@@ -13,15 +13,15 @@ import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.I
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
+import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ColumnContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
-    topbarType: TopbarType = TopbarType.NORMAL,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+    appBarSetting: AppBarSetting = AppBarSetting,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
@@ -33,8 +33,8 @@ fun ColumnContent(
 ) {
     BaseScreenScaffold(
         topbarModel = topbarModel,
-        topbarType = topbarType,
         scrollBehavior = scrollBehavior,
+        appBarSetting = appBarSetting,
         actions = actions,
         navigationIcon = navigationIcon,
         floatingActionButton = floatingActionButton,

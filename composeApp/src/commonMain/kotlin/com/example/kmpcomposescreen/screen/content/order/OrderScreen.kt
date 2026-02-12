@@ -61,9 +61,9 @@ class OrderScreen : BaseSimpleScreen(),
             }
 
             stickyHeader {
-                UIFadingHeader(listState, 56.dp) {
+//                UIFadingHeader(listState, 56.dp) {
                     FadingHeader()
-                }
+//                }
             }
 
             itemsIndexed(getItemsList()) { index, item ->

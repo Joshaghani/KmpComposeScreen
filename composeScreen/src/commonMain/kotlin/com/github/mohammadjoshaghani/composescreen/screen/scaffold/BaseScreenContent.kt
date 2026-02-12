@@ -22,8 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
-import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
+import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
+import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBar
 
 @Composable
 fun BaseScreenContent(
@@ -32,6 +33,7 @@ fun BaseScreenContent(
     endPanel: (@Composable () -> Unit)? = null,
     paddingValues: PaddingValues,
     isWideScreen: Boolean,
+    navigationRailAppBar: NavigationRailAppBar,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Row(
@@ -44,33 +46,35 @@ fun BaseScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = MaterialTheme.colorScheme.onSecondary)
-                    .clip(MaterialTheme.shapes.medium)
+                    .background(color = navigationRailAppBar.backGroundColor)
+                    .clip(navigationRailAppBar.shape)
                     .verticalScroll(rememberScrollState())
             ) {
 
                 Surface(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(navigationRailAppBar.padding)
                         .fillMaxHeight(),
-                    shadowElevation = 4.dp,
-                    color = MaterialTheme.colorScheme.surface,
-                    shape = MaterialTheme.shapes.medium,
-                    tonalElevation = 0.dp
+                    shadowElevation = navigationRailAppBar.shadowElevation,
+                    color = navigationRailAppBar.color,
+                    shape = navigationRailAppBar.shape,
+                    tonalElevation = navigationRailAppBar.tonalElevation
 
                 ) {
-                    NavigationRail {
+                    NavigationRail(
+                        containerColor = navigationRailAppBar.color,
+                    ) {
                         navItems.forEach { item ->
                             NavigationRailItem(
                                 selected = item.isSelected,
-                                onClick = item.onClick,
+                                onClick = item.onClick ?: {},
                                 icon = {
-                                    UIBadgeIcon(item.badgeItem) {
-                                        IconTooltipBox(
-                                            icon = item.icon,
+                                    UIIconButton(
+                                        model = item.copy(
                                             tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                            onClick = null
                                         )
-                                    }
+                                    )
                                 },
                                 label = { item.title?.let { Text(it) } },
                                 colors = NavigationRailItemDefaults.colors(

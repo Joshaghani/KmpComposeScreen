@@ -2,6 +2,7 @@ package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -18,14 +19,14 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScree
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
+import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun BaseScreenScaffold(
     topbarModel: TopbarModel,
-    topbarType: TopbarType = TopbarType.NORMAL,
+    appBarSetting: AppBarSetting,
     scrollBehavior: TopAppBarScrollBehavior,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
@@ -55,7 +56,7 @@ fun BaseScreenScaffold(
             topBar = {
                 BaseScreenTopBar(
                     scrollBehavior,
-                    topbarType,
+                    appBarSetting.topAppBar,
                     topbarModel,
                     actions,
                     navigationIcon,
@@ -68,7 +69,7 @@ fun BaseScreenScaffold(
             },
             // اگر صفحه عریض نبود (موبایل بود)، باتوم بار را نشان بده
             bottomBar = {
-                BaseScreenBottomBar(bottomBar, isWideScreen, navItems)
+                BaseScreenBottomBar(bottomBar, appBarSetting.bottomAppBar, isWideScreen, navItems)
             },
             floatingActionButtonPosition = floatingActionButton?.fabPosition ?: FabPosition.End
         ) { paddingValues ->
@@ -79,6 +80,7 @@ fun BaseScreenScaffold(
                 endPanel,
                 paddingValues,
                 isWideScreen,
+                appBarSetting.navigationRailAppBar,
                 content
             )
         }

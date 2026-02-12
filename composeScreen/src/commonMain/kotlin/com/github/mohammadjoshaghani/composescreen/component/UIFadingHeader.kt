@@ -16,71 +16,26 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.material3.TopAppBarState
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun UIFadingHeader(
-    listState: ScrollState,
-    height: Dp,
-    content: @Composable () -> Unit) {
-    var previousOffset by remember { mutableStateOf(0) }
-    var isHeaderVisible by remember { mutableStateOf(true) }
-
-    // اینجا با snapshotFlow خونده میشه، نه مستقیم داخل composition
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.value }
-            .collect { currentOffset ->
-                isHeaderVisible = when {
-                    currentOffset > previousOffset -> false  // scroll down → hide
-                    currentOffset < previousOffset -> true   // scroll up → show
-                    else -> isHeaderVisible
-                }
-                previousOffset = currentOffset
-            }
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        // placeholder برای جلوگیری از پرش
-
-        AnimatedVisibility(
-            visible = isHeaderVisible,
-            enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
-            exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
-        ) {
-            Box(Modifier.fillMaxWidth()) {
-                content()
-            }
-        }
-    }
-}
-
-@Composable
-fun UIFadingHeader(
-    listState: LazyListState,
+    appBarState: TopAppBarState,
     height: Dp,
     content: @Composable () -> Unit
 ) {
-    var previousOffset by remember { mutableStateOf(0) }
-    var isHeaderVisible by remember { mutableStateOf(true) }
 
-    // اینجا با snapshotFlow خونده میشه، نه مستقیم داخل composition
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemScrollOffset }
-            .collect { currentOffset ->
-                isHeaderVisible = when {
-                    currentOffset > previousOffset -> false  // scroll down → hide
-                    currentOffset < previousOffset -> true   // scroll up → show
-                    else -> isHeaderVisible
-                }
-                previousOffset = currentOffset
-            }
+
+    var lastOffset by remember { mutableStateOf(-10000f) }
+    var isScrollingDown by remember { mutableStateOf(true) }
+
+    LaunchedEffect(appBarState.contentOffset) {
+        val current = appBarState.contentOffset
+        isScrollingDown = current > lastOffset
+        lastOffset = current
     }
 
     Box(
@@ -89,52 +44,8 @@ fun UIFadingHeader(
             .height(height),
         contentAlignment = Alignment.TopCenter
     ) {
-        // placeholder برای جلوگیری از پرش
-
         AnimatedVisibility(
-            visible = isHeaderVisible,
-            enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
-            exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
-        ) {
-            Box(Modifier.fillMaxWidth()) {
-                content()
-            }
-        }
-    }
-}
-
-@Composable
-fun UIFadingHeader(
-    listState: LazyGridState,
-    height: Dp,
-    content: @Composable () -> Unit
-) {
-    var previousOffset by remember { mutableStateOf(0) }
-    var isHeaderVisible by remember { mutableStateOf(true) }
-
-    // اینجا با snapshotFlow خونده میشه، نه مستقیم داخل composition
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemScrollOffset }
-            .collect { currentOffset ->
-                isHeaderVisible = when {
-                    currentOffset > previousOffset -> false  // scroll down → hide
-                    currentOffset < previousOffset -> true   // scroll up → show
-                    else -> isHeaderVisible
-                }
-                previousOffset = currentOffset
-            }
-    }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(height),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        // placeholder برای جلوگیری از پرش
-
-        AnimatedVisibility(
-            visible = isHeaderVisible,
+            visible = isScrollingDown,
             enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
             exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
         ) {

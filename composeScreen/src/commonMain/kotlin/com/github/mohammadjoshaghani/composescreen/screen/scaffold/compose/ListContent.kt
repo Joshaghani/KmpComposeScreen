@@ -9,7 +9,9 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,6 +25,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenSca
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
+import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 
@@ -30,8 +33,8 @@ import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 @Composable
 fun ListContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
-    topbarType: TopbarType = TopbarType.NORMAL,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+    appBarSetting: AppBarSetting = AppBarSetting,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
@@ -47,8 +50,8 @@ fun ListContent(
 
     BaseScreenScaffold(
         topbarModel = topbarModel,
-        topbarType = topbarType,
         scrollBehavior = scrollBehavior,
+        appBarSetting = appBarSetting,
         actions = actions,
         navigationIcon = navigationIcon,
         floatingActionButton = floatingActionButton,

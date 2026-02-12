@@ -12,7 +12,9 @@ import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,12 +27,13 @@ import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceTyp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
+import com.github.mohammadjoshaghani.composescreen.utils.TopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseScreenTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
-    topbarType: TopbarType = TopbarType.NORMAL,
+    topAppBar: TopAppBar,
     topbarModel: TopbarModel,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
@@ -51,10 +54,11 @@ fun BaseScreenTopBar(
         tonalElevation = 0.dp // اگر نمی‌خواهید رنگش با ارتفاع عوض شود، این را 0 بگذارید
     ) {
 
-        when (topbarType) {
+        when (topAppBar.topbarType) {
             TopbarType.NORMAL -> NormalAppbar(
                 scrollBehavior = scrollBehavior,
                 topbarModel = topbarModel,
+                topAppBar = topAppBar,
                 actions = actions,
                 navigationIcon = navigationIcon,
             )
@@ -62,6 +66,7 @@ fun BaseScreenTopBar(
             TopbarType.MEDIUM -> MediumAppbar(
                 scrollBehavior = scrollBehavior,
                 topbarModel = topbarModel,
+                topAppBar = topAppBar,
                 actions = actions,
                 navigationIcon = navigationIcon,
             )
@@ -69,6 +74,7 @@ fun BaseScreenTopBar(
             TopbarType.LARGE -> LargeAppbar(
                 scrollBehavior = scrollBehavior,
                 topbarModel = topbarModel,
+                topAppBar = topAppBar,
                 actions = actions,
                 navigationIcon = navigationIcon,
             )
@@ -83,6 +89,7 @@ fun BaseScreenTopBar(
 fun NormalAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
+    topAppBar: TopAppBar,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
 ) {
@@ -112,19 +119,18 @@ fun NormalAppbar(
                 val navigator = LocalNavigator.currentOrThrow
                 if (navigator.size > 1) {
                     UIIconButton(
-                        IconButtonModel(
-                            icon = IconSourceType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
-                        ) {
-                            (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                        }
-                    )
+                        icon = Icons.AutoMirrored.Rounded.ArrowBack
+                    ) {
+                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
+                    }
+
                 }
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-//                scrolledContainerColor = MaterialTheme.colorScheme.primary,
-        ),
+        colors = topAppBarColors(
+            containerColor = topAppBar.containerColor,
+            scrolledContainerColor = topAppBar.scrolledContainerColor
+        )
     )
 }
 
@@ -133,6 +139,7 @@ fun NormalAppbar(
 fun MediumAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
+    topAppBar: TopAppBar,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
 ) {
@@ -162,19 +169,18 @@ fun MediumAppbar(
                 val navigator = LocalNavigator.currentOrThrow
                 if (navigator.size > 1) {
                     UIIconButton(
-                        IconButtonModel(
-                            icon = IconSourceType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
-                        ) {
-                            (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                        }
-                    )
+                        icon = Icons.AutoMirrored.Rounded.ArrowBack
+                    ) {
+                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
+                    }
+
                 }
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-//                scrolledContainerColor = MaterialTheme.colorScheme.primary,
-        ),
+        colors = topAppBarColors(
+            containerColor = topAppBar.containerColor,
+            scrolledContainerColor = topAppBar.scrolledContainerColor
+        )
     )
 }
 
@@ -183,6 +189,7 @@ fun MediumAppbar(
 fun LargeAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
+    topAppBar: TopAppBar,
     actions: List<IconButtonModel> = emptyList(),
     navigationIcon: IconButtonModel? = null,
 ) {
@@ -212,19 +219,17 @@ fun LargeAppbar(
                 val navigator = LocalNavigator.currentOrThrow
                 if (navigator.size > 1) {
                     UIIconButton(
-                        IconButtonModel(
-                            icon = IconSourceType.IconVector(Icons.AutoMirrored.Rounded.ArrowBack)
-                        ) {
-                            (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                        }
-                    )
+                        icon = Icons.AutoMirrored.Rounded.ArrowBack
+                    ) {
+                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
+                    }
                 }
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-//                scrolledContainerColor = MaterialTheme.colorScheme.primary,
-        ),
+        colors = topAppBarColors(
+            containerColor = topAppBar.containerColor,
+            scrolledContainerColor = topAppBar.scrolledContainerColor
+        )
     )
 }
 

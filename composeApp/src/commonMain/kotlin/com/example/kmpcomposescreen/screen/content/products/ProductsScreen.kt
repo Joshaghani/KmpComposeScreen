@@ -50,7 +50,7 @@ class ProductsScreen : BaseSimpleScreen(),
             topbarModel = titleTopBar(),
             actions = iconsActionTopBar(
                 IconButtonModel(
-                    icon = IconSourceType.IconVector(Icons.Rounded.Add),
+                    iconVector =Icons.Rounded.Add,
                     title = "addProduct",
                     onClick = {
 

@@ -1,8 +1,11 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -11,31 +14,46 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconTooltipBox
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
+import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBar
 
 
 @Composable
 fun BaseScreenBottomBar(
     bottomBar: (@Composable () -> Unit)? = null,
+    bottomAppBar: BottomAppBar,
     isWideScreen: Boolean,
     navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     maxVisibleItems: Int = 4 // حداکثر آیتمی که مستقیم نشون داده میشه
 
 ) {
     if (bottomBar != null) {
-        bottomBar()
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shadowElevation = bottomAppBar.shadowElevation,
+            tonalElevation = bottomAppBar.tonalElevation
+        ) {
+            BottomAppBar(
+                modifier = Modifier.navigationBarsPadding(),
+                containerColor = bottomAppBar.containerColor,
+                contentColor = bottomAppBar.scrolledContainerColor,
+            ) {
+                bottomBar()
+            }
+        }
     } else if (!isWideScreen && navItems.isNotEmpty()) {
         var expanded by remember { mutableStateOf(false) }
 
@@ -43,55 +61,64 @@ fun BaseScreenBottomBar(
         val mainItems = navItems.take(maxVisibleItems)
         val overflowItems = navItems.drop(maxVisibleItems)
 
-        NavigationBar {
-            // آیتم‌های اصلی
-            mainItems.forEach { item ->
-                NavigationRailItem(
-                    selected = item.isSelected,
-                    onClick = item.onClick,
-                    icon = {
-                        UIBadgeIcon(item.badgeItem) {
-                            IconTooltipBox(
-                                icon = item.icon,
-                                tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+        Surface(
+            modifier = Modifier.fillMaxWidth(),
+            shadowElevation = bottomAppBar.shadowElevation,
+            tonalElevation = bottomAppBar.tonalElevation
+        ) {
+            NavigationBar(
+                containerColor = bottomAppBar.containerColor,
+                contentColor = bottomAppBar.scrolledContainerColor,
+            ) {
+                // آیتم‌های اصلی
+                mainItems.forEach { item ->
+                    NavigationRailItem(
+                        selected = item.isSelected,
+                        onClick = item.onClick ?: {},
+                        icon = {
+                            UIIconButton(
+                                model = item.copy(
+                                    tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
+                                    onClick = null
+                                )
                             )
-                        }
-                    },
-                    label = { item.title?.let { Text(it) } },
-                    colors = NavigationRailItemDefaults.colors(
-                        indicatorColor = Color.Transparent // 👈 حذف دایره انتخاب
+                        },
+                        label = { item.title?.let { Text(it) } },
+                        colors = NavigationRailItemDefaults.colors(
+                            indicatorColor = Color.Transparent
+                        )
                     )
-                )
-            }
+                }
 
-            // اگر آیتم اضافی هست، دکمه Overflow اضافه کن
-            if (overflowItems.isNotEmpty()) {
-                NavigationBarItem(
-                    selected = false,
-                    onClick = { expanded = true },
-                    icon = {
-                        Box {
-                            Icon(Icons.Default.MoreVert, contentDescription = "More")
+                // اگر آیتم اضافی هست، دکمه Overflow اضافه کن
+                if (overflowItems.isNotEmpty()) {
+                    NavigationBarItem(
+                        selected = false,
+                        onClick = { expanded = true },
+                        icon = {
+                            Box {
+                                Icon(Icons.Default.MoreVert, contentDescription = "More")
 
-                            DropdownMenu(
-                                expanded = expanded,
-                                onDismissRequest = { expanded = false },
-                                offset = DpOffset((-16).dp, (-4).dp)
-                            ) {
-                                overflowItems.forEach { item ->
-                                    DropdownMenuItem(
-                                        text = { item.title?.let { Text(it) } },
-                                        leadingIcon = { UIIcon(item.icon) },
-                                        onClick = {
-                                            expanded = false
-                                            item.onClick()
-                                        }
-                                    )
+                                DropdownMenu(
+                                    expanded = expanded,
+                                    onDismissRequest = { expanded = false },
+                                    offset = DpOffset((-16).dp, (-4).dp)
+                                ) {
+                                    overflowItems.forEach { item ->
+                                        DropdownMenuItem(
+                                            text = { item.title?.let { Text(it) } },
+                                            leadingIcon = { UIIcon(item.icon) },
+                                            onClick = {
+                                                expanded = false
+                                                item.onClick?.invoke()
+                                            }
+                                        )
+                                    }
                                 }
                             }
-                        }
-                    },
-                )
+                        },
+                    )
+                }
             }
         }
     }

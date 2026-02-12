@@ -10,7 +10,9 @@ fun BaseScreenFab(
     navItems: List<IconButtonModel>,
 ) {
 
-    if (fabIconModel.title.isNullOrEmpty()) {
+    if (fabIconModel.customCompose != null) {
+        fabIconModel.customCompose()
+    } else if (fabIconModel.title.isNullOrEmpty()) {
         SimpleFab(fabIconModel, isWideScreen, navItems)
     } else {
         ExtendedFab(fabIconModel, isWideScreen, navItems)
