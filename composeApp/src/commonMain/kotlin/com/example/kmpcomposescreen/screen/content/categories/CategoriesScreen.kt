@@ -34,7 +34,6 @@ import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.koin.core.component.KoinComponent
 
 class CategoriesScreen :
@@ -64,7 +63,7 @@ class CategoriesScreen :
                 )
                 .setBottomBarSetting(
                     containerColor = MaterialTheme.colorScheme.error,
-                    scrolledContainerColor = MaterialTheme.colorScheme.onSurface
+                    contentColor = MaterialTheme.colorScheme.onSurface
                 )
                 .setTopBarSetting(
                     containerColor = MaterialTheme.colorScheme.background,

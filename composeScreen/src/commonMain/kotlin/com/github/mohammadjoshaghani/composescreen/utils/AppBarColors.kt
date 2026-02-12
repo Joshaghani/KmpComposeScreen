@@ -32,13 +32,13 @@ class AppBarSetting {
 
     fun setBottomBarSetting(
         containerColor: Color = Color.Unspecified,
-        scrolledContainerColor: Color = Color.Unspecified,
+        contentColor: Color = Color.Unspecified,
         shadowElevation: Dp = 4.dp,
         tonalElevation: Dp = 0.dp,
     ) = apply {
         this.bottomAppBar.apply {
             this.containerColor = containerColor
-            this.scrolledContainerColor = scrolledContainerColor
+            this.contentColor = contentColor
             this.shadowElevation = shadowElevation
             this.tonalElevation = tonalElevation
         }
@@ -73,7 +73,7 @@ data class TopAppBar @OptIn(ExperimentalMaterial3Api::class) constructor(
 
 data class BottomAppBar(
     var containerColor: Color = Color.Unspecified,
-    var scrolledContainerColor: Color = Color.Unspecified,
+    var contentColor: Color = Color.Unspecified,
     var shadowElevation: Dp = 4.dp,
     var tonalElevation: Dp = 0.dp,
 )

@@ -62,7 +62,7 @@ fun BaseScreenBottomBar(
             BottomAppBar(
 //                modifier = Modifier.navigationBarsPadding(),
                 containerColor = bottomAppBar.containerColor,
-                contentColor = bottomAppBar.scrolledContainerColor,
+                contentColor = bottomAppBar.contentColor,
             ) {
                 bottomBar()
             }
@@ -92,7 +92,7 @@ fun BaseScreenBottomBar(
 
             NavigationBar(
                 containerColor = bottomAppBar.containerColor,
-                contentColor = bottomAppBar.scrolledContainerColor,
+                contentColor = bottomAppBar.contentColor,
             ) {
                 // آیتم‌های اصلی
                 mainItems.forEach { item ->
