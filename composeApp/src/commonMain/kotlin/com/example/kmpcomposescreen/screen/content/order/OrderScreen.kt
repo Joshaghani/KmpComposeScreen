@@ -171,7 +171,7 @@ class OrderScreen : BaseSimpleScreen(),
     fun FadingHeader(modifier: Modifier = Modifier) {
         Row(
             modifier = modifier.fillMaxWidth()
-                .background(ApplicationConfig.color.surfaceVariant).padding(8.dp)
+                .background(MaterialTheme.colorScheme.surfaceVariant).padding(8.dp)
         ) {
 
             Text(
