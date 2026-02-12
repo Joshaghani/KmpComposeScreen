@@ -21,7 +21,7 @@ import androidx.compose.ui.zIndex
  * منطق مشترک برای انیمیشن و وضعیت اسکرول
  */
 @Composable
-private fun FadingHeaderContent(
+fun UIFadingHeader(
     appBarState: TopAppBarState,
     height: Dp,
     content: @Composable () -> Unit
@@ -58,34 +58,24 @@ private fun FadingHeaderContent(
 // --- استفاده در Scope های مختلف ---
 
 @OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun LazyListScope.ItemFadingHeader(
+fun LazyListScope.itemFadingHeader(
     appBarState: TopAppBarState,
     height: Dp,
     content: @Composable () -> Unit
 ) {
     stickyHeader {
-        FadingHeaderContent(appBarState, height, content)
+        UIFadingHeader(appBarState, height, content)
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun LazyGridScope.ItemFadingHeader(
+fun LazyGridScope.itemFadingHeader(
     appBarState: TopAppBarState,
     height: Dp,
     content: @Composable () -> Unit
 ) {
     stickyHeader {
-        FadingHeaderContent(appBarState, height, content)
+        UIFadingHeader(appBarState, height, content)
     }
 }
 
-@Composable
-fun ColumnScope.ItemFadingHeader(
-    appBarState: TopAppBarState,
-    height: Dp,
-    content: @Composable () -> Unit
-) {
-    FadingHeaderContent(appBarState, height, content)
-}
