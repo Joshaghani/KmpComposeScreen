@@ -22,17 +22,40 @@ fun UIImage(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
 ) {
-    when(image) {
-        is IconSourceType.Bitmap -> UIImageBitmap(image.bitmap, modifier, alignment, contentScale, alpha, colorFilter)
-        is IconSourceType.Drawable -> UIImageResource(image.drawable, modifier, alignment, contentScale, alpha, colorFilter)
-        is IconSourceType.Icon -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+    when (image) {
+        is IconSourceType.Bitmap -> UIImage(
+            image.bitmap,
+            modifier,
+            alignment,
+            contentScale,
+            alpha,
+            colorFilter
+        )
+
+        is IconSourceType.Drawable -> UIImage(
+            image.drawable,
+            modifier,
+            alignment,
+            contentScale,
+            alpha,
+            colorFilter
+        )
+
+        is IconSourceType.Icon -> UIImage(
+            image.icon,
+            modifier,
+            alignment,
+            contentScale,
+            alpha,
+            colorFilter
+        )
     }
 }
 
 
 @Composable
-fun UIImageResource(
-    resource: DrawableResource,
+fun UIImage(
+    drawable: DrawableResource,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
@@ -40,7 +63,7 @@ fun UIImageResource(
     colorFilter: ColorFilter? = null,
 ) {
     Image(
-        painter = painterResource(resource),
+        painter = painterResource(drawable),
         contentDescription = null,
         alignment = alignment,
         contentScale = contentScale,
@@ -51,8 +74,8 @@ fun UIImageResource(
 }
 
 @Composable
-fun UIImageVector(
-    imageVector: ImageVector,
+fun UIImage(
+    icon: ImageVector,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
@@ -60,7 +83,7 @@ fun UIImageVector(
     colorFilter: ColorFilter? = null,
 ) {
     Image(
-        imageVector = imageVector,
+        imageVector = icon,
         contentDescription = null,
         alignment = alignment,
         contentScale = contentScale,
@@ -71,7 +94,7 @@ fun UIImageVector(
 }
 
 @Composable
-fun UIImageBitmap(
+fun UIImage(
     bitmap: ImageBitmap,
     modifier: Modifier = Modifier,
     alignment: Alignment = Alignment.Center,

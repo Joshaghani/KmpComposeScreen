@@ -51,7 +51,7 @@ fun UIButton(
             textColor = model.tint ?: MaterialTheme.colorScheme.primary,
             shape = model.shape,
             modifier = model.modifier,
-            leftIcon = model.iconSource,
+            startIcon = model.iconSource,
             onClick = model.onClick ?: {}
         )
 
@@ -60,7 +60,7 @@ fun UIButton(
             textColor = model.tint ?: MaterialTheme.colorScheme.onPrimary,
             shape = model.shape,
             modifier = model.modifier,
-            leftIcon = model.iconSource,
+            startIcon = model.iconSource,
             onClick = model.onClick ?: {}
         )
 
@@ -68,7 +68,7 @@ fun UIButton(
             title = model.title ?: "",
             textColor = model.tint ?: MaterialTheme.colorScheme.primary,
             modifier = model.modifier,
-            leftIcon = model.iconSource,
+            startIcon = model.iconSource,
             onClick = model.onClick ?: {}
         )
     }

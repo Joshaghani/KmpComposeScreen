@@ -1,6 +1,5 @@
 package com.github.mohammadjoshaghani.composescreen.component.button
 
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -15,19 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
+import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
 fun UIPrimaryButton(
     title: String,
     modifier: Modifier = Modifier,
-    leftIcon: IconSourceType? = null,
-    rightIcon: IconSourceType? = null,
     enabled: Boolean = true,
     textColor: Color = White,
     color: Color = MaterialTheme.colorScheme.primary,
@@ -46,7 +44,50 @@ fun UIPrimaryButton(
         modifier = modifier,
         shape = shape,
     ) {
-        leftIcon?.let {
+
+        Text(
+            text = title,
+            color = if (enabled) {
+                textColor
+            } else {
+                textColor.copy(alpha = .5f)
+            },
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .wrapContentWidth()
+        )
+
+    }
+}
+
+@Composable
+fun UIPrimaryButton(
+    title: String,
+    modifier: Modifier = Modifier,
+    startIcon: IconSourceType? = null,
+    endIcon: IconSourceType? = null,
+    enabled: Boolean = true,
+    textColor: Color = White,
+    color: Color = MaterialTheme.colorScheme.primary,
+    shape: Shape = MaterialTheme.shapes.large,
+    onClick: () -> Unit,
+) {
+    Button(
+        enabled = enabled,
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = color,
+            containerColor = color,
+            disabledContainerColor = color
+        ),
+        contentPadding = PaddingValues(vertical = 8.dp),
+        modifier = modifier,
+        shape = shape,
+    ) {
+        startIcon?.let {
             UISpacer(8)
             UIIcon(
                 icon = it,
@@ -68,10 +109,10 @@ fun UIPrimaryButton(
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .wrapContentWidth()
-                .offset(x = if (leftIcon != null) (-10).dp else 0.dp)
+                .offset(x = if (startIcon != null) (-10).dp else 0.dp)
         )
 
-        rightIcon?.let {
+        endIcon?.let {
             UISpacer(8)
             UIIcon(
                 icon = it,
@@ -84,4 +125,133 @@ fun UIPrimaryButton(
         }
     }
 }
+
+
+@Composable
+fun UIPrimaryButton(
+    title: String,
+    modifier: Modifier = Modifier,
+    startIcon: ImageVector? = null,
+    endIcon: ImageVector? = null,
+    enabled: Boolean = true,
+    textColor: Color = White,
+    color: Color = MaterialTheme.colorScheme.primary,
+    shape: Shape = MaterialTheme.shapes.large,
+    onClick: () -> Unit,
+) {
+    Button(
+        enabled = enabled,
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = color,
+            containerColor = color,
+            disabledContainerColor = color
+        ),
+        contentPadding = PaddingValues(vertical = 8.dp),
+        modifier = modifier,
+        shape = shape,
+    ) {
+        startIcon?.let {
+            UISpacer(8)
+            UIIcon(
+                icon = it,
+                modifier = Modifier.size(20.dp),
+                tint = textColor
+            )
+            UISpacer(8)
+        }
+        Text(
+            text = title,
+            color = if (enabled) {
+                textColor
+            } else {
+                textColor.copy(alpha = .5f)
+            },
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .wrapContentWidth()
+                .offset(x = if (startIcon != null) (-10).dp else 0.dp)
+        )
+
+        endIcon?.let {
+            UISpacer(8)
+            UIIcon(
+                icon = it,
+                modifier = Modifier
+                    .offset(x = (-5).dp)
+                    .size(20.dp),
+                tint = textColor
+            )
+            UISpacer(8)
+        }
+    }
+}
+
+
+@Composable
+fun UIPrimaryButton(
+    title: String,
+    modifier: Modifier = Modifier,
+    startDrawable: DrawableResource? = null,
+    endDrawable: DrawableResource? = null,
+    enabled: Boolean = true,
+    textColor: Color = White,
+    color: Color = MaterialTheme.colorScheme.primary,
+    shape: Shape = MaterialTheme.shapes.large,
+    onClick: () -> Unit,
+) {
+    Button(
+        enabled = enabled,
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            contentColor = color,
+            containerColor = color,
+            disabledContainerColor = color
+        ),
+        contentPadding = PaddingValues(vertical = 8.dp),
+        modifier = modifier,
+        shape = shape,
+    ) {
+        startDrawable?.let {
+            UISpacer(8)
+            UIIcon(
+                drawable = it,
+                modifier = Modifier.size(20.dp),
+                tint = textColor
+            )
+            UISpacer(8)
+        }
+        Text(
+            text = title,
+            color = if (enabled) {
+                textColor
+            } else {
+                textColor.copy(alpha = .5f)
+            },
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .wrapContentWidth()
+                .offset(x = if (startDrawable != null) (-10).dp else 0.dp)
+        )
+
+        endDrawable?.let {
+            UISpacer(8)
+            UIIcon(
+                drawable = it,
+                modifier = Modifier
+                    .offset(x = (-5).dp)
+                    .size(20.dp),
+                tint = textColor
+            )
+            UISpacer(8)
+        }
+    }
+}
+
 

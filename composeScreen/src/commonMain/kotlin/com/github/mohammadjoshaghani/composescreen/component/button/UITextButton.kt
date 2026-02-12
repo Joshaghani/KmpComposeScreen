@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
 import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
+import org.jetbrains.compose.resources.DrawableResource
 
 @Composable
 fun UITextButton(
@@ -27,8 +29,6 @@ fun UITextButton(
     modifier: Modifier = Modifier,
     paddingHorizontal: Int = 16,
     textColor: Color = MaterialTheme.colorScheme.primary,
-    leftIcon: IconSourceType? = null,
-    rightIcon: IconSourceType? = null,
     onClick: () -> Unit,
 ) {
 
@@ -45,7 +45,45 @@ fun UITextButton(
         horizontalArrangement = Arrangement.Center
     ) {
 
-        leftIcon?.let {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor.copy(alpha = if (enable) 1.0f else 0.3f),
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.wrapContentWidth().basicMarquee(iterations = Int.MAX_VALUE)
+        )
+
+    }
+}
+
+@Composable
+fun UITextButton(
+    title: String,
+    enable: Boolean = true,
+    modifier: Modifier = Modifier,
+    paddingHorizontal: Int = 16,
+    textColor: Color = MaterialTheme.colorScheme.primary,
+    startIcon: IconSourceType? = null,
+    endIcon: IconSourceType? = null,
+    onClick: () -> Unit,
+) {
+
+    Row(
+        modifier = modifier
+            .clipToBounds()
+            .clip(MaterialTheme.shapes.medium)
+            .themeClickable(enabled = enable) {
+                onClick()
+            }
+            .padding(horizontal = paddingHorizontal.dp),
+
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        startIcon?.let {
             UIIcon(icon = it, tint = textColor)
             UISpacer(8)
         }
@@ -60,8 +98,102 @@ fun UITextButton(
             modifier = Modifier.wrapContentWidth().basicMarquee(iterations = Int.MAX_VALUE)
         )
 
-        rightIcon?.let {
+        endIcon?.let {
             UIIcon(icon = it, tint = textColor)
+            UISpacer(8)
+        }
+    }
+}
+
+@Composable
+fun UITextButton(
+    title: String,
+    enable: Boolean = true,
+    modifier: Modifier = Modifier,
+    paddingHorizontal: Int = 16,
+    textColor: Color = MaterialTheme.colorScheme.primary,
+    startIcon: ImageVector? = null,
+    endIcon: ImageVector? = null,
+    onClick: () -> Unit,
+) {
+
+    Row(
+        modifier = modifier
+            .clipToBounds()
+            .clip(MaterialTheme.shapes.medium)
+            .themeClickable(enabled = enable) {
+                onClick()
+            }
+            .padding(horizontal = paddingHorizontal.dp),
+
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        startIcon?.let {
+            UIIcon(icon = it, tint = textColor)
+            UISpacer(8)
+        }
+
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor.copy(alpha = if (enable) 1.0f else 0.3f),
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.wrapContentWidth().basicMarquee(iterations = Int.MAX_VALUE)
+        )
+
+        endIcon?.let {
+            UIIcon(icon = it, tint = textColor)
+            UISpacer(8)
+        }
+    }
+}
+
+@Composable
+fun UITextButton(
+    title: String,
+    enable: Boolean = true,
+    modifier: Modifier = Modifier,
+    paddingHorizontal: Int = 16,
+    textColor: Color = MaterialTheme.colorScheme.primary,
+    startIcon: DrawableResource? = null,
+    endIcon: DrawableResource? = null,
+    onClick: () -> Unit,
+) {
+
+    Row(
+        modifier = modifier
+            .clipToBounds()
+            .clip(MaterialTheme.shapes.medium)
+            .themeClickable(enabled = enable) {
+                onClick()
+            }
+            .padding(horizontal = paddingHorizontal.dp),
+
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+
+        startIcon?.let {
+            UIIcon(drawable = it, tint = textColor)
+            UISpacer(8)
+        }
+
+        Text(
+            text = title,
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor.copy(alpha = if (enable) 1.0f else 0.3f),
+            softWrap = false,
+            maxLines = 1,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.wrapContentWidth().basicMarquee(iterations = Int.MAX_VALUE)
+        )
+
+        endIcon?.let {
+            UIIcon(drawable = it, tint = textColor)
             UISpacer(8)
         }
     }

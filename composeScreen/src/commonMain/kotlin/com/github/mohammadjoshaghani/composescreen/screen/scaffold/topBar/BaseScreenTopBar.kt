@@ -14,6 +14,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
@@ -43,8 +44,9 @@ fun BaseScreenTopBar(
     val fraction = scrollBehavior.state.overlappedFraction
 
     Surface(
-        shadowElevation = if (fraction > 0.01f) 8.dp else 0.dp,
-        tonalElevation = 0.dp // اگر نمی‌خواهید رنگش با ارتفاع عوض شود، این را 0 بگذارید
+        Modifier.zIndex(5f),
+        shadowElevation = if (topAppBar.isStickyHeader) 0.dp else if (fraction > 0.01f) 8.dp else 0.dp,
+        tonalElevation = 0.dp
     ) {
 
         when (topAppBar.topbarType) {

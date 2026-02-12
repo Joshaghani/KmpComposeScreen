@@ -21,11 +21,13 @@ object AppBarSetting {
         containerColor: Color = Color.Unspecified,
         scrolledContainerColor: Color = Color.Unspecified,
         topbarType: TopbarType = TopbarType.NORMAL,
+        isStickyHeader: Boolean = false,
     ) = apply {
         this.topAppBar.apply {
             this.containerColor = containerColor
             this.scrolledContainerColor = scrolledContainerColor
             this.topbarType = topbarType
+            this.isStickyHeader = isStickyHeader
         }
     }
 
@@ -67,6 +69,7 @@ data class TopAppBar @OptIn(ExperimentalMaterial3Api::class) constructor(
     var containerColor: Color = Color.Unspecified,
     var scrolledContainerColor: Color = Color.Unspecified,
     var topbarType: TopbarType = TopbarType.NORMAL,
+    var isStickyHeader: Boolean = false
 )
 
 data class BottomAppBar(
@@ -78,7 +81,7 @@ data class BottomAppBar(
 
 data class NavigationRailAppBar(
     var color: Color = Color.Unspecified,
-    var backGroundColor: Color = ApplicationConfig.color.onSecondary,
+    var backGroundColor: Color = Color.Unspecified,
     var shadowElevation: Dp = 4.dp,
     var shape: Shape = RoundedCornerShape(12.dp),
     var tonalElevation: Dp = 0.dp,
