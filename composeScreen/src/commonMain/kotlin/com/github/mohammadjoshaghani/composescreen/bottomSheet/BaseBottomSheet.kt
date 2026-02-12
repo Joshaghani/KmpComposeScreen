@@ -38,7 +38,10 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
                 ShowErrorScreen()
             }
 
-            else -> ComposeView(viewModel.state.value)
+            else -> {
+                ComposeView(viewModel.state.value)
+
+            }
         }
     }
 

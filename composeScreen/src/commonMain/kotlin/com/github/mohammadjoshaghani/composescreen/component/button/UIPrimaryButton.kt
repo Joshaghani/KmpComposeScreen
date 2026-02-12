@@ -1,6 +1,7 @@
 package com.github.mohammadjoshaghani.composescreen.component.button
 
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 
@@ -24,58 +26,61 @@ import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 fun UIPrimaryButton(
     title: String,
     modifier: Modifier = Modifier,
-    leftIconPainter: IconSourceType? = null,
-    rightIconPainter: IconSourceType? = null,
+    leftIcon: IconSourceType? = null,
+    rightIcon: IconSourceType? = null,
     enabled: Boolean = true,
-    paddingTop: Dp = 0.dp,
     textColor: Color = White,
     color: Color = MaterialTheme.colorScheme.primary,
-    tint: Color = MaterialTheme.colorScheme.onPrimary,
     shape: Shape = MaterialTheme.shapes.large,
     onClick: () -> Unit,
 ) {
     Button(
-        onClick = onClick,
         enabled = enabled,
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            color,
             contentColor = color,
+            containerColor = color,
+            disabledContainerColor = color
         ),
-        modifier = modifier.padding(top = paddingTop),
-        shape = shape
+        contentPadding = PaddingValues(vertical = 8.dp),
+        modifier = modifier,
+        shape = shape,
     ) {
-        leftIconPainter?.let {
+        leftIcon?.let {
+            UISpacer(8)
             UIIcon(
                 icon = it,
-                modifier = Modifier
-                    .padding(horizontal = 8.dp)
-                    .offset(x = (-10).dp)
-                    .size(20.dp),
-                tint = tint
+                modifier = Modifier.size(20.dp),
+                tint = textColor
             )
+            UISpacer(8)
         }
-
         Text(
             text = title,
-            color = textColor,
+            color = if (enabled) {
+                textColor
+            } else {
+                textColor.copy(alpha = .5f)
+            },
             softWrap = false,
             maxLines = 1,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
+                .padding(horizontal = 8.dp)
                 .wrapContentWidth()
-                .offset(x = if (leftIconPainter != null) (-10).dp else 0.dp)
-                .basicMarquee()
+                .offset(x = if (leftIcon != null) (-10).dp else 0.dp)
         )
 
-        rightIconPainter?.let {
+        rightIcon?.let {
+            UISpacer(8)
             UIIcon(
                 icon = it,
                 modifier = Modifier
-                    .padding(horizontal = 8.dp)
                     .offset(x = (-5).dp)
                     .size(20.dp),
-                tint = tint
+                tint = textColor
             )
+            UISpacer(8)
         }
     }
 }

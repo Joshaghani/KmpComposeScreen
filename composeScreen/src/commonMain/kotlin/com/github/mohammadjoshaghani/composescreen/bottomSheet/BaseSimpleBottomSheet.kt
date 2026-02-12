@@ -13,6 +13,7 @@ abstract class BaseSimpleBottomSheet : Screen {
     @Composable
     override fun Content() {
         ComposeView()
+
     }
 
     @Composable

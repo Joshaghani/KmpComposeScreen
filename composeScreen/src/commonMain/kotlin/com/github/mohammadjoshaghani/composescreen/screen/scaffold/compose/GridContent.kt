@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
@@ -20,7 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
@@ -33,17 +32,17 @@ fun GridContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     appBarSetting: AppBarSetting = AppBarSetting,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<IconButtonModel> = emptyList(),
+    navItems: List<ButtonModel> = emptyList(),
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
     columns: GridCells,
     isLoading: Boolean = false, // اضافه شد
     onLoadMore: (() -> Unit)? = null, // اضافه شد
-    content: LazyGridScope.(LazyGridState) -> Unit
+    content: LazyGridScope.() -> Unit
 ) {
     val gridState = rememberLazyGridState()
 
@@ -60,12 +59,13 @@ fun GridContent(
         endPanel = endPanel,
         bottomBar = bottomBar,
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
+        Box(modifier = Modifier
+            .padding(padding)) {
             LazyVerticalGrid(
                 columns = columns,
                 state = gridState
             ) {
-                content(gridState)
+                content()
 
                 // تشخیص رسیدن به انتهای گرید
                 item(span = { GridItemSpan(maxLineSpan) }) {

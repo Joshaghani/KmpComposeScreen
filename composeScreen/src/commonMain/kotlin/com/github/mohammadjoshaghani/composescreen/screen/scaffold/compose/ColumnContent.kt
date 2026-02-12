@@ -9,7 +9,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
@@ -22,10 +22,10 @@ fun ColumnContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     appBarSetting: AppBarSetting = AppBarSetting,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,

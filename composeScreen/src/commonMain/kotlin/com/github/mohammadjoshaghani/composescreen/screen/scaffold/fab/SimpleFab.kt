@@ -7,14 +7,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 internal fun SimpleFab(
     fabIconModel: FabIconModel,
     isWideScreen: Boolean,
-    navItems: List<IconButtonModel> = emptyList(),
+    navItems: List<ButtonModel> = emptyList(),
 ) {
     FloatingActionButton(
         modifier = Modifier.offset(

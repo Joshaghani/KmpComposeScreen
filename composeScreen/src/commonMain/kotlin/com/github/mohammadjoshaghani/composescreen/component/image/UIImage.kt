@@ -23,9 +23,9 @@ fun UIImage(
     colorFilter: ColorFilter? = null,
 ) {
     when(image) {
-        is IconSourceType.IconBitmap -> UIImageBitmap(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
-        is IconSourceType.IconResource -> UIImageResource(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
-        is IconSourceType.IconVector -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.Bitmap -> UIImageBitmap(image.bitmap, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.Drawable -> UIImageResource(image.drawable, modifier, alignment, contentScale, alpha, colorFilter)
+        is IconSourceType.Icon -> UIImageVector(image.icon, modifier, alignment, contentScale, alpha, colorFilter)
     }
 }
 

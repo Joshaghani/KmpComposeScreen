@@ -15,9 +15,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,18 +23,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.koin.koinScreenModel
 import com.example.kmpcomposescreen.screen.content.main.utils.iconsActionTopBar
 import com.example.kmpcomposescreen.textFieldTheme.UITextField
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
-import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 
 class ProductsScreen : BaseSimpleScreen(),
     KoinComponent, IClearStack {
@@ -49,8 +44,8 @@ class ProductsScreen : BaseSimpleScreen(),
         ListContent(
             topbarModel = titleTopBar(),
             actions = iconsActionTopBar(
-                IconButtonModel(
-                    iconVector =Icons.Rounded.Add,
+                ButtonModel(
+                    icon =Icons.Rounded.Add,
                     title = "addProduct",
                     onClick = {
 

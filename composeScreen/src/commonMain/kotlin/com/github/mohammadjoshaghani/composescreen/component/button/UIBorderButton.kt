@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,7 @@ fun UIBorderButton(
                 modifier = Modifier.size(20.dp),
                 tint = textColor
             )
+            UISpacer(8)
         }
         Text(
             text = title,
@@ -74,6 +76,7 @@ fun UIBorderButton(
         )
 
         rightIcon?.let {
+            UISpacer(8)
             UIIcon(
                 icon = it,
                 modifier = Modifier

@@ -11,32 +11,37 @@ import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceTyp
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import org.jetbrains.compose.resources.DrawableResource
 
-data class IconButtonModel(
-
-    val iconVector: ImageVector? = null,
-    val iconResource: DrawableResource? = null,
-    val iconBitmap: ImageBitmap? = null,
-
+data class ButtonModel(
+    val buttonType: ButtonType = ButtonType.Icon,
+    val icon: ImageVector? = null,
+    val drawable: DrawableResource? = null,
+    val bitmap: ImageBitmap? = null,
     val title: String? = null,
     val tooltip: String? = null,
-    val doesButtonHaveBorder: Boolean = true,
     val isSelected: Boolean = false,
     val badgeItem: BadgeItem = BadgeItem.None,
     val modifier: Modifier = Modifier,
     val shape: Shape = RoundedCornerShape(12.dp),
-    val tint: Color = ApplicationConfig.color.onBackground,
+    val tint: Color? = null,
     val onClick: (() -> Unit)? = null,
 ) {
 
-    val icon: IconSourceType?
+    val iconSource: IconSourceType?
         get() {
-            if (iconVector != null) {
-                return IconSourceType.IconVector(iconVector)
-            } else if (iconResource != null) {
-                return IconSourceType.IconResource(iconResource)
-            } else if (iconBitmap != null) {
-                return IconSourceType.IconBitmap(iconBitmap)
+            if (icon != null) {
+                return IconSourceType.Icon(icon)
+            } else if (drawable != null) {
+                return IconSourceType.Drawable(drawable)
+            } else if (bitmap != null) {
+                return IconSourceType.Bitmap(bitmap)
             }
             return null
         }
+}
+
+enum class ButtonType {
+    Icon,
+    BorderButton,
+    PrimaryButton,
+    TextButton,
 }

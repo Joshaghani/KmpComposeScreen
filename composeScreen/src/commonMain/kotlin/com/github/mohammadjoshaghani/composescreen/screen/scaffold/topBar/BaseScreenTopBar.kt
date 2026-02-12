@@ -1,31 +1,24 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.utils.TopAppBar
 
@@ -35,8 +28,8 @@ fun BaseScreenTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     topAppBar: TopAppBar,
     topbarModel: TopbarModel,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
 ) {
 
     if (
@@ -90,8 +83,8 @@ fun NormalAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
     topAppBar: TopAppBar,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
 ) {
     TopAppBar(
         scrollBehavior = scrollBehavior,
@@ -102,18 +95,18 @@ fun NormalAppbar(
                 is TopbarModel.Text -> Text(
                     topbarModel.title,
                     maxLines = 1,
-                    modifier = Modifier.basicMarquee()
+                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )
             }
         },
         actions = {
             actions.forEach { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
             }
         },
         navigationIcon = {
             navigationIcon?.let { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
 
             } ?: run {
                 val navigator = LocalNavigator.currentOrThrow
@@ -140,8 +133,8 @@ fun MediumAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
     topAppBar: TopAppBar,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
 ) {
     MediumTopAppBar(
         scrollBehavior = scrollBehavior,
@@ -152,18 +145,18 @@ fun MediumAppbar(
                 is TopbarModel.Text -> Text(
                     topbarModel.title,
                     maxLines = 1,
-                    modifier = Modifier.basicMarquee()
+                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )
             }
         },
         actions = {
             actions.forEach { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
             }
         },
         navigationIcon = {
             navigationIcon?.let { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
 
             } ?: run {
                 val navigator = LocalNavigator.currentOrThrow
@@ -190,8 +183,8 @@ fun LargeAppbar(
     scrollBehavior: TopAppBarScrollBehavior,
     topbarModel: TopbarModel,
     topAppBar: TopAppBar,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
 ) {
     LargeTopAppBar(
         scrollBehavior = scrollBehavior,
@@ -202,18 +195,18 @@ fun LargeAppbar(
                 is TopbarModel.Text -> Text(
                     topbarModel.title,
                     maxLines = 1,
-                    modifier = Modifier.basicMarquee()
+                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
                 )
             }
         },
         actions = {
             actions.forEach { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
             }
         },
         navigationIcon = {
             navigationIcon?.let { icon ->
-                UIIconButton(icon)
+                UIButton(icon)
 
             } ?: run {
                 val navigator = LocalNavigator.currentOrThrow

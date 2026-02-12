@@ -2,7 +2,6 @@ package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
@@ -12,7 +11,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.BaseScreenBottomBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScreenFab
@@ -28,10 +27,10 @@ fun BaseScreenScaffold(
     topbarModel: TopbarModel,
     appBarSetting: AppBarSetting,
     scrollBehavior: TopAppBarScrollBehavior,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
@@ -52,6 +51,7 @@ fun BaseScreenScaffold(
                     focusManager.clearFocus()
                 }
                 .imePadding()
+                .navigationBarsPadding()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
                 BaseScreenTopBar(

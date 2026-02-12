@@ -55,7 +55,7 @@ class OrderScreen : BaseSimpleScreen(),
         ListContent(
             topbarModel = titleTopBar(),
             actions = iconsActionTopBar()
-        ) { listState ->
+        ) {
             stickyHeader {
                 ComposeStickyView()
             }

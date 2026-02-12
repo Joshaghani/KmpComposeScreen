@@ -29,7 +29,7 @@ fun UITextButton(
     textColor: Color = MaterialTheme.colorScheme.primary,
     leftIcon: IconSourceType? = null,
     rightIcon: IconSourceType? = null,
-    clickable: () -> Unit,
+    onClick: () -> Unit,
 ) {
 
     Row(
@@ -37,7 +37,7 @@ fun UITextButton(
             .clipToBounds()
             .clip(MaterialTheme.shapes.medium)
             .themeClickable(enabled = enable) {
-                clickable()
+                onClick()
             }
             .padding(horizontal = paddingHorizontal.dp),
 
@@ -57,7 +57,7 @@ fun UITextButton(
             softWrap = false,
             maxLines = 1,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.wrapContentWidth().basicMarquee()
+            modifier = Modifier.wrapContentWidth().basicMarquee(iterations = Int.MAX_VALUE)
         )
 
         rightIcon?.let {

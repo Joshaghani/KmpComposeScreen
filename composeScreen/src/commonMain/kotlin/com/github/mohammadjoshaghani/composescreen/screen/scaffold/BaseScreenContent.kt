@@ -21,14 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
-import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBar
 
 @Composable
 fun BaseScreenContent(
-    navItems: List<IconButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
+    navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     paddingValues: PaddingValues,
@@ -69,7 +68,7 @@ fun BaseScreenContent(
                                 selected = item.isSelected,
                                 onClick = item.onClick ?: {},
                                 icon = {
-                                    UIIconButton(
+                                    UIButton(
                                         model = item.copy(
                                             tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
                                             onClick = null

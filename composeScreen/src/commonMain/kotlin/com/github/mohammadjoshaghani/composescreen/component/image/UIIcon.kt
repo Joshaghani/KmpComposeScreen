@@ -19,9 +19,9 @@ fun UIIcon(
 ) {
 
     when (icon) {
-        is IconSourceType.IconResource -> UIIcon(icon.icon, modifier, tint)
-        is IconSourceType.IconVector -> UIIcon(icon.icon, modifier, tint)
-        is IconSourceType.IconBitmap -> UIIcon(icon.icon, modifier, tint)
+        is IconSourceType.Drawable -> UIIcon(icon.drawable, modifier, tint)
+        is IconSourceType.Icon -> UIIcon(icon.icon, modifier, tint)
+        is IconSourceType.Bitmap -> UIIcon(icon.bitmap, modifier, tint)
         else -> {
             NullPointerException("icon of UIcon must not be null")
         }
@@ -31,12 +31,12 @@ fun UIIcon(
 
 @Composable
 fun UIIcon(
-    resource: DrawableResource,
+    drawable: DrawableResource,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
 ) {
     Icon(
-        painter = painterResource(resource),
+        painter = painterResource(drawable),
         contentDescription = null,
         modifier = modifier,
         tint = tint
@@ -45,12 +45,12 @@ fun UIIcon(
 
 @Composable
 fun UIIcon(
-    imageVector: ImageVector,
+    icon: ImageVector,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
 ) {
     Icon(
-        imageVector = imageVector,
+        imageVector = icon,
         contentDescription = null,
         modifier = modifier,
         tint = tint

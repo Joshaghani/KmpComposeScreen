@@ -5,13 +5,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,11 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.IconButtonModel
+import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
@@ -35,16 +31,16 @@ fun ListContent(
     topbarModel: TopbarModel = TopbarModel.Nothing,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     appBarSetting: AppBarSetting = AppBarSetting,
-    actions: List<IconButtonModel> = emptyList(),
-    navigationIcon: IconButtonModel? = null,
+    actions: List<ButtonModel> = emptyList(),
+    navigationIcon: ButtonModel? = null,
     floatingActionButton: FabIconModel? = null,
-    navItems: List<IconButtonModel> = emptyList(),
+    navItems: List<ButtonModel> = emptyList(),
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
     bottomBar: (@Composable () -> Unit)? = null,
     isLoading: Boolean = false, // وضعیت لودینگ رو پاس بدید
     onLoadMore: (() -> Unit)? = null, // تابعی که دیتای جدید رو میاره
-    content: LazyListScope.(LazyListState) -> Unit
+    content: LazyListScope.() -> Unit
 ) {
     val listState = rememberLazyListState()
 
@@ -60,10 +56,11 @@ fun ListContent(
         endPanel = endPanel,
         bottomBar = bottomBar,
     ) { padding ->
-        Box(modifier = Modifier.padding(padding)) {
+        Box(modifier = Modifier
+            .padding(padding)) {
             LazyColumn(state = listState) {
                 // محتوای اصلی لیست
-                content(listState)
+                content()
 
                 item {
                     if (onLoadMore != null) {

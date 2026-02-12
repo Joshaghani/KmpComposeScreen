@@ -2,7 +2,6 @@
 
 package com.github.mohammadjoshaghani.composescreen.component.button.IconButton
 
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,7 +20,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.component.image.IconSourceType
 import com.github.mohammadjoshaghani.composescreen.component.image.UIBadgeIcon
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
@@ -40,70 +38,32 @@ fun UIIconButton(
     TooltipBox(
         positionProvider = TooltipDefaults.rememberTooltipPositionProvider(
             TooltipAnchorPosition.Above,
-            8.dp
+            0.dp
         ),
         tooltip = { tooltip?.let { PlainTooltip { Text(it) } } },
         state = rememberTooltipState(),
         modifier = modifier,
     ) {
-        UIBadgeIcon(badgeItem) {
-            onClick?.let {
-                IconButton(
-                    onClick = onClick,
-                    shape = shape,
-                ) {
+        onClick?.let {
+            IconButton(
+                onClick = onClick,
+                shape = shape,
+            ) {
+                UIBadgeIcon(badgeItem) {
                     iconContent()
                 }
-            } ?: run {
-                Box(modifier.padding(16.dp)) {
+            }
+        } ?: run {
+            Box(modifier.padding(16.dp)) {
+                UIBadgeIcon(badgeItem) {
                     iconContent()
                 }
             }
         }
+
     }
 }
 
-
-@Composable
-fun UIIconButton(
-    model: IconButtonModel
-) {
-
-    when (val icon = model.icon) {
-        is IconSourceType.IconBitmap -> UIIconButton(
-            icon = icon.icon,
-            tooltip = model.tooltip,
-            badgeItem = model.badgeItem,
-            modifier = model.modifier,
-            tint = model.tint,
-            shape = model.shape,
-            onClick = model.onClick
-        )
-
-        is IconSourceType.IconResource -> UIIconButton(
-            icon = icon.icon,
-            tooltip = model.tooltip,
-            badgeItem = model.badgeItem,
-            modifier = model.modifier,
-            tint = model.tint,
-            shape = model.shape,
-            onClick = model.onClick
-        )
-
-        is IconSourceType.IconVector -> UIIconButton(
-            icon = icon.icon,
-            tooltip = model.tooltip,
-            badgeItem = model.badgeItem,
-            modifier = model.modifier,
-            tint = model.tint,
-            shape = model.shape,
-            onClick = model.onClick
-        )
-
-        null -> {}
-    }
-
-}
 
 
 @Composable

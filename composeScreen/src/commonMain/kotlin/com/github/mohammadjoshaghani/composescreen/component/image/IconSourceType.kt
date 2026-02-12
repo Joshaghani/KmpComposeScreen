@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import org.jetbrains.compose.resources.DrawableResource
 
 sealed interface IconSourceType{
-    data class IconVector(val icon: ImageVector) : IconSourceType
-    data class IconResource(val icon: DrawableResource) : IconSourceType
-    data class IconBitmap(val icon: ImageBitmap) : IconSourceType
+    data class Icon(val icon: ImageVector) : IconSourceType
+    data class Drawable(val drawable: DrawableResource) : IconSourceType
+    data class Bitmap(val bitmap: ImageBitmap) : IconSourceType
 
 }
