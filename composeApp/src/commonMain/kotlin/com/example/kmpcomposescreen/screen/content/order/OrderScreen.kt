@@ -104,7 +104,7 @@ class OrderScreen : BaseSimpleScreen(),
             UIBorderCard(
                 shape = CircleShape,
                 paddingValue = 4.dp,
-                clickable = {
+                onClick = {
                     selectedFilter = if (selectedFilter == 0) null else 0
                 },
                 backgroundColor = if (selectedFilter == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
@@ -120,7 +120,7 @@ class OrderScreen : BaseSimpleScreen(),
             UIBorderCard(
                 shape = CircleShape,
                 paddingValue = 4.dp,
-                clickable = {
+                onClick = {
                     selectedFilter = if (selectedFilter == 1) null else 1
                 },
                 backgroundColor = if (selectedFilter == 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
@@ -136,7 +136,7 @@ class OrderScreen : BaseSimpleScreen(),
             UIBorderCard(
                 shape = CircleShape,
                 paddingValue = 4.dp,
-                clickable = {
+                onClick = {
                     selectedFilter = if (selectedFilter == 2) null else 2
                 },
                 backgroundColor = if (selectedFilter == 2) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,
@@ -152,7 +152,7 @@ class OrderScreen : BaseSimpleScreen(),
             UIBorderCard(
                 shape = CircleShape,
                 paddingValue = 4.dp,
-                clickable = {
+                onClick = {
                     selectedFilter = if (selectedFilter == 3) null else 3
                 },
                 backgroundColor = if (selectedFilter == 3) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surface,

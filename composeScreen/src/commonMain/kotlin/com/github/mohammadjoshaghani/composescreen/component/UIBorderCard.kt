@@ -24,7 +24,7 @@ fun UIBorderCard(
     backgroundColor: Color = MaterialTheme.colorScheme.surface,
     borderColor: Color = MaterialTheme.colorScheme.outlineVariant,
     elevation: Dp = 0.dp,
-    clickable: (() -> Unit)? = null,
+    onClick: (() -> Unit)? = null,
     paddingValue: Dp = 16.dp,
     borderWidth: Dp = 1.dp,
     shape: CornerBasedShape = MaterialTheme.shapes.medium,
@@ -49,14 +49,14 @@ fun UIBorderCard(
         },
     ) {
 
-        if (clickable != null) {
+        if (onClick != null) {
             Column(
                 verticalArrangement = verticalArrangement,
                 horizontalAlignment = horizontalAlignment,
                 modifier = Modifier
                     .clip(shape)
                     .themeClickable {
-                        clickable()
+                        onClick()
                     }.padding(16.dp), content = content
             )
         } else {

@@ -24,17 +24,17 @@ internal fun SimpleFab(
                 } else 0.dp
         ),
         containerColor = MaterialTheme.colorScheme.primary,
-        onClick = fabIconModel.onFabPressed
+        onClick = fabIconModel.onClick
     ) {
-        if (fabIconModel.iconResource != null) {
+        if (fabIconModel.drawable != null) {
             Icon(
-                painterResource(fabIconModel.iconResource),
+                painterResource(fabIconModel.drawable),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onPrimary
             )
-        } else if (fabIconModel.iconVector != null) {
+        } else if (fabIconModel.icon != null) {
             Icon(
-                fabIconModel.iconVector,
+                fabIconModel.icon,
                 contentDescription = null,
 
                 tint = MaterialTheme.colorScheme.onPrimary

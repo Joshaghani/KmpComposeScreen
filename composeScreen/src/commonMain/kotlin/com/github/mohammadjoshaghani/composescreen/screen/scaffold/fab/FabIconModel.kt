@@ -9,10 +9,10 @@ import org.jetbrains.compose.resources.DrawableResource
 
 data class FabIconModel(
     val customCompose: (@Composable () -> Unit)? = null,
-    val iconResource: DrawableResource? = null,
-    val iconVector: ImageVector? = null,
+    val drawable: DrawableResource? = null,
+    val icon: ImageVector? = null,
     val title: String? = null,
-    val onFabPressed: () -> Unit,
+    val onClick: () -> Unit,
     var fabPosition: FabPosition = FabPosition.End,
     var paddingFromStart: Dp = 72.dp
 )

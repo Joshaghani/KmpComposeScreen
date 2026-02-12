@@ -11,8 +11,6 @@ import com.example.kmpcomposescreen.theme.ExampleTheme
 import com.example.kmpcomposescreen.theme.color.getApplicationColorScheme
 import com.github.mohammadjoshaghani.composescreen.app.ComposeScreen
 import com.github.mohammadjoshaghani.composescreen.extension.themeClickable
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig.errorScreen
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig.loadingScreen
 
 @Composable
 fun App() {
