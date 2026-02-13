@@ -1,5 +1,6 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
@@ -21,6 +22,8 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconMo
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.input.pointer.pointerInput
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -41,29 +44,44 @@ fun BaseScreenScaffold(
 ) {
 
     val windowSizeClass = calculateWindowSizeClass()
-    val isWideScreen = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
-
+    val isWideScreen = remember(windowSizeClass) {
+        windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
+    }
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
     ProvideLayoutDirection {
         Scaffold(
             modifier = Modifier
-                .noRippleClickable {
-                    keyboardController?.hide()
-                    focusManager.clearFocus()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        keyboardController?.hide()
+                        focusManager.clearFocus()
+                    })
                 }
                 .imePadding()
                 .navigationBarsPadding()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                val fraction = scrollBehavior.state.overlappedFraction
 
+                val fraction by remember {
+                    derivedStateOf { scrollBehavior.state.overlappedFraction }
+                }
+
+                val containerColor by remember {
+                    derivedStateOf {
+                        lerp(
+                            appBarSetting.topAppBar.containerColor,
+                            appBarSetting.topAppBar.scrolledContainerColor,
+                            fraction.coerceIn(0f, 1f)
+                        )
+                    }
+                }
                 Surface(
                     Modifier.zIndex(5f),
                     shadowElevation = if (fraction > 0.01f) 8.dp else 0.dp,
                     tonalElevation = 0.dp,
-                    color = if (fraction > 0.01f) appBarSetting.topAppBar.scrolledContainerColor else appBarSetting.topAppBar.containerColor
+                    color = containerColor
 
                 ) {
                     Column {
