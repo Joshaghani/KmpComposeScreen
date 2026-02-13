@@ -11,7 +11,6 @@ import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,55 +18,69 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.Navigator
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
+import kotlin.math.abs
 
 @Composable
 fun SwipeToGoBackWrapper(
-    threshold: Float = 100f,
+    thresholdDp: Float = 72f, // dp، نه px
     content: @Composable () -> Unit,
 ) {
     val layoutDirection = LocalLayoutDirection.current
+    val density = LocalDensity.current
 
-    var totalDrag by remember { mutableFloatStateOf(0f) }
+    // drag به px است
+    var totalDragPx by remember { mutableFloatStateOf(0f) }
     var showIcon by remember { mutableStateOf(false) }
 
+    // threshold رو به px تبدیل می‌کنیم تا مقایسه درست باشه
+    val thresholdPx = remember(thresholdDp, density) {
+        with(density) { thresholdDp.dp.toPx() }
+    }
+
     val iconOffset by animateDpAsState(
-        targetValue = if (showIcon) 50.dp else (-200).dp,
-        animationSpec = spring()
+        targetValue = if (showIcon) 24.dp else (-200).dp,
+        animationSpec = spring(),
+        label = "SwipeBackIconOffset"
     )
+
+    val iconAlignment = if (layoutDirection == LayoutDirection.Rtl) {
+        Alignment.CenterEnd
+    } else {
+        Alignment.CenterStart
+    }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .pointerInput(layoutDirection) {
+            .pointerInput(layoutDirection, thresholdPx) {
                 detectHorizontalDragGestures(
                     onDragStart = {
-                        totalDrag = 0f
+                        totalDragPx = 0f
                         showIcon = false
                     },
-                    onHorizontalDrag = { change, dragAmount ->
+                    onHorizontalDrag = { change, dragAmountPx ->
                         change.consume()
+                        totalDragPx += dragAmountPx
 
-                        totalDrag += dragAmount
-                        // در RTL، درگ از راست به چپ باید منفی باشد
-                        // در LTR، درگ از چپ به راست باید مثبت باشد
-                        showIcon = when (layoutDirection) {
-                            LayoutDirection.Rtl -> totalDrag < 0
-                            LayoutDirection.Ltr -> totalDrag > 0
-                        }
+                        // فقط وقتی درگ در جهت "back" هست آیکن رو نشون بده
+                        showIcon = isBackDirectionDrag(layoutDirection, totalDragPx)
                     },
                     onDragEnd = {
                         val shouldNavigateBack = when (layoutDirection) {
-                            LayoutDirection.Rtl -> totalDrag < -threshold
-                            LayoutDirection.Ltr -> totalDrag > threshold
+                            LayoutDirection.Rtl -> totalDragPx < -thresholdPx
+                            LayoutDirection.Ltr -> totalDragPx > thresholdPx
                         }
+
                         if (shouldNavigateBack) {
                             ApplicationConfig.navigator?.pop()
                         }
-                        totalDrag = 0f
+
+                        totalDragPx = 0f
                         showIcon = false
                     }
                 )
@@ -80,8 +93,15 @@ fun SwipeToGoBackWrapper(
             imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowRight,
             contentDescription = "Back",
             modifier = Modifier
-                .align(Alignment.CenterStart)
+                .align(iconAlignment)
                 .offset(x = iconOffset)
         )
     }
+}
+
+private fun isBackDirectionDrag(layoutDirection: LayoutDirection, totalDragPx: Float): Boolean {
+    return when (layoutDirection) {
+        LayoutDirection.Rtl -> totalDragPx < 0f
+        LayoutDirection.Ltr -> totalDragPx > 0f
+    } && abs(totalDragPx) > 6f // deadzone کوچیک برای جلوگیری از flicker
 }

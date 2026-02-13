@@ -6,7 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
@@ -16,18 +19,25 @@ fun UIIcon(
     icon: IconSourceType?,
     modifier: Modifier = Modifier,
     tint: Color = LocalContentColor.current,
+    contentDescription: String? = null,
 ) {
+    if (icon == null) return // به جای کرش، هیچی نشون نده
 
-    when (icon) {
-        is IconSourceType.Drawable -> UIIcon(icon.drawable, modifier, tint)
-        is IconSourceType.Icon -> UIIcon(icon.icon, modifier, tint)
-        is IconSourceType.Bitmap -> UIIcon(icon.bitmap, modifier, tint)
-        else -> {
-            NullPointerException("icon of UIcon must not be null")
-        }
-    }
-
+    Icon(
+        painter = icon.toPainter(),
+        contentDescription = contentDescription,
+        modifier = modifier,
+        tint = tint
+    )
 }
+
+@Composable
+private fun IconSourceType.toPainter(): Painter = when (this) {
+    is IconSourceType.Drawable -> painterResource(drawable)
+    is IconSourceType.Icon -> rememberVectorPainter(icon)
+    is IconSourceType.Bitmap -> BitmapPainter(bitmap)
+}
+
 
 @Composable
 fun UIIcon(

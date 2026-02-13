@@ -11,10 +11,10 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 class AppBarSetting {
 
     @OptIn(ExperimentalMaterial3Api::class)
-    internal var topAppBar: TopAppBar = TopAppBar()
+    internal var topAppBarConfig: TopAppBarConfig = TopAppBarConfig()
 
-    internal var bottomAppBar: BottomAppBar = BottomAppBar()
-    internal var navigationRailAppBar: NavigationRailAppBar = NavigationRailAppBar()
+    internal var bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig()
+    internal var navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig()
 
 
     fun setTopBarSetting(
@@ -22,7 +22,7 @@ class AppBarSetting {
         scrolledContainerColor: Color = Color.Unspecified,
         topbarType: TopbarType = TopbarType.NORMAL,
     ) = apply {
-        this.topAppBar.apply {
+        this.topAppBarConfig.apply {
             this.containerColor = containerColor
             this.scrolledContainerColor = scrolledContainerColor
             this.topbarType = topbarType
@@ -36,7 +36,7 @@ class AppBarSetting {
         shadowElevation: Dp = 4.dp,
         tonalElevation: Dp = 0.dp,
     ) = apply {
-        this.bottomAppBar.apply {
+        this.bottomAppBarConfig.apply {
             this.containerColor = containerColor
             this.contentColor = contentColor
             this.shadowElevation = shadowElevation
@@ -52,7 +52,7 @@ class AppBarSetting {
         tonalElevation: Dp = 0.dp,
         padding: Dp = 16.dp
     ) = apply {
-        this.navigationRailAppBar.apply {
+        this.navigationRailAppBarConfig.apply {
             this.color = color
             this.backGroundColor = backGroundColor
             this.shadowElevation = shadowElevation
@@ -64,21 +64,21 @@ class AppBarSetting {
 
 }
 
-data class TopAppBar @OptIn(ExperimentalMaterial3Api::class) constructor(
+data class TopAppBarConfig @OptIn(ExperimentalMaterial3Api::class) constructor(
     var containerColor: Color = Color.Unspecified,
     var scrolledContainerColor: Color = Color.Unspecified,
     var topbarType: TopbarType = TopbarType.NORMAL,
     var isStickyHeader: Boolean = false
 )
 
-data class BottomAppBar(
+data class BottomAppBarConfig(
     var containerColor: Color = Color.Unspecified,
     var contentColor: Color = Color.Unspecified,
     var shadowElevation: Dp = 4.dp,
     var tonalElevation: Dp = 0.dp,
 )
 
-data class NavigationRailAppBar(
+data class NavigationRailAppBarConfig(
     var color: Color = Color.Unspecified,
     var backGroundColor: Color = Color.Unspecified,
     var shadowElevation: Dp = 4.dp,

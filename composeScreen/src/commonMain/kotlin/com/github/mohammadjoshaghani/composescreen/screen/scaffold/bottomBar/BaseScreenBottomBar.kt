@@ -11,8 +11,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,7 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
@@ -28,94 +25,112 @@ import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TypeShadow
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.UIShadow
-import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBar
-
+import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
 
 @Composable
 fun BaseScreenBottomBar(
     bottomBar: (@Composable () -> Unit)? = null,
-    bottomAppBar: BottomAppBar,
+    bottomAppBarConfig: BottomAppBarConfig,
     isWideScreen: Boolean,
-    navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
-    maxVisibleItems: Int = 4 // حداکثر آیتمی که مستقیم نشون داده میشه
-
+    navItems: List<ButtonModel> = emptyList(),
+    maxVisibleItems: Int = 4
 ) {
-
-    if (bottomBar != null) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            UIShadow(TypeShadow.BOTTOM_BAR)
-
-            BottomAppBar(
-//                modifier = Modifier.navigationBarsPadding(),
-                containerColor = bottomAppBar.containerColor,
-                contentColor = bottomAppBar.contentColor,
-            ) {
-                bottomBar()
+    when {
+        bottomBar != null -> {
+            BottomBarContainer {
+                BottomAppBar(
+                    containerColor = bottomAppBarConfig.containerColor,
+                    contentColor = bottomAppBarConfig.contentColor,
+                ) {
+                    bottomBar()
+                }
             }
         }
-    } else if (!isWideScreen && navItems.isNotEmpty()) {
-        var expanded by remember { mutableStateOf(false) }
 
-        // آیتم‌های مستقیم و باقی مانده
-        val mainItems = navItems.take(maxVisibleItems)
-        val overflowItems = navItems.drop(maxVisibleItems)
+        !isWideScreen && navItems.isNotEmpty() -> {
+            BottomNavBar(
+                config = bottomAppBarConfig,
+                navItems = navItems,
+                maxVisibleItems = maxVisibleItems
+            )
+        }
 
-        Box(modifier = Modifier.fillMaxWidth()) {
-            UIShadow(TypeShadow.BOTTOM_BAR)
+        else -> Unit
+    }
+}
 
-            NavigationBar(
-                containerColor = bottomAppBar.containerColor,
-                contentColor = bottomAppBar.contentColor,
-            ) {
-                // آیتم‌های اصلی
-                mainItems.forEach { item ->
-                    NavigationRailItem(
-                        selected = item.isSelected,
-                        onClick = item.onClick ?: {},
-                        icon = {
-                            UIButton(
-                                model = item.copy(
-                                    tint = if (item.isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface,
-                                    onClick = null
-                                )
+@Composable
+private fun BottomBarContainer(content: @Composable () -> Unit) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        UIShadow(TypeShadow.BOTTOM_BAR)
+        content()
+    }
+}
+
+@Composable
+private fun BottomNavBar(
+    config: BottomAppBarConfig,
+    navItems: List<ButtonModel>,
+    maxVisibleItems: Int,
+) {
+    val mainItems = navItems.take(maxVisibleItems)
+    val overflowItems = navItems.drop(maxVisibleItems)
+
+    var overflowExpanded by remember(overflowItems.size) { mutableStateOf(false) }
+
+    BottomBarContainer {
+        NavigationBar(
+            containerColor = config.containerColor,
+            contentColor = config.contentColor,
+        ) {
+            mainItems.forEach { item ->
+                NavigationBarItem(
+                    selected = item.isSelected,
+                    onClick = item.onClick ?: {},
+                    icon = {
+                        UIButton(
+                            model = item.copy(
+                                tint = if (item.isSelected)
+                                    MaterialTheme.colorScheme.primary
+                                else
+                                    MaterialTheme.colorScheme.onSurface,
+                                onClick = null
                             )
-                        },
-                        label = { item.title?.let { Text(it) } },
-                        colors = NavigationRailItemDefaults.colors(
-                            indicatorColor = Color.Transparent
                         )
-                    )
-                }
+                    },
+                    label = { item.title?.let { Text(it) } },
+                    alwaysShowLabel = item.title != null
+                )
+            }
 
-                // اگر آیتم اضافی هست، دکمه Overflow اضافه کن
-                if (overflowItems.isNotEmpty()) {
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = { expanded = true },
-                        icon = {
-                            Box {
-                                Icon(Icons.Default.MoreVert, contentDescription = "More")
-
-                                DropdownMenu(
-                                    expanded = expanded,
-                                    onDismissRequest = { expanded = false },
-                                    offset = DpOffset((-16).dp, (-4).dp)
-                                ) {
-                                    overflowItems.forEach { item ->
-                                        DropdownMenuItem(
-                                            text = { item.title?.let { Text(it) } },
-                                            leadingIcon = { UIIcon(item.iconSource) },
-                                            onClick = {
-                                                expanded = false
-                                                item.onClick?.invoke()
-                                            }
-                                        )
-                                    }
+            if (overflowItems.isNotEmpty()) {
+                NavigationBarItem(
+                    selected = false,
+                    onClick = { overflowExpanded = true },
+                    icon = {
+                        Box {
+                            Icon(Icons.Default.MoreVert, contentDescription = "More")
+                            DropdownMenu(
+                                expanded = overflowExpanded,
+                                onDismissRequest = { overflowExpanded = false },
+                                offset = DpOffset((-16).dp, (-4).dp)
+                            ) {
+                                overflowItems.forEach { item ->
+                                    DropdownMenuItem(
+                                        text = { item.title?.let { Text(it) } },
+                                        leadingIcon = { UIIcon(item.iconSource) },
+                                        onClick = {
+                                            overflowExpanded = false
+                                            item.onClick?.invoke()
+                                        }
+                                    )
                                 }
                             }
-                        },
-                    )
-                }
+                        }
+                    },
+                    label = { Text("More") },
+                    alwaysShowLabel = false
+                )
             }
         }
     }

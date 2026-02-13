@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
-import com.github.mohammadjoshaghani.composescreen.extension.noRippleClickable
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.BaseScreenBottomBar
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScreenFab
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
@@ -74,8 +73,8 @@ fun BaseScreenScaffold(
                 val containerColor by remember {
                     derivedStateOf {
                         lerp(
-                            appBarSetting.topAppBar.containerColor,
-                            appBarSetting.topAppBar.scrolledContainerColor,
+                            appBarSetting.topAppBarConfig.containerColor,
+                            appBarSetting.topAppBarConfig.scrolledContainerColor,
                             fraction.coerceIn(0f, 1f)
                         )
                     }
@@ -91,7 +90,7 @@ fun BaseScreenScaffold(
                         Column {
                             BaseScreenTopBar(
                                 scrollBehavior,
-                                appBarSetting.topAppBar,
+                                appBarSetting.topAppBarConfig,
                                 topbarTypeCompose,
                                 actions,
                                 navigationIcon,
@@ -119,7 +118,7 @@ fun BaseScreenScaffold(
             },
             // اگر صفحه عریض نبود (موبایل بود)، باتوم بار را نشان بده
             bottomBar = {
-                BaseScreenBottomBar(bottomBar, appBarSetting.bottomAppBar, isWideScreen, navItems)
+                BaseScreenBottomBar(bottomBar, appBarSetting.bottomAppBarConfig, isWideScreen, navItems)
             },
             floatingActionButtonPosition = floatingActionButton?.fabPosition ?: FabPosition.End
         ) { paddingValues ->
@@ -130,7 +129,7 @@ fun BaseScreenScaffold(
                 endPanel,
                 paddingValues,
                 isWideScreen,
-                appBarSetting.navigationRailAppBar,
+                appBarSetting.navigationRailAppBarConfig,
                 content
             )
         }

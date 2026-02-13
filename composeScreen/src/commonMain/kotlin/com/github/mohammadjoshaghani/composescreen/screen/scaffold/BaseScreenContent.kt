@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
-import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBar
+import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBarConfig
 
 @Composable
 fun BaseScreenContent(
@@ -32,7 +32,7 @@ fun BaseScreenContent(
     endPanel: (@Composable () -> Unit)? = null,
     paddingValues: PaddingValues,
     isWideScreen: Boolean,
-    navigationRailAppBar: NavigationRailAppBar,
+    navigationRailAppBarConfig: NavigationRailAppBarConfig,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Row(
@@ -45,23 +45,23 @@ fun BaseScreenContent(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = navigationRailAppBar.backGroundColor)
-                    .clip(navigationRailAppBar.shape)
+                    .background(color = navigationRailAppBarConfig.backGroundColor)
+                    .clip(navigationRailAppBarConfig.shape)
                     .verticalScroll(rememberScrollState())
             ) {
 
                 Surface(
                     modifier = Modifier
-                        .padding(navigationRailAppBar.padding)
+                        .padding(navigationRailAppBarConfig.padding)
                         .fillMaxHeight(),
-                    shadowElevation = navigationRailAppBar.shadowElevation,
-                    color = navigationRailAppBar.color,
-                    shape = navigationRailAppBar.shape,
-                    tonalElevation = navigationRailAppBar.tonalElevation
+                    shadowElevation = navigationRailAppBarConfig.shadowElevation,
+                    color = navigationRailAppBarConfig.color,
+                    shape = navigationRailAppBarConfig.shape,
+                    tonalElevation = navigationRailAppBarConfig.tonalElevation
 
                 ) {
                     NavigationRail(
-                        containerColor = navigationRailAppBar.color,
+                        containerColor = navigationRailAppBarConfig.color,
                     ) {
                         navItems.forEach { item ->
                             NavigationRailItem(

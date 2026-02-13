@@ -35,100 +35,102 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
 
+private const val TOAST_DURATION_MS = 3000L
+
 @Composable
 fun UIToastNotification() {
-
-    var textToastMessage by remember { mutableStateOf<ToastMessageModel?>(null) }
-    var isShowToast by remember { mutableStateOf(false) }
+    var toast by remember { mutableStateOf<ToastMessageModel?>(null) }
+    var visible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        ToastCreator.toastChannel.collectLatest { toast ->
-            textToastMessage = toast
-            isShowToast = true
-            delay(3000)
-            isShowToast = false
+        ToastCreator.toastChannel.collectLatest { incoming ->
+            toast = incoming
+            visible = true
+            delay(TOAST_DURATION_MS)
+            visible = false
         }
     }
 
     AnimatedVisibility(
-        modifier = Modifier
-            .testTag("ToastAnimatedVisibility"),
-        visible = isShowToast,
-        enter = slideInVertically(
-            initialOffsetY = { -it }
-        ),
-        exit = slideOutVertically(
-            targetOffsetY = { -(it + 10) }
-        )
+        modifier = Modifier.testTag("ToastAnimatedVisibility"),
+        visible = visible && toast != null,
+        enter = slideInVertically(initialOffsetY = { -it }),
+        exit = slideOutVertically(targetOffsetY = { -(it + 10) })
     ) {
+        val model = toast ?: return@AnimatedVisibility
 
-        textToastMessage!!.apply {
+        ToastCard(model = model)
+    }
+}
 
-            val message = message
-
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Card(
-                    modifier = Modifier.shadow(
-                        ambientColor = MaterialTheme.colorScheme.onBackground,
-                        elevation = 5.dp,
-                        shape = MaterialTheme.shapes.medium
-                    ),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    shape = MaterialTheme.shapes.medium
-
+@Composable
+private fun ToastCard(model: ToastMessageModel) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Card(
+            modifier = Modifier.shadow(
+                ambientColor = MaterialTheme.colorScheme.onBackground,
+                elevation = 5.dp,
+                shape = MaterialTheme.shapes.medium
+            ),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            shape = MaterialTheme.shapes.medium
+        ) {
+            ProvideLayoutDirection {
+                Row(
+                    modifier = Modifier
+                        .heightIn(min = 60.dp)
+                        .clip(MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.background)
+                        .border(
+                            width = 1.dp,
+                            color = model.state.textColor,
+                            shape = MaterialTheme.shapes.medium
+                        )
+                        .padding(vertical = 10.dp), // کمی نفس دادن به محتوا
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    ProvideLayoutDirection {
-                        Row(
-                            modifier = Modifier
-                                .heightIn(min = 60.dp)
-                                .clip(MaterialTheme.shapes.medium)
-                                .background(MaterialTheme.colorScheme.background)
-                                .border(
-                                    1.dp,
-                                    state.textColor,
-                                    MaterialTheme.shapes.medium
-                                ),
+                    UISpacer(16)
 
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
+                    ToastIcon(state = model.state)
 
-                            UISpacer(16)
+                    UISpacer(8)
 
-                            state.icon?.let {
-                                Icon(
-                                    imageVector = state.icon,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(24.dp),
-                                    tint = state.textColor,
-                                )
-                            } ?: run {
-                                state.vector?.let {
-                                    Icon(
-                                        painter = painterResource(it),
-                                        contentDescription = null,
-                                        modifier = Modifier.size(24.dp),
-                                        tint = state.textColor,
-                                    )
-                                }
-                            }
+                    Text(
+                        text = model.message,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-                            UISpacer(8)
-
-                            Text(message)
-
-                            UISpacer(16)
-
-                        }
-                    }
+                    UISpacer(16)
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ToastIcon(state: ToastState) {
+    when {
+        state.icon != null -> Icon(
+            imageVector = state.icon,
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = state.textColor
+        )
+
+        state.vector != null -> Icon(
+            painter = painterResource(state.vector),
+            contentDescription = null,
+            modifier = Modifier.size(24.dp),
+            tint = state.textColor
+        )
+
+        else -> Unit
     }
 }

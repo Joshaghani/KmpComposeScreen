@@ -1,6 +1,7 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar
 
 import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,203 +19,99 @@ import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.B
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.UIIconButton
 import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
-import com.github.mohammadjoshaghani.composescreen.utils.TopAppBar
+import com.github.mohammadjoshaghani.composescreen.utils.TopAppBarConfig
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseScreenTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
-    topAppBar: TopAppBar,
+    topAppBarConfig: TopAppBarConfig,
     topbarModel: TopbarTypeCompose,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
 ) {
 
-    if (
-        actions.isEmpty() &&
-        navigationIcon == null &&
-        topbarModel == TopbarTypeCompose.Nothing
-    ) {
-        return
+    if (actions.isEmpty() && navigationIcon == null && topbarModel == TopbarTypeCompose.Nothing) return
+
+    AppBarByType(
+        scrollBehavior = scrollBehavior,
+        topbarTypeCompose = topbarModel,
+        topAppBar = topAppBarConfig,
+        actions = actions,
+        navigationIcon = navigationIcon,
+    )
+
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AppBarByType(
+    scrollBehavior: TopAppBarScrollBehavior,
+    topbarTypeCompose: TopbarTypeCompose,
+    topAppBar: TopAppBarConfig,
+    actions: List<ButtonModel>,
+    navigationIcon: ButtonModel?,
+) {
+    val titleContent: @Composable () -> Unit = {
+        when (topbarTypeCompose) {
+            is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
+            TopbarTypeCompose.Nothing -> Unit
+            is TopbarTypeCompose.Text -> Text(
+                text = topbarTypeCompose.title,
+                maxLines = 1,
+                modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
+            )
+        }
     }
 
+    val actionsContent: @Composable RowScope.() -> Unit = {
+        actions.forEach { UIButton(it) }
+    }
 
+    val navIconContent: @Composable () -> Unit = {
+        navigationIcon?.let { UIButton(it) } ?: DefaultBackButtonIfPossible()
+    }
+
+    val colors = topAppBarColors(
+        containerColor = topAppBar.containerColor,
+        scrolledContainerColor = topAppBar.scrolledContainerColor
+    )
 
     when (topAppBar.topbarType) {
-        TopbarType.NORMAL -> NormalAppbar(
+        TopbarType.NORMAL -> TopAppBar(
             scrollBehavior = scrollBehavior,
-            topbarTypeCompose = topbarModel,
-            topAppBar = topAppBar,
-            actions = actions,
-            navigationIcon = navigationIcon,
+            title = titleContent,
+            actions = actionsContent,
+            navigationIcon = navIconContent,
+            colors = colors,
         )
 
-        TopbarType.MEDIUM -> MediumAppbar(
+        TopbarType.MEDIUM -> MediumTopAppBar(
             scrollBehavior = scrollBehavior,
-            topbarTypeCompose = topbarModel,
-            topAppBar = topAppBar,
-            actions = actions,
-            navigationIcon = navigationIcon,
+            title = titleContent,
+            actions = actionsContent,
+            navigationIcon = navIconContent,
+            colors = colors,
         )
 
-        TopbarType.LARGE -> LargeAppbar(
+        TopbarType.LARGE -> LargeTopAppBar(
             scrollBehavior = scrollBehavior,
-            topbarTypeCompose = topbarModel,
-            topAppBar = topAppBar,
-            actions = actions,
-            navigationIcon = navigationIcon,
+            title = titleContent,
+            actions = actionsContent,
+            navigationIcon = navIconContent,
+            colors = colors,
         )
     }
-
-
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NormalAppbar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    topbarTypeCompose: TopbarTypeCompose,
-    topAppBar: TopAppBar,
-    actions: List<ButtonModel> = emptyList(),
-    navigationIcon: ButtonModel? = null,
-) {
-    TopAppBar(
-        scrollBehavior = scrollBehavior,
-        title = {
-            when (topbarTypeCompose) {
-                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
-                TopbarTypeCompose.Nothing -> Unit
-                is TopbarTypeCompose.Text -> Text(
-                    topbarTypeCompose.title,
-                    maxLines = 1,
-                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
-                )
-            }
-        },
-        actions = {
-            actions.forEach { icon ->
-                UIButton(icon)
-            }
-        },
-        navigationIcon = {
-            navigationIcon?.let { icon ->
-                UIButton(icon)
+private fun DefaultBackButtonIfPossible() {
+    val navigator = LocalNavigator.currentOrThrow
+    if (navigator.size <= 1) return
 
-            } ?: run {
-                val navigator = LocalNavigator.currentOrThrow
-                if (navigator.size > 1) {
-                    UIIconButton(
-                        icon = Icons.AutoMirrored.Rounded.ArrowBack
-                    ) {
-                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                    }
-
-                }
-            }
-        },
-        colors = topAppBarColors(
-            containerColor = topAppBar.containerColor,
-            scrolledContainerColor = topAppBar.scrolledContainerColor
-        )
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MediumAppbar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    topbarTypeCompose: TopbarTypeCompose,
-    topAppBar: TopAppBar,
-    actions: List<ButtonModel> = emptyList(),
-    navigationIcon: ButtonModel? = null,
-) {
-    MediumTopAppBar(
-        scrollBehavior = scrollBehavior,
-        title = {
-            when (topbarTypeCompose) {
-                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
-                TopbarTypeCompose.Nothing -> Unit
-                is TopbarTypeCompose.Text -> Text(
-                    topbarTypeCompose.title,
-                    maxLines = 1,
-                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
-                )
-            }
-        },
-        actions = {
-            actions.forEach { icon ->
-                UIButton(icon)
-            }
-        },
-        navigationIcon = {
-            navigationIcon?.let { icon ->
-                UIButton(icon)
-
-            } ?: run {
-                val navigator = LocalNavigator.currentOrThrow
-                if (navigator.size > 1) {
-                    UIIconButton(
-                        icon = Icons.AutoMirrored.Rounded.ArrowBack
-                    ) {
-                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                    }
-
-                }
-            }
-        },
-        colors = topAppBarColors(
-            containerColor = topAppBar.containerColor,
-            scrolledContainerColor = topAppBar.scrolledContainerColor
-        )
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LargeAppbar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    topbarTypeCompose: TopbarTypeCompose,
-    topAppBar: TopAppBar,
-    actions: List<ButtonModel> = emptyList(),
-    navigationIcon: ButtonModel? = null,
-) {
-    LargeTopAppBar(
-        scrollBehavior = scrollBehavior,
-        title = {
-            when (topbarTypeCompose) {
-                is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
-                TopbarTypeCompose.Nothing -> Unit
-                is TopbarTypeCompose.Text -> Text(
-                    topbarTypeCompose.title,
-                    maxLines = 1,
-                    modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
-                )
-            }
-        },
-        actions = {
-            actions.forEach { icon ->
-                UIButton(icon)
-            }
-        },
-        navigationIcon = {
-            navigationIcon?.let { icon ->
-                UIButton(icon)
-
-            } ?: run {
-                val navigator = LocalNavigator.currentOrThrow
-                if (navigator.size > 1) {
-                    UIIconButton(
-                        icon = Icons.AutoMirrored.Rounded.ArrowBack
-                    ) {
-                        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
-                    }
-                }
-            }
-        },
-        colors = topAppBarColors(
-            containerColor = topAppBar.containerColor,
-            scrolledContainerColor = topAppBar.scrolledContainerColor
-        )
-    )
+    UIIconButton(icon = Icons.AutoMirrored.Rounded.ArrowBack) {
+        (navigator.lastItemOrNull as? IBaseScreen)?.onBackPressed()
+    }
 }
 
