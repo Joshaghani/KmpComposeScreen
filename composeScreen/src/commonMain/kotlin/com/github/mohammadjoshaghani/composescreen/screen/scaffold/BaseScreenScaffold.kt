@@ -25,7 +25,8 @@ import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopBarShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TypeShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.UIShadow
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -102,7 +103,12 @@ fun BaseScreenScaffold(
 
                         }
                     }
-                    if (fraction > 0.01f) TopBarShadow() else UISpacer(5)
+
+                    if (fraction > 0.01f) {
+                        UIShadow(TypeShadow.TOP_BAR)
+                    } else {
+                        UISpacer(5)
+                    }
                 }
 
             },

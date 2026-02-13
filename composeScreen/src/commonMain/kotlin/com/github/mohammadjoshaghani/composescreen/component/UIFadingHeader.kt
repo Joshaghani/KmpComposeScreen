@@ -26,14 +26,18 @@ fun UIFadingHeader(
     height: Dp,
     content: @Composable () -> Unit
 ) {
-    var lastOffset by remember { mutableFloatStateOf(-10000f) }
+    var lastOffset by remember { mutableFloatStateOf(appBarState.contentOffset) }
     var isScrollingDown by remember { mutableStateOf(true) }
 
     LaunchedEffect(appBarState.contentOffset) {
         val current = appBarState.contentOffset
-        // اگر آفست بیشتر شده یعنی به سمت پایین اسکرول می‌کنیم
-        isScrollingDown = current > lastOffset
-        lastOffset = current
+        val delta = current - lastOffset
+
+        // فقط وقتی اختلاف قابل توجهه جهت رو تغییر بده
+        if (kotlin.math.abs(delta) > 2f) {
+            isScrollingDown = delta > 0
+            lastOffset = current
+        }
     }
 
     Box(
@@ -54,6 +58,7 @@ fun UIFadingHeader(
         }
     }
 }
+
 
 // --- استفاده در Scope های مختلف ---
 

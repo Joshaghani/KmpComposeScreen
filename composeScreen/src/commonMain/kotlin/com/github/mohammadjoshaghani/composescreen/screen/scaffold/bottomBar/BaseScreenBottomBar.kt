@@ -1,10 +1,7 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.BottomAppBar
@@ -23,14 +20,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BottomBarShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TypeShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.UIShadow
 import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBar
 
 
@@ -46,7 +43,7 @@ fun BaseScreenBottomBar(
 
     if (bottomBar != null) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            BottomBarShadow()
+            UIShadow(TypeShadow.BOTTOM_BAR)
 
             BottomAppBar(
 //                modifier = Modifier.navigationBarsPadding(),
@@ -64,7 +61,7 @@ fun BaseScreenBottomBar(
         val overflowItems = navItems.drop(maxVisibleItems)
 
         Box(modifier = Modifier.fillMaxWidth()) {
-            BottomBarShadow()
+            UIShadow(TypeShadow.BOTTOM_BAR)
 
             NavigationBar(
                 containerColor = bottomAppBar.containerColor,

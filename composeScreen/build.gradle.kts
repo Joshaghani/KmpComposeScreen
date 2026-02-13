@@ -1,3 +1,4 @@
+import jdk.tools.jlink.resources.plugins
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.konan.target.HostManager
 
@@ -13,7 +14,7 @@ plugins {
 }
 
 group = "io.github.joshaghani"
-version = "1.0.0-rc17"
+version = "1.0.0-rc18"
 
 kotlin {
     androidTarget()
