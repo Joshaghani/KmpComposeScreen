@@ -1,7 +1,9 @@
 package com.github.mohammadjoshaghani.composescreen.bottomSheet
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -17,7 +19,10 @@ abstract class BaseSimpleBottomSheet : Screen {
     @Composable
     override fun Content() {
         Column(
-            Modifier.navigationBarsPadding()
+            Modifier
+                .background(MaterialTheme.colorScheme.surface)
+                .navigationBarsPadding()
+
         ) {
             ComposeView()
         }

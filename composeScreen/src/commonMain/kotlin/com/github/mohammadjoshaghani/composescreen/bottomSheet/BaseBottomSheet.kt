@@ -1,10 +1,12 @@
 package com.github.mohammadjoshaghani.composescreen.bottomSheet
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -42,7 +44,10 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
 
             else -> {
                 Column(
-                    Modifier.navigationBarsPadding()
+                    Modifier
+                        .background(MaterialTheme.colorScheme.surface)
+                        .navigationBarsPadding()
+
                 ) {
                     ComposeView(viewModel.state.value)
                 }
