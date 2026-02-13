@@ -1,4 +1,3 @@
-import jdk.tools.jlink.resources.plugins
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.konan.target.HostManager
 
