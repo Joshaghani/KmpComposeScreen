@@ -1,12 +1,14 @@
-package com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose
+package com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
@@ -24,36 +26,41 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.BaseScreenScaffold
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
-import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
-
+import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
+import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBarConfig
+import com.github.mohammadjoshaghani.composescreen.utils.TopAppBarConfig
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListContent(
-    topbarTypeCompose: TopbarTypeCompose = TopbarTypeCompose.Nothing,
-    scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
-    appBarSetting: AppBarSetting = AppBarSetting(),
-    actions: List<ButtonModel> = emptyList(),
-    navigationIcon: ButtonModel? = null,
-    floatingActionButton: FabIconModel? = null,
+fun GridContent(
+    topbarTypeTitle: TopbarTypeTitle = TopbarTypeTitle.Nothing,
+    topbarActions: List<ButtonModel> = emptyList(),
+    topbarNavigationIcon: ButtonModel? = null,
+    topbarSticky: (@Composable () -> Unit)? = null,
     navItems: List<ButtonModel> = emptyList(),
-    stickyTopbar: (@Composable () -> Unit)? = null,
     startPanel: (@Composable () -> Unit)? = null,
     endPanel: (@Composable () -> Unit)? = null,
+    fab: FabIconModel? = null,
     bottomBar: (@Composable () -> Unit)? = null,
+    scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
+    columns: GridCells,
     isLoading: Boolean = false,
     onLoadMore: (() -> Unit)? = null,
-    content: LazyListScope.() -> Unit
+    topAppBarConfig: TopAppBarConfig = TopAppBarConfig(),
+    bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig(),
+    navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig(),
+    content: LazyGridScope.() -> Unit
 ) {
-    val listState = rememberLazyListState()
-    val reachEnd by remember {
+    val gridState = rememberLazyGridState()
+
+    val reachEnd by remember(gridState) {
         derivedStateOf {
-            val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()
+            val lastVisibleItem = gridState.layoutInfo.visibleItemsInfo.lastOrNull()
             lastVisibleItem != null &&
-                    lastVisibleItem.index == listState.layoutInfo.totalItemsCount - 1 &&
-                    listState.layoutInfo.totalItemsCount > 0
+                    lastVisibleItem.index == gridState.layoutInfo.totalItemsCount - 1 &&
+                    gridState.layoutInfo.totalItemsCount > 0
         }
     }
 
@@ -69,28 +76,33 @@ fun ListContent(
     }
 
     BaseScreenScaffold(
-        topbarTypeCompose = topbarTypeCompose,
-        scrollBehavior = scrollBehavior,
-        appBarSetting = appBarSetting,
-        actions = actions,
-        navigationIcon = navigationIcon,
-        floatingActionButton = floatingActionButton,
-        stickyTopbar = stickyTopbar,
+        topbarTypeTitle = topbarTypeTitle,
+        topbarActions = topbarActions,
+        topbarNavigationIcon = topbarNavigationIcon,
+        topbarSticky = topbarSticky,
         navItems = navItems,
         startPanel = startPanel,
         endPanel = endPanel,
+        fab = fab,
         bottomBar = bottomBar,
+        scrollBehavior = scrollBehavior,
+        topAppBarConfig = topAppBarConfig,
+        bottomAppBarConfig = bottomAppBarConfig,
+        navigationRailAppBarConfig = navigationRailAppBarConfig,
     ) { padding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            LazyColumn(state = listState) {
+            LazyVerticalGrid(
+                columns = columns,
+                state = gridState
+            ) {
                 content()
 
-                if (isLoading) {
-                    item {
+                item(span = { GridItemSpan(maxLineSpan) }) {
+                    if (isLoading) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()

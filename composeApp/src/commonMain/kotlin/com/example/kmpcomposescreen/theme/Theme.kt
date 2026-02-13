@@ -12,7 +12,7 @@ fun ExampleTheme(
     content: @Composable (ColorScheme) -> Unit,
 ) {
 
-    val color = getApplicationColorScheme(true)
+    val color = getApplicationColorScheme(false)
 
     MaterialTheme(
         colorScheme = color,

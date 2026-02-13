@@ -1,4 +1,4 @@
-package com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar
+package com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

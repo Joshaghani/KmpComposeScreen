@@ -31,9 +31,8 @@ import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.B
 import com.github.mohammadjoshaghani.composescreen.component.itemFadingHeader
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
-import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ListContent
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import org.koin.core.component.KoinComponent
 
 class CategoriesScreen :
@@ -54,29 +53,21 @@ class CategoriesScreen :
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
         ListContent(
-            topbarTypeCompose = titleTopBar(scrollBehavior),
             scrollBehavior = scrollBehavior,
-            appBarSetting = AppBarSetting()
-                .setNavRailSetting(
-                    color = MaterialTheme.colorScheme.surface,
-                    backGroundColor = MaterialTheme.colorScheme.background
-                )
-                .setBottomBarSetting(
-                    containerColor = MaterialTheme.colorScheme.error,
-                    contentColor = MaterialTheme.colorScheme.onSurface
-                )
-                .setTopBarSetting(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    scrolledContainerColor = MaterialTheme.colorScheme.background,
-                ),
-            actions = actionIconsTopBar(),
-            stickyTopbar = {
+            topbarTypeTitle = titleTopBar(scrollBehavior),
+            topbarActions = actionIconsTopBar(),
+            topbarSticky = {
                 Text(
                     text = "هدر چسبان (ادامه‌ی تاپ‌بار)",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
+
+
+        /*
+
+         */
 //            bottomBar = {
 //                Column(
 //                    Modifier.fillMaxWidth(),
@@ -122,7 +113,7 @@ class CategoriesScreen :
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    fun titleTopBar(scrollBehavior: TopAppBarScrollBehavior) = TopbarTypeCompose.Compose {
+    fun titleTopBar(scrollBehavior: TopAppBarScrollBehavior) = TopbarTypeTitle.Compose {
         Column {
             Text("Medium Top App Bar")
         }

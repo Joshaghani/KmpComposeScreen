@@ -28,9 +28,8 @@ import com.example.kmpcomposescreen.textFieldTheme.UITextField
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ListContent
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import org.koin.core.component.KoinComponent
 
 class ProductsScreen : BaseSimpleScreen(),
@@ -42,8 +41,8 @@ class ProductsScreen : BaseSimpleScreen(),
 
 
         ListContent(
-            topbarTypeCompose = titleTopBar(),
-            actions = iconsActionTopBar(
+            topbarTypeTitle = titleTopBar(),
+            topbarActions = iconsActionTopBar(
                 ButtonModel(
                     icon =Icons.Rounded.Add,
                     title = "addProduct",
@@ -53,16 +52,16 @@ class ProductsScreen : BaseSimpleScreen(),
                 )
             )
         ) {
-            stickyHeader {
-                FadingHeader(Modifier)
-            }
+//            stickyHeader {
+//                FadingHeader(Modifier)
+//            }
             itemsIndexed(getItemsList()) { index, item ->
                 ItemUI(index, item)
             }
         }
     }
 
-    fun titleTopBar() = TopbarTypeCompose.Compose {
+    fun titleTopBar() = TopbarTypeTitle.Compose {
         Column(
             Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally

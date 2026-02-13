@@ -31,9 +31,8 @@ import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.button.UITextButton
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.ListContent
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
-import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ListContent
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import org.koin.core.component.KoinComponent
 
 class OrderScreen : BaseSimpleScreen(),
@@ -46,8 +45,8 @@ class OrderScreen : BaseSimpleScreen(),
     override fun ComposeView() {
 
         ListContent(
-            topbarTypeCompose = titleTopBar(),
-            actions = iconsActionTopBar()
+            topbarTypeTitle = titleTopBar(),
+            topbarActions = iconsActionTopBar()
         ) {
             stickyHeader {
                 ComposeStickyView()
@@ -66,7 +65,7 @@ class OrderScreen : BaseSimpleScreen(),
     }
 
 
-    fun titleTopBar() = TopbarTypeCompose.Compose {
+    fun titleTopBar() = TopbarTypeTitle.Compose {
         Column(
             Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally

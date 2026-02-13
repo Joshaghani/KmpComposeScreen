@@ -26,19 +26,21 @@ import com.github.mohammadjoshaghani.composescreen.utils.TopAppBarConfig
 fun BaseScreenTopBar(
     scrollBehavior: TopAppBarScrollBehavior,
     topAppBarConfig: TopAppBarConfig,
-    topbarModel: TopbarTypeCompose,
+    topbarTypeTitle: TopbarTypeTitle,
+    topbarSizeType: TopbarSizeType,
     actions: List<ButtonModel> = emptyList(),
     navigationIcon: ButtonModel? = null,
 ) {
 
-    if (actions.isEmpty() && navigationIcon == null && topbarModel == TopbarTypeCompose.Nothing) return
+    if (actions.isEmpty() && navigationIcon == null && topbarTypeTitle == TopbarTypeTitle.Nothing) return
 
     AppBarByType(
         scrollBehavior = scrollBehavior,
-        topbarTypeCompose = topbarModel,
+        topbarTypeTitle = topbarTypeTitle,
         topAppBar = topAppBarConfig,
         actions = actions,
         navigationIcon = navigationIcon,
+        topbarSizeType = topbarSizeType,
     )
 
 }
@@ -48,17 +50,18 @@ fun BaseScreenTopBar(
 @Composable
 private fun AppBarByType(
     scrollBehavior: TopAppBarScrollBehavior,
-    topbarTypeCompose: TopbarTypeCompose,
+    topbarTypeTitle: TopbarTypeTitle,
     topAppBar: TopAppBarConfig,
     actions: List<ButtonModel>,
     navigationIcon: ButtonModel?,
+    topbarSizeType: TopbarSizeType,
 ) {
     val titleContent: @Composable () -> Unit = {
-        when (topbarTypeCompose) {
-            is TopbarTypeCompose.Compose -> topbarTypeCompose.content()
-            TopbarTypeCompose.Nothing -> Unit
-            is TopbarTypeCompose.Text -> Text(
-                text = topbarTypeCompose.title,
+        when (topbarTypeTitle) {
+            is TopbarTypeTitle.Compose -> topbarTypeTitle.content()
+            TopbarTypeTitle.Nothing -> Unit
+            is TopbarTypeTitle.Text -> Text(
+                text = topbarTypeTitle.title,
                 maxLines = 1,
                 modifier = Modifier.basicMarquee(iterations = Int.MAX_VALUE)
             )
@@ -78,8 +81,8 @@ private fun AppBarByType(
         scrolledContainerColor = topAppBar.scrolledContainerColor
     )
 
-    when (topAppBar.topbarType) {
-        TopbarType.NORMAL -> TopAppBar(
+    when (topbarSizeType) {
+        TopbarSizeType.SMALL -> TopAppBar(
             scrollBehavior = scrollBehavior,
             title = titleContent,
             actions = actionsContent,
@@ -87,7 +90,7 @@ private fun AppBarByType(
             colors = colors,
         )
 
-        TopbarType.MEDIUM -> MediumTopAppBar(
+        TopbarSizeType.MEDIUM -> MediumTopAppBar(
             scrollBehavior = scrollBehavior,
             title = titleContent,
             actions = actionsContent,
@@ -95,7 +98,7 @@ private fun AppBarByType(
             colors = colors,
         )
 
-        TopbarType.LARGE -> LargeTopAppBar(
+        TopbarSizeType.LARGE -> LargeTopAppBar(
             scrollBehavior = scrollBehavior,
             title = titleContent,
             actions = actionsContent,

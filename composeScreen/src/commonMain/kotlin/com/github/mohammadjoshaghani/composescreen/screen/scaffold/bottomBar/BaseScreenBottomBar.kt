@@ -23,24 +23,24 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TypeShadow
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.UIShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.TypeShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.UIShadow
 import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
 
 @Composable
 fun BaseScreenBottomBar(
     bottomBar: (@Composable () -> Unit)? = null,
-    bottomAppBarConfig: BottomAppBarConfig,
-    isWideScreen: Boolean,
+    bottomConfig: BottomAppBarConfig,
+    isWideScreen: Boolean, // فعلاً فقط برای آینده/استایل نگهش می‌داریم
     navItems: List<ButtonModel> = emptyList(),
-    maxVisibleItems: Int = 4
+    maxVisibleItems: Int = 4,
 ) {
     when {
         bottomBar != null -> {
             BottomBarContainer {
                 BottomAppBar(
-                    containerColor = bottomAppBarConfig.containerColor,
-                    contentColor = bottomAppBarConfig.contentColor,
+                    containerColor = bottomConfig.containerColor,
+                    contentColor = bottomConfig.contentColor,
                 ) {
                     bottomBar()
                 }
@@ -49,7 +49,7 @@ fun BaseScreenBottomBar(
 
         !isWideScreen && navItems.isNotEmpty() -> {
             BottomNavBar(
-                config = bottomAppBarConfig,
+                config = bottomConfig,
                 navItems = navItems,
                 maxVisibleItems = maxVisibleItems
             )

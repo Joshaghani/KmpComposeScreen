@@ -6,69 +6,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarType
-
-class AppBarSetting {
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    internal var topAppBarConfig: TopAppBarConfig = TopAppBarConfig()
-
-    internal var bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig()
-    internal var navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig()
-
-
-    fun setTopBarSetting(
-        containerColor: Color = Color.Unspecified,
-        scrolledContainerColor: Color = Color.Unspecified,
-        topbarType: TopbarType = TopbarType.NORMAL,
-    ) = apply {
-        this.topAppBarConfig.apply {
-            this.containerColor = containerColor
-            this.scrolledContainerColor = scrolledContainerColor
-            this.topbarType = topbarType
-            this.isStickyHeader = isStickyHeader
-        }
-    }
-
-    fun setBottomBarSetting(
-        containerColor: Color = Color.Unspecified,
-        contentColor: Color = Color.Unspecified,
-        shadowElevation: Dp = 4.dp,
-        tonalElevation: Dp = 0.dp,
-    ) = apply {
-        this.bottomAppBarConfig.apply {
-            this.containerColor = containerColor
-            this.contentColor = contentColor
-            this.shadowElevation = shadowElevation
-            this.tonalElevation = tonalElevation
-        }
-    }
-
-    fun setNavRailSetting(
-        color: Color = Color.Unspecified,
-        backGroundColor: Color = ApplicationConfig.color.onSecondary,
-        shadowElevation: Dp = 4.dp,
-        shape: Shape = RoundedCornerShape(12.dp),
-        tonalElevation: Dp = 0.dp,
-        padding: Dp = 16.dp
-    ) = apply {
-        this.navigationRailAppBarConfig.apply {
-            this.color = color
-            this.backGroundColor = backGroundColor
-            this.shadowElevation = shadowElevation
-            this.shape = shape
-            this.tonalElevation = tonalElevation
-            this.padding = padding
-        }
-    }
-
-}
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarSizeType
 
 data class TopAppBarConfig @OptIn(ExperimentalMaterial3Api::class) constructor(
     var containerColor: Color = Color.Unspecified,
     var scrolledContainerColor: Color = Color.Unspecified,
-    var topbarType: TopbarType = TopbarType.NORMAL,
-    var isStickyHeader: Boolean = false
+    var topbarSizeType: TopbarSizeType = TopbarSizeType.SMALL
 )
 
 data class BottomAppBarConfig(

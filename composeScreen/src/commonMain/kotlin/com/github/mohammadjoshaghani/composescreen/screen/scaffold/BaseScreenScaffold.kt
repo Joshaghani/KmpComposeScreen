@@ -1,14 +1,28 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
@@ -19,36 +33,36 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.bottomBar.Bas
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.BaseScreenFab
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.fab.FabIconModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseScreenTopBar
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeCompose
-import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
-import androidx.compose.ui.graphics.lerp
-import androidx.compose.ui.input.pointer.pointerInput
-import com.github.mohammadjoshaghani.composescreen.component.UISpacer
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TypeShadow
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.UIShadow
-
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.TypeShadow
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.UIShadow
+import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
+import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBarConfig
+import com.github.mohammadjoshaghani.composescreen.utils.TopAppBarConfig
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun BaseScreenScaffold(
-    topbarTypeCompose: TopbarTypeCompose,
-    appBarSetting: AppBarSetting,
+    topbarTypeTitle: TopbarTypeTitle,
+    topbarActions: List<ButtonModel>,
+    topbarNavigationIcon: ButtonModel?,
+    topbarSticky: (@Composable () -> Unit)?,
+    navItems: List<ButtonModel>,
+    startPanel: (@Composable () -> Unit)?,
+    endPanel: (@Composable () -> Unit)?,
+    fab: FabIconModel?,
+    bottomBar: (@Composable () -> Unit)?,
+    topAppBarConfig: TopAppBarConfig = TopAppBarConfig(),
+    bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig(),
+    navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig(),
     scrollBehavior: TopAppBarScrollBehavior,
-    actions: List<ButtonModel> = emptyList(),
-    navigationIcon: ButtonModel? = null,
-    floatingActionButton: FabIconModel? = null,
-    navItems: List<ButtonModel> = emptyList(), // لیست آیتم‌های نویگیشن
-    stickyTopbar: (@Composable () -> Unit)? = null,
-    startPanel: (@Composable () -> Unit)? = null,
-    endPanel: (@Composable () -> Unit)? = null,
-    bottomBar: (@Composable () -> Unit)? = null,
-    content: @Composable (PaddingValues) -> Unit
+    content: @Composable (padding: PaddingValues) -> Unit
 ) {
-
     val windowSizeClass = calculateWindowSizeClass()
     val isWideScreen = remember(windowSizeClass) {
         windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
     }
+
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
@@ -65,75 +79,67 @@ fun BaseScreenScaffold(
                 .navigationBarsPadding()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-
-                val fraction by remember {
-                    derivedStateOf { scrollBehavior.state.overlappedFraction }
+                val fraction =
+                    remember { derivedStateOf { scrollBehavior.state.overlappedFraction } }.value
+                val containerColor = remember(fraction, topAppBarConfig) {
+                    lerp(
+                        topAppBarConfig.containerColor,
+                        topAppBarConfig.scrolledContainerColor,
+                        fraction.coerceIn(0f, 1f)
+                    )
                 }
 
-                val containerColor by remember {
-                    derivedStateOf {
-                        lerp(
-                            appBarSetting.topAppBarConfig.containerColor,
-                            appBarSetting.topAppBarConfig.scrolledContainerColor,
-                            fraction.coerceIn(0f, 1f)
-                        )
-                    }
-                }
-
-                Column {
+                Box(
+                    Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.BottomCenter
+                ) {
                     Surface(
                         Modifier.zIndex(5f),
                         tonalElevation = 0.dp,
                         color = containerColor
-
                     ) {
                         Column {
+
                             BaseScreenTopBar(
-                                scrollBehavior,
-                                appBarSetting.topAppBarConfig,
-                                topbarTypeCompose,
-                                actions,
-                                navigationIcon,
+                                scrollBehavior = scrollBehavior,
+                                topAppBarConfig = topAppBarConfig,
+                                topbarTypeTitle = topbarTypeTitle,
+                                actions = topbarActions,
+                                navigationIcon = topbarNavigationIcon,
+                                topbarSizeType = topAppBarConfig.topbarSizeType
                             )
-                            stickyTopbar?.let {
-                                stickyTopbar()
-                            }
 
-
+                            topbarSticky?.invoke()
                         }
                     }
 
-                    if (fraction > 0.01f) {
-                        UIShadow(TypeShadow.TOP_BAR)
-                    } else {
-                        UISpacer(5)
-                    }
-                }
+                    if (fraction > 0.01f) UIShadow(TypeShadow.TOP_BAR)
 
+                }
             },
             floatingActionButton = {
-                floatingActionButton?.let {
-                    BaseScreenFab(it, isWideScreen, navItems)
-                }
+                fab?.let { BaseScreenFab(it, isWideScreen, navItems) }
             },
-            // اگر صفحه عریض نبود (موبایل بود)، باتوم بار را نشان بده
             bottomBar = {
-                BaseScreenBottomBar(bottomBar, appBarSetting.bottomAppBarConfig, isWideScreen, navItems)
+                BaseScreenBottomBar(
+                    bottomBar = bottomBar,
+                    bottomConfig = bottomAppBarConfig,
+                    isWideScreen = isWideScreen,
+                    navItems = navItems
+                )
             },
-            floatingActionButtonPosition = floatingActionButton?.fabPosition ?: FabPosition.End
-        ) { paddingValues ->
-
+            floatingActionButtonPosition = fab?.fabPosition
+                ?: FabPosition.End
+        ) { padding ->
             BaseScreenContent(
-                navItems,
-                startPanel,
-                endPanel,
-                paddingValues,
-                isWideScreen,
-                appBarSetting.navigationRailAppBarConfig,
-                content
+                navItems = navItems,
+                startPanel = startPanel,
+                endPanel = endPanel,
+                paddingValues = padding,
+                isWideScreen = isWideScreen,
+                navigationRailAppBarConfig = navigationRailAppBarConfig,
+                content = content
             )
         }
     }
 }
-
-
