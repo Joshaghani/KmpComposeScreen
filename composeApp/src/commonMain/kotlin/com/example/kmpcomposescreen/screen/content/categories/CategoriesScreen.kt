@@ -89,9 +89,9 @@ class CategoriesScreen :
 
         ) {
 
-            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
-                FadingHeader()
-            }
+//            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
+//                FadingHeader()
+//            }
 
             itemsIndexed(getItemsList()) { index, item ->
                 ItemUI(index, item)

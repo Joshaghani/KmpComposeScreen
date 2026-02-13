@@ -17,7 +17,7 @@ fun App() {
     ExampleTheme {
         ComposeScreen(
             listOf(MainScreen()),
-            color = getApplicationColorScheme(true),
+            color = it,
             loadingScreen = {
                 Column {
                     Text("Loading...")

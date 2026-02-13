@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.UIButton
 import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BottomBarShadow
 import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBar
 
 
@@ -45,20 +46,8 @@ fun BaseScreenBottomBar(
 
     if (bottomBar != null) {
         Box(modifier = Modifier.fillMaxWidth()) {
-            Box(
-                modifier = Modifier
-                    .offset(y = (-5).dp)
-                    .fillMaxWidth()
-                    .height(5.dp)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Gray.copy(alpha = 0.2f)
-                            )
-                        )
-                    )
-            )
+            BottomBarShadow()
+
             BottomAppBar(
 //                modifier = Modifier.navigationBarsPadding(),
                 containerColor = bottomAppBar.containerColor,
@@ -75,20 +64,7 @@ fun BaseScreenBottomBar(
         val overflowItems = navItems.drop(maxVisibleItems)
 
         Box(modifier = Modifier.fillMaxWidth()) {
-            Box(
-                modifier = Modifier
-                    .offset(y = (-5).dp)
-                    .fillMaxWidth()
-                    .height(5.dp)
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Gray.copy(alpha = 0.2f)
-                            )
-                        )
-                    )
-            )
+            BottomBarShadow()
 
             NavigationBar(
                 containerColor = bottomAppBar.containerColor,

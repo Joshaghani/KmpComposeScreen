@@ -11,8 +11,8 @@ val LightiOSColors: ColorScheme = lightColorScheme(
     onPrimaryContainer = iOSBlueDark,
 
     secondary = iOSBlue,
-    onSecondary = iOSGray,
-    secondaryContainer = iOSRed.copy(alpha = 0.65f),
+    onSecondary = Color.White,
+    secondaryContainer = iOSBlue.copy(alpha = 0.15f),
     onSecondaryContainer = iOSBlue,
 
     tertiary = iOSSecondary,

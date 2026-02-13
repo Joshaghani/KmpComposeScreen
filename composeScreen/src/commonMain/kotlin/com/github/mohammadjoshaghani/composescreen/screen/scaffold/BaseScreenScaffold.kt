@@ -24,6 +24,8 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 import com.github.mohammadjoshaghani.composescreen.utils.AppBarSetting
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
+import com.github.mohammadjoshaghani.composescreen.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopBarShadow
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -77,26 +79,30 @@ fun BaseScreenScaffold(
                         )
                     }
                 }
-                Surface(
-                    Modifier.zIndex(5f),
-                    shadowElevation = if (fraction > 0.01f) 8.dp else 0.dp,
-                    tonalElevation = 0.dp,
-                    color = containerColor
 
-                ) {
-                    Column {
-                        BaseScreenTopBar(
-                            scrollBehavior,
-                            appBarSetting.topAppBar,
-                            topbarTypeCompose,
-                            actions,
-                            navigationIcon,
-                        )
-                        stickyTopbar?.let {
-                            stickyTopbar()
+                Column {
+                    Surface(
+                        Modifier.zIndex(5f),
+                        tonalElevation = 0.dp,
+                        color = containerColor
+
+                    ) {
+                        Column {
+                            BaseScreenTopBar(
+                                scrollBehavior,
+                                appBarSetting.topAppBar,
+                                topbarTypeCompose,
+                                actions,
+                                navigationIcon,
+                            )
+                            stickyTopbar?.let {
+                                stickyTopbar()
+                            }
+
+
                         }
-
                     }
+                    if (fraction > 0.01f) TopBarShadow() else UISpacer(5)
                 }
 
             },

@@ -12,8 +12,8 @@ val DarkiOSColors: ColorScheme = darkColorScheme(
     onPrimaryContainer = iOSBlueDark,
 
     secondary = iOSBlue,
-    onSecondary = iOSBackgroundDark,
-    secondaryContainer = iOSRed.copy(alpha = 0.65f),
+    onSecondary = Color.Black,
+    secondaryContainer = iOSBlue.copy(alpha = 0.25f),
     onSecondaryContainer = iOSBlue,
 
     tertiary = iOSSecondary,
