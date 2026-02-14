@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.twotone.Login
 import androidx.compose.material.icons.twotone.ShoppingCart
@@ -28,10 +28,10 @@ import com.github.mohammadjoshaghani.composescreen.component.UISpacer
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.BadgeItem
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonModel
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonType
-import com.github.mohammadjoshaghani.composescreen.component.itemFadingHeader
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ListContent
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.footer.FooterModel
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ColumnContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import org.koin.core.component.KoinComponent
 
@@ -39,7 +39,6 @@ class CategoriesScreen :
     BaseSimpleScreen(),
     KoinComponent,
     IClearStack {
-
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
     @Composable
@@ -52,22 +51,42 @@ class CategoriesScreen :
 //        }
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-        ListContent(
+        ColumnContent(
+//            columns = GridCells.Fixed(1),
             scrollBehavior = scrollBehavior,
             topbarTypeTitle = titleTopBar(scrollBehavior),
             topbarActions = actionIconsTopBar(),
             topbarSticky = {
+//                Column(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.background)) {
                 Text(
                     text = "هدر چسبان (ادامه‌ی تاپ‌بار)",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
+//                    }
+
+            },
+            startPanel = {
+                Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.error)) {
+                    Text("START PANEL****")
+
+                }
+            },
+            endPanel = {
+                Text("END PANEL****")
+            },
+
+            footerModel = FooterModel(56.dp){
+                Text("END FOTERRRRRRRRRRRRRRRR****")
+
             }
 
 
-        /*
 
-         */
+
+            /*
+
+             */
 //            bottomBar = {
 //                Column(
 //                    Modifier.fillMaxWidth(),
@@ -80,13 +99,19 @@ class CategoriesScreen :
 
         ) {
 
-            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
-                FadingHeader()
+//            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
+//                FadingHeader()
+//            }
+
+//            itemsIndexed(getItemsList()) { index, item ->
+
+
+            Column() {
+                getItemsList().forEachIndexed { index, item ->
+                    ItemUI(index, item)
+                }
             }
 
-            itemsIndexed(getItemsList()) { index, item ->
-                ItemUI(index, item)
-            }
         }
     }
 
@@ -204,6 +229,61 @@ class CategoriesScreen :
         }
 
     }
+
+//
+//    @Composable
+//    override fun ComposeView() {
+//
+//        val listState = rememberLazyListState()
+//
+//        val headerH = 56.dp
+//        val density = LocalDensity.current
+//        val headerHPx = with(density) { headerH.toPx() }
+//
+//        val progress by remember {
+//            derivedStateOf {
+//                val info = listState.layoutInfo
+//                val total = info.totalItemsCount
+//                if (total == 0) return@derivedStateOf 0f
+//
+//                val last = info.visibleItemsInfo.lastOrNull() ?: return@derivedStateOf 0f
+//
+//                // فقط وقتی آیتم آخر وارد viewport شد شروع کن
+//                if (last.index != total - 1) return@derivedStateOf 0f
+//
+//                // باقی مانده تا رسیدن دقیق به انتهای viewport
+//                val remainingPx = (last.offset + last.size - info.viewportEndOffset).coerceAtLeast(0)
+//
+//                // 0..1
+//                (1f - (remainingPx / headerHPx)).coerceIn(0f, 1f)
+//            }
+//        }
+//
+//        Box(Modifier.fillMaxSize()) {
+//
+//            LazyColumn(
+//                state = listState,
+//                modifier = Modifier.fillMaxSize(),
+//                contentPadding = PaddingValues(bottom = headerH) // فضا رزرو می‌کنیم
+//            ) {
+//                items(20) { Text("Item $it", Modifier.padding(16.dp)) }
+//            }
+//
+//            // هدر ثابت، فقط با offset حرکت می‌کند (بدون تغییر layout)
+//            Box(
+//                modifier = Modifier
+//                    .align(Alignment.BottomCenter)
+//                    .height(headerH)
+//                    .fillMaxWidth()
+//                    .offset {
+//                        val y = ((1f - progress) * headerHPx).toInt()
+//                        IntOffset(0, y) // 0 یعنی کامل دیده شده، headerHPx یعنی کامل مخفی
+//                    }
+//            ) {
+//                Text("Header", Modifier.align(Alignment.Center))
+//            }
+//        }
+//    }
 
     data class CategoryModel(
         val title: String,

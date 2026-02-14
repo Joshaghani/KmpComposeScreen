@@ -1,12 +1,17 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Scaffold
@@ -20,11 +25,15 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
@@ -56,6 +65,9 @@ fun BaseScreenScaffold(
     bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig(),
     navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig(),
     scrollBehavior: TopAppBarScrollBehavior,
+    bottomOverlay: (@Composable () -> Unit)? = null,
+    translation: Float = 0f,
+    headerHPx: Float = 0f,
     content: @Composable (padding: PaddingValues) -> Unit
 ) {
     val windowSizeClass = calculateWindowSizeClass()
@@ -94,12 +106,11 @@ fun BaseScreenScaffold(
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     Surface(
-                        Modifier.zIndex(5f),
+                        Modifier.zIndex(10000f),
                         tonalElevation = 0.dp,
                         color = containerColor
                     ) {
                         Column {
-
                             BaseScreenTopBar(
                                 scrollBehavior = scrollBehavior,
                                 topAppBarConfig = topAppBarConfig,
@@ -110,6 +121,7 @@ fun BaseScreenScaffold(
                             )
 
                             topbarSticky?.invoke()
+
                         }
                     }
 
@@ -131,15 +143,37 @@ fun BaseScreenScaffold(
             floatingActionButtonPosition = fab?.fabPosition
                 ?: FabPosition.End
         ) { padding ->
-            BaseScreenContent(
-                navItems = navItems,
-                startPanel = startPanel,
-                endPanel = endPanel,
-                paddingValues = padding,
-                isWideScreen = isWideScreen,
-                navigationRailAppBarConfig = navigationRailAppBarConfig,
-                content = content
-            )
+            Box(Modifier.fillMaxSize()) {
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .graphicsLayer {
+                            translationY = translation - headerHPx
+                        }
+                ) {
+                    BaseScreenContent(
+                        navItems = navItems,
+                        startPanel = startPanel,
+                        endPanel = endPanel,
+                        paddingValues = padding,
+                        isWideScreen = isWideScreen,
+                        navigationRailAppBarConfig = navigationRailAppBarConfig,
+                        content = content
+                    )
+                }
+
+                bottomOverlay?.let {
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = padding.calculateBottomPadding())
+                            .zIndex(999f)
+                    ) {
+                        it()
+                    }
+                }
+            }
         }
     }
 }
