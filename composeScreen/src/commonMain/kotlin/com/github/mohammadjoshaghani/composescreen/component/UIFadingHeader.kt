@@ -21,7 +21,7 @@ import androidx.compose.ui.zIndex
  * منطق مشترک برای انیمیشن و وضعیت اسکرول
  */
 @Composable
-fun UIFadingHeader(
+internal fun UIFadingHeader(
     appBarState: TopAppBarState,
     height: Dp,
     content: @Composable () -> Unit

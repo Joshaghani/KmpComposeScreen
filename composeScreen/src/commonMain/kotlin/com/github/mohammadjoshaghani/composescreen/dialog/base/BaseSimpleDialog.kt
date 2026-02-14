@@ -68,7 +68,7 @@ abstract class BaseSimpleDialog : IBaseDialog, CoroutineScope {
             ),
             onDismissRequest = { dismiss() }
         ) {
-            ProvideLayoutDirection {
+            ProvideLayoutDirection(ApplicationConfig.isRtl) {
 
                 Box(
                     modifier = Modifier

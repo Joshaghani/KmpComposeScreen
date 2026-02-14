@@ -1,5 +1,6 @@
 package com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -46,7 +47,7 @@ fun ColumnContent(
     topAppBarConfig: TopAppBarConfig = TopAppBarConfig(),
     bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig(),
     navigationRailAppBarConfig: NavigationRailAppBarConfig = NavigationRailAppBarConfig(),
-    content: @Composable ColumnScope.() -> Unit
+    content: @Composable ColumnScope.(ScrollState) -> Unit
 ) {
     val scrollState = rememberScrollState()
     val density = LocalDensity.current
@@ -117,7 +118,7 @@ fun ColumnContent(
                 .padding(padding)
                 .verticalScroll(scrollState)
         ) {
-            content()
+            content(scrollState)
         }
     }
 }

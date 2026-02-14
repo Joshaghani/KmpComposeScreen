@@ -24,7 +24,6 @@ import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
 @Composable
 @Preview
 fun App(startScreen: List<IBaseScreen>) {
-//    ProvideNavigatorLifecycleKMPSupport {
         BottomSheetNavigator(
             sheetShape = RoundedCornerShape(
                 topStart = 16.dp,
@@ -64,7 +63,6 @@ fun App(startScreen: List<IBaseScreen>) {
 
             }
 
-//        }
     }
 
     RenderNotifications()

@@ -18,12 +18,7 @@ fun App() {
         ComposeScreen(
             listOf(MainScreen()),
             color = it,
-            loadingScreen = {
-                Column {
-                    Text("Loading...")
-                    CircularProgressIndicator(strokeWidth = 1.dp)
-                }
-            },
+
             errorScreen = { message, retryClick ->
                 Text(
                     message,

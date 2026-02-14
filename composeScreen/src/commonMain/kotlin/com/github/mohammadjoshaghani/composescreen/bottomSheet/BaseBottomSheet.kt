@@ -33,6 +33,7 @@ abstract class BaseBottomSheet<State : ViewState<Event>, Event : ViewEvent, Effe
 
     @Composable
     override fun Content() {
+
         LaunchedEffect(viewModel) {
             viewModel.effect.collect { handler.handleEffects(it, viewModel) }
         }

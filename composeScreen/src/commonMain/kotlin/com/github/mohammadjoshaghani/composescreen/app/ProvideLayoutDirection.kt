@@ -7,11 +7,10 @@ import androidx.compose.ui.unit.LayoutDirection
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 @Composable
-fun ProvideLayoutDirection(content: @Composable () -> Unit) {
+fun ProvideLayoutDirection(isRtl: Boolean, content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalLayoutDirection provides
-                if (ApplicationConfig.isRtl) LayoutDirection.Rtl
-                else LayoutDirection.Ltr
+                if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr
     ) {
         content()
     }

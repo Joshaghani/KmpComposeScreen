@@ -15,7 +15,6 @@ data class ButtonModel(
     val buttonType: ButtonType = ButtonType.Icon,
     val icon: ImageVector? = null,
     val drawable: DrawableResource? = null,
-    val bitmap: ImageBitmap? = null,
     val title: String? = null,
     val tooltip: String? = null,
     val isSelected: Boolean = false,
@@ -32,8 +31,6 @@ data class ButtonModel(
                 return IconSourceType.Icon(icon)
             } else if (drawable != null) {
                 return IconSourceType.Drawable(drawable)
-            } else if (bitmap != null) {
-                return IconSourceType.Bitmap(bitmap)
             }
             return null
         }

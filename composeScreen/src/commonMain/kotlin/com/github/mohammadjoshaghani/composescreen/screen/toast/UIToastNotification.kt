@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
@@ -81,7 +82,7 @@ private fun ToastCard(model: ToastMessageModel) {
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
             shape = MaterialTheme.shapes.medium
         ) {
-            ProvideLayoutDirection {
+            ProvideLayoutDirection(ApplicationConfig.isRtl) {
                 Row(
                     modifier = Modifier
                         .heightIn(min = 60.dp)

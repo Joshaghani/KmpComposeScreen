@@ -30,8 +30,8 @@ import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.B
 import com.github.mohammadjoshaghani.composescreen.component.button.IconButton.ButtonType
 import com.github.mohammadjoshaghani.composescreen.screen.BaseSimpleScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
-import com.github.mohammadjoshaghani.composescreen.screen.scaffold.footer.FooterModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ColumnContent
+import com.github.mohammadjoshaghani.composescreen.screen.scaffold.footer.FooterModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import org.koin.core.component.KoinComponent
 
@@ -76,41 +76,14 @@ class CategoriesScreen :
                 Text("END PANEL****")
             },
 
-            footerModel = FooterModel(56.dp){
+            footerModel = FooterModel(56.dp) {
                 Text("END FOTERRRRRRRRRRRRRRRR****")
 
             }
 
 
-
-
-            /*
-
-             */
-//            bottomBar = {
-//                Column(
-//                    Modifier.fillMaxWidth(),
-//                    horizontalAlignment = Alignment.CenterHorizontally
-//                ) {
-//                    Text("Bottom Bar")
-//
-//                }
-//            }
-
         ) {
 
-//            itemFadingHeader(appBarState = scrollBehavior.state, 56.dp) {
-//                FadingHeader()
-//            }
-
-//            itemsIndexed(getItemsList()) { index, item ->
-
-
-            Column() {
-                getItemsList().forEachIndexed { index, item ->
-                    ItemUI(index, item)
-                }
-            }
 
         }
     }
@@ -290,6 +263,39 @@ class CategoriesScreen :
     )
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

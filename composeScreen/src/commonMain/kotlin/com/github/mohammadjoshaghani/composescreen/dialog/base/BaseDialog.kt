@@ -84,7 +84,7 @@ abstract class BaseDialog<State : ViewState<Event>, Event : ViewEvent, Effect : 
             ),
             onDismissRequest = { dismiss() }
         ) {
-            ProvideLayoutDirection {
+            ProvideLayoutDirection(ApplicationConfig.isRtl) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()

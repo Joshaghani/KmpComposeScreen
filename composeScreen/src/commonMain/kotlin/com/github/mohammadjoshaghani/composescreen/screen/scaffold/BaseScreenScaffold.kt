@@ -45,6 +45,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.BaseSc
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.TypeShadow
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.compose.UIShadow
+import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
 import com.github.mohammadjoshaghani.composescreen.utils.NavigationRailAppBarConfig
 import com.github.mohammadjoshaghani.composescreen.utils.TopAppBarConfig
@@ -78,7 +79,7 @@ fun BaseScreenScaffold(
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
-    ProvideLayoutDirection {
+    ProvideLayoutDirection(ApplicationConfig.isRtl) {
         Scaffold(
             modifier = Modifier
                 .pointerInput(Unit) {
