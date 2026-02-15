@@ -76,14 +76,17 @@ class CategoriesScreen :
                 Text("END PANEL****")
             },
 
-            footerModel = FooterModel(56.dp) {
+            footerPanel = {
                 Text("END FOTERRRRRRRRRRRRRRRR****")
-
             }
 
 
         ) {
 
+            getItemsList().forEachIndexed {
+                index, item ->
+                ItemUI(index, item)
+            }
 
         }
     }
