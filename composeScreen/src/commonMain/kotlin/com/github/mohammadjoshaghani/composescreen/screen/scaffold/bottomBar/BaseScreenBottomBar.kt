@@ -39,6 +39,7 @@ fun BaseScreenBottomBar(
         bottomBar != null -> {
             BottomBarContainer {
                 BottomAppBar(
+                    modifier = bottomConfig.modifier,
                     containerColor = bottomConfig.containerColor,
                     contentColor = bottomConfig.contentColor,
                 ) {

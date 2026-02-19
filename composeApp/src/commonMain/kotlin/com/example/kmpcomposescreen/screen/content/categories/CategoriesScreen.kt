@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -33,6 +34,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.contetn.ColumnContent
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.footer.FooterModel
 import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.TopbarTypeTitle
+import com.github.mohammadjoshaghani.composescreen.utils.BottomAppBarConfig
 import org.koin.core.component.KoinComponent
 
 class CategoriesScreen :
@@ -76,9 +78,18 @@ class CategoriesScreen :
                 Text("END PANEL****")
             },
 
-            footerPanel = {
-                Text("END FOTERRRRRRRRRRRRRRRR****")
+            bottomAppBarConfig = BottomAppBarConfig(modifier = Modifier.height(200.dp)),
+            bottomBar = {
+                Column (modifier = Modifier
+                    .fillMaxWidth()
+                    .height(400.dp)){
+                    Text("Bottom Bar")
+                }
+
             }
+//            footerPanel = {
+//                Text("END FOTERRRRRRRRRRRRRRRR****")
+//            }
 
 
         ) {

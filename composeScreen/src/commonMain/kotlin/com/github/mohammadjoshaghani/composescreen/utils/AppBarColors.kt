@@ -2,6 +2,7 @@ package com.github.mohammadjoshaghani.composescreen.utils
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
@@ -19,6 +20,7 @@ data class BottomAppBarConfig(
     var contentColor: Color = Color.Unspecified,
     var shadowElevation: Dp = 4.dp,
     var tonalElevation: Dp = 0.dp,
+    var modifier: Modifier = Modifier
 )
 
 data class NavigationRailAppBarConfig(
