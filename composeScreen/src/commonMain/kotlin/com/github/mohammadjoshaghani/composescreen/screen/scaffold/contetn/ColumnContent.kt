@@ -125,6 +125,7 @@ fun ColumnContent(
     endPanel: (@Composable () -> Unit)? = null,
     fab: FabIconModel? = null,
     bottomBar: (@Composable () -> Unit)? = null,
+    scrollState: ScrollState? = null,
     scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(),
     topAppBarConfig: TopAppBarConfig = TopAppBarConfig(),
     bottomAppBarConfig: BottomAppBarConfig = BottomAppBarConfig(),
@@ -150,6 +151,13 @@ fun ColumnContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
+                .let {
+                    if (scrollState != null) {
+                        it.verticalScroll(scrollState)
+                    } else {
+                        it
+                    }
+                }
         ) {
             content()
         }
