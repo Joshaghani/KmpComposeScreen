@@ -116,7 +116,11 @@ fun BaseScreenScaffold(
                         }
                     }
 
-                    if (fraction > 0.01f) UIShadow(TypeShadow.TOP_BAR)
+                    if (fraction > 0.01f) UIShadow(
+                        TypeShadow.TOP_BAR,
+                        shadowElevationLight = topAppBarConfig.shadowElevationLight,
+                        shadowElevationDark = topAppBarConfig.shadowElevationDark
+                    )
 
                 }
             },
@@ -148,7 +152,6 @@ fun BaseScreenScaffold(
         }
     }
 }
-
 
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3WindowSizeClassApi::class)
@@ -221,7 +224,11 @@ fun BaseScreenScaffold(
                         }
                     }
 
-                    if (fraction > 0.01f) UIShadow(TypeShadow.TOP_BAR)
+                    if (fraction > 0.01f) UIShadow(
+                        TypeShadow.TOP_BAR,
+                        shadowElevationLight = topAppBarConfig.shadowElevationLight,
+                        shadowElevationDark = topAppBarConfig.shadowElevationDark
+                    )
 
                 }
             },

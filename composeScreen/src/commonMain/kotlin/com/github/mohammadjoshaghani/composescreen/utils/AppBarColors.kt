@@ -12,14 +12,16 @@ import com.github.mohammadjoshaghani.composescreen.screen.scaffold.topBar.Topbar
 data class TopAppBarConfig @OptIn(ExperimentalMaterial3Api::class) constructor(
     var containerColor: Color = Color.Unspecified,
     var scrolledContainerColor: Color = Color.Unspecified,
-    var topbarSizeType: TopbarSizeType = TopbarSizeType.SMALL
+    var topbarSizeType: TopbarSizeType = TopbarSizeType.SMALL,
+    var shadowElevationLight: Int = 5,
+    var shadowElevationDark: Int = 1,
 )
 
 data class BottomAppBarConfig(
     var containerColor: Color = Color.Unspecified,
     var contentColor: Color = Color.Unspecified,
-    var shadowElevation: Dp = 4.dp,
-    var tonalElevation: Dp = 0.dp,
+    var shadowElevationLight: Int = 5,
+    var shadowElevationDark: Int = 1,
     var modifier: Modifier = Modifier
 )
 

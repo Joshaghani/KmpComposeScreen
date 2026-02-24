@@ -37,7 +37,7 @@ fun BaseScreenBottomBar(
 ) {
     when {
         bottomBar != null -> {
-            BottomBarContainer {
+            BottomBarContainer(bottomConfig) {
                 BottomAppBar(
                     modifier = bottomConfig.modifier,
                     containerColor = bottomConfig.containerColor,
@@ -61,9 +61,13 @@ fun BaseScreenBottomBar(
 }
 
 @Composable
-private fun BottomBarContainer(content: @Composable () -> Unit) {
+private fun BottomBarContainer(config: BottomAppBarConfig, content: @Composable () -> Unit) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        UIShadow(TypeShadow.BOTTOM_BAR)
+        UIShadow(
+            TypeShadow.BOTTOM_BAR,
+            shadowElevationLight = config.shadowElevationLight,
+            shadowElevationDark = config.shadowElevationDark
+        )
         content()
     }
 }
@@ -79,7 +83,7 @@ private fun BottomNavBar(
 
     var overflowExpanded by remember(overflowItems.size) { mutableStateOf(false) }
 
-    BottomBarContainer {
+    BottomBarContainer(config) {
         NavigationBar(
             containerColor = config.containerColor,
             contentColor = config.contentColor,

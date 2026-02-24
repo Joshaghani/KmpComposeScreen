@@ -20,22 +20,27 @@ enum class TypeShadow {
 }
 
 @Composable
-fun UIShadow(type: TypeShadow) {
+fun UIShadow(
+    type: TypeShadow,
+    shadowElevationLight: Int,
+    shadowElevationDark: Int,
+) {
     val isDarkTheme = MaterialTheme.colorScheme.background.luminance() < 0.5
     val (offsetY, height, colors) = when (type) {
         TypeShadow.TOP_BAR -> shadowParams(
             isDarkTheme = isDarkTheme,
             startColor = MaterialTheme.colorScheme.onSurface.copy(alpha = if (isDarkTheme) 0.3f else 0.15f),
             endColor = Color.Transparent,
-            offsetLight = 5.dp,
-            offsetDark = 1.dp
+            offsetLight = shadowElevationLight.dp,
+            offsetDark = shadowElevationDark.dp
         )
+
         TypeShadow.BOTTOM_BAR -> shadowParams(
             isDarkTheme = isDarkTheme,
             startColor = Color.Transparent,
             endColor = MaterialTheme.colorScheme.onSurface.copy(alpha = if (isDarkTheme) 0.3f else 0.15f),
-            offsetLight = (-5).dp,
-            offsetDark = (-1).dp
+            offsetLight = (-shadowElevationLight).dp,
+            offsetDark = (-shadowElevationDark).dp
         )
     }
 
