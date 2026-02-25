@@ -8,6 +8,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,6 +42,8 @@ abstract class BaseScreen<
 
     var onEventSent: (EVENT) -> Unit = { viewModel.handleEvents(it) }
 
+    private var isStarted = false
+
     @Composable
     abstract fun getViewModel(): VM
     abstract val handler: BaseHandler<EVENT, EFFECT, VM>
@@ -53,13 +58,19 @@ abstract class BaseScreen<
         viewModel = getViewModel()
         val viewState by viewModel.state.collectAsState()
 
-        LaunchedEffect(viewModel) {
-            viewModel.effect.collect { handler.handleEffects(it, viewModel) }
-        }
-        LaunchedEffect(Unit) {
-            onStart()
+        var restartTrigger by remember { mutableStateOf(0) }
+
+        // وقتی صفحه دوباره به کامپوزیشن میاد (مثلاً بعد از برگشت از صفحه بعدی)
+        LaunchedEffect(restartTrigger) {
+            if (isStarted) {
+                onRestart()
+            } else {
+                isStarted = true
+                onStart()
+            }
         }
 
+        // وقتی صفحه از بین میره (مثلاً نَویگیت کردی به صفحه بعدی)
         DisposableEffect(Unit) {
             onDispose {
                 onStop()

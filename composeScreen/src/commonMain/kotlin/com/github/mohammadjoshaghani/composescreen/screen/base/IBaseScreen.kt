@@ -12,4 +12,6 @@ interface IBaseScreen {
 
     fun onStart() {}
     fun onStop() {}
+
+    fun onRestart() {}
 }
