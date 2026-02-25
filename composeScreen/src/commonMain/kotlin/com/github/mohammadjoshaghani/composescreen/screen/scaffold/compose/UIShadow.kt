@@ -31,16 +31,20 @@ fun UIShadow(
             isDarkTheme = isDarkTheme,
             startColor = MaterialTheme.colorScheme.onSurface.copy(alpha = if (isDarkTheme) 0.3f else 0.15f),
             endColor = Color.Transparent,
-            offsetLight = shadowElevationLight.dp,
-            offsetDark = shadowElevationDark.dp
+            offsetLight = 5.dp,
+            offsetDark = 1.dp,
+            heightLight = shadowElevationLight,
+            heightDark = shadowElevationDark,
         )
 
         TypeShadow.BOTTOM_BAR -> shadowParams(
             isDarkTheme = isDarkTheme,
             startColor = Color.Transparent,
             endColor = MaterialTheme.colorScheme.onSurface.copy(alpha = if (isDarkTheme) 0.3f else 0.15f),
-            offsetLight = (-shadowElevationLight).dp,
-            offsetDark = (-shadowElevationDark).dp
+            offsetLight = (-5).dp,
+            offsetDark = (-1).dp,
+            heightLight = shadowElevationLight,
+            heightDark = shadowElevationDark,
         )
     }
 
@@ -59,10 +63,12 @@ private fun shadowParams(
     startColor: Color,
     endColor: Color,
     offsetLight: Dp,
-    offsetDark: Dp
+    offsetDark: Dp,
+    heightLight: Int,
+    heightDark: Int,
 ): Triple<Dp, Dp, List<Color>> {
     val offset = if (isDarkTheme) offsetDark else offsetLight
-    val height = if (isDarkTheme) 1.dp else 5.dp
+    val height = if (isDarkTheme) heightDark.dp else heightLight.dp
     val colors = listOf(startColor, endColor)
     return Triple(offset, height, colors)
 }
