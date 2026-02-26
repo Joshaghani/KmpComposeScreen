@@ -27,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.github.mohammadjoshaghani.composescreen.app.ProvideLayoutDirection
 import com.github.mohammadjoshaghani.composescreen.component.UISpacer
+import com.github.mohammadjoshaghani.composescreen.component.image.UIIcon
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -118,16 +120,14 @@ private fun ToastCard(model: ToastMessageModel) {
 @Composable
 private fun ToastIcon(state: ToastState) {
     when {
-        state.icon != null -> Icon(
-            imageVector = state.icon,
-            contentDescription = null,
+        state.icon != null -> UIIcon(
+            icon = state.icon,
             modifier = Modifier.size(24.dp),
             tint = state.textColor
         )
 
-        state.vector != null -> Icon(
-            painter = painterResource(state.vector),
-            contentDescription = null,
+        state.vector != null -> UIIcon(
+            drawable = state.vector,
             modifier = Modifier.size(24.dp),
             tint = state.textColor
         )

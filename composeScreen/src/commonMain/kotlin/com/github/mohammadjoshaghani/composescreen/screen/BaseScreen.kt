@@ -21,6 +21,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.koin.koinScreenModel
 import com.github.mohammadjoshaghani.composescreen.app.RenderDialogs
+import com.github.mohammadjoshaghani.composescreen.app.RenderNotifications
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreenImpl
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
@@ -28,6 +29,9 @@ import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewEvent
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewSideEffect
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.screen.swipeBack.SwipeBack
+import com.github.mohammadjoshaghani.composescreen.screen.toast.ScreenSideEffects
+import com.github.mohammadjoshaghani.composescreen.screen.toast.ToastCreator
+import com.github.mohammadjoshaghani.composescreen.screen.toast.toast
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 
 @OptIn(ExperimentalVoyagerApi::class)
@@ -91,7 +95,13 @@ abstract class BaseScreen<
                 SwipeBack(this) {
                     ComposeView(viewState)
                 }
-                RenderDialogs()
+
+                ScreenSideEffects(
+                    state = viewState,
+                    clearToast = {
+                        viewState.toastMessage = null
+                    }
+                )
             }
         }
     }

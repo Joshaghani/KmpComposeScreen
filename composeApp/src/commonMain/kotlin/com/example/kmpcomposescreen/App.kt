@@ -1,9 +1,13 @@
 package com.example.kmpcomposescreen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.kmpcomposescreen.screen.content.main.MainScreen
@@ -20,6 +24,7 @@ import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewSideEffec
 import com.github.mohammadjoshaghani.composescreen.screen.contract.ViewState
 import com.github.mohammadjoshaghani.composescreen.screen.errorScreen.ErrorScreenMessageModel
 import com.github.mohammadjoshaghani.composescreen.screen.toast.ToastMessageModel
+import com.github.mohammadjoshaghani.composescreen.screen.toast.toast
 
 @Composable
 fun App() {
@@ -27,11 +32,13 @@ fun App() {
         ComposeScreen(
             listOf(TestScreen()),
             color = it,
-
             errorScreen = { message, retryClick ->
-                Text(
-                    message,
-                    modifier = Modifier.themeClickable { retryClick() })
+                Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.error)) {
+                    Text(
+                        message,
+                        modifier = Modifier.themeClickable { retryClick() })
+                }
+
             }
         )
     }
@@ -50,7 +57,7 @@ class TestContract {
     ) : ViewState<Event>
 
     sealed interface Effect : ViewSideEffect {
-        data object Loading : Effect
+        data class Loading(val message: String, val event: Event) : Effect
     }
 
 
@@ -64,7 +71,7 @@ class TestViewModel : BaseViewModel<
         >(TestContract.State()) {
 
     override fun handleEvents(event: TestContract.Event) {
-        setEffect { TestContract.Effect.Loading }
+        setEffect { TestContract.Effect.Loading("dfdf", event) }
     }
 
 }
@@ -78,7 +85,19 @@ class TestHandler : BaseHandler<
         effect: TestContract.Effect,
         viewModel: TestViewModel
     ) {
-        viewModel.setState { copy(isLoading = true) }
+        when (effect) {
+            is TestContract.Effect.Loading -> {
+                viewModel.setState {
+                    copy(
+                        errorScreen = ErrorScreenMessageModel(
+                            effect.message,
+                            effect.event
+                        )
+                    )
+                }
+            }
+        }
+
     }
 
     override fun TestViewModel.updateState(
@@ -99,7 +118,8 @@ class TestScreen : BaseScreen<
         >() {
     @Composable
     override fun getViewModel(): TestViewModel {
-        return TestViewModel()
+        val viewModel = remember { TestViewModel() }
+        return viewModel
     }
 
     override val handler: TestHandler = TestHandler()

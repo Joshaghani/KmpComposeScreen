@@ -17,6 +17,7 @@ import cafe.adriel.voyager.transitions.ScaleTransition
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.github.mohammadjoshaghani.composescreen.component.SlidScreenAnimation
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
+import com.github.mohammadjoshaghani.composescreen.screen.toast.UIToastNotification
 import com.github.mohammadjoshaghani.composescreen.utils.ApplicationConfig
 import com.github.mohammadjoshaghani.composescreen.utils.ScreenTransitionType
 
@@ -65,7 +66,7 @@ fun App(startScreen: List<IBaseScreen>) {
 
     }
 
-    RenderNotifications()
+    UIToastNotification()
 
 }
 

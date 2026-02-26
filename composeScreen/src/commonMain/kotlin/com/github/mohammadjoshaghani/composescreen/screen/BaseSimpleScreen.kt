@@ -13,6 +13,7 @@ import cafe.adriel.voyager.core.annotation.ExperimentalVoyagerApi
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.core.screen.Screen
 import com.github.mohammadjoshaghani.composescreen.app.RenderDialogs
+import com.github.mohammadjoshaghani.composescreen.app.RenderNotifications
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreen
 import com.github.mohammadjoshaghani.composescreen.screen.base.IBaseScreenImpl
 import com.github.mohammadjoshaghani.composescreen.screen.base.IClearStack
@@ -52,6 +53,7 @@ abstract class BaseSimpleScreen : Screen, IBaseScreen by IBaseScreenImpl() {
             ComposeView()
         }
         RenderDialogs()
+        RenderNotifications()
     }
 
     @Composable
