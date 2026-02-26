@@ -56,6 +56,10 @@ abstract class BaseScreen<
     override fun Content() {
 
         viewModel = getViewModel()
+        LaunchedEffect(viewModel) {
+            viewModel.effect.collect { handler.handleEffects(it, viewModel) }
+        }
+
         val viewState by viewModel.state.collectAsState()
 
         var restartTrigger by remember { mutableStateOf(0) }
